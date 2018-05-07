@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>提交测序数据到SRA | ChengCZ&#39;s Notebook</title>
+  <meta name="author" content="ChengCZ">
+
+  
+  <meta name="description" content="九月一号开学了，暑假作业写完了没有？但是跟我并没有关系，不开学，没作业，但是好多事情啊，，，最近提交了一些数据到SRA，每次过程总是那么曲折离奇，对一些遇到的问题进行整理填坑吧。
+简单说，申请BioProject，申请BioSample，填写SRA_metadata，上传数据，虽然过程清晰，坑还没填">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">提交测序数据到SRA</h1>
+  
+
+    <time datetime="2017-09-01T13:29:21.000Z">
+  <span class="day">1</span><span class="month">Sep</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p>九月一号开学了，暑假作业写完了没有？但是跟我并没有关系，不开学，没作业，但是好多事情啊，，，最近提交了一些数据到SRA，每次过程总是那么曲折离奇，对一些遇到的问题进行整理填坑吧。</p>
+<p>简单说，申请<strong>BioProject</strong>，申请<strong>BioSample</strong>，填写<strong>SRA_metadata</strong>，上传数据，虽然过程清晰，坑还没填完，仍在邮件NCBI，过程供参考。</p>
+<h2 id="1-BioProject"><a href="#1-BioProject" class="headerlink" title="1. BioProject"></a>1. <a href="https://submit.ncbi.nlm.nih.gov/subs/bioproject/" target="_blank" rel="noopener">BioProject</a></h2><p>申请一个项目编号，填写submitter 信息，选择项目类型（Raw sequence reads），物种名称，释放时间，项目描述，BioSample和文章信息（跳过，跳过，，），核对提交</p>
+<h2 id="2-BioSample"><a href="#2-BioSample" class="headerlink" title="2. BioSample"></a>2. <a href="https://submit.ncbi.nlm.nih.gov/subs/biosample/" target="_blank" rel="noopener">BioSample</a></h2><p>申请一个样品编号，submitter 信息，释放时间，样品类型，<strong>填写样品属性表格</strong>，核对提交</p>
+<h2 id="3-SRA"><a href="#3-SRA" class="headerlink" title="3. SRA"></a>3. <a href="https://submit.ncbi.nlm.nih.gov/subs/sra/" target="_blank" rel="noopener">SRA</a></h2><p>主要就填写<strong>SRA_metadata</strong>，测序平台，文库类型等等，选择批量提交，填写表格注意看要求啊，除了样品名称、登录号等信息，其他属性组合每行也要是唯一的。</p>
+<h2 id="4-submit-data"><a href="#4-submit-data" class="headerlink" title="4. submit data"></a>4. submit data</h2><p>看数据大小，选择合适上传方法吧，小于2G用aspera浏览器插件，大数据选择ftp或者aspera命令行。这几次都用了aspera cmd上传，霸占几乎全部网速，很快上传好</p>
+<p>具体命令为：<code>ascp -i &lt;path/to/key_file&gt; -QT -l100m -k1 -d &lt;path/to/folder/containing files&gt; subasp@upload.ncbi.nlm.nih.gov:uploads/XXX@xxx.com_g3O1FgOE</code>， 其中key必须是全路径，-d接包括原始数据的文件夹（<strong>不再包含其他文件夹</strong>），<a href="mailto:XXX@xxx.com" target="_blank" rel="noopener">XXX@xxx.com</a>为注册账号邮箱</p>
+<p>上传结束后，SRA中选择上传数据文件夹，，，</p>
+<blockquote>
+<p><em>好了，装逼结束，文件没仔细检查，传了两不完整的fastq，发邮件给ncbi沟通呢，md5值也还没有用到，不知什么情况，，，too young, too naive…</em></p>
+</blockquote>
+
+    
+    
+    <footer class="meta">
+      
+  <div class="cats">
+<a href="/categories/bioinformatics/">bioinformatics</a></div>
+
+      
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2018 ChengCZ
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

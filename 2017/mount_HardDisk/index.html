@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>服务器挂载4T硬盘 | ChengCZ&#39;s Notebook</title>
+  <meta name="author" content="ChengCZ">
+
+  
+  <meta name="description" content="因为一些我并不理解的原因，服务器不能正确识别4T的NTFS移动硬盘，需要对其格式化成ext4格式，就我的一些操作记录。
+
+fdisk -l，查看硬盘分配的硬件编号
+
+
+parted /dev/sdg，对使用parted工具对硬盘进行分区
+
+mklable gpt，把磁盘格式化为 gpt分区表
+
+mk">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">服务器挂载4T硬盘</h1>
+  
+
+    <time datetime="2017-07-28T02:20:21.000Z">
+  <span class="day">28</span><span class="month">Jul</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p>因为一些我并不理解的原因，服务器不能正确识别4T的NTFS移动硬盘，需要对其格式化成ext4格式，就我的一些操作记录。</p>
+<ol>
+<li><p><code>fdisk -l</code>，查看硬盘分配的硬件编号</p>
+<p><img src="./images/2017/fdisk.png" alt=""></p>
+</li>
+<li><p><code>parted /dev/sdg</code>，对使用parted工具对硬盘进行分区</p>
+<ul>
+<li><p><code>mklable gpt</code>，把磁盘格式化为 gpt分区表</p>
+</li>
+<li><p><code>mkpart primary 0 4000G</code>，创建一个主分区，起始位置-结束位置</p>
+</li>
+<li><p><code>mkpart extended 2000G 4000G</code>，可选，创建一个扩展分区</p>
+</li>
+<li><p><code>print</code>，打印出当前设备的信息</p>
+</li>
+<li><p><code>quit</code>，推出parted</p>
+</li>
+</ul>
+<p><img src="./images/2017/linux_parted.png" alt=""></p>
+</li>
+<li><p><code>mkfs.ext4 /dev/sdg1</code>，对硬盘进行格式化，如果存在多个分区，每个分区都需要进行格式化</p>
+<p><img src="./images/2017/mkfs.ext4.png" alt=""></p>
+</li>
+<li><p><code>mount /dev/sdg1 /mnt/usbmount1</code>，挂载硬盘到服务器</p>
+</li>
+<li><p><code>umount /dev/sdg1</code>，硬盘卸载</p>
+</li>
+</ol>
+
+    
+    
+    <footer class="meta">
+      
+  <div class="cats">
+<a href="/categories/linux/">linux</a></div>
+
+      
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2018 ChengCZ
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>
