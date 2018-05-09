@@ -44,6 +44,76 @@
   <header>
     
   
+    <h1 class="title"><a href="/2018/snpEff/">VCF 注释 —— SnpEff</a></h1>
+  
+
+    <time datetime="2018-05-09T13:45:52.000Z">
+  <span class="day">9</span><span class="month">May</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p>日常工作之读文档，了解参数改变、新方法功能，对已有流程进行修改。</p>
+<p>各种文档看一边忘一遍，使用需要有一次看 SnpEff （<a href="http://snpeff.sourceforge.net/index.html" target="_blank" rel="noopener">http://snpeff.sourceforge.net/index.html</a> ），进行一些整理如下，不过还是建议<a href="http://snpeff.sourceforge.net/SnpEff_manual.html" target="_blank" rel="noopener">原文</a>，鬼知道我会在哪里写错理解错。</p>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><ol>
+<li><p>annotation</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">java -jar snpEff.jar eff genome	input.vcf &gt;output.vcf</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> -hgvs, 默认开启，使用 HGVS 变异描述语法对蛋白替换进行描述</span><br><span class="line"><span class="meta">#</span> -fi, 提供bed文件，只对bed区域内位点进行注释</span><br><span class="line"><span class="meta">#</span> -no-downstream, -no-intergenic, -no-intron, -no-upstream, -no-utr, -no [effectType], 参数还可对根据注释类型对注释进行初过滤</span><br><span class="line"><span class="meta">#</span> -canon, 只使用基因对应最长转录本（作为权威转录本）进行注释；参数-canonList可以自行提供基因权威转录本，格式为“GeneID    transcript_ID”</span><br><span class="line"><span class="meta">#</span> -noStats, 不输出注释统计信息</span><br><span class="line"><span class="meta">#</span> -v, 话痨模式，输出各种运行信息</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>database</p>
+<p>人、小鼠等物种都有已经 build 的数据库，可以直接下载，链接：<a href="https://sourceforge.net/projects/snpeff/files/databases/v4_3/" target="_blank" rel="noopener">https://sourceforge.net/projects/snpeff/files/databases/v4_3/</a>，注释选择基因组版本。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java -jar snpEff.jar databases    # 查看可用数据库</span><br><span class="line">java -jar snpEff.jar download -v GRCh37.75    # 下载数据库 GRCh37.75</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Q, 使用执行程序下载数据库时容易断，一般建议手动下载，或者wget等其他方式</span><br></pre></td></tr></table></figure>
+<p>软件还提供了自行构建数据库，详细用法如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 添加配置信息</span><br><span class="line">echo 'GRCh37.70.genome : Human ' &gt;&gt;~/snpEff/snpEff.config</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Create directoy for this new genome</span><br><span class="line">mkdir -p ~/snpEff/data/GRCh37.70 &amp;&amp; cd ~/snpEff/data/GRCh37.70</span><br><span class="line"><span class="meta">#</span> Get annotation files</span><br><span class="line">wget -c -O genes.gtf.gz ftp://ftp.ensembl.org/pub/release-70/gtf/homo_sapiens/Homo_sapiens.GRCh37.70.gtf.gz</span><br><span class="line"><span class="meta">#</span> Get the genome</span><br><span class="line">wget -c -O sequences.fa.gz ftp://ftp.ensembl.org/pub/release-70/fasta/homo_sapiens/dna/Homo_sapiens.GRCh37.70.dna.toplevel.fa.gz</span><br><span class="line"><span class="meta">#</span> Optional, Download CDSs</span><br><span class="line">wget -c -O cds.fa.gz ftp://ftp.ensembl.org/pub/release-70/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh37.70.cdna.all.fa.gz</span><br><span class="line"><span class="meta">#</span> Optional, Download proteins</span><br><span class="line">wget -c -O protein.fa.gz ftp://ftp.ensembl.org/pub/release-70/fasta/homo_sapiens/pep/Homo_sapiens.GRCh37.70.pep.all.fa.gz</span><br><span class="line"><span class="meta">#</span> Optional, Download regulatory annotations</span><br><span class="line">wget -c -O regulation.gff.gz ftp://ftp.ensembl.org/pub/release-70/regulation/homo_sapiens/AnnotatedFeatures.gff.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Building a database from GFF files</span><br><span class="line">cd ~/snpEff &amp;&amp; java -jar snpEff.jar build -gff3 -v GRCh37.70</span><br><span class="line"><span class="meta">#</span> rm -r ~/snpEff/data/GRCh37.70</span><br></pre></td></tr></table></figure>
+<p>此外，snpEff 构建数据库还支持 RefSeq, GenBank 等多种数据输入格式，具体用法查看原文档。</p>
+<p><strong>注意物种 codon 选择</strong>，codon 可以在 <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi" target="_blank" rel="noopener">https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi</a> 中查看，codon可以在<code>~/snpEff/snpEff.config</code>文件中设置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 设置特异 codon</span><br><span class="line">codon.Invertebrate_Mitochondrial:  TTT/F, TTC/F, TAC/Y, TAA/*, ATG/M+, ATG/M+, ACT/T, ...</span><br><span class="line"># 物种选择恰当的 codontable</span><br><span class="line">dm3.M.codonTable : Invertebrate_Mitochondrial    # the chromosome &apos;M&apos; from fly genome (dm3) uses Invertebrate_Mitochondrial codon table</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>dump</p>
+<p>从数据库中提取出注释信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java -jar snpEff.jar dump -v -bed GRCh37.70 &gt; GRCh37.70.bed</span><br><span class="line"><span class="meta">#</span> [-bed |-txt ] 设置数据格式</span><br><span class="line"><span class="meta">#</span> [-0 |-1 ] 设置坐标系统，0-based 或者 1-based</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ol>
+<h3 id="注释结果"><a href="#注释结果" class="headerlink" title="注释结果"></a>注释结果</h3><p><img src="./images/snpEff.png" alt=""></p>
+<p>可以看到注释信息被添加到了 VCF 中每个变异 INFO 信息中，以 ANN= 特征开始，详细的注释说明可查看<a href="./appendix/snpEff.pdf">官方文档</a> <a href="http://snpeff.sourceforge.net/VCFannotationformat_v1.0.pdf" target="_blank" rel="noopener">http://snpeff.sourceforge.net/VCFannotationformat_v1.0.pdf</a>。因为基因多个转录本、相互重叠基因等原因，可以看到变异位点被多次注释，需根据实际需求进行筛选。</p>
+
+    
+    
+    <footer class="meta">
+      
+  <div class="cats">
+<a href="/categories/bioinfor/">bioinfor</a></div>
+
+      
+  <div class="tags">
+<a href="/tags/annotation/">annotation</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
     <h1 class="title"><a href="/2017/umount/">卸载一个假忙的硬盘</a></h1>
   
 
@@ -126,7 +196,7 @@
     <footer class="meta">
       
   <div class="cats">
-<a href="/categories/bioinformatics/">bioinformatics</a></div>
+<a href="/categories/bioinfor/">bioinfor</a></div>
 
       
       
@@ -478,7 +548,7 @@
     <footer class="meta">
       
   <div class="cats">
-<a href="/categories/bioinformatics/">bioinformatics</a><a href="/categories/bioinformatics/python/">python</a></div>
+<a href="/categories/bioinfor/">bioinfor</a><a href="/categories/bioinfor/python/">python</a></div>
 
       
   <div class="tags">
@@ -539,56 +609,6 @@
 <a href="/categories/python/">python</a></div>
 
       
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2017/ggplot_rank_abundance/">使用ggplot绘制扩增子rank abundance曲线</a></h1>
-  
-
-    <time datetime="2017-04-20T01:23:01.000Z">
-  <span class="day">20</span><span class="month">Apr</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <p>ggplot2实现微生物rank abundance绘图，另发现了<code>reshape2</code>能方便的进行dataframe格式整理，长表格，宽表格相互转换</p>
-<p>具体代码实现如下：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(ggplot2)</span><br><span class="line"><span class="keyword">library</span>(reshape2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># otu_table    抽平后的otu table，第一列为OTU编号，最后一列为tax注释</span></span><br><span class="line">otu_table &lt;- read.table(otu_table, sep=<span class="string">"\t"</span>, header=<span class="literal">TRUE</span>)</span><br><span class="line">otu_table &lt;- otu_table[,<span class="number">2</span>:(length(otu_table)-<span class="number">1</span>)]</span><br><span class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:length(otu_table))&#123;    <span class="comment"># 计算等级相对丰度</span></span><br><span class="line">  sample &lt;- otu_table[,i]</span><br><span class="line">  otu_table[,i]&lt;- rev(sort(sample/sum(sample)))</span><br><span class="line">&#125;</span><br><span class="line">rank_abundance &lt;- otu_table</span><br><span class="line">rank_abundance$rank &lt;- <span class="number">1</span>:dim(rank_abundance)[<span class="number">1</span>]    <span class="comment"># 添加等级</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 宽表格整理成长表格</span></span><br><span class="line">dat &lt;- melt(rank_abundance, id.vars = c(<span class="string">'rank'</span>), variable.name=<span class="string">'sample'</span>)</span><br><span class="line"><span class="comment"># 整合样品分组信息</span></span><br><span class="line">group &lt;- read.table(group, sep=<span class="string">'\t'</span>, col.names=c(<span class="string">'sample'</span>, <span class="string">'group'</span>))</span><br><span class="line">dat &lt;- merge(dat, group, by=c(<span class="string">'sample'</span>), all=<span class="literal">TRUE</span>)</span><br><span class="line"><span class="comment"># 移除0值</span></span><br><span class="line">dat &lt;- dat[dat$value&gt;<span class="number">0</span>,]</span><br><span class="line"></span><br><span class="line">g &lt;- ggplot(dat, aes(rank, log10(dat$value), group=sample)) + </span><br><span class="line">  geom_step(aes(color=group)) + <span class="comment">#ylim(-4,0) + xlim(0,2000) + </span></span><br><span class="line">  labs(x=<span class="string">"Species Rank"</span>, y=<span class="string">"Relative Abundance"</span>) + </span><br><span class="line">  <span class="comment"># 设置y轴指示刻度，针对不同数据，可能需要调整</span></span><br><span class="line">  scale_y_continuous(breaks=c(-<span class="number">4</span>,-<span class="number">3</span>,-<span class="number">2</span>,-<span class="number">1</span>), labels=c(<span class="string">'1e-4'</span>,<span class="string">'1e-3'</span>,<span class="string">'1e-2'</span>,<span class="string">'1e-1'</span>)) + </span><br><span class="line">  <span class="comment"># 调整y轴指示刻度显示方法</span></span><br><span class="line">  theme(axis.text.y = element_text(angle=<span class="number">90</span>, hjust=<span class="number">0.5</span>, vjust=<span class="number">1</span>)) + </span><br><span class="line"></span><br><span class="line">ggsave(<span class="string">"rank_abundance.pdf"</span>)</span><br></pre></td></tr></table></figure>
-<p>结果展示：</p>
-<p><img src="./images/2017/rank_abundance.png" alt=""></p>
-
-    
-    
-    <footer class="meta">
-      
-  <div class="cats">
-<a href="/categories/R/">R</a></div>
-
-      
-  <div class="tags">
-<a href="/tags/ggplot/">ggplot</a><a href="/tags/amplicon/">amplicon</a></div>
-
       
     </footer>
     
