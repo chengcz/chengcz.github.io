@@ -1,109 +1,132 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   
-  <title>Page 2 | ChengCZ&#39;s Notebook</title>
-  <meta name="author" content="ChengCZ">
-
+  <title>ChengCZ&#39;s Notebook</title>
+  <meta name="viewport" content="width=device-width">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="ChengCZ&#39;s Notebook">
+<meta property="og:url" content="http://chengcz.github.io/page/2/index.html">
+<meta property="og:site_name" content="ChengCZ&#39;s Notebook">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ChengCZ&#39;s Notebook">
+  
+    <link rel="alternative" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
   
   
-
-  <link rel="alternate" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
   
 </head>
-
 <body>
-  <header id="header" class="inner"><nav>
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-  </ul>
-</nav></header>
-  <div id="content" class="inner">
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
+  <div id="container">
+    <div class="mobile-nav-panel">
+	<i class="icon-reorder icon-large"></i>
 </div>
+<header id="header">
+	<h1 class="blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>
+	<nav class="nav">
+		<ul>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li>
+			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+		</ul>
+	</nav>
+	<div id="search-form-wrap">
+		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://chengcz.github.io"></form>
+	</div>
+</header>
+    <div id="main">
+      
   
-  <header>
-    
+    <article id="post-ggplot_rank_abundance" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2017/ggplot_rank_abundance/" class="article-date">
+  <time datetime="2017-04-20T01:23:01.000Z" itemprop="datePublished">2017-04-20</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
   
-    <h1 class="title"><a href="/2017/ggplot_rank_abundance/">使用ggplot绘制扩增子rank abundance曲线</a></h1>
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2017/ggplot_rank_abundance/">使用ggplot绘制扩增子rank abundance曲线</a>
+    </h1>
   
 
-    <time datetime="2017-04-20T01:23:01.000Z">
-  <span class="day">20</span><span class="month">Apr</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <p>ggplot2实现微生物rank abundance绘图，另发现了<code>reshape2</code>能方便的进行dataframe格式整理，长表格，宽表格相互转换</p>
+	</header>
+	<div class="entry-content">
+		
+    	<p>ggplot2实现微生物rank abundance绘图，另发现了<code>reshape2</code>能方便的进行dataframe格式整理，长表格，宽表格相互转换</p>
 <p>具体代码实现如下：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(ggplot2)</span><br><span class="line"><span class="keyword">library</span>(reshape2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># otu_table    抽平后的otu table，第一列为OTU编号，最后一列为tax注释</span></span><br><span class="line">otu_table &lt;- read.table(otu_table, sep=<span class="string">"\t"</span>, header=<span class="literal">TRUE</span>)</span><br><span class="line">otu_table &lt;- otu_table[,<span class="number">2</span>:(length(otu_table)-<span class="number">1</span>)]</span><br><span class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:length(otu_table))&#123;    <span class="comment"># 计算等级相对丰度</span></span><br><span class="line">  sample &lt;- otu_table[,i]</span><br><span class="line">  otu_table[,i]&lt;- rev(sort(sample/sum(sample)))</span><br><span class="line">&#125;</span><br><span class="line">rank_abundance &lt;- otu_table</span><br><span class="line">rank_abundance$rank &lt;- <span class="number">1</span>:dim(rank_abundance)[<span class="number">1</span>]    <span class="comment"># 添加等级</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 宽表格整理成长表格</span></span><br><span class="line">dat &lt;- melt(rank_abundance, id.vars = c(<span class="string">'rank'</span>), variable.name=<span class="string">'sample'</span>)</span><br><span class="line"><span class="comment"># 整合样品分组信息</span></span><br><span class="line">group &lt;- read.table(group, sep=<span class="string">'\t'</span>, col.names=c(<span class="string">'sample'</span>, <span class="string">'group'</span>))</span><br><span class="line">dat &lt;- merge(dat, group, by=c(<span class="string">'sample'</span>), all=<span class="literal">TRUE</span>)</span><br><span class="line"><span class="comment"># 移除0值</span></span><br><span class="line">dat &lt;- dat[dat$value&gt;<span class="number">0</span>,]</span><br><span class="line"></span><br><span class="line">g &lt;- ggplot(dat, aes(rank, log10(dat$value), group=sample)) + </span><br><span class="line">  geom_step(aes(color=group)) + <span class="comment">#ylim(-4,0) + xlim(0,2000) + </span></span><br><span class="line">  labs(x=<span class="string">"Species Rank"</span>, y=<span class="string">"Relative Abundance"</span>) + </span><br><span class="line">  <span class="comment"># 设置y轴指示刻度，针对不同数据，可能需要调整</span></span><br><span class="line">  scale_y_continuous(breaks=c(-<span class="number">4</span>,-<span class="number">3</span>,-<span class="number">2</span>,-<span class="number">1</span>), labels=c(<span class="string">'1e-4'</span>,<span class="string">'1e-3'</span>,<span class="string">'1e-2'</span>,<span class="string">'1e-1'</span>)) + </span><br><span class="line">  <span class="comment"># 调整y轴指示刻度显示方法</span></span><br><span class="line">  theme(axis.text.y = element_text(angle=<span class="number">90</span>, hjust=<span class="number">0.5</span>, vjust=<span class="number">1</span>)) + </span><br><span class="line"></span><br><span class="line">ggsave(<span class="string">"rank_abundance.pdf"</span>)</span><br></pre></td></tr></table></figure>
 <p>结果展示：</p>
 <p><img src="./images/2017/rank_abundance.png" alt=""></p>
 
     
-    
-    <footer class="meta">
-      
-  <div class="cats">
-<a href="/categories/R/">R</a></div>
-
-      
-  <div class="tags">
-<a href="/tags/ggplot/">ggplot</a><a href="/tags/amplicon/">amplicon</a></div>
-
-      
-    </footer>
-    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/R/">R</a>
   </div>
-  
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/amplicon/">amplicon</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ggplot/">ggplot</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
 </article>
 
-  <article class="post">
+
+	<hr class="article-devider">
+
+
+
   
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
+    <article id="post-linux_cmd" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2017/linux_cmd/" class="article-date">
+  <time datetime="2017-03-15T02:39:31.000Z" itemprop="datePublished">2017-03-15</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
   
-  <header>
-    
-  
-    <h1 class="title"><a href="/2017/linux_cmd/">linux基本命令介绍</a></h1>
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2017/linux_cmd/">linux基本命令介绍</a>
+    </h1>
   
 
-    <time datetime="2017-03-15T02:39:31.000Z">
-  <span class="day">15</span><span class="month">Mar</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h1 id="linux登录"><a href="#linux登录" class="headerlink" title="linux登录"></a>linux登录</h1><p>远程登录linux服务器具体原理呢，水平还不够，说不清，先简单粗暴上方法。一般采取<code>ssh</code>的方式远程登录，常用ssh客户端有<a href="http://www.netsarang.com/" target="_blank" rel="noopener">xshell</a>, <a href="http://www.putty.org/" target="_blank" rel="noopener">putty</a>，本地电脑与服务器间数据传输一般是ftp客户端的方式，可以使用<a href="http://www.netsarang.com/" target="_blank" rel="noopener">xftp</a>, <a href="https://filezilla-project.org/" target="_blank" rel="noopener">FileZilla</a>。</p>
+	</header>
+	<div class="entry-content">
+		
+    	<h1 id="linux登录"><a href="#linux登录" class="headerlink" title="linux登录"></a>linux登录</h1><p>远程登录linux服务器具体原理呢，水平还不够，说不清，先简单粗暴上方法。一般采取<code>ssh</code>的方式远程登录，常用ssh客户端有<a href="http://www.netsarang.com/" target="_blank" rel="noopener">xshell</a>, <a href="http://www.putty.org/" target="_blank" rel="noopener">putty</a>，本地电脑与服务器间数据传输一般是ftp客户端的方式，可以使用<a href="http://www.netsarang.com/" target="_blank" rel="noopener">xftp</a>, <a href="https://filezilla-project.org/" target="_blank" rel="noopener">FileZilla</a>。</p>
 <p>登录需要<strong>帐号</strong>，<strong>密码</strong>，<strong>主机地址</strong>(ip或可解析网址)，一般ssh登录端口选择<strong>22</strong>，ftp登录端口选择<strong>21</strong>。</p>
 <h1 id="basic-command"><a href="#basic-command" class="headerlink" title="basic command"></a>basic command</h1><ol>
 <li><p><code>ls</code>：列出当前路径（或特定路径）下的文件、文件夹</p>
@@ -221,99 +244,113 @@
 <p>Linux系统命令可以通过<code>man command</code>或者<code>command --help</code>的方式查看详细帮助信息</p>
 
     
-    
-    <footer class="meta">
-      
-  <div class="cats">
-<a href="/categories/linux/">linux</a></div>
-
-      
-  <div class="tags">
-<a href="/tags/command/">command</a></div>
-
-      
-    </footer>
-    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
   </div>
-  
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/command/">command</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
 </article>
 
-  <article class="post">
+
+	<hr class="article-devider">
+
+
+
   
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
+    <article id="post-parse_PE_fastq" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2017/parse_PE_fastq/" class="article-date">
+  <time datetime="2017-03-14T13:05:10.000Z" itemprop="datePublished">2017-03-14</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
   
-  <header>
-    
-  
-    <h1 class="title"><a href="/2017/parse_PE_fastq/">parse pe fastq file use python</a></h1>
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2017/parse_PE_fastq/">parse pe fastq file use python</a>
+    </h1>
   
 
-    <time datetime="2017-03-14T13:05:10.000Z">
-  <span class="day">14</span><span class="month">Mar</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <p>github看了业界大神<a href="https://github.com/lh3" target="_blank" rel="noopener">li heng</a>序列解析的脚本readfq，智商着急啊，没看懂，倒是新学了一个新功能，<strong>python生成器<code>yield</code>。</strong></p>
+	</header>
+	<div class="entry-content">
+		
+    	<p>github看了业界大神<a href="https://github.com/lh3" target="_blank" rel="noopener">li heng</a>序列解析的脚本readfq，智商着急啊，没看懂，倒是新学了一个新功能，<strong>python生成器<code>yield</code>。</strong></p>
 <p><a href="https://github.com/lh3/readfq/blob/master/readfq.py" target="_blank" rel="noopener">readfq.py</a>适用于fasta或者单端fastq文件，但是目前测序主要以双端数据为主，现学现卖，实现了一个paried-end数据解析器，代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># --*-- coding:utf-8 --*--</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> gzip</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_pe_fastq</span><span class="params">(fastq1,fastq2,phred=<span class="number">33</span>)</span>:</span></span><br><span class="line">    <span class="keyword">from</span> numpy <span class="keyword">import</span> fromstring,byte</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        name1 = fastq1.readline().partition(<span class="string">' '</span>)[<span class="number">0</span>]</span><br><span class="line">        name2 = fastq2.readline().partition(<span class="string">' '</span>)[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> name1 <span class="keyword">or</span> <span class="keyword">not</span> name2:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        read1, nothing1, qual1 = fq1.readline()[:<span class="number">-1</span>], fq1.readline(), fq1.readline()[:<span class="number">-1</span>]</span><br><span class="line">        read2, nothing2, qual2 = fq2.readline()[:<span class="number">-1</span>], fq2.readline(), fq2.readline()[:<span class="number">-1</span>]</span><br><span class="line">        qual1 = fromstring(qual1,dtype=byte)-phred</span><br><span class="line">        qual2 = fromstring(qual2,dtype=byte)-phred</span><br><span class="line">        <span class="keyword">assert</span> name1 == name2, <span class="string">'fastq1, fastq2 is not paired-end'</span></span><br><span class="line">        <span class="keyword">yield</span> name1, read1, read2, qual1, qual2</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    fq1 = gzip.open(sys.argv[<span class="number">1</span>],<span class="string">'r'</span>)</span><br><span class="line">    fq1 = gzip.open(sys.argv[<span class="number">2</span>],<span class="string">'r'</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> parse_pe_fastq(fq1, fq2):</span><br><span class="line">        name, seq1, seq2, qua1, qua2 = i</span><br><span class="line">        <span class="comment"># filter, stat, split</span></span><br></pre></td></tr></table></figure>
 <p>通过<code>while</code>循环遍历双端文件，四行为一个单元进行数据读取，每四行作为一个完整单元返回（<code>yeild</code>），进行其他操作（<code># filter, stat, split</code>）， 一个操作结束后迭代器（<code>parse_pe_fastq</code>）继续解析测序数据，for循环中qua1作为一个<code>numpy.ndarray</code>对象，可进行其他一些q20统计、过滤等操作。</p>
 
     
-    
-    <footer class="meta">
-      
-  <div class="cats">
-<a href="/categories/python/">python</a></div>
-
-      
-  <div class="tags">
-<a href="/tags/fastq/">fastq</a></div>
-
-      
-    </footer>
-    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
   </div>
-  
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fastq/">fastq</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
 </article>
 
-  <article class="post">
+
+	<hr class="article-devider">
+
+
+
   
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
+    <article id="post-Getting_Started" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2017/Getting_Started/" class="article-date">
+  <time datetime="2017-03-11T02:57:34.000Z" itemprop="datePublished">2017-03-11</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
   
-  <header>
-    
-  
-    <h1 class="title"><a href="/2017/Getting_Started/">&#39;XXX，从入门到放弃&#39;</a></h1>
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2017/Getting_Started/">&#39;XXX，从入门到放弃&#39;</a>
+    </h1>
   
 
-    <time datetime="2017-03-11T02:57:34.000Z">
-  <span class="day">11</span><span class="month">Mar</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <p>生物背景从事生物信息分析工作，本科时候对统计、计算机之类的有些兴趣，觉着“<strong>生物信息</strong>”很高大上的样子，什毛都不懂就如了生信的坑，这一路下来，知道越多越觉得需要了解、懂的东西也越多，经常有“<strong>我擦勒，要学这么多东西啊</strong>” ， <code>linux</code>, <code>R</code>, <code>python</code>, <code>perl</code>…… 微博上看了各种从入门到放弃系列，觉得很有意思，这里也不自知的写个从入门到放弃吧，生物信息是一个多学科的交叉学科，遗传、生理、计算机、统计基础好像都须知道一些，“<strong>XXX，从入门到放弃</strong>”，我也不知道是啥从入门到放弃。</p>
+	</header>
+	<div class="entry-content">
+		
+    	<p>生物背景从事生物信息分析工作，本科时候对统计、计算机之类的有些兴趣，觉着“<strong>生物信息</strong>”很高大上的样子，什毛都不懂就如了生信的坑，这一路下来，知道越多越觉得需要了解、懂的东西也越多，经常有“<strong>我擦勒，要学这么多东西啊</strong>” ， <code>linux</code>, <code>R</code>, <code>python</code>, <code>perl</code>…… 微博上看了各种从入门到放弃系列，觉得很有意思，这里也不自知的写个从入门到放弃吧，生物信息是一个多学科的交叉学科，遗传、生理、计算机、统计基础好像都须知道一些，“<strong>XXX，从入门到放弃</strong>”，我也不知道是啥从入门到放弃。</p>
 <p>很早就有利用博客整理、交流学习思路的想法，懒癌穷癌很成功的阻止了我，看到很多利用github的教程，简单粗暴，终于鼓起勇气试试。</p>
 <p>讲真，统计不是很懂，遗传不知道怎么说起，那就说说生信分析的linux、R、python这些咯。</p>
 <h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><p>分析主要工作环境，<strong>命令行</strong>操作，分析工具众多。</p>
@@ -336,61 +373,64 @@
 <h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><p>可以掌握的技能。关注<a href="https://www.docker.com/" target="_blank" rel="noopener">docker</a>，这是因为同事提到工作流程迁移系统环境兼容的问题，docker完全免去了这些烦恼。无奈，工作系统版本太低，无法安装，还没有试过。</p>
 
     
-    
-    <footer class="meta">
-      
-  <div class="cats">
-<a href="/categories/bioinfor/">bioinfor</a></div>
-
-      
-      
-    </footer>
-    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
   </div>
-  
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
 </article>
 
 
-<nav id="pagenavi">
-  
-    <a href="/" class="alignleft prev">Prev</a>
-  
-  
-  <div class="clearfix"></div>
-</nav></div>
-  <footer id="footer" class="inner"><div class="social alignright">
+	<hr class="article-devider">
+
+
+
   
   
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
   
-  
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+
+    </div>
+    <div class="mb-search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:chengcz.github.io">
+  </form>
 </div>
-<p>
-  
-  &copy; 2018 ChengCZ
-  
-</p>
-<div class="clearfix"></div></footer>
-  <script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
+<footer id="footer">
+	<!---<h1 class="footer-blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>--->
+	<span class="copyright">
+		&copy; 2018 ChengCZ<br>
+		<!---Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>--->
+	</span>
+</footer>
 
+    
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
 <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
 <script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
 
 
-<div id="phasebeam">
-  <canvas></canvas>
-  <canvas></canvas>
-  <canvas></canvas>
-</div>
-<script src="/js/phasebeam.js"></script>
+<script src="/js/script.js"></script>
+  </div>
 </body>
 </html>

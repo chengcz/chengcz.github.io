@@ -1,61 +1,78 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   
   <title>linux基本命令介绍 | ChengCZ&#39;s Notebook</title>
-  <meta name="author" content="ChengCZ">
-
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="linux登录远程登录linux服务器具体原理呢，水平还不够，说不清，先简单粗暴上方法。一般采取ssh的方式远程登录，常用ssh客户端有xshell, putty，本地电脑与服务器间数据传输一般是ftp客户端的方式，可以使用xftp, FileZilla。 登录需要帐号，密码，主机地址(ip或可解析网址)，一般ssh登录端口选择22，ftp登录端口选择21。 basic command ls：列出">
+<meta name="keywords" content="command">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux基本命令介绍">
+<meta property="og:url" content="http://chengcz.github.io/2017/linux_cmd/index.html">
+<meta property="og:site_name" content="ChengCZ&#39;s Notebook">
+<meta property="og:description" content="linux登录远程登录linux服务器具体原理呢，水平还不够，说不清，先简单粗暴上方法。一般采取ssh的方式远程登录，常用ssh客户端有xshell, putty，本地电脑与服务器间数据传输一般是ftp客户端的方式，可以使用xftp, FileZilla。 登录需要帐号，密码，主机地址(ip或可解析网址)，一般ssh登录端口选择22，ftp登录端口选择21。 basic command ls：列出">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-07T13:16:45.433Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux基本命令介绍">
+<meta name="twitter:description" content="linux登录远程登录linux服务器具体原理呢，水平还不够，说不清，先简单粗暴上方法。一般采取ssh的方式远程登录，常用ssh客户端有xshell, putty，本地电脑与服务器间数据传输一般是ftp客户端的方式，可以使用xftp, FileZilla。 登录需要帐号，密码，主机地址(ip或可解析网址)，一般ssh登录端口选择22，ftp登录端口选择21。 basic command ls：列出">
   
-  <meta name="description" content="linux登录远程登录linux服务器具体原理呢，水平还不够，说不清，先简单粗暴上方法。一般采取ssh的方式远程登录，常用ssh客户端有xshell, putty，本地电脑与服务器间数据传输一般是ftp客户端的方式，可以使用xftp, FileZilla。
-登录需要帐号，密码，主机地址(ip或可解析">
+    <link rel="alternative" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
   
   
-
-  <link rel="alternate" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
   
 </head>
-
 <body>
-  <header id="header" class="inner"><nav>
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-  </ul>
-</nav></header>
-  <div id="content" class="inner"><article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
+  <div id="container">
+    <div class="mobile-nav-panel">
+	<i class="icon-reorder icon-large"></i>
 </div>
+<header id="header">
+	<h1 class="blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>
+	<nav class="nav">
+		<ul>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li>
+			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+		</ul>
+	</nav>
+	<div id="search-form-wrap">
+		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://chengcz.github.io"></form>
+	</div>
+</header>
+    <div id="main">
+      <article id="post-linux_cmd" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2017/linux_cmd/" class="article-date">
+  <time datetime="2017-03-15T02:39:31.000Z" itemprop="datePublished">2017-03-15</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
   
-  <header>
-    
-  
-    <h1 class="title">linux基本命令介绍</h1>
+    <h1 class="article-title entry-title" itemprop="name">
+      linux基本命令介绍
+    </h1>
   
 
-    <time datetime="2017-03-15T02:39:31.000Z">
-  <span class="day">15</span><span class="month">Mar</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h1 id="linux登录"><a href="#linux登录" class="headerlink" title="linux登录"></a>linux登录</h1><p>远程登录linux服务器具体原理呢，水平还不够，说不清，先简单粗暴上方法。一般采取<code>ssh</code>的方式远程登录，常用ssh客户端有<a href="http://www.netsarang.com/" target="_blank" rel="noopener">xshell</a>, <a href="http://www.putty.org/" target="_blank" rel="noopener">putty</a>，本地电脑与服务器间数据传输一般是ftp客户端的方式，可以使用<a href="http://www.netsarang.com/" target="_blank" rel="noopener">xftp</a>, <a href="https://filezilla-project.org/" target="_blank" rel="noopener">FileZilla</a>。</p>
+	</header>
+	<div class="entry-content">
+		
+    	<h1 id="linux登录"><a href="#linux登录" class="headerlink" title="linux登录"></a>linux登录</h1><p>远程登录linux服务器具体原理呢，水平还不够，说不清，先简单粗暴上方法。一般采取<code>ssh</code>的方式远程登录，常用ssh客户端有<a href="http://www.netsarang.com/" target="_blank" rel="noopener">xshell</a>, <a href="http://www.putty.org/" target="_blank" rel="noopener">putty</a>，本地电脑与服务器间数据传输一般是ftp客户端的方式，可以使用<a href="http://www.netsarang.com/" target="_blank" rel="noopener">xftp</a>, <a href="https://filezilla-project.org/" target="_blank" rel="noopener">FileZilla</a>。</p>
 <p>登录需要<strong>帐号</strong>，<strong>密码</strong>，<strong>主机地址</strong>(ip或可解析网址)，一般ssh登录端口选择<strong>22</strong>，ftp登录端口选择<strong>21</strong>。</p>
 <h1 id="basic-command"><a href="#basic-command" class="headerlink" title="basic command"></a>basic command</h1><ol>
 <li><p><code>ls</code>：列出当前路径（或特定路径）下的文件、文件夹</p>
@@ -173,55 +190,82 @@
 <p>Linux系统命令可以通过<code>man command</code>或者<code>command --help</code>的方式查看详细帮助信息</p>
 
     
-    
-    <footer class="meta">
-      
-  <div class="cats">
-<a href="/categories/linux/">linux</a></div>
-
-      
-  <div class="tags">
-<a href="/tags/command/">command</a></div>
-
-      
-    </footer>
-    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
   </div>
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/command/">command</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
+    
+<nav id="article-nav">
   
-</article></div>
-  <footer id="footer" class="inner"><div class="social alignright">
+    <a href="/2017/ggplot_rank_abundance/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          使用ggplot绘制扩增子rank abundance曲线
+        
+      </div>
+    </a>
   
   
+    <a href="/2017/parse_PE_fastq/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          parse pe fastq file use python
+        
+      </div>
+    </a>
   
+</nav>
+
   
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</article>
+
+
+
+
+    </div>
+    <div class="mb-search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:chengcz.github.io">
+  </form>
 </div>
-<p>
-  
-  &copy; 2018 ChengCZ
-  
-</p>
-<div class="clearfix"></div></footer>
-  <script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
+<footer id="footer">
+	<!---<h1 class="footer-blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>--->
+	<span class="copyright">
+		&copy; 2018 ChengCZ<br>
+		<!---Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>--->
+	</span>
+</footer>
 
+    
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
 <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
 <script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
 
 
-<div id="phasebeam">
-  <canvas></canvas>
-  <canvas></canvas>
-  <canvas></canvas>
-</div>
-<script src="/js/phasebeam.js"></script>
+<script src="/js/script.js"></script>
+  </div>
 </body>
 </html>

@@ -1,69 +1,81 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   
   <title>服务器挂载4T硬盘 | ChengCZ&#39;s Notebook</title>
-  <meta name="author" content="ChengCZ">
-
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="因为一些我并不理解的原因，服务器不能正确识别4T的NTFS移动硬盘，需要对其格式化成ext4格式，就我的一些操作记录。  fdisk -l，查看硬盘分配的硬件编号   parted /dev/sdg，对使用parted工具对硬盘进行分区  mklable gpt，把磁盘格式化为 gpt分区表  mkpart primary 0 4000G，创建一个主分区，起始位置-结束位置  mkpart ext">
+<meta property="og:type" content="article">
+<meta property="og:title" content="服务器挂载4T硬盘">
+<meta property="og:url" content="http://chengcz.github.io/2017/mount_HardDisk/index.html">
+<meta property="og:site_name" content="ChengCZ&#39;s Notebook">
+<meta property="og:description" content="因为一些我并不理解的原因，服务器不能正确识别4T的NTFS移动硬盘，需要对其格式化成ext4格式，就我的一些操作记录。  fdisk -l，查看硬盘分配的硬件编号   parted /dev/sdg，对使用parted工具对硬盘进行分区  mklable gpt，把磁盘格式化为 gpt分区表  mkpart primary 0 4000G，创建一个主分区，起始位置-结束位置  mkpart ext">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://chengcz.github.io/2017/mount_HardDisk/images/2017/fdisk.png">
+<meta property="og:image" content="http://chengcz.github.io/2017/mount_HardDisk/images/2017/linux_parted.png">
+<meta property="og:image" content="http://chengcz.github.io/2017/mount_HardDisk/images/2017/mkfs.ext4.png">
+<meta property="og:updated_time" content="2018-05-07T13:22:51.541Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="服务器挂载4T硬盘">
+<meta name="twitter:description" content="因为一些我并不理解的原因，服务器不能正确识别4T的NTFS移动硬盘，需要对其格式化成ext4格式，就我的一些操作记录。  fdisk -l，查看硬盘分配的硬件编号   parted /dev/sdg，对使用parted工具对硬盘进行分区  mklable gpt，把磁盘格式化为 gpt分区表  mkpart primary 0 4000G，创建一个主分区，起始位置-结束位置  mkpart ext">
+<meta name="twitter:image" content="http://chengcz.github.io/2017/mount_HardDisk/images/2017/fdisk.png">
   
-  <meta name="description" content="因为一些我并不理解的原因，服务器不能正确识别4T的NTFS移动硬盘，需要对其格式化成ext4格式，就我的一些操作记录。
-
-fdisk -l，查看硬盘分配的硬件编号
-
-
-parted /dev/sdg，对使用parted工具对硬盘进行分区
-
-mklable gpt，把磁盘格式化为 gpt分区表
-
-mk">
+    <link rel="alternative" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
   
   
-
-  <link rel="alternate" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
   
 </head>
-
 <body>
-  <header id="header" class="inner"><nav>
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-  </ul>
-</nav></header>
-  <div id="content" class="inner"><article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
+  <div id="container">
+    <div class="mobile-nav-panel">
+	<i class="icon-reorder icon-large"></i>
 </div>
+<header id="header">
+	<h1 class="blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>
+	<nav class="nav">
+		<ul>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li>
+			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+		</ul>
+	</nav>
+	<div id="search-form-wrap">
+		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://chengcz.github.io"></form>
+	</div>
+</header>
+    <div id="main">
+      <article id="post-mount_HardDisk" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2017/mount_HardDisk/" class="article-date">
+  <time datetime="2017-07-28T02:20:21.000Z" itemprop="datePublished">2017-07-28</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
   
-  <header>
-    
-  
-    <h1 class="title">服务器挂载4T硬盘</h1>
+    <h1 class="article-title entry-title" itemprop="name">
+      服务器挂载4T硬盘
+    </h1>
   
 
-    <time datetime="2017-07-28T02:20:21.000Z">
-  <span class="day">28</span><span class="month">Jul</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <p>因为一些我并不理解的原因，服务器不能正确识别4T的NTFS移动硬盘，需要对其格式化成ext4格式，就我的一些操作记录。</p>
+	</header>
+	<div class="entry-content">
+		
+    	<p>因为一些我并不理解的原因，服务器不能正确识别4T的NTFS移动硬盘，需要对其格式化成ext4格式，就我的一些操作记录。</p>
 <ol>
 <li><p><code>fdisk -l</code>，查看硬盘分配的硬件编号</p>
 <p><img src="./images/2017/fdisk.png" alt=""></p>
@@ -93,52 +105,80 @@ mk">
 </ol>
 
     
-    
-    <footer class="meta">
-      
-  <div class="cats">
-<a href="/categories/linux/">linux</a></div>
-
-      
-      
-    </footer>
-    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
   </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+    
+<nav id="article-nav">
   
-</article></div>
-  <footer id="footer" class="inner"><div class="social alignright">
+    <a href="/2017/new_object/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          python class实现fasta文件解析
+        
+      </div>
+    </a>
   
   
+    <a href="/2017/python_dict/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          python字典
+        
+      </div>
+    </a>
   
+</nav>
+
   
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</article>
+
+
+
+
+    </div>
+    <div class="mb-search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:chengcz.github.io">
+  </form>
 </div>
-<p>
-  
-  &copy; 2018 ChengCZ
-  
-</p>
-<div class="clearfix"></div></footer>
-  <script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
+<footer id="footer">
+	<!---<h1 class="footer-blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>--->
+	<span class="copyright">
+		&copy; 2018 ChengCZ<br>
+		<!---Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>--->
+	</span>
+</footer>
 
+    
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
 <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
 <script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
 
 
-<div id="phasebeam">
-  <canvas></canvas>
-  <canvas></canvas>
-  <canvas></canvas>
-</div>
-<script src="/js/phasebeam.js"></script>
+<script src="/js/script.js"></script>
+  </div>
 </body>
 </html>
