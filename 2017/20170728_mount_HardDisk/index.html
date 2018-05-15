@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>服务器挂载4T硬盘 | ChengCZ&#39;s Notebook</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="因为一些我并不理解的原因，服务器不能正确识别4T的NTFS移动硬盘，需要对其格式化成ext4格式，就我的一些操作记录。  fdisk -l，查看硬盘分配的硬件编号   parted /dev/sdg，对使用parted工具对硬盘进行分区  mklable gpt，把磁盘格式化为 gpt分区表  mkpart primary 0 4000G，创建一个主分区，起始位置-结束位置  mkpart ext">
+<meta property="og:type" content="article">
+<meta property="og:title" content="服务器挂载4T硬盘">
+<meta property="og:url" content="http://chengcz.github.io/2017/20170728_mount_HardDisk/index.html">
+<meta property="og:site_name" content="ChengCZ&#39;s Notebook">
+<meta property="og:description" content="因为一些我并不理解的原因，服务器不能正确识别4T的NTFS移动硬盘，需要对其格式化成ext4格式，就我的一些操作记录。  fdisk -l，查看硬盘分配的硬件编号   parted /dev/sdg，对使用parted工具对硬盘进行分区  mklable gpt，把磁盘格式化为 gpt分区表  mkpart primary 0 4000G，创建一个主分区，起始位置-结束位置  mkpart ext">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://chengcz.github.io/2017/20170728_mount_HardDisk/images/2017/fdisk.png">
+<meta property="og:image" content="http://chengcz.github.io/2017/20170728_mount_HardDisk/images/2017/linux_parted.png">
+<meta property="og:image" content="http://chengcz.github.io/2017/20170728_mount_HardDisk/images/2017/mkfs.ext4.png">
+<meta property="og:updated_time" content="2018-05-07T13:22:51.541Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="服务器挂载4T硬盘">
+<meta name="twitter:description" content="因为一些我并不理解的原因，服务器不能正确识别4T的NTFS移动硬盘，需要对其格式化成ext4格式，就我的一些操作记录。  fdisk -l，查看硬盘分配的硬件编号   parted /dev/sdg，对使用parted工具对硬盘进行分区  mklable gpt，把磁盘格式化为 gpt分区表  mkpart primary 0 4000G，创建一个主分区，起始位置-结束位置  mkpart ext">
+<meta name="twitter:image" content="http://chengcz.github.io/2017/20170728_mount_HardDisk/images/2017/fdisk.png">
+  
+    <link rel="alternative" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+	<i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+	<h1 class="blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>
+	<nav class="nav">
+		<ul>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/categories">Categories</a></li><li><a href="/about">About</a></li>
+			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+		</ul>
+	</nav>
+	<div id="search-form-wrap">
+		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://chengcz.github.io"></form>
+	</div>
+</header>
+    <div id="main">
+      <article id="post-20170728_mount_HardDisk" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2017/20170728_mount_HardDisk/" class="article-date">
+  <time datetime="2017-07-28T02:20:21.000Z" itemprop="datePublished">2017-07-28</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      服务器挂载4T硬盘
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>因为一些我并不理解的原因，服务器不能正确识别4T的NTFS移动硬盘，需要对其格式化成ext4格式，就我的一些操作记录。</p>
+<ol>
+<li><p><code>fdisk -l</code>，查看硬盘分配的硬件编号</p>
+<p><img src="./images/2017/fdisk.png" alt=""></p>
+</li>
+<li><p><code>parted /dev/sdg</code>，对使用parted工具对硬盘进行分区</p>
+<ul>
+<li><p><code>mklable gpt</code>，把磁盘格式化为 gpt分区表</p>
+</li>
+<li><p><code>mkpart primary 0 4000G</code>，创建一个主分区，起始位置-结束位置</p>
+</li>
+<li><p><code>mkpart extended 2000G 4000G</code>，可选，创建一个扩展分区</p>
+</li>
+<li><p><code>print</code>，打印出当前设备的信息</p>
+</li>
+<li><p><code>quit</code>，推出parted</p>
+</li>
+</ul>
+<p><img src="./images/2017/linux_parted.png" alt=""></p>
+</li>
+<li><p><code>mkfs.ext4 /dev/sdg1</code>，对硬盘进行格式化，如果存在多个分区，每个分区都需要进行格式化</p>
+<p><img src="./images/2017/mkfs.ext4.png" alt=""></p>
+</li>
+<li><p><code>mount /dev/sdg1 /mnt/usbmount1</code>，挂载硬盘到服务器</p>
+</li>
+<li><p><code>umount /dev/sdg1</code>，硬盘卸载</p>
+</li>
+</ol>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+    
+<nav id="article-nav">
+  
+    <a href="/2017/20170828_new_object/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          python class实现fasta文件解析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/20170619_python_dict/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          python字典
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+    </div>
+    <div class="mb-search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:chengcz.github.io">
+  </form>
+</div>
+<footer id="footer">
+	<!---<h1 class="footer-blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>--->
+	<span class="copyright">
+		&copy; 2018 ChengCZ<br>
+		<!---Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>--->
+	</span>
+</footer>
+
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

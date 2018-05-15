@@ -33,7 +33,7 @@
 	</h1>
 	<nav class="nav">
 		<ul>
-			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/categories">Categories</a></li><li><a href="/about">About</a></li>
 			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
 			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
 		</ul>
@@ -45,10 +45,73 @@
     <div id="main">
       
   
-    <article id="post-ggplot_rank_abundance" class="post">
+    <article id="post-20170507_python_anaconda" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
-			<a href="/2017/ggplot_rank_abundance/" class="article-date">
+			<a href="/2017/20170507_python_anaconda/" class="article-date">
+  <time datetime="2017-05-07T14:12:08.000Z" itemprop="datePublished">2017-05-07</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2017/20170507_python_anaconda/">python科学计算——anaconda</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>python大法好，但是坑爹的版本，坑爹的包管理，折腾死大把大把工作时间。anaconda实现了python2和python3和谐共存，同时conda更方便的进行包管理，支持win，linux，mac多系统平台。</p>
+<p>还有一些小小的便利，anaconda已经提供了python科学计算常用包，numpy, pandas, matplotlib等等，python notebook也必然是有的，目前已更名为<code>jupyter notebook</code>，输出文档很方便进行交流展示。</p>
+<p>清华大学TUNA镜像网站提供了anaconda安装包，<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/，不必被下载速度折磨死。" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/，不必被下载速度折磨死。</a></p>
+<h2 id="anaconda安装"><a href="#anaconda安装" class="headerlink" title="anaconda安装"></a>anaconda安装</h2><p>和python一样，anaconda存在2和3两个版本，目前都更新到4.3.1版，但是，，，还有一个但是，选择安装哪一个版本并没有太大区别，可以方便的通过anaconda环境管理切换不同的python版本。</p>
+<p>针对unix like用户，anaconda还有一个非常重要的特性，非root用户也能方便的进行安装(默认安装到<code>~/anaconda2/</code>)，添加<code>~/anaconda2/bin</code>到环境变量<code>$PATH</code>，而后即可享受anaconda。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>创建名为python3的环境，python版本为3.4，该命令仅安装python基本模块</span><br><span class="line">conda create --name python3 python=3.4</span><br><span class="line"><span class="meta">#</span>创建新环境，同时针对新环境安装anaconda</span><br><span class="line">conda create --name python3 python=3.4 anaconda</span><br><span class="line"><span class="meta">#</span>激活python3环境</span><br><span class="line">source activate python3</span><br><span class="line"><span class="meta">#</span>关闭环境</span><br><span class="line">source deactivate python3</span><br><span class="line"><span class="meta">#</span>删除环境</span><br><span class="line">conda revome --name python3 --all</span><br></pre></td></tr></table></figure>
+<h2 id="conda安装包"><a href="#conda安装包" class="headerlink" title="conda安装包"></a>conda安装包</h2><p>conda于pip类似，对python包进行管理，还能管理python和conda本身</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>列出当前环境中已安装的包</span><br><span class="line">conda list    </span><br><span class="line"><span class="meta">#</span>搜索，安装，升级，删除指定特定的包</span><br><span class="line">conda [search|install|update|remove] package_name</span><br><span class="line"><span class="meta">#</span>可以使用-n参数，对指定特定环境中的包进行操作</span><br><span class="line">conda list -n env_name</span><br><span class="line"><span class="meta">#</span>升级python或者conda，升级python至当前大版本的最新版本</span><br><span class="line">conda update python</span><br></pre></td></tr></table></figure>
+<h2 id="anaconda镜像设置"><a href="#anaconda镜像设置" class="headerlink" title="anaconda镜像设置"></a>anaconda镜像设置</h2><p>anaconda主机在国外，conda在线安装包速度慢到怀疑人生，这时绝壁选择使用国内镜像网站，首先将仓库镜像加入conda配置，具体命令为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 添加Anaconda的TUNA镜像</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line"><span class="meta">#</span> 设置搜索时显示通道地址</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
+<p>或者直接编辑文件<code>~/.condarc</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ssl_verify: true</span><br><span class="line">channels:</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">  - defaults</span><br><span class="line">show_channel_urls: true</span><br></pre></td></tr></table></figure>
+<p>然后，你就可以尽情享受python编程的快乐，不被各种包折磨死</p>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
+    <article id="post-20170420_rank_abundance" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2017/20170420_rank_abundance/" class="article-date">
   <time datetime="2017-04-20T01:23:01.000Z" itemprop="datePublished">2017-04-20</time>
 </a>
 		</span>
@@ -62,7 +125,7 @@
 		
   
     <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2017/ggplot_rank_abundance/">使用ggplot绘制扩增子rank abundance曲线</a>
+      <a class="article-title" href="/2017/20170420_rank_abundance/">使用ggplot绘制扩增子rank abundance曲线</a>
     </h1>
   
 
@@ -102,10 +165,10 @@
 
 
   
-    <article id="post-linux_cmd" class="post">
+    <article id="post-20170315_linux_cmd" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
-			<a href="/2017/linux_cmd/" class="article-date">
+			<a href="/2017/20170315_linux_cmd/" class="article-date">
   <time datetime="2017-03-15T02:39:31.000Z" itemprop="datePublished">2017-03-15</time>
 </a>
 		</span>
@@ -119,7 +182,7 @@
 		
   
     <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2017/linux_cmd/">linux基本命令介绍</a>
+      <a class="article-title" href="/2017/20170315_linux_cmd/">linux基本命令介绍</a>
     </h1>
   
 
@@ -270,10 +333,10 @@
 
 
   
-    <article id="post-parse_PE_fastq" class="post">
+    <article id="post-20170314_parse_PE_fastq" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
-			<a href="/2017/parse_PE_fastq/" class="article-date">
+			<a href="/2017/20170314_parse_PE_fastq/" class="article-date">
   <time datetime="2017-03-14T13:05:10.000Z" itemprop="datePublished">2017-03-14</time>
 </a>
 		</span>
@@ -287,7 +350,7 @@
 		
   
     <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2017/parse_PE_fastq/">parse pe fastq file use python</a>
+      <a class="article-title" href="/2017/20170314_parse_PE_fastq/">parse pe fastq file use python</a>
     </h1>
   
 
@@ -326,10 +389,10 @@
 
 
   
-    <article id="post-Getting_Started" class="post">
+    <article id="post-20170311_Getting_Started" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
-			<a href="/2017/Getting_Started/" class="article-date">
+			<a href="/2017/20170311_Getting_Started/" class="article-date">
   <time datetime="2017-03-11T02:57:34.000Z" itemprop="datePublished">2017-03-11</time>
 </a>
 		</span>
@@ -343,7 +406,7 @@
 		
   
     <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2017/Getting_Started/">&#39;XXX，从入门到放弃&#39;</a>
+      <a class="article-title" href="/2017/20170311_Getting_Started/">&#39;XXX，从入门到放弃&#39;</a>
     </h1>
   
 

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用 STAR-fusion 分析 Fusion-Gene | ChengCZ&#39;s Notebook</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="软件文档：https://github.com/STAR-Fusion/STAR-Fusion/wiki ##软件安装  STAR，https://github.com/alexdobin/STAR 运行依赖 perl 模块 DB_File URI::Escape Set::IntervalTree Carp::Assert JSON::XS PerlIO::gzip common::sense">
+<meta name="keywords" content="Fusion Gene">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 STAR-fusion 分析 Fusion-Gene">
+<meta property="og:url" content="http://chengcz.github.io/2018/20180515_STAR_Fusion/index.html">
+<meta property="og:site_name" content="ChengCZ&#39;s Notebook">
+<meta property="og:description" content="软件文档：https://github.com/STAR-Fusion/STAR-Fusion/wiki ##软件安装  STAR，https://github.com/alexdobin/STAR 运行依赖 perl 模块 DB_File URI::Escape Set::IntervalTree Carp::Assert JSON::XS PerlIO::gzip common::sense">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://chengcz.github.io/2018/20180515_STAR_Fusion/images/2018/star_fusion.results.png">
+<meta property="og:updated_time" content="2018-05-15T14:15:06.432Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 STAR-fusion 分析 Fusion-Gene">
+<meta name="twitter:description" content="软件文档：https://github.com/STAR-Fusion/STAR-Fusion/wiki ##软件安装  STAR，https://github.com/alexdobin/STAR 运行依赖 perl 模块 DB_File URI::Escape Set::IntervalTree Carp::Assert JSON::XS PerlIO::gzip common::sense">
+<meta name="twitter:image" content="http://chengcz.github.io/2018/20180515_STAR_Fusion/images/2018/star_fusion.results.png">
+  
+    <link rel="alternative" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+	<i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+	<h1 class="blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>
+	<nav class="nav">
+		<ul>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/categories">Categories</a></li><li><a href="/about">About</a></li>
+			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+		</ul>
+	</nav>
+	<div id="search-form-wrap">
+		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://chengcz.github.io"></form>
+	</div>
+</header>
+    <div id="main">
+      <article id="post-20180515_STAR_Fusion" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/20180515_STAR_Fusion/" class="article-date">
+  <time datetime="2018-05-15T14:14:52.000Z" itemprop="datePublished">2018-05-15</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      使用 STAR-fusion 分析 Fusion-Gene
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>软件文档：<a href="https://github.com/STAR-Fusion/STAR-Fusion/wiki" target="_blank" rel="noopener">https://github.com/STAR-Fusion/STAR-Fusion/wiki</a></p>
+<p>##软件安装</p>
+<ol>
+<li>STAR，<a href="https://github.com/alexdobin/STAR" target="_blank" rel="noopener">https://github.com/alexdobin/STAR</a></li>
+<li>运行依赖 perl 模块<ol>
+<li>DB_File</li>
+<li>URI::Escape</li>
+<li>Set::IntervalTree</li>
+<li>Carp::Assert</li>
+<li>JSON::XS</li>
+<li>PerlIO::gzip</li>
+<li>common::sense</li>
+<li>Types::Serialiser</li>
+<li>Canary::Stability</li>
+</ol>
+</li>
+</ol>
+<p>##数据库准备</p>
+<p>下载一个较小的未处理的参考文件，自己运行 index 命令。要是网速够快也可以直接在 index 好的数据库文件，~27G</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget -c https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/GRCh37_v19_CTAT_lib_Feb092018.source_data.tar.gz</span><br><span class="line"><span class="meta">$</span>STAR_FUSION_HOME/FusionFilter/prep_genome_lib.pl \</span><br><span class="line">    --genome_fa ref_genome.fa \</span><br><span class="line">    --gtf ref_annot.gtf \</span><br><span class="line">    --fusion_annot_lib CTAT_HumanFusionLib.v0.1.0.dat.gz \</span><br><span class="line">    --annot_filter_rule AnnotFilterRule.pm \</span><br><span class="line">    --pfam_db PFAM.domtblout.dat.gz</span><br></pre></td></tr></table></figure>
+<p>##运行STAR-Fusion</p>
+<p><strong>STAR-Fusion</strong>  对 STAR 输出的嵌合比对分析发现可能存在的基因融合事件</p>
+<h3 id="从-fastq-文件开始"><a href="#从-fastq-文件开始" class="headerlink" title="从 fastq 文件开始"></a>从 fastq 文件开始</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>STAR_FUSION_HOME/STAR-Fusion \</span><br><span class="line">    --genome_lib_dir /path/to/your/CTAT_resource_lib \</span><br><span class="line">    --left_fq reads_1.fq \</span><br><span class="line">    --right_fq reads_2.fq \</span><br><span class="line">    --output_dir star_fusion_outdir \</span><br><span class="line">    --no_remove_dups</span><br></pre></td></tr></table></figure>
+<h3 id="从-STAR-产生-Bam-文件开始"><a href="#从-STAR-产生-Bam-文件开始" class="headerlink" title="从 STAR 产生 Bam 文件开始"></a>从 STAR 产生 Bam 文件开始</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">STAR --genomeDir $&#123;star_index_dir&#125; \</span><br><span class="line">    --readFilesIn $&#123;left_fq_filename&#125; $&#123;right_fq_filename&#125; \</span><br><span class="line">    --twopassMode Basic \</span><br><span class="line">    --outReadsUnmapped None \</span><br><span class="line">    --chimSegmentMin 12 \</span><br><span class="line">    --chimJunctionOverhangMin 12 \</span><br><span class="line">    --alignSJDBoverhangMin 10 \</span><br><span class="line">    --alignMatesGapMax 100000 \</span><br><span class="line">    --alignIntronMax 100000 \</span><br><span class="line">    --chimSegmentReadGapMax 3 \</span><br><span class="line">    --alignSJstitchMismatchNmax 5 -1 5 5 \</span><br><span class="line">    --runThreadN $&#123;THREAD_COUNT&#125; \</span><br><span class="line">    --outSAMstrandField intronMotif</span><br><span class="line"></span><br><span class="line">STAR-Fusion --genome_lib_dir /path/to/your/CTAT_resource_lib \</span><br><span class="line">             -J Chimeric.out.junction \</span><br><span class="line">             --output_dir star_fusion_outdir</span><br></pre></td></tr></table></figure>
+<h2 id="输出文件"><a href="#输出文件" class="headerlink" title="输出文件"></a>输出文件</h2><p>STAR 速度还是那么让人惊喜，6m reads不到半小时。 融合结果<code>star-fusion.fusion_predictions.abridged.tsv</code></p>
+<blockquote>
+<p><strong>FusionName</strong>,<br><strong>JunctionReadCount</strong>, split align到融合点的序列片段数<br><strong>SpanningFragCount</strong>, 双端reads跨越融合点的序列片段数<br><strong>SpliceType</strong>, 断点是否在注释文件存在<br><strong>LeftGene</strong>,<br><strong>LeftBreakpoint</strong>,<br><strong>RightGene</strong>,<br><strong>RightBreakpoint</strong>,<br><strong>LargeAnchorSupport</strong>,<br><strong>FFPM</strong>, fusion fragments per million total reads<br><strong>LeftBreakDinuc</strong>,<br><strong>LeftBreakEntropy</strong>,<br><strong>RightBreakDinuc</strong>,<br><strong>RightBreakEntropy</strong>,<br><strong>annots</strong>,</p>
+</blockquote>
+<h2 id="结果比较"><a href="#结果比较" class="headerlink" title="结果比较"></a>结果比较</h2><p>真是一个悲伤的故事，根据官网给的两种运行方式，结果差别这么大。查看 STAR-Fusion 脚本，使用的 mapping 参数差异有点大啊，哪一个比较合理呢（一个新坑）？？？</p>
+<p><img src="./images/2018/star_fusion.results.png" alt=""></p>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fusion-Gene/">Fusion Gene</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/20180509_snpEff/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          VCF 注释 —— SnpEff
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+    </div>
+    <div class="mb-search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:chengcz.github.io">
+  </form>
+</div>
+<footer id="footer">
+	<!---<h1 class="footer-blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>--->
+	<span class="copyright">
+		&copy; 2018 ChengCZ<br>
+		<!---Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>--->
+	</span>
+</footer>
+
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

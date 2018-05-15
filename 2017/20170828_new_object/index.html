@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>python class实现fasta文件解析 | ChengCZ&#39;s Notebook</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="没有对象怎么办（object）？？？当然是new一个啊 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950class Sequence(object):    # 使用__init__对Sequence进行初始化，Sequence对象具有三个属性    def __i">
+<meta name="keywords" content="fasta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python class实现fasta文件解析">
+<meta property="og:url" content="http://chengcz.github.io/2017/20170828_new_object/index.html">
+<meta property="og:site_name" content="ChengCZ&#39;s Notebook">
+<meta property="og:description" content="没有对象怎么办（object）？？？当然是new一个啊 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950class Sequence(object):    # 使用__init__对Sequence进行初始化，Sequence对象具有三个属性    def __i">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-07T13:16:28.611Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python class实现fasta文件解析">
+<meta name="twitter:description" content="没有对象怎么办（object）？？？当然是new一个啊 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950class Sequence(object):    # 使用__init__对Sequence进行初始化，Sequence对象具有三个属性    def __i">
+  
+    <link rel="alternative" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+	<i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+	<h1 class="blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>
+	<nav class="nav">
+		<ul>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/categories">Categories</a></li><li><a href="/about">About</a></li>
+			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+		</ul>
+	</nav>
+	<div id="search-form-wrap">
+		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://chengcz.github.io"></form>
+	</div>
+</header>
+    <div id="main">
+      <article id="post-20170828_new_object" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2017/20170828_new_object/" class="article-date">
+  <time datetime="2017-08-28T14:47:06.000Z" itemprop="datePublished">2017-08-28</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      python class实现fasta文件解析
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>没有对象怎么办（object）？？？当然是new一个啊</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sequence</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="comment"># 使用__init__对Sequence进行初始化，Sequence对象具有三个属性</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, seq, descr=<span class="string">''</span>)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.seq = seq</span><br><span class="line">        self.descr = descr</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 给Sequence对象定义一个反向互补方法</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reverse_complement</span><span class="params">(self)</span>:</span></span><br><span class="line">        RC = &#123;<span class="string">'A'</span>:<span class="string">'T'</span>,<span class="string">'T'</span>:<span class="string">'A'</span>,<span class="string">'C'</span>:<span class="string">'G'</span>,<span class="string">'G'</span>:<span class="string">'C'</span>,<span class="string">'N'</span>:<span class="string">'N'</span>,</span><br><span class="line">              <span class="string">'a'</span>:<span class="string">'t'</span>,<span class="string">'t'</span>:<span class="string">'a'</span>,<span class="string">'c'</span>:<span class="string">'g'</span>,<span class="string">'g'</span>:<span class="string">'c'</span>,<span class="string">'n'</span>:<span class="string">'n'</span>&#125;</span><br><span class="line">        <span class="keyword">return</span> Sequence(self.name, <span class="string">''</span>.join([RC[i] <span class="keyword">for</span> i <span class="keyword">in</span> self.seq[::<span class="number">-1</span>]]), self.descr)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 定义输出到文件的方法，接受文件句柄输入</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">write_to_fasta_file</span><span class="params">(self, file_handle)</span>:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">_SeqFormat</span><span class="params">(seq, chara=<span class="number">80</span>)</span>:</span></span><br><span class="line">            tmp = <span class="string">''</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(seq),chara):</span><br><span class="line">                tmp += (seq[i:(i+chara)]+<span class="string">'\n'</span>)</span><br><span class="line">            <span class="keyword">return</span> tmp</span><br><span class="line">        file_handle.write(<span class="string">'&gt;&#123;&#125; &#123;&#125;\n'</span>.format(self.name, self.descr))</span><br><span class="line">        file_handle.write(<span class="string">'&#123;&#125;'</span>.format(_SeqFormat(self.seq)))</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FastaReader</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, fastafile)</span>:</span></span><br><span class="line">        self.fasta = fastafile</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 使用__iter__方法实现对fasta文件的循环解析，其中用到yeild构造了生成器</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">with</span> open(self.fasta) <span class="keyword">as</span> f:</span><br><span class="line">            seq = <span class="keyword">None</span></span><br><span class="line">            <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">                <span class="keyword">if</span> line.startswith( <span class="string">"&gt;"</span> ):</span><br><span class="line">                    <span class="keyword">if</span> seq:</span><br><span class="line">                        <span class="keyword">yield</span> Sequence( name, seq, descr )</span><br><span class="line">                    name, sep, descr = line[<span class="number">1</span>:<span class="number">-1</span>].partition(<span class="string">' '</span>)</span><br><span class="line">                    seq = <span class="string">""</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">assert</span> seq <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>, <span class="string">"FASTA file does not start with '&gt;'."</span></span><br><span class="line">                    seq += line[:<span class="number">-1</span>].encode()</span><br><span class="line">        <span class="keyword">if</span> seq <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            <span class="keyword">yield</span> Sequence( name, seq, descr )</span><br><span class="line"></span><br><span class="line"><span class="comment"># example</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> FastaReader(<span class="string">'ref.fa'</span>):</span><br><span class="line">    <span class="comment"># 使用</span></span><br><span class="line">    i.write_to_fasta_file(file_handle)</span><br><span class="line">    i.seq</span><br><span class="line">    i.name</span><br><span class="line">    i.descr</span><br></pre></td></tr></table></figure>
+<p>懒癌发作了，就这，，，</p>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fasta/">fasta</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
+    
+<nav id="article-nav">
+  
+    <a href="/2017/20170901_submit_data_to_sra/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          提交测序数据到SRA
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/20170728_mount_HardDisk/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          服务器挂载4T硬盘
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+    </div>
+    <div class="mb-search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:chengcz.github.io">
+  </form>
+</div>
+<footer id="footer">
+	<!---<h1 class="footer-blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>--->
+	<span class="copyright">
+		&copy; 2018 ChengCZ<br>
+		<!---Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>--->
+	</span>
+</footer>
+
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

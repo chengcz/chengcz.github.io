@@ -33,7 +33,7 @@
 	</h1>
 	<nav class="nav">
 		<ul>
-			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/categories">Categories</a></li><li><a href="/about">About</a></li>
 			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
 			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
 		</ul>
@@ -45,10 +45,92 @@
     <div id="main">
       
   
-    <article id="post-snpEff" class="post">
+    <article id="post-20180515_STAR_Fusion" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
-			<a href="/2018/snpEff/" class="article-date">
+			<a href="/2018/20180515_STAR_Fusion/" class="article-date">
+  <time datetime="2018-05-15T14:14:52.000Z" itemprop="datePublished">2018-05-15</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2018/20180515_STAR_Fusion/">使用 STAR-fusion 分析 Fusion-Gene</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>软件文档：<a href="https://github.com/STAR-Fusion/STAR-Fusion/wiki" target="_blank" rel="noopener">https://github.com/STAR-Fusion/STAR-Fusion/wiki</a></p>
+<p>##软件安装</p>
+<ol>
+<li>STAR，<a href="https://github.com/alexdobin/STAR" target="_blank" rel="noopener">https://github.com/alexdobin/STAR</a></li>
+<li>运行依赖 perl 模块<ol>
+<li>DB_File</li>
+<li>URI::Escape</li>
+<li>Set::IntervalTree</li>
+<li>Carp::Assert</li>
+<li>JSON::XS</li>
+<li>PerlIO::gzip</li>
+<li>common::sense</li>
+<li>Types::Serialiser</li>
+<li>Canary::Stability</li>
+</ol>
+</li>
+</ol>
+<p>##数据库准备</p>
+<p>下载一个较小的未处理的参考文件，自己运行 index 命令。要是网速够快也可以直接在 index 好的数据库文件，~27G</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget -c https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/GRCh37_v19_CTAT_lib_Feb092018.source_data.tar.gz</span><br><span class="line"><span class="meta">$</span>STAR_FUSION_HOME/FusionFilter/prep_genome_lib.pl \</span><br><span class="line">    --genome_fa ref_genome.fa \</span><br><span class="line">    --gtf ref_annot.gtf \</span><br><span class="line">    --fusion_annot_lib CTAT_HumanFusionLib.v0.1.0.dat.gz \</span><br><span class="line">    --annot_filter_rule AnnotFilterRule.pm \</span><br><span class="line">    --pfam_db PFAM.domtblout.dat.gz</span><br></pre></td></tr></table></figure>
+<p>##运行STAR-Fusion</p>
+<p><strong>STAR-Fusion</strong>  对 STAR 输出的嵌合比对分析发现可能存在的基因融合事件</p>
+<h3 id="从-fastq-文件开始"><a href="#从-fastq-文件开始" class="headerlink" title="从 fastq 文件开始"></a>从 fastq 文件开始</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>STAR_FUSION_HOME/STAR-Fusion \</span><br><span class="line">    --genome_lib_dir /path/to/your/CTAT_resource_lib \</span><br><span class="line">    --left_fq reads_1.fq \</span><br><span class="line">    --right_fq reads_2.fq \</span><br><span class="line">    --output_dir star_fusion_outdir \</span><br><span class="line">    --no_remove_dups</span><br></pre></td></tr></table></figure>
+<h3 id="从-STAR-产生-Bam-文件开始"><a href="#从-STAR-产生-Bam-文件开始" class="headerlink" title="从 STAR 产生 Bam 文件开始"></a>从 STAR 产生 Bam 文件开始</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">STAR --genomeDir $&#123;star_index_dir&#125; \</span><br><span class="line">    --readFilesIn $&#123;left_fq_filename&#125; $&#123;right_fq_filename&#125; \</span><br><span class="line">    --twopassMode Basic \</span><br><span class="line">    --outReadsUnmapped None \</span><br><span class="line">    --chimSegmentMin 12 \</span><br><span class="line">    --chimJunctionOverhangMin 12 \</span><br><span class="line">    --alignSJDBoverhangMin 10 \</span><br><span class="line">    --alignMatesGapMax 100000 \</span><br><span class="line">    --alignIntronMax 100000 \</span><br><span class="line">    --chimSegmentReadGapMax 3 \</span><br><span class="line">    --alignSJstitchMismatchNmax 5 -1 5 5 \</span><br><span class="line">    --runThreadN $&#123;THREAD_COUNT&#125; \</span><br><span class="line">    --outSAMstrandField intronMotif</span><br><span class="line"></span><br><span class="line">STAR-Fusion --genome_lib_dir /path/to/your/CTAT_resource_lib \</span><br><span class="line">             -J Chimeric.out.junction \</span><br><span class="line">             --output_dir star_fusion_outdir</span><br></pre></td></tr></table></figure>
+<h2 id="输出文件"><a href="#输出文件" class="headerlink" title="输出文件"></a>输出文件</h2><p>STAR 速度还是那么让人惊喜，6m reads不到半小时。 融合结果<code>star-fusion.fusion_predictions.abridged.tsv</code></p>
+<blockquote>
+<p><strong>FusionName</strong>,<br><strong>JunctionReadCount</strong>, split align到融合点的序列片段数<br><strong>SpanningFragCount</strong>, 双端reads跨越融合点的序列片段数<br><strong>SpliceType</strong>, 断点是否在注释文件存在<br><strong>LeftGene</strong>,<br><strong>LeftBreakpoint</strong>,<br><strong>RightGene</strong>,<br><strong>RightBreakpoint</strong>,<br><strong>LargeAnchorSupport</strong>,<br><strong>FFPM</strong>, fusion fragments per million total reads<br><strong>LeftBreakDinuc</strong>,<br><strong>LeftBreakEntropy</strong>,<br><strong>RightBreakDinuc</strong>,<br><strong>RightBreakEntropy</strong>,<br><strong>annots</strong>,</p>
+</blockquote>
+<h2 id="结果比较"><a href="#结果比较" class="headerlink" title="结果比较"></a>结果比较</h2><p>真是一个悲伤的故事，根据官网给的两种运行方式，结果差别这么大。查看 STAR-Fusion 脚本，使用的 mapping 参数差异有点大啊，哪一个比较合理呢（一个新坑）？？？</p>
+<p><img src="./images/2018/star_fusion.results.png" alt=""></p>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fusion-Gene/">Fusion Gene</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
+    <article id="post-20180509_snpEff" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/20180509_snpEff/" class="article-date">
   <time datetime="2018-05-09T13:45:52.000Z" itemprop="datePublished">2018-05-09</time>
 </a>
 		</span>
@@ -62,7 +144,7 @@
 		
   
     <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/snpEff/">VCF 注释 —— SnpEff</a>
+      <a class="article-title" href="/2018/20180509_snpEff/">VCF 注释 —— SnpEff</a>
     </h1>
   
 
@@ -70,7 +152,7 @@
 	<div class="entry-content">
 		
     	<p>日常工作之读文档，了解参数改变、新方法功能，对已有流程进行修改。</p>
-<p>各种文档看一边忘一遍，使用需要有一次看 SnpEff （<a href="http://snpeff.sourceforge.net/index.html" target="_blank" rel="noopener">http://snpeff.sourceforge.net/index.html</a> ），进行一些整理如下，不过还是建议<a href="http://snpeff.sourceforge.net/SnpEff_manual.html" target="_blank" rel="noopener">原文</a>，鬼知道我会在哪里写错理解错。</p>
+<p>各种文档看一边遍一遍，使用需要又一次看 SnpEff （<a href="http://snpeff.sourceforge.net/index.html" target="_blank" rel="noopener">http://snpeff.sourceforge.net/index.html</a> ），进行一些整理如下，不过还是建议<a href="http://snpeff.sourceforge.net/SnpEff_manual.html" target="_blank" rel="noopener">原文</a>，鬼知道我会在哪里写错理解错。</p>
 <h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><ol>
 <li><p>annotation</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">java -jar snpEff.jar eff genome	input.vcf &gt;output.vcf</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> -hgvs, 默认开启，使用 HGVS 变异描述语法对蛋白替换进行描述</span><br><span class="line"><span class="meta">#</span> -fi, 提供bed文件，只对bed区域内位点进行注释</span><br><span class="line"><span class="meta">#</span> -no-downstream, -no-intergenic, -no-intron, -no-upstream, -no-utr, -no [effectType], 参数还可对根据注释类型对注释进行初过滤</span><br><span class="line"><span class="meta">#</span> -canon, 只使用基因对应最长转录本（作为权威转录本）进行注释；参数-canonList可以自行提供基因权威转录本，格式为“GeneID    transcript_ID”</span><br><span class="line"><span class="meta">#</span> -noStats, 不输出注释统计信息</span><br><span class="line"><span class="meta">#</span> -v, 话痨模式，输出各种运行信息</span><br></pre></td></tr></table></figure>
@@ -92,7 +174,7 @@
 <p>​</p>
 </li>
 </ol>
-<h3 id="注释结果"><a href="#注释结果" class="headerlink" title="注释结果"></a>注释结果</h3><p><img src="./images/snpEff.png" alt=""></p>
+<h3 id="注释结果"><a href="#注释结果" class="headerlink" title="注释结果"></a>注释结果</h3><p><img src="./images/2018/snpEff.png" alt=""></p>
 <p>可以看到注释信息被添加到了 VCF 中每个变异 INFO 信息中，以 ANN= 特征开始，详细的注释说明可查看<a href="./appendix/snpEff.pdf">官方文档</a> <a href="http://snpeff.sourceforge.net/VCFannotationformat_v1.0.pdf" target="_blank" rel="noopener">http://snpeff.sourceforge.net/VCFannotationformat_v1.0.pdf</a>。因为基因多个转录本、相互重叠基因等原因，可以看到变异位点被多次注释，需根据实际需求进行筛选。</p>
 
     
@@ -122,10 +204,10 @@
 
 
   
-    <article id="post-umount" class="post">
+    <article id="post-20170927_umount" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
-			<a href="/2017/umount/" class="article-date">
+			<a href="/2017/20170927_umount/" class="article-date">
   <time datetime="2017-09-27T03:19:21.000Z" itemprop="datePublished">2017-09-27</time>
 </a>
 		</span>
@@ -139,7 +221,7 @@
 		
   
     <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2017/umount/">卸载一个假忙的硬盘</a>
+      <a class="article-title" href="/2017/20170927_umount/">卸载一个假忙的硬盘</a>
     </h1>
   
 
@@ -186,10 +268,10 @@
 
 
   
-    <article id="post-submit_data_to_sra" class="post">
+    <article id="post-20170901_submit_data_to_sra" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
-			<a href="/2017/submit_data_to_sra/" class="article-date">
+			<a href="/2017/20170901_submit_data_to_sra/" class="article-date">
   <time datetime="2017-09-01T13:29:21.000Z" itemprop="datePublished">2017-09-01</time>
 </a>
 		</span>
@@ -203,7 +285,7 @@
 		
   
     <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2017/submit_data_to_sra/">提交测序数据到SRA</a>
+      <a class="article-title" href="/2017/20170901_submit_data_to_sra/">提交测序数据到SRA</a>
     </h1>
   
 
@@ -247,10 +329,10 @@
 
 
   
-    <article id="post-new_object" class="post">
+    <article id="post-20170828_new_object" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
-			<a href="/2017/new_object/" class="article-date">
+			<a href="/2017/20170828_new_object/" class="article-date">
   <time datetime="2017-08-28T14:47:06.000Z" itemprop="datePublished">2017-08-28</time>
 </a>
 		</span>
@@ -264,7 +346,7 @@
 		
   
     <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2017/new_object/">python class实现fasta文件解析</a>
+      <a class="article-title" href="/2017/20170828_new_object/">python class实现fasta文件解析</a>
     </h1>
   
 
@@ -302,10 +384,10 @@
 
 
   
-    <article id="post-mount_HardDisk" class="post">
+    <article id="post-20170728_mount_HardDisk" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
-			<a href="/2017/mount_HardDisk/" class="article-date">
+			<a href="/2017/20170728_mount_HardDisk/" class="article-date">
   <time datetime="2017-07-28T02:20:21.000Z" itemprop="datePublished">2017-07-28</time>
 </a>
 		</span>
@@ -319,7 +401,7 @@
 		
   
     <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2017/mount_HardDisk/">服务器挂载4T硬盘</a>
+      <a class="article-title" href="/2017/20170728_mount_HardDisk/">服务器挂载4T硬盘</a>
     </h1>
   
 
@@ -380,10 +462,10 @@
 
 
   
-    <article id="post-python_dict" class="post">
+    <article id="post-20170619_python_dict" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
-			<a href="/2017/python_dict/" class="article-date">
+			<a href="/2017/20170619_python_dict/" class="article-date">
   <time datetime="2017-06-19T08:38:01.000Z" itemprop="datePublished">2017-06-19</time>
 </a>
 		</span>
@@ -397,7 +479,7 @@
 		
   
     <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2017/python_dict/">python字典</a>
+      <a class="article-title" href="/2017/20170619_python_dict/">python字典</a>
     </h1>
   
 
@@ -439,10 +521,10 @@
 
 
   
-    <article id="post-linux_find" class="post">
+    <article id="post-20170521_linux_find" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
-			<a href="/2017/linux_find/" class="article-date">
+			<a href="/2017/20170521_linux_find/" class="article-date">
   <time datetime="2017-05-21T04:39:31.000Z" itemprop="datePublished">2017-05-21</time>
 </a>
 		</span>
@@ -456,7 +538,7 @@
 		
   
     <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2017/linux_find/">Linux命令——find</a>
+      <a class="article-title" href="/2017/20170521_linux_find/">Linux命令——find</a>
     </h1>
   
 
@@ -531,10 +613,10 @@
 
 
   
-    <article id="post-parse_fasta" class="post">
+    <article id="post-20170511_parse_fasta" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
-			<a href="/2017/parse_fasta/" class="article-date">
+			<a href="/2017/20170511_parse_fasta/" class="article-date">
   <time datetime="2017-05-11T03:40:15.000Z" itemprop="datePublished">2017-05-11</time>
 </a>
 		</span>
@@ -548,7 +630,7 @@
 		
   
     <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2017/parse_fasta/">fasta序列解析</a>
+      <a class="article-title" href="/2017/20170511_parse_fasta/">fasta序列解析</a>
     </h1>
   
 
@@ -590,10 +672,10 @@
 
 
   
-    <article id="post-RefSeq_GFF2GTF" class="post">
+    <article id="post-20170510_RefSeq_GFF2GTF" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
-			<a href="/2017/RefSeq_GFF2GTF/" class="article-date">
+			<a href="/2017/20170510_RefSeq_GFF2GTF/" class="article-date">
   <time datetime="2017-05-10T14:33:43.000Z" itemprop="datePublished">2017-05-10</time>
 </a>
 		</span>
@@ -607,7 +689,7 @@
 		
   
     <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2017/RefSeq_GFF2GTF/">RefSeq数据库GFF格式转换</a>
+      <a class="article-title" href="/2017/20170510_RefSeq_GFF2GTF/">RefSeq数据库GFF格式转换</a>
     </h1>
   
 
@@ -627,7 +709,7 @@
 			<span class="category">
 				
   <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>»<a class="article-category-link" href="/categories/bioinfor/python/">python</a>
+    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
   </div>
 
 			</span>
@@ -635,69 +717,6 @@
 				
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GFF/">GFF</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GTF/">GTF</a></li></ul>
 
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
-    <article id="post-python_anaconda" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2017/python_anaconda/" class="article-date">
-  <time datetime="2017-05-07T14:12:08.000Z" itemprop="datePublished">2017-05-07</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2017/python_anaconda/">python科学计算——anaconda</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<p>python大法好，但是坑爹的版本，坑爹的包管理，折腾死大把大把工作时间。anaconda实现了python2和python3和谐共存，同时conda更方便的进行包管理，支持win，linux，mac多系统平台。</p>
-<p>还有一些小小的便利，anaconda已经提供了python科学计算常用包，numpy, pandas, matplotlib等等，python notebook也必然是有的，目前已更名为<code>jupyter notebook</code>，输出文档很方便进行交流展示。</p>
-<p>清华大学TUNA镜像网站提供了anaconda安装包，<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/，不必被下载速度折磨死。" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/，不必被下载速度折磨死。</a></p>
-<h2 id="anaconda安装"><a href="#anaconda安装" class="headerlink" title="anaconda安装"></a>anaconda安装</h2><p>和python一样，anaconda存在2和3两个版本，目前都更新到4.3.1版，但是，，，还有一个但是，选择安装哪一个版本并没有太大区别，可以方便的通过anaconda环境管理切换不同的python版本。</p>
-<p>针对unix like用户，anaconda还有一个非常重要的特性，非root用户也能方便的进行安装(默认安装到<code>~/anaconda2/</code>)，添加<code>~/anaconda2/bin</code>到环境变量<code>$PATH</code>，而后即可享受anaconda。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>创建名为python3的环境，python版本为3.4，该命令仅安装python基本模块</span><br><span class="line">conda create --name python3 python=3.4</span><br><span class="line"><span class="meta">#</span>创建新环境，同时针对新环境安装anaconda</span><br><span class="line">conda create --name python3 python=3.4 anaconda</span><br><span class="line"><span class="meta">#</span>激活python3环境</span><br><span class="line">source activate python3</span><br><span class="line"><span class="meta">#</span>关闭环境</span><br><span class="line">source deactivate python3</span><br><span class="line"><span class="meta">#</span>删除环境</span><br><span class="line">conda revome --name python3 --all</span><br></pre></td></tr></table></figure>
-<h2 id="conda安装包"><a href="#conda安装包" class="headerlink" title="conda安装包"></a>conda安装包</h2><p>conda于pip类似，对python包进行管理，还能管理python和conda本身</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>列出当前环境中已安装的包</span><br><span class="line">conda list    </span><br><span class="line"><span class="meta">#</span>搜索，安装，升级，删除指定特定的包</span><br><span class="line">conda [search|install|update|remove] package_name</span><br><span class="line"><span class="meta">#</span>可以使用-n参数，对指定特定环境中的包进行操作</span><br><span class="line">conda list -n env_name</span><br><span class="line"><span class="meta">#</span>升级python或者conda，升级python至当前大版本的最新版本</span><br><span class="line">conda update python</span><br></pre></td></tr></table></figure>
-<h2 id="anaconda镜像设置"><a href="#anaconda镜像设置" class="headerlink" title="anaconda镜像设置"></a>anaconda镜像设置</h2><p>anaconda主机在国外，conda在线安装包速度慢到怀疑人生，这时绝壁选择使用国内镜像网站，首先将仓库镜像加入conda配置，具体命令为：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 添加Anaconda的TUNA镜像</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line"><span class="meta">#</span> 设置搜索时显示通道地址</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
-<p>或者直接编辑文件<code>~/.condarc</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ssl_verify: true</span><br><span class="line">channels:</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">  - defaults</span><br><span class="line">show_channel_urls: true</span><br></pre></td></tr></table></figure>
-<p>然后，你就可以尽情享受python编程的快乐，不被各种包折磨死</p>
-
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/python/">python</a>
-  </div>
-
-			</span>
-			<span class="tags">
-				
 			</span>
 		</div>
 	</footer>
