@@ -5,17 +5,17 @@
   
   <title>使用 trimmomatic 进行数据质控 | ChengCZ&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width">
-  <meta name="description" content="trimmomatic 使用 java 编写，免安装多平台运行，同时运行速度非常快。 12345# paired end java -jar trimmomatic-0.32.jar PE -threads 8 -phred33 sample_R1.fastq.gz sample_R2.fastq.gz sample_R1_paired.fastq.gz sample_R1_unpaired.fa">
+  <meta name="description" content="trimmomatic 使用 java 编写，免安装多平台运行，同时运行速度非常快。 1234567891011# paired end java -jar trimmomatic-0.32.jar PE -threads 8 -phred33 \    sample_R1.fastq.gz sample_R2.fastq.gz \    sample_R1_paired.fastq.gz sam">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 trimmomatic 进行数据质控">
 <meta property="og:url" content="http://chengcz.github.io/2018/201805_trimmomatic/index.html">
 <meta property="og:site_name" content="ChengCZ&#39;s Notebook">
-<meta property="og:description" content="trimmomatic 使用 java 编写，免安装多平台运行，同时运行速度非常快。 12345# paired end java -jar trimmomatic-0.32.jar PE -threads 8 -phred33 sample_R1.fastq.gz sample_R2.fastq.gz sample_R1_paired.fastq.gz sample_R1_unpaired.fa">
+<meta property="og:description" content="trimmomatic 使用 java 编写，免安装多平台运行，同时运行速度非常快。 1234567891011# paired end java -jar trimmomatic-0.32.jar PE -threads 8 -phred33 \    sample_R1.fastq.gz sample_R2.fastq.gz \    sample_R1_paired.fastq.gz sam">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-17T12:10:30.430Z">
+<meta property="og:updated_time" content="2018-05-17T14:30:55.725Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 trimmomatic 进行数据质控">
-<meta name="twitter:description" content="trimmomatic 使用 java 编写，免安装多平台运行，同时运行速度非常快。 12345# paired end java -jar trimmomatic-0.32.jar PE -threads 8 -phred33 sample_R1.fastq.gz sample_R2.fastq.gz sample_R1_paired.fastq.gz sample_R1_unpaired.fa">
+<meta name="twitter:description" content="trimmomatic 使用 java 编写，免安装多平台运行，同时运行速度非常快。 1234567891011# paired end java -jar trimmomatic-0.32.jar PE -threads 8 -phred33 \    sample_R1.fastq.gz sample_R2.fastq.gz \    sample_R1_paired.fastq.gz sam">
   
     <link rel="alternative" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
   
@@ -72,7 +72,7 @@
 	<div class="entry-content">
 		
     	<p>trimmomatic 使用 java 编写，免安装多平台运行，同时运行速度非常快。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> paired end </span><br><span class="line">java -jar trimmomatic-0.32.jar PE -threads 8 -phred33 sample_R1.fastq.gz sample_R2.fastq.gz sample_R1_paired.fastq.gz sample_R1_unpaired.fastq.gz sample_R2_paired.fastq.gz sample_R2_unpaired.fastq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 SLIDINGWINDOW:4:15 MINLEN:36</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> single end</span><br><span class="line">java -jar trimmomatic-0.32.jar PE -threads 8 -phred33 sample.fastq.gz sample_clean.fastq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 SLIDINGWINDOW:4:15 MINLEN:36</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> paired end </span><br><span class="line">java -jar trimmomatic-0.32.jar PE -threads 8 -phred33 \</span><br><span class="line">    sample_R1.fastq.gz sample_R2.fastq.gz \</span><br><span class="line">    sample_R1_paired.fastq.gz sample_R1_unpaired.fastq.gz \</span><br><span class="line">    sample_R2_paired.fastq.gz sample_R2_unpaired.fastq.gz \</span><br><span class="line">    ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 SLIDINGWINDOW:4:15 MINLEN:36</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> single end</span><br><span class="line">java -jar trimmomatic-0.32.jar PE -threads 8 -phred33 \</span><br><span class="line">    sample.fastq.gz sample_clean.fastq.gz \</span><br><span class="line">    ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 SLIDINGWINDOW:4:15 MINLEN:36</span><br></pre></td></tr></table></figure>
 <p>参数选择<br><strong>PE/SE</strong></p>
 <blockquote>
 <p>设定对 Paired-End 或 Single-End 的 reads 进行处理，其输入和输出参数稍有不一样</p>
@@ -95,7 +95,10 @@
 <p>从 reads 首端（ 5’端）开始进行滑动，当滑动位点周围一段序列(window)的平均碱基低于阈值，则从该处进行切除。 Windows 的 size 是 4 bp， 若其平均碱基质量小于15，则切除</p>
 </blockquote>
 <p>MAXINFO：<br><strong>LEADING/TRAILING&gt;</strong></p>
-<p>切除 reads 首端（ 5’端） / reads 末端（ 3’端）碱基质量小于指定值的碱基<br><strong>CROP/HEADCROP</strong></p>
+<blockquote>
+<p>切除 reads 首端（ 5’端） / reads 末端（ 3’端）碱基质量小于指定值的碱基</p>
+</blockquote>
+<p><strong>CROP/HEADCROP</strong></p>
 <blockquote>
 <p>从 reads 末端（ 3’端）/reads 首端（ 5’端）切除碱基到指定长度</p>
 </blockquote>
