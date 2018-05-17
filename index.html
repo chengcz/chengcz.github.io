@@ -33,7 +33,7 @@
 	</h1>
 	<nav class="nav">
 		<ul>
-			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/categories">Categories</a></li><li><a href="/about">About</a></li>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/about">About</a></li>
 			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
 			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
 		</ul>
@@ -297,6 +297,92 @@
 				
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FusionGene/">FusionGene</a></li></ul>
 
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
+    <article id="post-201805_trimmomatic" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201805_trimmomatic/" class="article-date">
+  <time datetime="2018-05-13T07:47:30.000Z" itemprop="datePublished">2018-05-13</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2018/201805_trimmomatic/">使用 trimmomatic 进行数据质控</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>trimmomatic 使用 java 编写，免安装多平台运行，同时运行速度非常快。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> paired end </span><br><span class="line">java -jar trimmomatic-0.32.jar PE -threads 8 -phred33 sample_R1.fastq.gz sample_R2.fastq.gz sample_R1_paired.fastq.gz sample_R1_unpaired.fastq.gz sample_R2_paired.fastq.gz sample_R2_unpaired.fastq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 SLIDINGWINDOW:4:15 MINLEN:36</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> single end</span><br><span class="line">java -jar trimmomatic-0.32.jar PE -threads 8 -phred33 sample.fastq.gz sample_clean.fastq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 SLIDINGWINDOW:4:15 MINLEN:36</span><br></pre></td></tr></table></figure>
+<p>参数选择<br><strong>PE/SE</strong></p>
+<blockquote>
+<p>设定对 Paired-End 或 Single-End 的 reads 进行处理，其输入和输出参数稍有不一样</p>
+</blockquote>
+<p><strong>threads</strong></p>
+<blockquote>
+<p>设置多线程运行数</p>
+</blockquote>
+<p><strong>phred33/phred64</strong></p>
+<blockquote>
+<p>设置碱基的质量格式，可选 phred64</p>
+</blockquote>
+<p><strong>ILLUMINACLIP</strong>:<fastawithadaptersetc>:<seed mismatches="">:<palindrome clip="" threshold="">:<simple clip="" threshold="">:<minadapterlength>:<keepbothreads> </keepbothreads></minadapterlength></simple></palindrome></seed></fastawithadaptersetc></p>
+<blockquote>
+<p>切除 adapter 序列。参数后分别接 adapter 序列的 fasta 文件，允许的最大 mismatch 数， palindrome 模式下匹配碱基数阈值： simple 模式下的匹配碱基数阈值</p>
+<p><em>minAdapterLength</em>：只对 PE 测序的 palindrome clip 模式有效，指定 palindrome 模式下可以切除的接头序列最短长度，由于历史的原因，默认值是 8，但实际上 palindrome 模式可以切除短至 1bp 的接头污染，所以可以设置为 1 。<br><em>keepBothReads</em>：只对 PE 测序的 palindrome clip 模式有效，这个参数很重要，在上图中 D 模式下， R1 和 R2 在去除了接头序列之后剩余的部分是完全反向互补的，默认参数 false，意味着整条去除与 R1 完全反向互补的 R2，当做重复去除掉，但在有些情况下，例如需要用到 paired reads 的 bowtie2 流程，就要将这个参数改为 true，否则会损失一部分 paired reads。</p>
+</blockquote>
+<p><strong>SLIDINGWINDOW</strong></p>
+<blockquote>
+<p>从 reads 首端（ 5’端）开始进行滑动，当滑动位点周围一段序列(window)的平均碱基低于阈值，则从该处进行切除。 Windows 的 size 是 4 bp， 若其平均碱基质量小于15，则切除</p>
+</blockquote>
+<p>MAXINFO：<br><strong>LEADING/TRAILING&gt;</strong></p>
+<p>切除 reads 首端（ 5’端） / reads 末端（ 3’端）碱基质量小于指定值的碱基<br><strong>CROP/HEADCROP</strong></p>
+<blockquote>
+<p>从 reads 末端（ 3’端）/reads 首端（ 5’端）切除碱基到指定长度</p>
+</blockquote>
+<p><strong>MINLEN</strong></p>
+<blockquote>
+<p>抛弃低于指定长度的 reads</p>
+</blockquote>
+<p><strong>TOPHRED33/TOPHRED64</strong></p>
+<blockquote>
+<p>转换碱基质量格式，Illumina HiSeq 2000质量系统为phred-64，可用该参数转换到phred-33</p>
+</blockquote>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
 			</span>
 		</div>
 	</footer>
@@ -665,87 +751,9 @@
 
 
   
-    <article id="post-201707_mountHardDisk" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2017/201707_mountHardDisk/" class="article-date">
-  <time datetime="2017-07-28T02:20:21.000Z" itemprop="datePublished">2017-07-28</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2017/201707_mountHardDisk/">服务器挂载 4T 硬盘</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<p>因为一些我并不理解的原因，服务器不能正确识别4T的NTFS移动硬盘，需要对其格式化成ext4格式，就我的一些操作记录。</p>
-<ol>
-<li><p><code>fdisk -l</code>，查看硬盘分配的硬件编号</p>
-<p><img src="./images/2017/fdisk.png" alt=""></p>
-</li>
-<li><p><code>parted /dev/sdg</code>，对使用parted工具对硬盘进行分区</p>
-<ul>
-<li><p><code>mklable gpt</code>，把磁盘格式化为 gpt分区表</p>
-</li>
-<li><p><code>mkpart primary 0 4000G</code>，创建一个主分区，起始位置-结束位置</p>
-</li>
-<li><p><code>mkpart extended 2000G 4000G</code>，可选，创建一个扩展分区</p>
-</li>
-<li><p><code>print</code>，打印出当前设备的信息</p>
-</li>
-<li><p><code>quit</code>，推出parted</p>
-</li>
-</ul>
-<p><img src="./images/2017/linux_parted.png" alt=""></p>
-</li>
-<li><p><code>mkfs.ext4 /dev/sdg1</code>，对硬盘进行格式化，如果存在多个分区，每个分区都需要进行格式化</p>
-<p><img src="./images/2017/mkfs.ext4.png" alt=""></p>
-</li>
-<li><p><code>mount /dev/sdg1 /mnt/usbmount1</code>，挂载硬盘到服务器</p>
-</li>
-<li><p><code>umount /dev/sdg1</code>，硬盘卸载</p>
-</li>
-</ol>
-
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-  </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
