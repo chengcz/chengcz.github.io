@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用 topaht2-fusion 分析 Fusion-Gene | ChengCZ&#39;s Notebook</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="tophat2-fusion 文档搬运工：https://ccb.jhu.edu/software/tophat/fusion_tutorial.shtml ###step1.tophat 1tophat2 -p 8 -o $OUTPUT --fusion-search --keep-fasta-order --bowtie1 --no-coverage-search --fusion-ancho">
+<meta name="keywords" content="FusionGene">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 topaht2-fusion 分析 Fusion-Gene">
+<meta property="og:url" content="http://chengcz.github.io/2018/201805_TophatFusion/index.html">
+<meta property="og:site_name" content="ChengCZ&#39;s Notebook">
+<meta property="og:description" content="tophat2-fusion 文档搬运工：https://ccb.jhu.edu/software/tophat/fusion_tutorial.shtml ###step1.tophat 1tophat2 -p 8 -o $OUTPUT --fusion-search --keep-fasta-order --bowtie1 --no-coverage-search --fusion-ancho">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://chengcz.github.io/2018/201805_TophatFusion/images/2018/bowtie1.2_TophatFusion.png">
+<meta property="og:updated_time" content="2018-05-17T11:20:51.123Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 topaht2-fusion 分析 Fusion-Gene">
+<meta name="twitter:description" content="tophat2-fusion 文档搬运工：https://ccb.jhu.edu/software/tophat/fusion_tutorial.shtml ###step1.tophat 1tophat2 -p 8 -o $OUTPUT --fusion-search --keep-fasta-order --bowtie1 --no-coverage-search --fusion-ancho">
+<meta name="twitter:image" content="http://chengcz.github.io/2018/201805_TophatFusion/images/2018/bowtie1.2_TophatFusion.png">
+  
+    <link rel="alternative" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+	<i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+	<h1 class="blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>
+	<nav class="nav">
+		<ul>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/categories">Categories</a></li><li><a href="/about">About</a></li>
+			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+		</ul>
+	</nav>
+	<div id="search-form-wrap">
+		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://chengcz.github.io"></form>
+	</div>
+</header>
+    <div id="main">
+      <article id="post-201805_TophatFusion" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201805_TophatFusion/" class="article-date">
+  <time datetime="2018-05-17T10:45:52.000Z" itemprop="datePublished">2018-05-17</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      使用 topaht2-fusion 分析 Fusion-Gene
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>tophat2-fusion 文档搬运工：<a href="https://ccb.jhu.edu/software/tophat/fusion_tutorial.shtml" target="_blank" rel="noopener">https://ccb.jhu.edu/software/tophat/fusion_tutorial.shtml</a></p>
+<p>###step1.tophat</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tophat2 -p 8 -o $OUTPUT --fusion-search --keep-fasta-order --bowtie1 --no-coverage-search --fusion-anchor-length 10 --fusion-min-dist 100000 --mate-inner-dist 40 --mate-std-dev 100 $hg_bowtie1_index $read1.fastq.gz $read2.fastq.gz</span><br></pre></td></tr></table></figure>
+<p><strong>Note:</strong></p>
+<p><em>–fusion-search</em>，融合 reads 搜索</p>
+<p><em>–keep-fasta-order</em>,</p>
+<p><em>–bowtie1</em>，使用 bowtie1 代替 bowtie2 进行 reads 比对。需要使用 bowtie-1.1.2，最新版本 1.2.2 会报错</p>
+<p><img src="./images/2018/bowtie1.2_TophatFusion.png" alt=""></p>
+<p><em>–no-coverage-search</em>,</p>
+<p><em>–fusion-anchor-length 10</em> ,</p>
+<p><em>–fusion-min-dist 100000</em> ,</p>
+<p><em>–mate-inner-dist 40</em> ,</p>
+<p><em>–mate-std-dev 100</em> ,</p>
+<p>###step2.tophat-fusion-post</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tophat-fusion-post -p 8 --num-fusion-reads 1 --num-fusion-pairs 2 --num-fusion-both 5 $hg_bowtie1_index</span><br></pre></td></tr></table></figure>
+<p><strong>Note:</strong></p>
+<p>–num-fusion-reads* , 支持融合的最少 reads 数目</p>
+<p><em>–num-fusion-pairs</em>, 支持融合事件的最少配对 reads 数，表示为跨越融合点的测序片段</p>
+<p><em>–num-fusion-both</em>,  支持融合的最少 reads，包括跨越的 reads 对和 split reads</p>
+<p><em>–fusion-read-mismatches</em>, Reads support fusions if they map across fusion with at most this many mismatches. The default is 2.</p>
+<p><em>–fusion-multireads</em>, Reads that map to more than this many places will be ignored. The default is 2.</p>
+<p><em>–non-human</em>, If your annotation is different from that of human, use the option.</p>
+<p><em>–fusion-pair-dist</em>, Pairs with this specified distance are counted as supporting evidence for the fusion. The default threshold for the inner distance is 250.</p>
+<h3 id="results"><a href="#results" class="headerlink" title="results"></a>results</h3><p>测试了多个样品，多个参数，也根据官网数据、命令运行项目，都没有发现任何融合结果，bug还是打开方式不对</p>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FusionGene/">FusionGene</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
+    
+<nav id="article-nav">
+  
+    <a href="/2018/201805_argparse/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          python 参数解析 —— argsparse
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/201805_STARFusion/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          使用 STAR-fusion 分析 Fusion-Gene
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+    </div>
+    <div class="mb-search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:chengcz.github.io">
+  </form>
+</div>
+<footer id="footer">
+	<!---<h1 class="footer-blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>--->
+	<span class="copyright">
+		&copy; 2018 ChengCZ<br>
+		<!---Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>--->
+	</span>
+</footer>
+
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

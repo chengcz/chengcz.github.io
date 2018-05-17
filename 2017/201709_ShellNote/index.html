@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>shell 命令使用笔记 | ChengCZ&#39;s Notebook</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="&amp;amp;&amp;amp;，cmd1 &amp;amp;&amp;amp; cmd2 如果cmd1成功执行（返回0，注意设置中脚本执行返回值），那么执行cmd2 ​  ||，cmd1 || cmd2 如果cmd1执行失败，那么执行cmd2 ​  (), {}组合逻辑控制 ()组合来控制命令； {}组合控制子shell ​  条件判断 123456789101112131415161718192021222324252">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell 命令使用笔记">
+<meta property="og:url" content="http://chengcz.github.io/2017/201709_ShellNote/index.html">
+<meta property="og:site_name" content="ChengCZ&#39;s Notebook">
+<meta property="og:description" content="&amp;amp;&amp;amp;，cmd1 &amp;amp;&amp;amp; cmd2 如果cmd1成功执行（返回0，注意设置中脚本执行返回值），那么执行cmd2 ​  ||，cmd1 || cmd2 如果cmd1执行失败，那么执行cmd2 ​  (), {}组合逻辑控制 ()组合来控制命令； {}组合控制子shell ​  条件判断 123456789101112131415161718192021222324252">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-17T08:08:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="shell 命令使用笔记">
+<meta name="twitter:description" content="&amp;amp;&amp;amp;，cmd1 &amp;amp;&amp;amp; cmd2 如果cmd1成功执行（返回0，注意设置中脚本执行返回值），那么执行cmd2 ​  ||，cmd1 || cmd2 如果cmd1执行失败，那么执行cmd2 ​  (), {}组合逻辑控制 ()组合来控制命令； {}组合控制子shell ​  条件判断 123456789101112131415161718192021222324252">
+  
+    <link rel="alternative" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+	<i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+	<h1 class="blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>
+	<nav class="nav">
+		<ul>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/categories">Categories</a></li><li><a href="/about">About</a></li>
+			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+		</ul>
+	</nav>
+	<div id="search-form-wrap">
+		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://chengcz.github.io"></form>
+	</div>
+</header>
+    <div id="main">
+      <article id="post-201709_ShellNote" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2017/201709_ShellNote/" class="article-date">
+  <time datetime="2017-09-15T08:38:30.000Z" itemprop="datePublished">2017-09-15</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      shell 命令使用笔记
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<ol>
+<li><p><code>&amp;&amp;</code>，cmd1 &amp;&amp; cmd2</p>
+<p>如果cmd1成功执行（返回0，注意设置中脚本执行返回值），那么执行cmd2</p>
+<p>​</p>
+</li>
+<li><p><code>||</code>，cmd1 || cmd2</p>
+<p>如果cmd1执行失败，那么执行cmd2</p>
+<p>​</p>
+</li>
+<li><p><code>()</code>, <code>{}</code>组合逻辑控制</p>
+<p>()组合来控制命令； {}组合控制子shell</p>
+<p>​</p>
+</li>
+<li><p>条件判断</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">if [ condition ]; then</span><br><span class="line"><span class="meta">#</span> if test condition; then</span><br><span class="line">	echo 'yes'</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>使用[]判断条件时，[]和condition之间必须用空格分隔开</span><br><span class="line"><span class="meta">#</span> -d		判断是不是文件夹</span><br><span class="line"><span class="meta">#</span> -f		判断是不是文件</span><br><span class="line"><span class="meta">#</span> -L		判断是不是链接</span><br><span class="line"><span class="meta">#</span> -s		判断文件是否存在且非空</span><br><span class="line"><span class="meta">#</span> -r		判断文件是否可读</span><br><span class="line"><span class="meta">#</span> -w 		判断文件是否可写</span><br><span class="line"><span class="meta">#</span> -x		判断文件是否可执行</span><br><span class="line"><span class="meta">#</span> -z		判断是否空字符串</span><br><span class="line"><span class="meta">#</span> -n		判断是否非空字符串</span><br><span class="line"><span class="meta">#</span> =		判断字符串是否相等</span><br><span class="line"><span class="meta">#</span> !=		判断字符串是否不等</span><br><span class="line"><span class="meta">#</span> -eq		判断数值是否相等</span><br><span class="line"><span class="meta">#</span> -ne		判断数值是否不等</span><br><span class="line"><span class="meta">#</span> -gt		第一个数大于第二个数</span><br><span class="line"><span class="meta">#</span> -ge		第一个数大于等于第二个数</span><br><span class="line"><span class="meta">#</span> -lt		第一个数小于第二个数</span><br><span class="line"><span class="meta">#</span> -le		第一个数小于等于第二个数</span><br><span class="line"><span class="meta">#</span> -a		逻辑与</span><br><span class="line"><span class="meta">#</span> -o		逻辑或</span><br><span class="line"><span class="meta">#</span> !		逻辑否</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ol>
+<ol start="5">
+<li><p>推出状态</p>
+<p><code>exit n</code>，其中n表示数字，0表示脚本执行成功无错误，1表示执行失败某处有错误</p>
+<blockquote>
+<p>可以使用 <strong>$?</strong> 获得最后执行命令推出状态</p>
+</blockquote>
+<p>​</p>
+</li>
+<li><p>shell脚本</p>
+<ul>
+<li style="list-style: none"><input type="checkbox"> <strong>$#</strong> 获取脚本输出参数长度</li>
+<li style="list-style: none"><input type="checkbox"> <strong>$@</strong> 获取脚本所有参数</li>
+</ul>
+</li>
+<li><p>循环</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in `ls `</span><br><span class="line">	do</span><br><span class="line">		echo 'yes'</span><br><span class="line">	done</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>序列生成</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">seq 3    # 1 2 3</span><br><span class="line">seq 3 5    # 3 4 5</span><br><span class="line">seq 5 2 10    # 5 7 9</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>随机数生成</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">echo $RANDOM</span><br><span class="line"><span class="meta">#</span> RANDOM是bash的一个内建函数，会返回一个[0, 32676]内的整数</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 生成一定范围内的随机数</span><br><span class="line">beg=5</span><br><span class="line">end=15</span><br><span class="line">echo $((RANDOM % ($end - $beg) + $beg))</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>shell 数学计算</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo $((9-4))    # 5</span><br><span class="line">echo $((9/4))    # 2</span><br><span class="line">echo $((9/-4))    # -2</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ol>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+    
+<nav id="article-nav">
+  
+    <a href="/2017/201709_umount/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          卸载一个假忙的硬盘
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/201709_submitDataToSRA/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          提交测序数据到 SRA
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+    </div>
+    <div class="mb-search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:chengcz.github.io">
+  </form>
+</div>
+<footer id="footer">
+	<!---<h1 class="footer-blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>--->
+	<span class="copyright">
+		&copy; 2018 ChengCZ<br>
+		<!---Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>--->
+	</span>
+</footer>
+
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

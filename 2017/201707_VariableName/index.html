@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>一次诡异的 python 错误排查 | ChengCZ&#39;s Notebook</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="输入表格示例：    library reads_num reads_len bases_num GC avgQ Q20 Q30     A-Ctrl 46,875,170 150.0 7.00 Gb 49.90% 36.6 93.24% 85.97%   B-Ctrl 154,351,882 150.0 23.00 Gb 45.40% 36.9 93.80% 86.93%   C-Ctrl 58">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一次诡异的 python 错误排查">
+<meta property="og:url" content="http://chengcz.github.io/2017/201707_VariableName/index.html">
+<meta property="og:site_name" content="ChengCZ&#39;s Notebook">
+<meta property="og:description" content="输入表格示例：    library reads_num reads_len bases_num GC avgQ Q20 Q30     A-Ctrl 46,875,170 150.0 7.00 Gb 49.90% 36.6 93.24% 85.97%   B-Ctrl 154,351,882 150.0 23.00 Gb 45.40% 36.9 93.80% 86.93%   C-Ctrl 58">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-17T11:15:04.927Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一次诡异的 python 错误排查">
+<meta name="twitter:description" content="输入表格示例：    library reads_num reads_len bases_num GC avgQ Q20 Q30     A-Ctrl 46,875,170 150.0 7.00 Gb 49.90% 36.6 93.24% 85.97%   B-Ctrl 154,351,882 150.0 23.00 Gb 45.40% 36.9 93.80% 86.93%   C-Ctrl 58">
+  
+    <link rel="alternative" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+	<i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+	<h1 class="blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>
+	<nav class="nav">
+		<ul>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/categories">Categories</a></li><li><a href="/about">About</a></li>
+			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+		</ul>
+	</nav>
+	<div id="search-form-wrap">
+		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://chengcz.github.io"></form>
+	</div>
+</header>
+    <div id="main">
+      <article id="post-201707_VariableName" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2017/201707_VariableName/" class="article-date">
+  <time datetime="2017-07-02T16:07:27.000Z" itemprop="datePublished">2017-07-03</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      一次诡异的 python 错误排查
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>输入表格示例：</p>
+<table>
+<thead>
+<tr>
+<th>library</th>
+<th>reads_num</th>
+<th>reads_len</th>
+<th>bases_num</th>
+<th>GC</th>
+<th>avgQ</th>
+<th>Q20</th>
+<th>Q30</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A-Ctrl</td>
+<td>46,875,170</td>
+<td>150.0</td>
+<td>7.00 Gb</td>
+<td>49.90%</td>
+<td>36.6</td>
+<td>93.24%</td>
+<td>85.97%</td>
+</tr>
+<tr>
+<td>B-Ctrl</td>
+<td>154,351,882</td>
+<td>150.0</td>
+<td>23.00 Gb</td>
+<td>45.40%</td>
+<td>36.9</td>
+<td>93.80%</td>
+<td>86.93%</td>
+</tr>
+<tr>
+<td>C-Ctrl</td>
+<td>58,126,912</td>
+<td>150.0</td>
+<td>8.00 Gb</td>
+<td>60.05%</td>
+<td>36.05</td>
+<td>92.19%</td>
+<td>83.96%</td>
+</tr>
+<tr>
+<td>D-Ctrl</td>
+<td>143,761,494</td>
+<td>150.0</td>
+<td>21.00 Gb</td>
+<td>42.00%</td>
+<td>37.25</td>
+<td>94.46%</td>
+<td>88.15%</td>
+</tr>
+</tbody>
+</table>
+<h2 id="初次尝试"><a href="#初次尝试" class="headerlink" title="初次尝试"></a>初次尝试</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 错误的结果</span></span><br><span class="line">table = open(<span class="string">'qc.stat'</span>, <span class="string">'r'</span>)</span><br><span class="line">header = [[],] * len(table.readline().strip().split(<span class="string">'\t'</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> table:</span><br><span class="line">    <span class="keyword">for</span> x,y <span class="keyword">in</span> enumerate(i.strip().split(<span class="string">'\t'</span>)):</span><br><span class="line">        header[x].append(y)</span><br><span class="line">header</span><br><span class="line"><span class="comment"># table.close()</span></span><br></pre></td></tr></table></figure>
+<h3 id="结果输出"><a href="#结果输出" class="headerlink" title="结果输出"></a>结果输出</h3><pre><code>[[&apos;A&apos;,
+  &apos;46,875,170&apos;,
+  &apos;150.0&apos;,
+  &apos;7.00 Gb&apos;,
+  &apos;49.90%&apos;,
+  &apos;36.6&apos;,
+  &apos;93.24%&apos;,
+  &apos;85.97%&apos;,
+  &apos;B&apos;,
+  &apos;154,351,882&apos;,
+  &apos;150.0&apos;,
+  &apos;23.00 Gb&apos;,
+  &apos;45.40%&apos;,
+  &apos;36.9&apos;,
+  &apos;93.80%&apos;,
+  &apos;86.93%&apos;,
+  &apos;C&apos;,
+  &apos;58,126,912&apos;,
+  &apos;150.0&apos;,
+  &apos;8.00 Gb&apos;,
+  &apos;60.05%&apos;,
+  &apos;36.05&apos;,
+  &apos;92.19%&apos;,
+  &apos;83.96%&apos;,
+  &apos;D&apos;,
+  &apos;143,761,494&apos;,
+  &apos;150.0&apos;,
+  &apos;21.00 Gb&apos;,
+  &apos;42.00%&apos;,
+  &apos;37.25&apos;,
+  &apos;94.46%&apos;,
+  &apos;88.15%&apos;],
+ [&apos;A&apos;,
+  &apos;46,875,170&apos;,
+  &apos;150.0&apos;,
+  &apos;7.00 Gb&apos;,
+  &apos;49.90%&apos;,
+  &apos;36.6&apos;,
+  &apos;93.24%&apos;,
+  &apos;85.97%&apos;,
+  &apos;B&apos;,
+  &apos;154,351,882&apos;,
+  &apos;150.0&apos;,
+  &apos;23.00 Gb&apos;,
+  &apos;45.40%&apos;,
+  &apos;36.9&apos;,
+  &apos;93.80%&apos;,
+  &apos;86.93%&apos;,
+  &apos;C&apos;,
+  &apos;58,126,912&apos;,
+  &apos;150.0&apos;,
+  &apos;8.00 Gb&apos;,
+  &apos;60.05%&apos;,
+  &apos;36.05&apos;,
+  &apos;92.19%&apos;,
+  &apos;83.96%&apos;,
+  &apos;D&apos;,
+  &apos;143,761,494&apos;,
+  &apos;150.0&apos;,
+  &apos;21.00 Gb&apos;,
+  &apos;42.00%&apos;,
+  &apos;37.25&apos;,
+  &apos;94.46%&apos;,
+  &apos;88.15%&apos;],
+ ...]
+</code></pre><h2 id="正确解析"><a href="#正确解析" class="headerlink" title="正确解析"></a>正确解析</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 正确代码</span></span><br><span class="line">table = open(<span class="string">'qc.stat'</span>, <span class="string">'r'</span>)</span><br><span class="line">header = [[i,] <span class="keyword">for</span> i <span class="keyword">in</span> table.readline().strip().split(<span class="string">'\t'</span>)]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> table:</span><br><span class="line">    <span class="keyword">for</span> x,y <span class="keyword">in</span> enumerate(i.strip().split(<span class="string">'\t'</span>)):</span><br><span class="line">        header[x].append(y)</span><br><span class="line">header</span><br><span class="line"><span class="comment"># table.close()</span></span><br></pre></td></tr></table></figure>
+<h3 id="结果输出-1"><a href="#结果输出-1" class="headerlink" title="结果输出"></a>结果输出</h3><pre><code>[[&apos;library&apos;, &apos;A&apos;, &apos;B&apos;, &apos;C&apos;, &apos;D&apos;],
+ [&apos;reads_num&apos;, &apos;46,875,170&apos;, &apos;154,351,882&apos;, &apos;58,126,912&apos;, &apos;143,761,494&apos;],
+ [&apos;reads_len&apos;, &apos;150.0&apos;, &apos;150.0&apos;, &apos;150.0&apos;, &apos;150.0&apos;],
+ [&apos;bases_num&apos;, &apos;7.00 Gb&apos;, &apos;23.00 Gb&apos;, &apos;8.00 Gb&apos;, &apos;21.00 Gb&apos;],
+ [&apos;GC&apos;, &apos;49.90%&apos;, &apos;45.40%&apos;, &apos;60.05%&apos;, &apos;42.00%&apos;],
+ [&apos;avgQ&apos;, &apos;36.6&apos;, &apos;36.9&apos;, &apos;36.05&apos;, &apos;37.25&apos;],
+ [&apos;Q20&apos;, &apos;93.24%&apos;, &apos;93.80%&apos;, &apos;92.19%&apos;, &apos;94.46%&apos;],
+ [&apos;Q30&apos;, &apos;85.97%&apos;, &apos;86.93%&apos;, &apos;83.96%&apos;, &apos;88.15%&apos;]]
+</code></pre><h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 错误原因查找</span></span><br><span class="line"></span><br><span class="line">head = <span class="string">'#library\treads_num\treads_len\tbases_num\tGC\tavgQ\tQ20\tQ30'</span></span><br><span class="line"></span><br><span class="line">header = [[], ] * len(head.strip().split(<span class="string">'\t'</span>))</span><br><span class="line"><span class="keyword">print</span> <span class="string">'error method...'</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> header:</span><br><span class="line">    <span class="keyword">print</span> id(i)</span><br><span class="line"></span><br><span class="line">header = [[i,] <span class="keyword">for</span> i <span class="keyword">in</span> head.strip().split(<span class="string">'\t'</span>)]</span><br><span class="line"><span class="keyword">print</span> <span class="string">'\nright method...'</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> header:</span><br><span class="line">    <span class="keyword">print</span> id(i)</span><br></pre></td></tr></table></figure>
+<pre><code>error method...
+4435237272
+4435237272
+4435237272
+4435237272
+4435237272
+4435237272
+4435237272
+4435237272
+
+right method...
+4435236984
+4435354904
+4435318688
+4435237416
+4435318040
+4435319768
+4435318472
+4435319624
+</code></pre><p><strong>python独特的变量命名方式</strong>：变量名（&gt;= 1个）指向储存数据物理地址，使用其中任何一个名称都可以对数据进行操作</p>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+    
+<nav id="article-nav">
+  
+    <a href="/2017/201707_mountHardDisk/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          服务器挂载 4T 硬盘
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/201706_pythondict/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          python 字典
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+    </div>
+    <div class="mb-search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:chengcz.github.io">
+  </form>
+</div>
+<footer id="footer">
+	<!---<h1 class="footer-blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>--->
+	<span class="copyright">
+		&copy; 2018 ChengCZ<br>
+		<!---Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>--->
+	</span>
+</footer>
+
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>
