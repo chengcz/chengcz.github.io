@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>python 表格处理 —— pandas | ChengCZ&#39;s Notebook</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="pandas 表格数据处理，唰唰唰… Data frame12345678910111213141516171819202122232425262728293031323334353637import pandas as pd# 数据框转制dat = dat.T# 根据列进行合并dat = pd.merge(dat1, dat2,                on=&apos;col&apos;,    # col">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python 表格处理 —— pandas">
+<meta property="og:url" content="http://chengcz.github.io/2018/201805_pandas/index.html">
+<meta property="og:site_name" content="ChengCZ&#39;s Notebook">
+<meta property="og:description" content="pandas 表格数据处理，唰唰唰… Data frame12345678910111213141516171819202122232425262728293031323334353637import pandas as pd# 数据框转制dat = dat.T# 根据列进行合并dat = pd.merge(dat1, dat2,                on=&apos;col&apos;,    # col">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-18T11:05:07.352Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python 表格处理 —— pandas">
+<meta name="twitter:description" content="pandas 表格数据处理，唰唰唰… Data frame12345678910111213141516171819202122232425262728293031323334353637import pandas as pd# 数据框转制dat = dat.T# 根据列进行合并dat = pd.merge(dat1, dat2,                on=&apos;col&apos;,    # col">
+  
+    <link rel="alternative" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+	<i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+	<h1 class="blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>
+	<nav class="nav">
+		<ul>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/about">About</a></li>
+			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+		</ul>
+	</nav>
+	<div id="search-form-wrap">
+		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://chengcz.github.io"></form>
+	</div>
+</header>
+    <div id="main">
+      <article id="post-201805_pandas" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201805_pandas/" class="article-date">
+  <time datetime="2018-05-18T10:45:52.000Z" itemprop="datePublished">2018-05-18</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      python 表格处理 —— pandas
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>pandas 表格数据处理，唰唰唰…</p>
+<h2 id="Data-frame"><a href="#Data-frame" class="headerlink" title="Data frame"></a>Data frame</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据框转制</span></span><br><span class="line">dat = dat.T</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据列进行合并</span></span><br><span class="line">dat = pd.merge(dat1, dat2, </span><br><span class="line">               on=<span class="string">'col'</span>,    <span class="comment"># col在两个数据框中同时存在时，设置on</span></span><br><span class="line">               left_on=<span class="string">'col1'</span>, right_on=<span class="string">'col2'</span>,    <span class="comment"># 两个列名不同时存在，分贝设置合并列名</span></span><br><span class="line">               left_index=<span class="keyword">False</span>, right_index=<span class="keyword">False</span>,    <span class="comment"># 使用df的index进行合并</span></span><br><span class="line">               how=<span class="string">'outdir'</span>)    <span class="comment"># &#123;'left', 'right', 'outer', 'inner'&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># concat 合并列数据</span></span><br><span class="line">dat = pd.concat(dflst, </span><br><span class="line">              	axis=<span class="number">1</span>,    <span class="comment"># 左右合并</span></span><br><span class="line">                join=<span class="string">'outer'</span>)    <span class="comment"># &#123;'inner', 'outer'&#125;</span></span><br><span class="line"><span class="comment"># concat 行追加</span></span><br><span class="line">dat = pd.concat(dflst, axis=<span class="number">0</span>, ignore_index=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除数据框行或者列</span></span><br><span class="line">dat = dat.drop(col_lst, axis=<span class="number">1</span>)    <span class="comment"># 删除 列</span></span><br><span class="line">dat = dat.drop(index_lst, axis=<span class="number">0</span>)    <span class="comment"># 删除 行</span></span><br><span class="line">dat = dat.drop_duplicates()    <span class="comment"># 删除 重复行</span></span><br><span class="line">dat = dat.dropna(axis=<span class="number">0</span>,     <span class="comment"># 0，1 0表示行，1表示列</span></span><br><span class="line">                 how=<span class="string">'all'</span>)    <span class="comment"># &#123;'any', 'all'&#125;, all表示删除所有值缺失，any表示删除任意一个值缺失</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 长表格 ==&gt; 宽表格转换</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">dat = pd.pivot_table(df, index=[<span class="string">"Product"</span>],    <span class="comment"># 设置保留字段</span></span><br><span class="line">                     columns=[<span class="string">'Year'</span>],    <span class="comment"># 扩展列</span></span><br><span class="line">                     values=[<span class="string">"Price"</span>],    <span class="comment"># 选定列对应数值</span></span><br><span class="line">                     aggfunc=[np.sum], fill_value=<span class="number">0</span>)    <span class="comment"># 设置数据合并的具体操作</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 宽表格 ==&gt; 长表格转换</span></span><br><span class="line">df = df.melt(id_vars=[<span class="string">"Name"</span>,<span class="string">"Product"</span>],    <span class="comment"># 保留的主字段</span></span><br><span class="line">			 var_name=<span class="string">"Year"</span>,    <span class="comment"># 分类名</span></span><br><span class="line">			 value_name=<span class="string">"Price"</span>)    <span class="comment"># 变量名</span></span><br></pre></td></tr></table></figure>
+<h2 id="read-table"><a href="#read-table" class="headerlink" title="read table"></a>read table</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">dat = pd.read_table(<span class="string">'data.csv'</span>, </span><br><span class="line">                    sep=<span class="string">'\t'</span>,     <span class="comment"># 设置表格分隔符，read_table默认为‘\t’，read_csv默认为‘,’</span></span><br><span class="line">                    index_col=<span class="number">0</span>,    <span class="comment"># 使用第1列作为数据框index，默认range(0, num_line)作为index</span></span><br><span class="line">                    header=<span class="keyword">None</span>,     <span class="comment"># 表示文件不存在表头，默认第一行为表头</span></span><br><span class="line">                    names=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">''</span>])    <span class="comment"># 表头不存在时，添加表头为...</span></span><br><span class="line"><span class="comment"># dat = pd.read_csv(...)</span></span><br><span class="line">dat = pd.read_excel(<span class="string">'data.xlsx'</span>, </span><br><span class="line">                    sheet_name=<span class="string">'sheet1'</span>)    <span class="comment"># 读取data.xlsx工作簿中sheet1的表格</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取文件前特定行数</span></span><br><span class="line">dat = pd.read_csv(<span class="string">'data.csv'</span>, nrows=<span class="number">500</span>)   </span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取超大文件</span></span><br><span class="line">reader = pd.read_csv(<span class="string">'data.csv'</span>, </span><br><span class="line">                     iterator=<span class="keyword">True</span>)    <span class="comment"># 产生一个迭代器</span></span><br><span class="line">chunkSize = <span class="number">100000</span></span><br><span class="line">chunks = []</span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        chunk = reader.get_chunk(chunkSize)    <span class="comment"># 一次读取特定行</span></span><br><span class="line">        <span class="comment"># chunk     # 进行一些过滤、处理</span></span><br><span class="line">        chunks.append(chunk)</span><br><span class="line">    <span class="keyword">except</span> StopIteration:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">df = pd.concat(chunks, axis=<span class="number">0</span>, ignore_index=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="save-table"><a href="#save-table" class="headerlink" title="save table"></a>save table</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出数据到txt文本</span></span><br><span class="line">dat.to_csv(<span class="string">'data.xls'</span>, </span><br><span class="line">           index=<span class="keyword">False</span>,    <span class="comment"># 是否输出df的index</span></span><br><span class="line">           header=<span class="keyword">False</span>,    <span class="comment"># 是否输出表头</span></span><br><span class="line">           na_rep=<span class="string">''</span>,    <span class="comment"># 缺省值替换</span></span><br><span class="line">           sep=<span class="string">'\t'</span>,    <span class="comment"># 使用tab作为分隔符</span></span><br><span class="line">           encoding=<span class="string">'utf-8'</span>)    <span class="comment"># 输出文件使用utf-8编码</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出数据框到excel</span></span><br><span class="line">writer = pd.ExcelWriter(<span class="string">'output.xlsx'</span>)    <span class="comment"># 创建输出文件</span></span><br><span class="line">df1.to_excel(writer, </span><br><span class="line">             sheet_name=<span class="string">'Sheet1'</span>, )    <span class="comment"># 输出到工作簿中名为Sheet1的工作表</span></span><br><span class="line">df2.to_excel(writer, </span><br><span class="line">             sheet_name=<span class="string">'Sheet2'</span>, )    <span class="comment"># 输出到工作簿中名为Sheet2的工作表</span></span><br><span class="line"><span class="comment"># ... </span></span><br><span class="line">writer.save()    <span class="comment"># 保存工作簿</span></span><br></pre></td></tr></table></figure>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/201805_subprocess/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          python 执行 linux 命令 —— subprocess
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+    </div>
+    <div class="mb-search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:chengcz.github.io">
+  </form>
+</div>
+<footer id="footer">
+	<!---<h1 class="footer-blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>--->
+	<span class="copyright">
+		&copy; 2018 ChengCZ<br>
+		<!---Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>--->
+	</span>
+</footer>
+
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>
