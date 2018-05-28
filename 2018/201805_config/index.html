@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>编写 python 的几种 config 处理方式 | ChengCZ&#39;s Notebook</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="编写分析流程时候，为了兼容性总会设置一些常用选项配置文件输入，不同配置方式各有一些特点，就用过的几种配置方式简单整理 script —— config.py123456import osimport sys# sys.path.insert(0, &apos;config_py_dirname&apos;)    # 使config.py文件位于PYTHONPATH路径下import configoption = c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编写 python 的几种 config 处理方式">
+<meta property="og:url" content="http://chengcz.github.io/2018/201805_config/index.html">
+<meta property="og:site_name" content="ChengCZ&#39;s Notebook">
+<meta property="og:description" content="编写分析流程时候，为了兼容性总会设置一些常用选项配置文件输入，不同配置方式各有一些特点，就用过的几种配置方式简单整理 script —— config.py123456import osimport sys# sys.path.insert(0, &apos;config_py_dirname&apos;)    # 使config.py文件位于PYTHONPATH路径下import configoption = c">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-28T15:14:18.280Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编写 python 的几种 config 处理方式">
+<meta name="twitter:description" content="编写分析流程时候，为了兼容性总会设置一些常用选项配置文件输入，不同配置方式各有一些特点，就用过的几种配置方式简单整理 script —— config.py123456import osimport sys# sys.path.insert(0, &apos;config_py_dirname&apos;)    # 使config.py文件位于PYTHONPATH路径下import configoption = c">
+  
+    <link rel="alternative" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+	<i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+	<h1 class="blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>
+	<nav class="nav">
+		<ul>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/about">About</a></li>
+			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+		</ul>
+	</nav>
+	<div id="search-form-wrap">
+		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://chengcz.github.io"></form>
+	</div>
+</header>
+    <div id="main">
+      <article id="post-201805_config" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201805_config/" class="article-date">
+  <time datetime="2018-05-28T15:13:32.000Z" itemprop="datePublished">2018-05-28</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      编写 python 的几种 config 处理方式
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>编写分析流程时候，为了兼容性总会设置一些常用选项配置文件输入，不同配置方式各有一些特点，就用过的几种配置方式简单整理</p>
+<h3 id="script-——-config-py"><a href="#script-——-config-py" class="headerlink" title="script —— config.py"></a>script —— config.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="comment"># sys.path.insert(0, 'config_py_dirname')    # 使config.py文件位于PYTHONPATH路径下</span></span><br><span class="line"><span class="keyword">import</span> config</span><br><span class="line"></span><br><span class="line">option = config.option    <span class="comment"># 获取配置信息</span></span><br></pre></td></tr></table></figure>
+<p>书写方式完全按照python脚本进行，可读性较高，问题在于<strong>PYTHONPATH的处理</strong>，脚本环境内<strong>键值对可能产生的覆盖问题</strong>，准确导入分析流程</p>
+<h3 id="configparser-——-config-ini"><a href="#configparser-——-config-ini" class="headerlink" title="configparser —— config.ini"></a>configparser —— config.ini</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> configparser    <span class="comment"># python3</span></span><br><span class="line"><span class="comment"># import Configparser as configparser    # python2</span></span><br><span class="line"></span><br><span class="line">cf = configparser.ConfigParser()</span><br><span class="line">cf.read(<span class="string">'config.ini'</span>)</span><br><span class="line"></span><br><span class="line">sections = cf.sections()    <span class="comment"># 列出所有section</span></span><br><span class="line">options = cf.options(section)    <span class="comment"># 列出section对应的所有option</span></span><br><span class="line">value = cf.get(section,option)    <span class="comment"># 范围section对应option的值，string</span></span><br><span class="line"><span class="comment"># getint(section,option) 返回为int，</span></span><br><span class="line"><span class="comment"># getboolean(section,option) 返回bool，</span></span><br><span class="line"><span class="comment"># getfloat(section,option) 返回float</span></span><br></pre></td></tr></table></figure>
+<p>但是，<strong>在configparser模块中不区分section, option大小写，一次读取一条配置信息</strong></p>
+<h3 id="json-——-config-json"><a href="#json-——-config-json" class="headerlink" title="json —— config.json"></a>json —— config.json</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="comment"># 倒入配置json到python环境，config类型跟json内容相关</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'config.json'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    config = json.load(f)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 输出python对象到json文件</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'whatever.josn'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    json.dump(config, f, indent=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>json文件格式要求较严格，书写配置文件容易手误出错，相比之下<strong>更适用于流程中数据传递</strong></p>
+<h3 id="yaml-——-config-yaml"><a href="#yaml-——-config-yaml" class="headerlink" title="yaml —— config.yaml"></a>yaml —— config.yaml</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'config.yaml'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    config = yaml.load(f)     <span class="comment"># dict OR list</span></span><br></pre></td></tr></table></figure>
+<h4 id="YAML-语法规则"><a href="#YAML-语法规则" class="headerlink" title="YAML 语法规则"></a>YAML 语法规则</h4><ul>
+<li>大小写敏感 </li>
+<li>使用缩进表示层级关系 </li>
+<li>使用空格缩进,不允许使用Tab键</li>
+<li>相同层级的元素左侧对齐即可</li>
+<li>使用 <strong>#</strong> 作为注释符号</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 表示 key-value 对</span></span><br><span class="line"><span class="attr">key1:</span> <span class="string">value2</span></span><br><span class="line"><span class="attr">key2:</span> <span class="string">value2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 表示 list</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">value1</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">value2</span></span><br><span class="line"><span class="comment"># [value1, value2]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 时间表示</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2018</span><span class="bullet">-05</span><span class="bullet">-24</span>    <span class="comment"># iso8601</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># None表示</span></span><br><span class="line"><span class="attr">key:</span> <span class="string">~</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># bool表示</span></span><br><span class="line"><span class="attr">flag1:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">flag2:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>相比于上面几种方法，<strong>yaml可读性高，容易书写，不用考虑PYTHONPATH问题，批量导入配置信息</strong></p>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/201805_HGVS/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          HGVS 变异描述规则
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+    </div>
+    <div class="mb-search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:chengcz.github.io">
+  </form>
+</div>
+<footer id="footer">
+	<!---<h1 class="footer-blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>--->
+	<span class="copyright">
+		&copy; 2018 ChengCZ<br>
+		<!---Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>--->
+	</span>
+</footer>
+
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

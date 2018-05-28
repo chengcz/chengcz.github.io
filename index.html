@@ -45,6 +45,73 @@
     <div id="main">
       
   
+    <article id="post-201805_config" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201805_config/" class="article-date">
+  <time datetime="2018-05-28T15:13:32.000Z" itemprop="datePublished">2018-05-28</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2018/201805_config/">编写 python 的几种 config 处理方式</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>编写分析流程时候，为了兼容性总会设置一些常用选项配置文件输入，不同配置方式各有一些特点，就用过的几种配置方式简单整理</p>
+<h3 id="script-——-config-py"><a href="#script-——-config-py" class="headerlink" title="script —— config.py"></a>script —— config.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="comment"># sys.path.insert(0, 'config_py_dirname')    # 使config.py文件位于PYTHONPATH路径下</span></span><br><span class="line"><span class="keyword">import</span> config</span><br><span class="line"></span><br><span class="line">option = config.option    <span class="comment"># 获取配置信息</span></span><br></pre></td></tr></table></figure>
+<p>书写方式完全按照python脚本进行，可读性较高，问题在于<strong>PYTHONPATH的处理</strong>，脚本环境内<strong>键值对可能产生的覆盖问题</strong>，准确导入分析流程</p>
+<h3 id="configparser-——-config-ini"><a href="#configparser-——-config-ini" class="headerlink" title="configparser —— config.ini"></a>configparser —— config.ini</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> configparser    <span class="comment"># python3</span></span><br><span class="line"><span class="comment"># import Configparser as configparser    # python2</span></span><br><span class="line"></span><br><span class="line">cf = configparser.ConfigParser()</span><br><span class="line">cf.read(<span class="string">'config.ini'</span>)</span><br><span class="line"></span><br><span class="line">sections = cf.sections()    <span class="comment"># 列出所有section</span></span><br><span class="line">options = cf.options(section)    <span class="comment"># 列出section对应的所有option</span></span><br><span class="line">value = cf.get(section,option)    <span class="comment"># 范围section对应option的值，string</span></span><br><span class="line"><span class="comment"># getint(section,option) 返回为int，</span></span><br><span class="line"><span class="comment"># getboolean(section,option) 返回bool，</span></span><br><span class="line"><span class="comment"># getfloat(section,option) 返回float</span></span><br></pre></td></tr></table></figure>
+<p>但是，<strong>在configparser模块中不区分section, option大小写，一次读取一条配置信息</strong></p>
+<h3 id="json-——-config-json"><a href="#json-——-config-json" class="headerlink" title="json —— config.json"></a>json —— config.json</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="comment"># 倒入配置json到python环境，config类型跟json内容相关</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'config.json'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    config = json.load(f)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 输出python对象到json文件</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'whatever.josn'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    json.dump(config, f, indent=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>json文件格式要求较严格，书写配置文件容易手误出错，相比之下<strong>更适用于流程中数据传递</strong></p>
+<h3 id="yaml-——-config-yaml"><a href="#yaml-——-config-yaml" class="headerlink" title="yaml —— config.yaml"></a>yaml —— config.yaml</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'config.yaml'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    config = yaml.load(f)     <span class="comment"># dict OR list</span></span><br></pre></td></tr></table></figure>
+<h4 id="YAML-语法规则"><a href="#YAML-语法规则" class="headerlink" title="YAML 语法规则"></a>YAML 语法规则</h4><ul>
+<li>大小写敏感 </li>
+<li>使用缩进表示层级关系 </li>
+<li>使用空格缩进,不允许使用Tab键</li>
+<li>相同层级的元素左侧对齐即可</li>
+<li>使用 <strong>#</strong> 作为注释符号</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 表示 key-value 对</span></span><br><span class="line"><span class="attr">key1:</span> <span class="string">value2</span></span><br><span class="line"><span class="attr">key2:</span> <span class="string">value2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 表示 list</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">value1</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">value2</span></span><br><span class="line"><span class="comment"># [value1, value2]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 时间表示</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2018</span><span class="bullet">-05</span><span class="bullet">-24</span>    <span class="comment"># iso8601</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># None表示</span></span><br><span class="line"><span class="attr">key:</span> <span class="string">~</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># bool表示</span></span><br><span class="line"><span class="attr">flag1:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">flag2:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>相比于上面几种方法，<strong>yaml可读性高，容易书写，不用考虑PYTHONPATH问题，批量导入配置信息</strong></p>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
     <article id="post-201805_HGVS" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
@@ -667,107 +734,6 @@
 <li><p><code>kill -9 106657</code></p>
 </li>
 <li><p>重新执行<code>umount /dev/sdf</code></p>
-</li>
-</ol>
-
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-  </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
-    <article id="post-201709_ShellNote" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2017/201709_ShellNote/" class="article-date">
-  <time datetime="2017-09-15T08:38:30.000Z" itemprop="datePublished">2017-09-15</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2017/201709_ShellNote/">shell 命令使用笔记</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<ol>
-<li><p><code>&amp;&amp;</code>，cmd1 &amp;&amp; cmd2</p>
-<p>如果cmd1成功执行（返回0，注意设置中脚本执行返回值），那么执行cmd2</p>
-<p>​</p>
-</li>
-<li><p><code>||</code>，cmd1 || cmd2</p>
-<p>如果cmd1执行失败，那么执行cmd2</p>
-<p>​</p>
-</li>
-<li><p><code>()</code>, <code>{}</code>组合逻辑控制</p>
-<p>()组合来控制命令； {}组合控制子shell</p>
-<p>​</p>
-</li>
-<li><p>条件判断</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">if [ condition ]; then</span><br><span class="line"><span class="meta">#</span> if test condition; then</span><br><span class="line">    echo 'yes'</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>使用[]判断条件时，[]和condition之间必须用空格分隔开</span><br><span class="line"><span class="meta">#</span> -d        判断是不是文件夹</span><br><span class="line"><span class="meta">#</span> -f        判断是不是文件</span><br><span class="line"><span class="meta">#</span> -L        判断是不是链接</span><br><span class="line"><span class="meta">#</span> -s        判断文件是否存在且非空</span><br><span class="line"><span class="meta">#</span> -r        判断文件是否可读</span><br><span class="line"><span class="meta">#</span> -w        判断文件是否可写</span><br><span class="line"><span class="meta">#</span> -x        判断文件是否可执行</span><br><span class="line"><span class="meta">#</span> -z        判断是否空字符串</span><br><span class="line"><span class="meta">#</span> -n        判断是否非空字符串</span><br><span class="line"><span class="meta">#</span> =         判断字符串是否相等</span><br><span class="line"><span class="meta">#</span> !=        判断字符串是否不等</span><br><span class="line"><span class="meta">#</span> -eq       判断数值是否相等</span><br><span class="line"><span class="meta">#</span> -ne       判断数值是否不等</span><br><span class="line"><span class="meta">#</span> -gt       第一个数大于第二个数</span><br><span class="line"><span class="meta">#</span> -ge       第一个数大于等于第二个数</span><br><span class="line"><span class="meta">#</span> -lt       第一个数小于第二个数</span><br><span class="line"><span class="meta">#</span> -le       第一个数小于等于第二个数</span><br><span class="line"><span class="meta">#</span> -a        逻辑与</span><br><span class="line"><span class="meta">#</span> -o        逻辑或</span><br><span class="line"><span class="meta">#</span> !         逻辑否</span><br></pre></td></tr></table></figure>
-<p>​</p>
-</li>
-<li><p>推出状态</p>
-<p><code>exit n</code>，其中n表示数字，0表示脚本执行成功无错误，1表示执行失败某处有错误</p>
-<blockquote>
-<p>可以使用 <strong>$?</strong> 获得最后执行命令推出状态</p>
-</blockquote>
-<p>​</p>
-</li>
-<li><p>shell脚本</p>
-<ul>
-<li><p>[ ] <strong>$#</strong> 获取脚本输出参数长度</p>
-</li>
-<li><p>[ ] <strong>$@</strong> 获取脚本所有参数</p>
-</li>
-</ul>
-</li>
-</ol>
-<ol start="7">
-<li><p>循环</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in `ls `</span><br><span class="line">    do</span><br><span class="line">        echo 'yes'</span><br><span class="line">    done</span><br></pre></td></tr></table></figure>
-<p>​</p>
-</li>
-<li><p>序列生成</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">seq 3    # 1 2 3</span><br><span class="line">seq 3 5    # 3 4 5</span><br><span class="line">seq 5 2 10    # 5 7 9</span><br></pre></td></tr></table></figure>
-<p>​</p>
-</li>
-<li><p>随机数生成</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">echo $RANDOM</span><br><span class="line"><span class="meta">#</span> RANDOM是bash的一个内建函数，会返回一个[0, 32676]内的整数</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 生成一定范围内的随机数</span><br><span class="line">beg=5</span><br><span class="line">end=15</span><br><span class="line">echo $((RANDOM % ($end - $beg) + $beg))</span><br></pre></td></tr></table></figure>
-<p>​</p>
-</li>
-<li><p>shell 数学计算</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo $((9-4))    # 5</span><br><span class="line">echo $((9/4))    # 2</span><br><span class="line">echo $((9/-4))    # -2</span><br></pre></td></tr></table></figure>
-<p>​</p>
 </li>
 </ol>
 
