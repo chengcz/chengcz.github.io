@@ -45,6 +45,139 @@
     <div id="main">
       
   
+    <article id="post-201806_ANNOVAR" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201806_ANNOVAR/" class="article-date">
+  <time datetime="2018-06-16T15:40:21.000Z" itemprop="datePublished">2018-06-16</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2018/201806_ANNOVAR/">vcf 注释 —— ANNOVAR</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>最先知道的 VCF 注释软件，但是呢没有搞定构建研究物种的注释数据库，于是转向snpEff，工作转向临床分析时候，发现 ANNOVAR 在人类数据注释多种第三方数据库支持，变异频率、HGVS、ACMG致病性、dbSNP、Cosmic支持等等</p>
+<p>软件文档镇楼: <a href="http://annovar.openbioinformatics.org/en/latest/" target="_blank" rel="noopener">http://annovar.openbioinformatics.org/en/latest/</a></p>
+<h3 id="软件下载"><a href="#软件下载" class="headerlink" title="软件下载"></a>软件下载</h3><p>ANNOVAR 由 perl 实现，下载即用，软件下载地址为：<a href="http://www.openbioinformatics.org/annovar/annovar_download_form.php" target="_blank" rel="noopener">http://www.openbioinformatics.org/annovar/annovar_download_form.php</a> ，软件包包括下面几个功能脚本：</p>
+<ul>
+<li><em>annotate_variation.pl</em>, 主程序，数据库下载，变异注释等等</li>
+<li><em>coding_change.pl</em>, 推断蛋白序列的变化</li>
+<li><em>convert2annovar.pl</em>, </li>
+<li><em>retrieve_seq_from_fasta.pl</em>, </li>
+<li><em>table_annovar.pl</em>, 注释程序，根据数据库选择完成不同类型变异注释</li>
+<li><em>variants_reduction.pl</em>, </li>
+</ul>
+<h3 id="数据库下载、整理"><a href="#数据库下载、整理" class="headerlink" title="数据库下载、整理"></a>数据库下载、整理</h3><p>ANNOVAR 注释变异可以分成有基于基因、基于染色体区间和变异数据等三种类型</p>
+<ol>
+<li><p>基于gene的注释</p>
+<p>注释结果为突变位点位于基因的相对位置，是否改变氨基酸编码，获得变异位点的HGVS命名方式</p>
+</li>
+<li><p>基于染色体区间的注释</p>
+<p>获取变异位点是否存在于某些特定的区间内，Identify cytogenetic band, 转录因子结合区等等</p>
+</li>
+<li><p>变异数据库的注释</p>
+<p>包括Clinvar, dbSNP, Cosmic, ExAC, gnomAD等等，突变数据库整理可参考<a href="https://chengcz.github.io/2018/201806_vcf2tab/index.html"><strong><em>从 vcf 文件准备 ANNOVAR 数据库</em></strong></a></p>
+</li>
+</ol>
+<p>ANNOVAR 数据库文件实际上为特定格式的文本文件，其数据库文件命名规则为:  <strong>\${path_database}/\${buildver}_\${database_name}.txt</strong></p>
+<h3 id="软件运行"><a href="#软件运行" class="headerlink" title="软件运行"></a>软件运行</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> input file format: vcf</span><br><span class="line">table_annovar.pl example/ex2.vcf humandb/ -buildver hg19 -out myanno -remove -protocol refGene,cytoBand,esp6500siv2_all,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_eas,1000g2015aug_eur,snp138,dbnsfp30a -operation g,r,f,f,f,f,f,f,f -nastring . -vcfinput</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 不同于snpEff，ANNOVAR 所有注释结果都在 vcf 文件 INFO 列添加key-value</span><br></pre></td></tr></table></figure>
+<h3 id="非人物种数据库整理"><a href="#非人物种数据库整理" class="headerlink" title="非人物种数据库整理"></a>非人物种数据库整理</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 下载物种基因序列、注释文件</span><br><span class="line">wget -c ftp://ftp.ensemblgenomes.org/pub/release-27/plants/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.27.dna.genome.fa.gz</span><br><span class="line">wget -c ftp://ftp.ensemblgenomes.org/pub/release-27/plants/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.27.gtf.gz</span><br><span class="line">gzip -d Arabidopsis_thaliana.TAIR10.27.dna.genome.fa.gz</span><br><span class="line">gzip -d Arabidopsis_thaliana.TAIR10.27.gtf.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> gtf文件格式转换</span><br><span class="line">gtfToGenePred -genePredExt Arabidopsis_thaliana.TAIR10.27.gtf AT_refGene.txt</span><br><span class="line"><span class="meta">#</span> wget -c http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/gtfToGenePred</span><br><span class="line"><span class="meta">#</span> 另一种格式转换方法，https://github.com/chengcz/pyGTF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 使用软件包提供脚本build物种数据库，数据库buildver为AT，名称为refGene</span><br><span class="line">perl retrieve_seq_from_fasta.pl --format refGene --seqfile Arabidopsis_thaliana.TAIR10.27.dna.genome.fa AT_refGene.txt --out AT_refGeneMrna.fa</span><br></pre></td></tr></table></figure>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vcf/">vcf</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
+    <article id="post-201806_vcf2tab" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201806_vcf2tab/" class="article-date">
+  <time datetime="2018-06-16T15:19:21.000Z" itemprop="datePublished">2018-06-16</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2018/201806_vcf2tab/">从 vcf 文件准备 ANNOVAR 数据库</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>annovar可以说是最常用的变异注释软件了，除了基于基因位置进行注释，还有丰富的第三方数据库支持，clinvar, cosmic等等，但是annovar提供下载数据库版本较老，需要自行下载第三方 vcf 进行转换。</p>
+<p>以 clinvar 为例说说 vcf 格式转换成 annovar 可识别表格格式，annovar 仅需要 vcf 中部分信息，为了脚本通用这里输出vcf所有信息到 tab 格式，详细处理脚本如下，同时实现脚本存放 <a href="https://github.com/chengcz/BioResource/tree/master/vcf2tab" target="_blank" rel="noopener">github</a>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gzip</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Parse_Variant_Annovar_Style</span><span class="params">(line)</span>:</span></span><br><span class="line">	CHROM, POS, ID, REF, ALT, QUAL, FILTER, INFO = line.split(<span class="string">'\t'</span>)[:<span class="number">8</span>]</span><br><span class="line">    <span class="comment"># 一般公共数据下载的 vcf 文件仅包含8列</span></span><br><span class="line">    POS = int(POS)</span><br><span class="line">    dat = &#123;&#125;</span><br><span class="line">    dat[<span class="string">'CHROM'</span>] = CHROM</span><br><span class="line">    dat[<span class="string">'ID'</span>] = ID</span><br><span class="line">    <span class="keyword">if</span> len(REF) == len(ALT) == <span class="number">1</span> <span class="keyword">and</span> REF != ALT:    <span class="comment"># SNV</span></span><br><span class="line">        dat[<span class="string">'START'</span>], dat[<span class="string">'END'</span>] = POS, POS</span><br><span class="line">        dat[<span class="string">'REF'</span>], dat[<span class="string">'ALT'</span>] = REF, ALT</span><br><span class="line">    <span class="keyword">elif</span> len(REF) == <span class="number">1</span> <span class="keyword">and</span> len(ALT) != <span class="number">1</span> <span class="keyword">and</span> ALT.startswith(REF):    <span class="comment"># Insert</span></span><br><span class="line">        dat[<span class="string">'START'</span>], dat[<span class="string">'END'</span>] = POS, POS</span><br><span class="line">        dat[<span class="string">'REF'</span>], dat[<span class="string">'ALT'</span>] = <span class="string">'-'</span>, ALT[<span class="number">1</span>:]</span><br><span class="line">    <span class="keyword">elif</span> len(REF) != <span class="number">1</span> <span class="keyword">and</span> len(ALT) == <span class="number">1</span> <span class="keyword">and</span> REF.startswith(ALT):    <span class="comment"># Delete</span></span><br><span class="line">        dat[<span class="string">'START'</span>], dat[<span class="string">'END'</span>] = POS+<span class="number">1</span>, POS+len(REF)<span class="number">-1</span></span><br><span class="line">        dat[<span class="string">'REF'</span>], dat[<span class="string">'ALT'</span>] = REF[<span class="number">1</span>:], <span class="string">'-'</span></span><br><span class="line">    <span class="keyword">else</span>:    <span class="comment"># complex variant</span></span><br><span class="line">        dat[<span class="string">'START'</span>], dat[<span class="string">'END'</span>] = POS, POS+len(REF)<span class="number">-1</span></span><br><span class="line">        dat[<span class="string">'REF'</span>], dat[<span class="string">'ALT'</span>] = REF, ALT</span><br><span class="line">    dat.update(INFO2dict(INFO))</span><br><span class="line">    <span class="keyword">return</span> dat</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Parse_Variant</span><span class="params">(line)</span>:</span></span><br><span class="line">	CHROM, POS, ID, REF, ALT, QUAL, FILTER, INFO = line.split(<span class="string">'\t'</span>)[:<span class="number">8</span>]</span><br><span class="line">    <span class="comment"># 一般公共数据下载的 vcf 文件仅包含8列</span></span><br><span class="line">    POS = int(POS)</span><br><span class="line">    dat = &#123;&#125;</span><br><span class="line">    dat[<span class="string">'CHROM'</span>] = CHROM</span><br><span class="line">    dat[<span class="string">'ID'</span>] = ID</span><br><span class="line">    dat[<span class="string">'START'</span>], dat[<span class="string">'END'</span>] = POS, POS+len(REF)<span class="number">-1</span></span><br><span class="line">    dat[<span class="string">'REF'</span>], dat[<span class="string">'ALT'</span>] = REF, ALT</span><br><span class="line">    dat.update(INFO2dict(INFO))</span><br><span class="line">    <span class="keyword">return</span> dat</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">INFO2dict</span><span class="params">(info)</span>:</span></span><br><span class="line">    tmp = [i.strip() <span class="keyword">for</span> i <span class="keyword">in</span> info.split(<span class="string">';'</span>) <span class="keyword">if</span> i.strip()]</span><br><span class="line">    infor = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> tmp:</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'='</span> <span class="keyword">in</span> i:</span><br><span class="line">            <span class="comment"># index = i.index('=')</span></span><br><span class="line">            <span class="comment"># infor[i[:index]] = i[index+1:]</span></span><br><span class="line">            i = i.split(<span class="string">'='</span>)</span><br><span class="line">            infor[i[<span class="number">0</span>]] = i[<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            infor[i] = <span class="string">'true'</span></span><br><span class="line">    <span class="keyword">return</span> infor</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fopen = gzip.open <span class="keyword">if</span> clinvar.endswith(<span class="string">'gz'</span>) <span class="keyword">else</span> open</span><br><span class="line"><span class="comment"># 这种文件打开适用于 python2, python3 中存在 bits 和 string 类型的差别</span></span><br><span class="line"><span class="keyword">with</span> fopen(input_vcf) <span class="keyword">as</span> f:</span><br><span class="line">    tags = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> f:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> i.strip():</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> i.startswith(<span class="string">'##INFO='</span>):</span><br><span class="line">             tags.append(i.split(<span class="string">','</span>)[<span class="number">0</span>].split(<span class="string">'='</span>)[<span class="number">-1</span>])</span><br><span class="line">        <span class="keyword">elif</span> i.startswith(<span class="string">'#CHROM'</span>):</span><br><span class="line">             print(<span class="string">'#CHROM\tSTART\tEND\tID\tREF\tALT\t&#123;&#125;\n'</span>.format(<span class="string">'\t'</span>.join(tags)))</span><br><span class="line">        <span class="keyword">elif</span> <span class="keyword">not</span> i.startswith(<span class="string">'#'</span>):</span><br><span class="line">             dat = Parse_Variant_Annovar_Style(i)</span><br><span class="line">             <span class="comment"># dat = Parse_Varitn(i)</span></span><br><span class="line">             <span class="keyword">for</span> x, label <span class="keyword">in</span> enumerate([<span class="string">'CHROM'</span>, <span class="string">'START'</span>, <span class="string">'END'</span>, <span class="string">'ID'</span>, <span class="string">'REF'</span>, <span class="string">'ALT'</span>]+tags):</span><br><span class="line">                <span class="keyword">if</span> x != <span class="number">0</span>:</span><br><span class="line">                    print(<span class="string">'\t'</span>)</span><br><span class="line">                print(dat.get(label, <span class="string">'--'</span>))    <span class="comment"># INFO 列中某些 tag 并不存在于所有行</span></span><br><span class="line">             print(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vcf/">vcf</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
     <article id="post-201805_config" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
@@ -202,6 +335,8 @@
 			</span>
 			<span class="tags">
 				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HGVS/">HGVS</a></li></ul>
+
 			</span>
 		</div>
 	</footer>
@@ -268,58 +403,6 @@
 
 
   
-    <article id="post-201805_argparse" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201805_argparse/" class="article-date">
-  <time datetime="2018-05-17T11:15:52.000Z" itemprop="datePublished">2018-05-17</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201805_argparse/">python 参数解析 —— argsparse</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<p>argsparse 解析命令行参数，一些常用参数整理。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser(<span class="comment"># prog=__file__,    # 设置项目名称，__file__ 与 sys.argv[0] 一致，默认显示为 basename(__file__)</span></span><br><span class="line">      usage=<span class="string">'''</span></span><br><span class="line"><span class="string">      python %(prog)s [option]  '''</span>,    <span class="comment"># 设置脚本输出默认 USAGE 信息</span></span><br><span class="line">      description=<span class="string">''' some script description '''</span>,   <span class="comment"># 脚本功能描述等等</span></span><br><span class="line">      formatter_class=argparse.RawTextHelpFormatter,    <span class="comment"># 以脚本内原始文档格式输出描述等信息</span></span><br><span class="line">      epilog=<span class="string">'''</span></span><br><span class="line"><span class="string">      Note and input example, and so on.  '''</span>)    <span class="comment"># 脚本描述以外的其他信息</span></span><br><span class="line"></span><br><span class="line">parser.add_argument(<span class="string">'-v'</span>, <span class="string">'--version'</span>,    <span class="comment"># 添加脚本版本信息参数</span></span><br><span class="line">                    action=<span class="string">'version'</span>,</span><br><span class="line">                    version=<span class="string">'%(prog)s 2.0'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加一个普通的可选参数</span></span><br><span class="line">parser.add_argument(<span class="string">'-e'</span>,    <span class="comment"># 短参数</span></span><br><span class="line">                    <span class="string">'--example'</span>,    <span class="comment"># 长参数</span></span><br><span class="line">                    dest=<span class="string">'example'</span>,     <span class="comment"># 参数对应模块内部，唯一标识符</span></span><br><span class="line">                    metavar=<span class="string">''</span>,    <span class="comment"># 设置help信息中参数后字符</span></span><br><span class="line">                    action=<span class="string">'store'</span>,    <span class="comment"># 参数处理方式</span></span><br><span class="line">                    type=str,    <span class="comment"># 传入参数类型</span></span><br><span class="line">                    choices=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>],    <span class="comment"># 参数选择范围</span></span><br><span class="line">                    required=<span class="keyword">True</span>,    <span class="comment"># 表示该参数必须被设置</span></span><br><span class="line">                    default=<span class="string">'a'</span>,    <span class="comment"># 参数缺省时，该参数默认值</span></span><br><span class="line">                    nargs=<span class="string">'+'</span>,    <span class="comment"># 参数个数，*+？，表示至少一个输入</span></span><br><span class="line">                    help=<span class="string">'some help infor'</span>)    <span class="comment"># help信息</span></span><br><span class="line"><span class="comment"># action属性为store_true, store_false, store_const时，参数不接任何输入信息</span></span><br><span class="line">parser.add_argument(<span class="string">'--sum'</span>,</span><br><span class="line">                    dest=<span class="string">'accumulate'</span>,</span><br><span class="line">                    action=<span class="string">'store_const'</span>,    <span class="comment"># 该参数被设置时，参数取值成 const 对应值</span></span><br><span class="line">                    const=sum,</span><br><span class="line">                    default=max,</span><br><span class="line">                    help=<span class="string">'sum the integers (default: find the max)'</span>)</span><br><span class="line"><span class="comment"># 位置参数</span></span><br><span class="line">parser.add_argument(<span class="string">'pos'</span>,</span><br><span class="line">                    dest=<span class="string">'pos_argument'</span>,</span><br><span class="line">                    metavar=<span class="string">''</span>,</span><br><span class="line">                    nargs=<span class="string">'+'</span>,    <span class="comment"># 参数输入文件个数</span></span><br><span class="line">                    help=<span class="string">'some help infor'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 互斥参数组，组内参数不可同时出现，required=True表示组内必须有参数被设置</span></span><br><span class="line">exclusive = parser.add_mutually_exclusive_group(required=<span class="keyword">True</span>)    </span><br><span class="line">exclusive.add_argument(<span class="string">'-a'</span>, )</span><br><span class="line">exclusive.add_argument(<span class="string">'-b'</span>, )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置多个参数为一组，无实际意义，仅在打印help信息时，分组显示</span></span><br><span class="line">group = parser.add_argument_group(<span class="string">'argument group info'</span>)    </span><br><span class="line">group.add_argument(<span class="string">'-c'</span>, )</span><br><span class="line">group.add_argument(<span class="string">'-d'</span>, )</span><br><span class="line"></span><br><span class="line"><span class="comment"># parse.print_help()</span></span><br><span class="line">args = parser.parse_args()    <span class="comment"># 参数解析，生成可调用对象</span></span><br><span class="line"></span><br><span class="line">example = args.example</span><br><span class="line"><span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
-
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/python/">python</a>
-  </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
     <article id="post-201805_subprocess" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
@@ -348,6 +431,58 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行cmd并等待运行结束，返回执行状态码</span></span><br><span class="line">subprocess.call(<span class="string">'ls'</span>, shell=<span class="keyword">True</span>)    <span class="comment"># 与 os.system() 功能相似</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行cmd并等待运行结束，返回执行状态码</span></span><br><span class="line">subprocess.check_call(<span class="string">'ls'</span>, shell=<span class="keyword">True</span>)    <span class="comment"># 与subprocess.call()不同，returncode不为0，触发CalledProcessError异常</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行cmd并等待运行结束，返回 /dev/stdout 信息</span></span><br><span class="line">subprocess.check_output(<span class="string">'ls'</span>, shell=<span class="keyword">True</span>, </span><br><span class="line">                        universal_newlines=<span class="keyword">True</span>)    <span class="comment"># 以 string 形式返回 stdout 信息，而不是bytes，与 os.popen() 功能相似</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 不等待 cmd 运行结束</span></span><br><span class="line">job = subprocess.Popen(<span class="string">'ls -l'</span>,    <span class="comment"># string of cmd</span></span><br><span class="line">                       shell=<span class="keyword">True</span>,    <span class="comment"># 传入参数作为 shell 进行执行</span></span><br><span class="line">                       stdout=subprocess.PIPE,    <span class="comment"># 输出标准输出到subprocess流程</span></span><br><span class="line">                       stderr=subprocess.PIPE,    <span class="comment"># 输出标准错误到subprocess流程</span></span><br><span class="line">                       universal_newlines=<span class="keyword">True</span>)    <span class="comment"># stdout 返回时，使用 string 代替 bytes 类型</span></span><br><span class="line">pid = job.pid    <span class="comment"># 获得 cmd 本地执行的 pid</span></span><br><span class="line">job.wait()    <span class="comment"># 等待工作结束，默认Popen不等待 cmd 执行完毕即退出</span></span><br><span class="line">stdout, stderr = job.communicate()    <span class="comment"># 获得 cmd 执行返回标准输出、标准错误</span></span><br><span class="line"><span class="comment"># 设置 stdin=subprocess.PIPE 时，可以在communicate(input='...')传入参数</span></span><br><span class="line">job.returncode    <span class="comment"># 获得 cmd 执行状态码</span></span><br><span class="line">job.kill()    <span class="comment"># 杀死 cmd 进程</span></span><br></pre></td></tr></table></figure>
 <p>os 模块实现 linux cmd 执行</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">os.system(<span class="string">'ls -l'</span>)    <span class="comment"># 直接返回 cmd 执行状态码</span></span><br><span class="line"><span class="comment"># assert not os.system('ls')</span></span><br><span class="line">os.popen(<span class="string">'ls -l'</span>)    <span class="comment"># 以文件句柄的方式返回 cmd 执行的stdout信息</span></span><br></pre></td></tr></table></figure>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
+    <article id="post-201805_argparse" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201805_argparse/" class="article-date">
+  <time datetime="2018-05-17T11:15:52.000Z" itemprop="datePublished">2018-05-17</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2018/201805_argparse/">python 参数解析 —— argsparse</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>argsparse 解析命令行参数，一些常用参数整理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser(<span class="comment"># prog=__file__,    # 设置项目名称，__file__ 与 sys.argv[0] 一致，默认显示为 basename(__file__)</span></span><br><span class="line">      usage=<span class="string">'''</span></span><br><span class="line"><span class="string">      python %(prog)s [option]  '''</span>,    <span class="comment"># 设置脚本输出默认 USAGE 信息</span></span><br><span class="line">      description=<span class="string">''' some script description '''</span>,   <span class="comment"># 脚本功能描述等等</span></span><br><span class="line">      formatter_class=argparse.RawTextHelpFormatter,    <span class="comment"># 以脚本内原始文档格式输出描述等信息</span></span><br><span class="line">      epilog=<span class="string">'''</span></span><br><span class="line"><span class="string">      Note and input example, and so on.  '''</span>)    <span class="comment"># 脚本描述以外的其他信息</span></span><br><span class="line"></span><br><span class="line">parser.add_argument(<span class="string">'-v'</span>, <span class="string">'--version'</span>,    <span class="comment"># 添加脚本版本信息参数</span></span><br><span class="line">                    action=<span class="string">'version'</span>,</span><br><span class="line">                    version=<span class="string">'%(prog)s 2.0'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加一个普通的可选参数</span></span><br><span class="line">parser.add_argument(<span class="string">'-e'</span>,    <span class="comment"># 短参数</span></span><br><span class="line">                    <span class="string">'--example'</span>,    <span class="comment"># 长参数</span></span><br><span class="line">                    dest=<span class="string">'example'</span>,     <span class="comment"># 参数对应模块内部，唯一标识符</span></span><br><span class="line">                    metavar=<span class="string">''</span>,    <span class="comment"># 设置help信息中参数后字符</span></span><br><span class="line">                    action=<span class="string">'store'</span>,    <span class="comment"># 参数处理方式</span></span><br><span class="line">                    type=str,    <span class="comment"># 传入参数类型</span></span><br><span class="line">                    choices=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>],    <span class="comment"># 参数选择范围</span></span><br><span class="line">                    required=<span class="keyword">True</span>,    <span class="comment"># 表示该参数必须被设置</span></span><br><span class="line">                    default=<span class="string">'a'</span>,    <span class="comment"># 参数缺省时，该参数默认值</span></span><br><span class="line">                    nargs=<span class="string">'+'</span>,    <span class="comment"># 参数个数，*+？，表示至少一个输入</span></span><br><span class="line">                    help=<span class="string">'some help infor'</span>)    <span class="comment"># help信息</span></span><br><span class="line"><span class="comment"># action属性为store_true, store_false, store_const时，参数不接任何输入信息</span></span><br><span class="line">parser.add_argument(<span class="string">'--sum'</span>,</span><br><span class="line">                    dest=<span class="string">'accumulate'</span>,</span><br><span class="line">                    action=<span class="string">'store_const'</span>,    <span class="comment"># 该参数被设置时，参数取值成 const 对应值</span></span><br><span class="line">                    const=sum,</span><br><span class="line">                    default=max,</span><br><span class="line">                    help=<span class="string">'sum the integers (default: find the max)'</span>)</span><br><span class="line"><span class="comment"># 位置参数</span></span><br><span class="line">parser.add_argument(<span class="string">'pos'</span>,</span><br><span class="line">                    dest=<span class="string">'pos_argument'</span>,</span><br><span class="line">                    metavar=<span class="string">''</span>,</span><br><span class="line">                    nargs=<span class="string">'+'</span>,    <span class="comment"># 参数输入文件个数</span></span><br><span class="line">                    help=<span class="string">'some help infor'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 互斥参数组，组内参数不可同时出现，required=True表示组内必须有参数被设置</span></span><br><span class="line">exclusive = parser.add_mutually_exclusive_group(required=<span class="keyword">True</span>)    </span><br><span class="line">exclusive.add_argument(<span class="string">'-a'</span>, )</span><br><span class="line">exclusive.add_argument(<span class="string">'-b'</span>, )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置多个参数为一组，无实际意义，仅在打印help信息时，分组显示</span></span><br><span class="line">group = parser.add_argument_group(<span class="string">'argument group info'</span>)    </span><br><span class="line">group.add_argument(<span class="string">'-c'</span>, )</span><br><span class="line">group.add_argument(<span class="string">'-d'</span>, )</span><br><span class="line"></span><br><span class="line"><span class="comment"># parse.print_help()</span></span><br><span class="line">args = parser.parse_args()    <span class="comment"># 参数解析，生成可调用对象</span></span><br><span class="line"></span><br><span class="line">example = args.example</span><br><span class="line"><span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
 
     
 	</div>
@@ -604,147 +739,6 @@
 				
   <div class="article-category">
     <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
-  </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
-    <article id="post-201805_snpEff" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201805_snpEff/" class="article-date">
-  <time datetime="2018-05-09T13:45:52.000Z" itemprop="datePublished">2018-05-09</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201805_snpEff/">VCF 注释 —— SnpEff</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<p>日常工作之读文档，了解参数改变、新方法功能，对已有流程进行修改。</p>
-<p>各种文档看一边遍一遍，使用需要又一次看 SnpEff （<a href="http://snpeff.sourceforge.net/index.html" target="_blank" rel="noopener">http://snpeff.sourceforge.net/index.html</a> ），进行一些整理如下，不过还是建议<a href="http://snpeff.sourceforge.net/SnpEff_manual.html" target="_blank" rel="noopener">原文</a>，鬼知道我会在哪里写错理解错。</p>
-<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><ol>
-<li><p>annotation</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">java -jar snpEff.jar eff genome input.vcf &gt;output.vcf</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> -hgvs, 默认开启，使用 HGVS 变异描述语法对蛋白替换进行描述</span><br><span class="line"><span class="meta">#</span> -fi, 提供bed文件，只对bed区域内位点进行注释</span><br><span class="line"><span class="meta">#</span> -no-downstream, -no-intergenic, -no-intron, -no-upstream, -no-utr, -no [effectType], 参数还可对根据注释类型对注释进行初过滤</span><br><span class="line"><span class="meta">#</span> -canon, 只使用基因对应最长转录本（作为权威转录本）进行注释；参数-canonList可以自行提供基因权威转录本，格式为“GeneID    transcript_ID”</span><br><span class="line"><span class="meta">#</span> -noStats, 不输出注释统计信息</span><br><span class="line"><span class="meta">#</span> -v, 话痨模式，输出各种运行信息</span><br></pre></td></tr></table></figure>
-<p>​</p>
-</li>
-<li><p>database</p>
-<p>人、小鼠等物种都有已经 build 的数据库，可以直接下载，链接：<a href="https://sourceforge.net/projects/snpeff/files/databases/v4_3/" target="_blank" rel="noopener">https://sourceforge.net/projects/snpeff/files/databases/v4_3/</a>，注释选择基因组版本。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java -jar snpEff.jar databases    # 查看可用数据库</span><br><span class="line">java -jar snpEff.jar download -v GRCh37.75    # 下载数据库 GRCh37.75</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Q, 使用执行程序下载数据库时容易断，一般建议手动下载，或者wget等其他方式</span><br></pre></td></tr></table></figure>
-<p>软件还提供了自行构建数据库，详细用法如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 添加配置信息</span><br><span class="line">echo 'GRCh37.70.genome : Human ' &gt;&gt;~/snpEff/snpEff.config</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Create directoy for this new genome</span><br><span class="line">mkdir -p ~/snpEff/data/GRCh37.70 &amp;&amp; cd ~/snpEff/data/GRCh37.70</span><br><span class="line"><span class="meta">#</span> Get annotation files</span><br><span class="line">wget -c -O genes.gtf.gz ftp://ftp.ensembl.org/pub/release-70/gtf/homo_sapiens/Homo_sapiens.GRCh37.70.gtf.gz</span><br><span class="line"><span class="meta">#</span> Get the genome</span><br><span class="line">wget -c -O sequences.fa.gz ftp://ftp.ensembl.org/pub/release-70/fasta/homo_sapiens/dna/Homo_sapiens.GRCh37.70.dna.toplevel.fa.gz</span><br><span class="line"><span class="meta">#</span> Optional, Download CDSs</span><br><span class="line">wget -c -O cds.fa.gz ftp://ftp.ensembl.org/pub/release-70/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh37.70.cdna.all.fa.gz</span><br><span class="line"><span class="meta">#</span> Optional, Download proteins</span><br><span class="line">wget -c -O protein.fa.gz ftp://ftp.ensembl.org/pub/release-70/fasta/homo_sapiens/pep/Homo_sapiens.GRCh37.70.pep.all.fa.gz</span><br><span class="line"><span class="meta">#</span> Optional, Download regulatory annotations</span><br><span class="line">wget -c -O regulation.gff.gz ftp://ftp.ensembl.org/pub/release-70/regulation/homo_sapiens/AnnotatedFeatures.gff.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Building a database from GFF files</span><br><span class="line">cd ~/snpEff &amp;&amp; java -jar snpEff.jar build -gff3 -v GRCh37.70</span><br><span class="line"><span class="meta">#</span> rm -r ~/snpEff/data/GRCh37.70</span><br></pre></td></tr></table></figure>
-<p>此外，snpEff 构建数据库还支持 RefSeq, GenBank 等多种数据输入格式，具体用法查看原文档。</p>
-<p><strong>注意物种 codon 选择</strong>，codon 可以在 <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi" target="_blank" rel="noopener">https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi</a> 中查看，codon可以在<code>~/snpEff/snpEff.config</code>文件中设置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 设置特异 codon</span><br><span class="line">codon.Invertebrate_Mitochondrial:  TTT/F, TTC/F, TAC/Y, TAA/*, ATG/M+, ATG/M+, ACT/T, ...</span><br><span class="line"># 物种选择恰当的 codontable</span><br><span class="line">dm3.M.codonTable : Invertebrate_Mitochondrial    # the chromosome &apos;M&apos; from fly genome (dm3) uses Invertebrate_Mitochondrial codon table</span><br></pre></td></tr></table></figure>
-<p>​</p>
-</li>
-<li><p>dump</p>
-<p>从数据库中提取出注释信息</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java -jar snpEff.jar dump -v -bed GRCh37.70 &gt; GRCh37.70.bed</span><br><span class="line"><span class="meta">#</span> [-bed |-txt ] 设置数据格式</span><br><span class="line"><span class="meta">#</span> [-0 |-1 ] 设置坐标系统，0-based 或者 1-based</span><br></pre></td></tr></table></figure>
-<p>​</p>
-</li>
-</ol>
-<h3 id="注释结果"><a href="#注释结果" class="headerlink" title="注释结果"></a>注释结果</h3><p><img src="./images/2018/snpEff.png" alt=""></p>
-<p>可以看到注释信息被添加到了 VCF 中每个变异 INFO 信息中，以 ANN= 特征开始，详细的注释说明可查看<a href="./appendix/snpEff.pdf">官方文档</a> <a href="http://snpeff.sourceforge.net/VCFannotationformat_v1.0.pdf" target="_blank" rel="noopener">http://snpeff.sourceforge.net/VCFannotationformat_v1.0.pdf</a>。因为基因多个转录本、相互重叠基因等原因，可以看到变异位点被多次注释，需根据实际需求进行筛选。</p>
-
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
-  </div>
-
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vcf/">vcf</a></li></ul>
-
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
-    <article id="post-201709_umount" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2017/201709_umount/" class="article-date">
-  <time datetime="2017-09-27T03:19:21.000Z" itemprop="datePublished">2017-09-27</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2017/201709_umount/">卸载一个假忙的硬盘</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<ol>
-<li><p><code>df -h</code>查看卸载硬盘信息</p>
-</li>
-<li><p><code>umount /dev/sdf</code>，停止使用的硬盘假装忙碌状态</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">umount: /mnt/usbhd2: device is busy.</span><br><span class="line">        (In some cases useful info about processes that use</span><br><span class="line">         the device is found by lsof(8) or fuser(1))</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>fuser /dev/sdf</code>，查看占用硬盘的进程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/mnt/sdf:         106657c</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>kill -9 106657</code></p>
-</li>
-<li><p>重新执行<code>umount /dev/sdf</code></p>
-</li>
-</ol>
-
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
   </div>
 
 			</span>

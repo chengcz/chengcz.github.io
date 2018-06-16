@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>vcf 注释 —— ANNOVAR | ChengCZ&#39;s Notebook</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="最先知道的 VCF 注释软件，但是呢没有搞定构建研究物种的注释数据库，于是转向snpEff，工作转向临床分析时候，发现 ANNOVAR 在人类数据注释多种第三方数据库支持，变异频率、HGVS、ACMG致病性、dbSNP、Cosmic支持等等 软件文档镇楼: http://annovar.openbioinformatics.org/en/latest/ 软件下载ANNOVAR 由 perl 实现，">
+<meta name="keywords" content="vcf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vcf 注释 —— ANNOVAR">
+<meta property="og:url" content="http://chengcz.github.io/2018/201806_ANNOVAR/index.html">
+<meta property="og:site_name" content="ChengCZ&#39;s Notebook">
+<meta property="og:description" content="最先知道的 VCF 注释软件，但是呢没有搞定构建研究物种的注释数据库，于是转向snpEff，工作转向临床分析时候，发现 ANNOVAR 在人类数据注释多种第三方数据库支持，变异频率、HGVS、ACMG致病性、dbSNP、Cosmic支持等等 软件文档镇楼: http://annovar.openbioinformatics.org/en/latest/ 软件下载ANNOVAR 由 perl 实现，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-06-16T16:18:25.970Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vcf 注释 —— ANNOVAR">
+<meta name="twitter:description" content="最先知道的 VCF 注释软件，但是呢没有搞定构建研究物种的注释数据库，于是转向snpEff，工作转向临床分析时候，发现 ANNOVAR 在人类数据注释多种第三方数据库支持，变异频率、HGVS、ACMG致病性、dbSNP、Cosmic支持等等 软件文档镇楼: http://annovar.openbioinformatics.org/en/latest/ 软件下载ANNOVAR 由 perl 实现，">
+  
+    <link rel="alternative" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+	<i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+	<h1 class="blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>
+	<nav class="nav">
+		<ul>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/about">About</a></li>
+			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+		</ul>
+	</nav>
+	<div id="search-form-wrap">
+		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://chengcz.github.io"></form>
+	</div>
+</header>
+    <div id="main">
+      <article id="post-201806_ANNOVAR" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201806_ANNOVAR/" class="article-date">
+  <time datetime="2018-06-16T15:40:21.000Z" itemprop="datePublished">2018-06-16</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      vcf 注释 —— ANNOVAR
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>最先知道的 VCF 注释软件，但是呢没有搞定构建研究物种的注释数据库，于是转向snpEff，工作转向临床分析时候，发现 ANNOVAR 在人类数据注释多种第三方数据库支持，变异频率、HGVS、ACMG致病性、dbSNP、Cosmic支持等等</p>
+<p>软件文档镇楼: <a href="http://annovar.openbioinformatics.org/en/latest/" target="_blank" rel="noopener">http://annovar.openbioinformatics.org/en/latest/</a></p>
+<h3 id="软件下载"><a href="#软件下载" class="headerlink" title="软件下载"></a>软件下载</h3><p>ANNOVAR 由 perl 实现，下载即用，软件下载地址为：<a href="http://www.openbioinformatics.org/annovar/annovar_download_form.php" target="_blank" rel="noopener">http://www.openbioinformatics.org/annovar/annovar_download_form.php</a> ，软件包包括下面几个功能脚本：</p>
+<ul>
+<li><em>annotate_variation.pl</em>, 主程序，数据库下载，变异注释等等</li>
+<li><em>coding_change.pl</em>, 推断蛋白序列的变化</li>
+<li><em>convert2annovar.pl</em>, </li>
+<li><em>retrieve_seq_from_fasta.pl</em>, </li>
+<li><em>table_annovar.pl</em>, 注释程序，根据数据库选择完成不同类型变异注释</li>
+<li><em>variants_reduction.pl</em>, </li>
+</ul>
+<h3 id="数据库下载、整理"><a href="#数据库下载、整理" class="headerlink" title="数据库下载、整理"></a>数据库下载、整理</h3><p>ANNOVAR 注释变异可以分成有基于基因、基于染色体区间和变异数据等三种类型</p>
+<ol>
+<li><p>基于gene的注释</p>
+<p>注释结果为突变位点位于基因的相对位置，是否改变氨基酸编码，获得变异位点的HGVS命名方式</p>
+</li>
+<li><p>基于染色体区间的注释</p>
+<p>获取变异位点是否存在于某些特定的区间内，Identify cytogenetic band, 转录因子结合区等等</p>
+</li>
+<li><p>变异数据库的注释</p>
+<p>包括Clinvar, dbSNP, Cosmic, ExAC, gnomAD等等，突变数据库整理可参考<a href="https://chengcz.github.io/2018/201806_vcf2tab/index.html"><strong><em>从 vcf 文件准备 ANNOVAR 数据库</em></strong></a></p>
+</li>
+</ol>
+<p>ANNOVAR 数据库文件实际上为特定格式的文本文件，其数据库文件命名规则为:  <strong>\${path_database}/\${buildver}_\${database_name}.txt</strong></p>
+<h3 id="软件运行"><a href="#软件运行" class="headerlink" title="软件运行"></a>软件运行</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> input file format: vcf</span><br><span class="line">table_annovar.pl example/ex2.vcf humandb/ -buildver hg19 -out myanno -remove -protocol refGene,cytoBand,esp6500siv2_all,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_eas,1000g2015aug_eur,snp138,dbnsfp30a -operation g,r,f,f,f,f,f,f,f -nastring . -vcfinput</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 不同于snpEff，ANNOVAR 所有注释结果都在 vcf 文件 INFO 列添加key-value</span><br></pre></td></tr></table></figure>
+<h3 id="非人物种数据库整理"><a href="#非人物种数据库整理" class="headerlink" title="非人物种数据库整理"></a>非人物种数据库整理</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 下载物种基因序列、注释文件</span><br><span class="line">wget -c ftp://ftp.ensemblgenomes.org/pub/release-27/plants/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.27.dna.genome.fa.gz</span><br><span class="line">wget -c ftp://ftp.ensemblgenomes.org/pub/release-27/plants/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.27.gtf.gz</span><br><span class="line">gzip -d Arabidopsis_thaliana.TAIR10.27.dna.genome.fa.gz</span><br><span class="line">gzip -d Arabidopsis_thaliana.TAIR10.27.gtf.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> gtf文件格式转换</span><br><span class="line">gtfToGenePred -genePredExt Arabidopsis_thaliana.TAIR10.27.gtf AT_refGene.txt</span><br><span class="line"><span class="meta">#</span> wget -c http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/gtfToGenePred</span><br><span class="line"><span class="meta">#</span> 另一种格式转换方法，https://github.com/chengcz/pyGTF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 使用软件包提供脚本build物种数据库，数据库buildver为AT，名称为refGene</span><br><span class="line">perl retrieve_seq_from_fasta.pl --format refGene --seqfile Arabidopsis_thaliana.TAIR10.27.dna.genome.fa AT_refGene.txt --out AT_refGeneMrna.fa</span><br></pre></td></tr></table></figure>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vcf/">vcf</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/201806_vcf2tab/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          从 vcf 文件准备 ANNOVAR 数据库
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+    </div>
+    <div class="mb-search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:chengcz.github.io">
+  </form>
+</div>
+<footer id="footer">
+	<!---<h1 class="footer-blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>--->
+	<span class="copyright">
+		&copy; 2018 ChengCZ<br>
+		<!---Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>--->
+	</span>
+</footer>
+
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>
