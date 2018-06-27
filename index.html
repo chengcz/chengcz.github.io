@@ -45,10 +45,63 @@
     <div id="main">
       
   
-    <article id="post-compare_vcf" class="post">
+    <article id="post-201806_python_decode" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
-			<a href="/2018/compare_vcf/" class="article-date">
+			<a href="/2018/201806_python_decode/" class="article-date">
+  <time datetime="2018-06-27T15:15:52.000Z" itemprop="datePublished">2018-06-27</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2018/201806_python_decode/">使用 python 正确读取不同编码方式文本</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>通常情况下，都会默认输入文件以 utf-8 的方式进行编码，总会有几个奇葩输入文件存在，导入分析流程，啊额，编码问题运行终止，再来一遍呢还是再来一遍。</p>
+<p>技术问题还是选择用技术手段解决好些，是吧，一个简单的例子如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> io <span class="keyword">import</span> open</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Read_File_Right_Encode</span><span class="params">(fp, encodelst=None)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="comment"># content = subprocess.check_output('iconv -f GBK -t utf-8 &#123;file&#125;')</span></span><br><span class="line">    <span class="keyword">with</span> open(fp, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        tmp = f.read()</span><br><span class="line">    <span class="keyword">if</span> encodelst <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">	    encodelst = [<span class="string">'gbk'</span>, <span class="string">'ascii'</span>, <span class="string">'utf-8'</span>]</span><br><span class="line">    x = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="keyword">if</span> x == len(encodelst):</span><br><span class="line">            <span class="keyword">raise</span> Exception(<span class="string">'Can\'t find right coding format of &#123;&#125; in decode list: &#123;&#125;'</span>.format(fp, <span class="string">', '</span>.join(encodelst)))</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            content = tmp.decode(encodelst[x])</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        x += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> content</span><br></pre></td></tr></table></figure>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
+    <article id="post-201806_compare_vcf" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201806_compare_vcf/" class="article-date">
   <time datetime="2018-06-25T16:02:01.000Z" itemprop="datePublished">2018-06-26</time>
 </a>
 		</span>
@@ -62,7 +115,7 @@
 		
   
     <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/compare_vcf/">NA12878 全外显子数据分析结果比较</a>
+      <a class="article-title" href="/2018/201806_compare_vcf/">NA12878 全外显子数据分析结果比较</a>
     </h1>
   
 
@@ -480,58 +533,6 @@
 
 
   
-    <article id="post-201805_argparse" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201805_argparse/" class="article-date">
-  <time datetime="2018-05-17T11:15:52.000Z" itemprop="datePublished">2018-05-17</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201805_argparse/">python 参数解析 —— argsparse</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<p>argsparse 解析命令行参数，一些常用参数整理。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser(<span class="comment"># prog=__file__,    # 设置项目名称，__file__ 与 sys.argv[0] 一致，默认显示为 basename(__file__)</span></span><br><span class="line">      usage=<span class="string">'''</span></span><br><span class="line"><span class="string">      python %(prog)s [option]  '''</span>,    <span class="comment"># 设置脚本输出默认 USAGE 信息</span></span><br><span class="line">      description=<span class="string">''' some script description '''</span>,   <span class="comment"># 脚本功能描述等等</span></span><br><span class="line">      formatter_class=argparse.RawTextHelpFormatter,    <span class="comment"># 以脚本内原始文档格式输出描述等信息</span></span><br><span class="line">      epilog=<span class="string">'''</span></span><br><span class="line"><span class="string">      Note and input example, and so on.  '''</span>)    <span class="comment"># 脚本描述以外的其他信息</span></span><br><span class="line"></span><br><span class="line">parser.add_argument(<span class="string">'-v'</span>, <span class="string">'--version'</span>,    <span class="comment"># 添加脚本版本信息参数</span></span><br><span class="line">                    action=<span class="string">'version'</span>,</span><br><span class="line">                    version=<span class="string">'%(prog)s 2.0'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加一个普通的可选参数</span></span><br><span class="line">parser.add_argument(<span class="string">'-e'</span>,    <span class="comment"># 短参数</span></span><br><span class="line">                    <span class="string">'--example'</span>,    <span class="comment"># 长参数</span></span><br><span class="line">                    dest=<span class="string">'example'</span>,     <span class="comment"># 参数对应模块内部，唯一标识符</span></span><br><span class="line">                    metavar=<span class="string">''</span>,    <span class="comment"># 设置help信息中参数后字符</span></span><br><span class="line">                    action=<span class="string">'store'</span>,    <span class="comment"># 参数处理方式</span></span><br><span class="line">                    type=str,    <span class="comment"># 传入参数类型</span></span><br><span class="line">                    choices=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>],    <span class="comment"># 参数选择范围</span></span><br><span class="line">                    required=<span class="keyword">True</span>,    <span class="comment"># 表示该参数必须被设置</span></span><br><span class="line">                    default=<span class="string">'a'</span>,    <span class="comment"># 参数缺省时，该参数默认值</span></span><br><span class="line">                    nargs=<span class="string">'+'</span>,    <span class="comment"># 参数个数，*+？，表示至少一个输入</span></span><br><span class="line">                    help=<span class="string">'some help infor'</span>)    <span class="comment"># help信息</span></span><br><span class="line"><span class="comment"># action属性为store_true, store_false, store_const时，参数不接任何输入信息</span></span><br><span class="line">parser.add_argument(<span class="string">'--sum'</span>,</span><br><span class="line">                    dest=<span class="string">'accumulate'</span>,</span><br><span class="line">                    action=<span class="string">'store_const'</span>,    <span class="comment"># 该参数被设置时，参数取值成 const 对应值</span></span><br><span class="line">                    const=sum,</span><br><span class="line">                    default=max,</span><br><span class="line">                    help=<span class="string">'sum the integers (default: find the max)'</span>)</span><br><span class="line"><span class="comment"># 位置参数</span></span><br><span class="line">parser.add_argument(<span class="string">'pos'</span>,</span><br><span class="line">                    dest=<span class="string">'pos_argument'</span>,</span><br><span class="line">                    metavar=<span class="string">''</span>,</span><br><span class="line">                    nargs=<span class="string">'+'</span>,    <span class="comment"># 参数输入文件个数</span></span><br><span class="line">                    help=<span class="string">'some help infor'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 互斥参数组，组内参数不可同时出现，required=True表示组内必须有参数被设置</span></span><br><span class="line">exclusive = parser.add_mutually_exclusive_group(required=<span class="keyword">True</span>)    </span><br><span class="line">exclusive.add_argument(<span class="string">'-a'</span>, )</span><br><span class="line">exclusive.add_argument(<span class="string">'-b'</span>, )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置多个参数为一组，无实际意义，仅在打印help信息时，分组显示</span></span><br><span class="line">group = parser.add_argument_group(<span class="string">'argument group info'</span>)    </span><br><span class="line">group.add_argument(<span class="string">'-c'</span>, )</span><br><span class="line">group.add_argument(<span class="string">'-d'</span>, )</span><br><span class="line"></span><br><span class="line"><span class="comment"># parse.print_help()</span></span><br><span class="line">args = parser.parse_args()    <span class="comment"># 参数解析，生成可调用对象</span></span><br><span class="line"></span><br><span class="line">example = args.example</span><br><span class="line"><span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
-
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/python/">python</a>
-  </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
     <article id="post-201805_subprocess" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
@@ -560,6 +561,58 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行cmd并等待运行结束，返回执行状态码</span></span><br><span class="line">subprocess.call(<span class="string">'ls'</span>, shell=<span class="keyword">True</span>)    <span class="comment"># 与 os.system() 功能相似</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行cmd并等待运行结束，返回执行状态码</span></span><br><span class="line">subprocess.check_call(<span class="string">'ls'</span>, shell=<span class="keyword">True</span>)    <span class="comment"># 与subprocess.call()不同，returncode不为0，触发CalledProcessError异常</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行cmd并等待运行结束，返回 /dev/stdout 信息</span></span><br><span class="line">subprocess.check_output(<span class="string">'ls'</span>, shell=<span class="keyword">True</span>, </span><br><span class="line">                        universal_newlines=<span class="keyword">True</span>)    <span class="comment"># 以 string 形式返回 stdout 信息，而不是bytes，与 os.popen() 功能相似</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 不等待 cmd 运行结束</span></span><br><span class="line">job = subprocess.Popen(<span class="string">'ls -l'</span>,    <span class="comment"># string of cmd</span></span><br><span class="line">                       shell=<span class="keyword">True</span>,    <span class="comment"># 传入参数作为 shell 进行执行</span></span><br><span class="line">                       stdout=subprocess.PIPE,    <span class="comment"># 输出标准输出到subprocess流程</span></span><br><span class="line">                       stderr=subprocess.PIPE,    <span class="comment"># 输出标准错误到subprocess流程</span></span><br><span class="line">                       universal_newlines=<span class="keyword">True</span>)    <span class="comment"># stdout 返回时，使用 string 代替 bytes 类型</span></span><br><span class="line">pid = job.pid    <span class="comment"># 获得 cmd 本地执行的 pid</span></span><br><span class="line">job.wait()    <span class="comment"># 等待工作结束，默认Popen不等待 cmd 执行完毕即退出</span></span><br><span class="line">stdout, stderr = job.communicate()    <span class="comment"># 获得 cmd 执行返回标准输出、标准错误</span></span><br><span class="line"><span class="comment"># 设置 stdin=subprocess.PIPE 时，可以在communicate(input='...')传入参数</span></span><br><span class="line">job.returncode    <span class="comment"># 获得 cmd 执行状态码</span></span><br><span class="line">job.kill()    <span class="comment"># 杀死 cmd 进程</span></span><br></pre></td></tr></table></figure>
 <p>os 模块实现 linux cmd 执行</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">os.system(<span class="string">'ls -l'</span>)    <span class="comment"># 直接返回 cmd 执行状态码</span></span><br><span class="line"><span class="comment"># assert not os.system('ls')</span></span><br><span class="line">os.popen(<span class="string">'ls -l'</span>)    <span class="comment"># 以文件句柄的方式返回 cmd 执行的stdout信息</span></span><br></pre></td></tr></table></figure>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
+    <article id="post-201805_argparse" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201805_argparse/" class="article-date">
+  <time datetime="2018-05-17T11:15:52.000Z" itemprop="datePublished">2018-05-17</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2018/201805_argparse/">python 参数解析 —— argsparse</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>argsparse 解析命令行参数，一些常用参数整理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser(<span class="comment"># prog=__file__,    # 设置项目名称，__file__ 与 sys.argv[0] 一致，默认显示为 basename(__file__)</span></span><br><span class="line">      usage=<span class="string">'''</span></span><br><span class="line"><span class="string">      python %(prog)s [option]  '''</span>,    <span class="comment"># 设置脚本输出默认 USAGE 信息</span></span><br><span class="line">      description=<span class="string">''' some script description '''</span>,   <span class="comment"># 脚本功能描述等等</span></span><br><span class="line">      formatter_class=argparse.RawTextHelpFormatter,    <span class="comment"># 以脚本内原始文档格式输出描述等信息</span></span><br><span class="line">      epilog=<span class="string">'''</span></span><br><span class="line"><span class="string">      Note and input example, and so on.  '''</span>)    <span class="comment"># 脚本描述以外的其他信息</span></span><br><span class="line"></span><br><span class="line">parser.add_argument(<span class="string">'-v'</span>, <span class="string">'--version'</span>,    <span class="comment"># 添加脚本版本信息参数</span></span><br><span class="line">                    action=<span class="string">'version'</span>,</span><br><span class="line">                    version=<span class="string">'%(prog)s 2.0'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加一个普通的可选参数</span></span><br><span class="line">parser.add_argument(<span class="string">'-e'</span>,    <span class="comment"># 短参数</span></span><br><span class="line">                    <span class="string">'--example'</span>,    <span class="comment"># 长参数</span></span><br><span class="line">                    dest=<span class="string">'example'</span>,     <span class="comment"># 参数对应模块内部，唯一标识符</span></span><br><span class="line">                    metavar=<span class="string">''</span>,    <span class="comment"># 设置help信息中参数后字符</span></span><br><span class="line">                    action=<span class="string">'store'</span>,    <span class="comment"># 参数处理方式</span></span><br><span class="line">                    type=str,    <span class="comment"># 传入参数类型</span></span><br><span class="line">                    choices=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>],    <span class="comment"># 参数选择范围</span></span><br><span class="line">                    required=<span class="keyword">True</span>,    <span class="comment"># 表示该参数必须被设置</span></span><br><span class="line">                    default=<span class="string">'a'</span>,    <span class="comment"># 参数缺省时，该参数默认值</span></span><br><span class="line">                    nargs=<span class="string">'+'</span>,    <span class="comment"># 参数个数，*+？，表示至少一个输入</span></span><br><span class="line">                    help=<span class="string">'some help infor'</span>)    <span class="comment"># help信息</span></span><br><span class="line"><span class="comment"># action属性为store_true, store_false, store_const时，参数不接任何输入信息</span></span><br><span class="line">parser.add_argument(<span class="string">'--sum'</span>,</span><br><span class="line">                    dest=<span class="string">'accumulate'</span>,</span><br><span class="line">                    action=<span class="string">'store_const'</span>,    <span class="comment"># 该参数被设置时，参数取值成 const 对应值</span></span><br><span class="line">                    const=sum,</span><br><span class="line">                    default=max,</span><br><span class="line">                    help=<span class="string">'sum the integers (default: find the max)'</span>)</span><br><span class="line"><span class="comment"># 位置参数</span></span><br><span class="line">parser.add_argument(<span class="string">'pos'</span>,</span><br><span class="line">                    dest=<span class="string">'pos_argument'</span>,</span><br><span class="line">                    metavar=<span class="string">''</span>,</span><br><span class="line">                    nargs=<span class="string">'+'</span>,    <span class="comment"># 参数输入文件个数</span></span><br><span class="line">                    help=<span class="string">'some help infor'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 互斥参数组，组内参数不可同时出现，required=True表示组内必须有参数被设置</span></span><br><span class="line">exclusive = parser.add_mutually_exclusive_group(required=<span class="keyword">True</span>)    </span><br><span class="line">exclusive.add_argument(<span class="string">'-a'</span>, )</span><br><span class="line">exclusive.add_argument(<span class="string">'-b'</span>, )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置多个参数为一组，无实际意义，仅在打印help信息时，分组显示</span></span><br><span class="line">group = parser.add_argument_group(<span class="string">'argument group info'</span>)    </span><br><span class="line">group.add_argument(<span class="string">'-c'</span>, )</span><br><span class="line">group.add_argument(<span class="string">'-d'</span>, )</span><br><span class="line"></span><br><span class="line"><span class="comment"># parse.print_help()</span></span><br><span class="line">args = parser.parse_args()    <span class="comment"># 参数解析，生成可调用对象</span></span><br><span class="line"></span><br><span class="line">example = args.example</span><br><span class="line"><span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
 
     
 	</div>
@@ -634,88 +687,6 @@
 <p><em>–non-human</em>, If your annotation is different from that of human, use the option.</p>
 <p><em>–fusion-pair-dist</em>, Pairs with this specified distance are counted as supporting evidence for the fusion. The default threshold for the inner distance is 250.</p>
 <h3 id="results"><a href="#results" class="headerlink" title="results"></a>results</h3><p>测试了多个样品，多个参数，也根据官网数据、命令运行项目，都没有发现任何融合结果，bug还是打开方式不对</p>
-
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
-  </div>
-
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FusionGene/">FusionGene</a></li></ul>
-
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
-    <article id="post-201805_STARFusion" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201805_STARFusion/" class="article-date">
-  <time datetime="2018-05-15T14:14:52.000Z" itemprop="datePublished">2018-05-15</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201805_STARFusion/">使用 STAR-fusion 分析 Fusion-Gene</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<p>软件文档：<a href="https://github.com/STAR-Fusion/STAR-Fusion/wiki" target="_blank" rel="noopener">https://github.com/STAR-Fusion/STAR-Fusion/wiki</a></p>
-<p>##软件安装</p>
-<ol>
-<li>STAR，<a href="https://github.com/alexdobin/STAR" target="_blank" rel="noopener">https://github.com/alexdobin/STAR</a></li>
-<li>运行依赖 perl 模块<ol>
-<li>DB_File</li>
-<li>URI::Escape</li>
-<li>Set::IntervalTree</li>
-<li>Carp::Assert</li>
-<li>JSON::XS</li>
-<li>PerlIO::gzip</li>
-<li>common::sense</li>
-<li>Types::Serialiser</li>
-<li>Canary::Stability</li>
-</ol>
-</li>
-</ol>
-<p>##数据库准备</p>
-<p>下载一个较小的未处理的参考文件，自己运行 index 命令。要是网速够快也可以直接在 index 好的数据库文件，~27G</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget -c https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/GRCh37_v19_CTAT_lib_Feb092018.source_data.tar.gz</span><br><span class="line"><span class="meta">$</span>STAR_FUSION_HOME/FusionFilter/prep_genome_lib.pl \</span><br><span class="line">    --genome_fa ref_genome.fa \</span><br><span class="line">    --gtf ref_annot.gtf \</span><br><span class="line">    --fusion_annot_lib CTAT_HumanFusionLib.v0.1.0.dat.gz \</span><br><span class="line">    --annot_filter_rule AnnotFilterRule.pm \</span><br><span class="line">    --pfam_db PFAM.domtblout.dat.gz</span><br></pre></td></tr></table></figure>
-<p>##运行STAR-Fusion</p>
-<p><strong>STAR-Fusion</strong>  对 STAR 输出的嵌合比对分析发现可能存在的基因融合事件</p>
-<h3 id="从-fastq-文件开始"><a href="#从-fastq-文件开始" class="headerlink" title="从 fastq 文件开始"></a>从 fastq 文件开始</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>STAR_FUSION_HOME/STAR-Fusion \</span><br><span class="line">    --genome_lib_dir /path/to/your/CTAT_resource_lib \</span><br><span class="line">    --left_fq reads_1.fq \</span><br><span class="line">    --right_fq reads_2.fq \</span><br><span class="line">    --output_dir star_fusion_outdir \</span><br><span class="line">    --no_remove_dups</span><br></pre></td></tr></table></figure>
-<h3 id="从-STAR-产生-Bam-文件开始"><a href="#从-STAR-产生-Bam-文件开始" class="headerlink" title="从 STAR 产生 Bam 文件开始"></a>从 STAR 产生 Bam 文件开始</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">STAR --genomeDir $&#123;star_index_dir&#125; \</span><br><span class="line">    --readFilesIn $&#123;left_fq_filename&#125; $&#123;right_fq_filename&#125; \</span><br><span class="line">    --twopassMode Basic \</span><br><span class="line">    --outReadsUnmapped None \</span><br><span class="line">    --chimSegmentMin 12 \</span><br><span class="line">    --chimJunctionOverhangMin 12 \</span><br><span class="line">    --alignSJDBoverhangMin 10 \</span><br><span class="line">    --alignMatesGapMax 100000 \</span><br><span class="line">    --alignIntronMax 100000 \</span><br><span class="line">    --chimSegmentReadGapMax 3 \</span><br><span class="line">    --alignSJstitchMismatchNmax 5 -1 5 5 \</span><br><span class="line">    --runThreadN $&#123;THREAD_COUNT&#125; \</span><br><span class="line">    --outSAMstrandField intronMotif</span><br><span class="line"></span><br><span class="line">STAR-Fusion --genome_lib_dir /path/to/your/CTAT_resource_lib \</span><br><span class="line">             -J Chimeric.out.junction \</span><br><span class="line">             --output_dir star_fusion_outdir</span><br></pre></td></tr></table></figure>
-<h2 id="输出文件"><a href="#输出文件" class="headerlink" title="输出文件"></a>输出文件</h2><p>STAR 速度还是那么让人惊喜，6m reads不到半小时。 融合结果<code>star-fusion.fusion_predictions.abridged.tsv</code></p>
-<blockquote>
-<p><strong>FusionName</strong>,<br><strong>JunctionReadCount</strong>, split align到融合点的序列片段数<br><strong>SpanningFragCount</strong>, 双端reads跨越融合点的序列片段数<br><strong>SpliceType</strong>, 断点是否在注释文件存在<br><strong>LeftGene</strong>,<br><strong>LeftBreakpoint</strong>,<br><strong>RightGene</strong>,<br><strong>RightBreakpoint</strong>,<br><strong>LargeAnchorSupport</strong>,<br><strong>FFPM</strong>, fusion fragments per million total reads<br><strong>LeftBreakDinuc</strong>,<br><strong>LeftBreakEntropy</strong>,<br><strong>RightBreakDinuc</strong>,<br><strong>RightBreakEntropy</strong>,<br><strong>annots</strong>,</p>
-</blockquote>
-<h2 id="结果比较"><a href="#结果比较" class="headerlink" title="结果比较"></a>结果比较</h2><p>真是一个悲伤的故事，根据官网给的两种运行方式，结果差别这么大。查看 STAR-Fusion 脚本，使用的 mapping 参数差异有点大啊，哪一个比较合理呢（一个新坑）？？？</p>
-<p><img src="./images/2018/star_fusion.results.png" alt=""></p>
 
     
 	</div>

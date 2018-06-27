@@ -45,6 +45,88 @@
     <div id="main">
       
   
+    <article id="post-201805_STARFusion" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201805_STARFusion/" class="article-date">
+  <time datetime="2018-05-15T14:14:52.000Z" itemprop="datePublished">2018-05-15</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2018/201805_STARFusion/">使用 STAR-fusion 分析 Fusion-Gene</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>软件文档：<a href="https://github.com/STAR-Fusion/STAR-Fusion/wiki" target="_blank" rel="noopener">https://github.com/STAR-Fusion/STAR-Fusion/wiki</a></p>
+<p>##软件安装</p>
+<ol>
+<li>STAR，<a href="https://github.com/alexdobin/STAR" target="_blank" rel="noopener">https://github.com/alexdobin/STAR</a></li>
+<li>运行依赖 perl 模块<ol>
+<li>DB_File</li>
+<li>URI::Escape</li>
+<li>Set::IntervalTree</li>
+<li>Carp::Assert</li>
+<li>JSON::XS</li>
+<li>PerlIO::gzip</li>
+<li>common::sense</li>
+<li>Types::Serialiser</li>
+<li>Canary::Stability</li>
+</ol>
+</li>
+</ol>
+<p>##数据库准备</p>
+<p>下载一个较小的未处理的参考文件，自己运行 index 命令。要是网速够快也可以直接在 index 好的数据库文件，~27G</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget -c https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/GRCh37_v19_CTAT_lib_Feb092018.source_data.tar.gz</span><br><span class="line"><span class="meta">$</span>STAR_FUSION_HOME/FusionFilter/prep_genome_lib.pl \</span><br><span class="line">    --genome_fa ref_genome.fa \</span><br><span class="line">    --gtf ref_annot.gtf \</span><br><span class="line">    --fusion_annot_lib CTAT_HumanFusionLib.v0.1.0.dat.gz \</span><br><span class="line">    --annot_filter_rule AnnotFilterRule.pm \</span><br><span class="line">    --pfam_db PFAM.domtblout.dat.gz</span><br></pre></td></tr></table></figure>
+<p>##运行STAR-Fusion</p>
+<p><strong>STAR-Fusion</strong>  对 STAR 输出的嵌合比对分析发现可能存在的基因融合事件</p>
+<h3 id="从-fastq-文件开始"><a href="#从-fastq-文件开始" class="headerlink" title="从 fastq 文件开始"></a>从 fastq 文件开始</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>STAR_FUSION_HOME/STAR-Fusion \</span><br><span class="line">    --genome_lib_dir /path/to/your/CTAT_resource_lib \</span><br><span class="line">    --left_fq reads_1.fq \</span><br><span class="line">    --right_fq reads_2.fq \</span><br><span class="line">    --output_dir star_fusion_outdir \</span><br><span class="line">    --no_remove_dups</span><br></pre></td></tr></table></figure>
+<h3 id="从-STAR-产生-Bam-文件开始"><a href="#从-STAR-产生-Bam-文件开始" class="headerlink" title="从 STAR 产生 Bam 文件开始"></a>从 STAR 产生 Bam 文件开始</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">STAR --genomeDir $&#123;star_index_dir&#125; \</span><br><span class="line">    --readFilesIn $&#123;left_fq_filename&#125; $&#123;right_fq_filename&#125; \</span><br><span class="line">    --twopassMode Basic \</span><br><span class="line">    --outReadsUnmapped None \</span><br><span class="line">    --chimSegmentMin 12 \</span><br><span class="line">    --chimJunctionOverhangMin 12 \</span><br><span class="line">    --alignSJDBoverhangMin 10 \</span><br><span class="line">    --alignMatesGapMax 100000 \</span><br><span class="line">    --alignIntronMax 100000 \</span><br><span class="line">    --chimSegmentReadGapMax 3 \</span><br><span class="line">    --alignSJstitchMismatchNmax 5 -1 5 5 \</span><br><span class="line">    --runThreadN $&#123;THREAD_COUNT&#125; \</span><br><span class="line">    --outSAMstrandField intronMotif</span><br><span class="line"></span><br><span class="line">STAR-Fusion --genome_lib_dir /path/to/your/CTAT_resource_lib \</span><br><span class="line">             -J Chimeric.out.junction \</span><br><span class="line">             --output_dir star_fusion_outdir</span><br></pre></td></tr></table></figure>
+<h2 id="输出文件"><a href="#输出文件" class="headerlink" title="输出文件"></a>输出文件</h2><p>STAR 速度还是那么让人惊喜，6m reads不到半小时。 融合结果<code>star-fusion.fusion_predictions.abridged.tsv</code></p>
+<blockquote>
+<p><strong>FusionName</strong>,<br><strong>JunctionReadCount</strong>, split align到融合点的序列片段数<br><strong>SpanningFragCount</strong>, 双端reads跨越融合点的序列片段数<br><strong>SpliceType</strong>, 断点是否在注释文件存在<br><strong>LeftGene</strong>,<br><strong>LeftBreakpoint</strong>,<br><strong>RightGene</strong>,<br><strong>RightBreakpoint</strong>,<br><strong>LargeAnchorSupport</strong>,<br><strong>FFPM</strong>, fusion fragments per million total reads<br><strong>LeftBreakDinuc</strong>,<br><strong>LeftBreakEntropy</strong>,<br><strong>RightBreakDinuc</strong>,<br><strong>RightBreakEntropy</strong>,<br><strong>annots</strong>,</p>
+</blockquote>
+<h2 id="结果比较"><a href="#结果比较" class="headerlink" title="结果比较"></a>结果比较</h2><p>真是一个悲伤的故事，根据官网给的两种运行方式，结果差别这么大。查看 STAR-Fusion 脚本，使用的 mapping 参数差异有点大啊，哪一个比较合理呢（一个新坑）？？？</p>
+<p><img src="./images/2018/star_fusion.results.png" alt=""></p>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FusionGene/">FusionGene</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
     <article id="post-201805_trimmomatic" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
@@ -815,98 +897,6 @@ right method...
 				
   <div class="article-category">
     <a class="article-category-link" href="/categories/python/">python</a>
-  </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
-    <article id="post-201705_linuxfind" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2017/201705_linuxfind/" class="article-date">
-  <time datetime="2017-05-21T04:39:31.000Z" itemprop="datePublished">2017-05-21</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2017/201705_linuxfind/">Linux 命令 —— find</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<p>find，Linux常用文件搜索命令简要整理</p>
-<h1 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h1><p>find基本用法如：<code>find [path] &lt;search regular&gt; [action]</code></p>
-<ul>
-<li>可选参数path，支持空格分隔的多路径查找，默认为当前路径</li>
-<li>可选参数action<ul>
-<li>-print，匹配文件输出到stdout，默认</li>
-<li>-exec，对find匹配到的文件执行该参数所给出的shell命令，格式为<strong>command { } \;</strong>，其中{}表示匹配文件</li>
-<li>-ok，于-exec类似，执行前给出提示是否执行</li>
-</ul>
-</li>
-</ul>
-<ol>
-<li><p>文件名</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">find [path] -name &lt;name&gt;</span><br><span class="line">find [path] -iname &lt;name&gt;    #不区分大小写</span><br><span class="line"><span class="meta">#</span> 其中&lt;name&gt;支持通配符，一般使用时建议增加单引号</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>文件类型，一般配合其他搜索参数一起使用</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find [path] -type [bdcplf]</span><br><span class="line"><span class="meta">#</span> 其中d表示目录，l表示链接，f表示文件</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>文件大小</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> -size 参数支持+-表示大于小于，ckMG表示数据单位</span><br><span class="line">find [path] -size +10M    #path下大于10M的文件</span><br><span class="line">find [path] -size -1G    #path下小于1G的文件</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>时间戳</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">find [path] -mtime -n +m    #更改时间为m天前n天内的文件</span><br><span class="line">find [path] -atime -n +m    #访问时间</span><br><span class="line">find [path] -ctime -n +m    #创建时间</span><br><span class="line"><span class="meta">#</span> mtime参数后数字表示天， mmin参数后数字表示分钟</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>文件属主</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">find [path] -user &lt;user_name&gt;    #path下属主为user_name的文件</span><br><span class="line">find [path] -group &lt;group_name&gt;    #path下组名为group_name的文件</span><br><span class="line">find [path] -nouser    #用户ID不存在的文件</span><br><span class="line">find [path] -nogroup    #组ID不存在的文件</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>文件权限</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">find [path] -perm 755    #权限设置为755的文件</span><br><span class="line">find [path] -perm -u=r    #文件属主有读权限的目录或文件</span><br><span class="line">find [path] -perm -g=r    #用户组有读权限的目录或文件</span><br><span class="line">find [path] -perm -o=r    #其它用户有读权限的目录或文件</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>其他搜索参数</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">find [path] &lt;search_regular&gt; [option]</span><br><span class="line"><span class="meta">#</span> -follow 追踪链接文件</span><br><span class="line"><span class="meta">#</span> -mount 不跨越文件系统mount点</span><br><span class="line"><span class="meta">#</span> -empty 空文件</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><ol>
-<li><p>多筛选条件组合</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">find [path] -name '*R' -a -mtime -1    #修改时间一天内的R脚本文件</span><br><span class="line"><span class="meta">#</span>-a | -and    # 同时满足</span><br><span class="line"><span class="meta">#</span>-o | -or    # 或</span><br><span class="line"><span class="meta">#</span>-not    # 条件取反</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>几个例子，来自微博@linux命令行精选网</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">find . ! -name &lt;NAME&gt; -delete    #用find删除文件时候排除特定文件</span><br><span class="line">find . -type l -xtype l    #查找失效的符号链接</span><br><span class="line">find . -iname '*.jpg' | sed 's/.*/&lt;img src="&amp;"&gt;/' &gt; gallery.html    #生成html 相册</span><br><span class="line">find . -size 0 -exec rm '&#123;&#125;' \;    #清理空文件</span><br><span class="line">find . -type d -exec mkdir -p $DESTDIR/&#123;&#125; \;    #复制一个目录的结构，忽略文件</span><br><span class="line">find . -type f -size +500M -exec ls -ls &#123;&#125; \; | sort -n    #找出所有大于500M的文件</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
   </div>
 
 			</span>
