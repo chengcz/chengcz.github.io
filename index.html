@@ -45,6 +45,78 @@
     <div id="main">
       
   
+    <article id="post-201806_HumanGene" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201806_HumanGene/" class="article-date">
+  <time datetime="2018-06-30T15:33:23.000Z" itemprop="datePublished">2018-06-30</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2018/201806_HumanGene/">canonical transcripts</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>我们使用 <a href="https://chengcz.github.io/2018/201805_snpEff/">snpEff</a>, <a href="https://chengcz.github.io/2018/201806_ANNOVAR/">annovar</a> 对得到的变异集注释，总会得到多个转录本注释结果，而只需要按照 HGVS 规范报告一个经典转录本(canonical transcripts) 对应注释结果，这时候就需要知道每个基因对应的经典转录本。</p>
+<p>一般情况下，我们使用<strong>基因对应的最长转录本代表该基因</strong>，具体操作上，首先从 <a href="https://chengcz.github.io/2018/201805_HGVS/">HGNC</a> 下载经过确认的基因对应经典转录本信息，其中不确定基因再使用最长转录本代表。</p>
+<ol>
+<li><p>HGNC 下载编码蛋白基因对应转录本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> wget -c ftp://ftp.ebi.ac.uk/pub/databases/genenames/new/tsv/locus_types/gene_with_protein_product.txt</span><br></pre></td></tr></table></figure>
+<p>根据表格，很方便得到基因名字对应 hgnc_id, entrez_id, ensembl_gene_id, refseq_accession 等多数据库基因ID，使用 refseq_accession 进行 HGVS 表示，这里就只关注 refseq_accession ， 还是可以发现其中一些基因名并不能对应到唯一 refseq_accession，下面就需要我们进行第二步，结合 GFF 文件挑出经典转录本。</p>
+</li>
+<li><p>NCBI下载人类基因注释GFF文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> wget -c ftp://ftp.ncbi.nlm.nih.gov/refseq/H_sapiens/annotation/GRCh37_latest/refseq_identifiers/GRCh37_latest_genomic.gff.gz</span><br></pre></td></tr></table></figure>
+<p>使用脚本将 gff 转换为表格样式，方便筛选每个基因对应最长转录本，具体操作参考如下，其中 <a href="https://github.com/chengcz/pyGTF" target="_blank" rel="noopener">pyGTF</a> 为用来解析 gff 文件。</p>
+<p><img src="./images/2018/gff2tab.png" alt=""></p>
+<p>输出文件可以<a href="https://github.com/chengcz/BioResource/tree/master/HumanGene" target="_blank" rel="noopener">下载</a> , 其具体格式为：</p>
+<p>| gene_id | gene_name | gene_type | transcript_id | transcript_name | transcript_type | transcript_length | chromosome | start | end  | strand |<br>| ——- | ——— | ——— | ————- | ————— | ————— | —————– | ———- | —– | —- | —— |<br>| gene0 | DDX11L1 | misc_RNA | NR_046018.2 | NR_046018.2 | misc_RNA | 1652 | NC_000001.10 | 11874 | 14409    | + |<br>| gene1 | WASH7P | misc_RNA | NR_024540.1 | NR_024540.1 | misc_RNA | 1769 | NC_000001.10 | 14362 | 29370    | - |<br>| gene2 | MIR6859-1 | miRNA | NR_106918.1 | NR_106918.1 | precursor_RNA | 68 | NC_000001.10 | 17369 | 17436    | - |<br>| gene2 | MIR6859-1 | miRNA | hsa-miR-6859-3p | hsa-miR-6859-3p | miRNA | 23 | NC_000001.10 | 17369 | 17391    | - |<br>| gene2 | MIR6859-1 | miRNA | hsa-miR-6859-5p | hsa-miR-6859-5p | miRNA | 23 | NC_000001.10 | 17409 | 17431    | - |</p>
+<p>根据 gene_name, transcript_name, transcript_length 三列排序，就可以很方便筛选出基因对应最长转录本。</p>
+</li>
+<li><p>脚本整合 HGNC 和 GFF 两部分结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">gene, length = &#123;&#125;, &#123;&#125;</span><br><span class="line">gff = pd.read_table(<span class="string">'hg37.geneinfo.txt'</span>, header=<span class="keyword">None</span>)</span><br><span class="line">gff = gff[(gff[<span class="number">2</span>]==<span class="string">'protein_coding'</span>) | (gff[<span class="number">5</span>]==<span class="string">'protein_coding'</span>)]</span><br><span class="line">nrow, ncol = gff.shape</span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> range(nrow):</span><br><span class="line">    transcriptid = gff.iloc[index,<span class="number">3</span>]</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        transcriptid = transcriptid[:transcriptid.rindex(<span class="string">'.'</span>)]</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    gene.setdefault(gff.iloc[index,<span class="number">1</span>], []).append(transcriptid)</span><br><span class="line">    length[transcriptid] = gff.iloc[index,<span class="number">6</span>]</span><br><span class="line"></span><br><span class="line">hgnc = pd.read_table(<span class="string">'gene_with_protein_product.txt'</span>)</span><br><span class="line">hgnc[<span class="string">'symbol'</span>] = hgnc[<span class="string">'symbol'</span>].astype(str)</span><br><span class="line">hgnc[<span class="string">'refseq_accession'</span>] = hgnc[<span class="string">'refseq_accession'</span>].astype(str)</span><br><span class="line">nrow, ncol = hgnc.shape</span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> range(nrow):</span><br><span class="line">    genename = hgnc.loc[index, <span class="string">'symbol'</span>]</span><br><span class="line">    refseq = hgnc.loc[index, <span class="string">'refseq_accession'</span>]</span><br><span class="line">    tmp = refseq.split(<span class="string">'|'</span>)</span><br><span class="line">    <span class="keyword">if</span> len(tmp) == <span class="number">1</span>:</span><br><span class="line">        print(<span class="string">'&#123;&#125;\t&#123;&#125;\thgnc'</span>.format(genename, refseq))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> len(tmp) == <span class="number">0</span>:</span><br><span class="line">            tmp = gene[genename]</span><br><span class="line">        tmp = sorted(tmp, key=<span class="keyword">lambda</span> x: length.get(x, <span class="number">0</span>), reverse=<span class="keyword">True</span>)</span><br><span class="line">        print(<span class="string">'&#123;&#125;\t&#123;&#125;\tgff'</span>.format(genename, tmp[<span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
+<p>结果整理文件可下载：<a href="https://github.com/chengcz/BioResource/tree/master/HumanGene/protein_coding_gene_canonical_transcripts.txt" target="_blank" rel="noopener">https://github.com/chengcz/BioResource/tree/master/HumanGene/protein_coding_gene_canonical_transcripts.txt</a></p>
+</li>
+</ol>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gtf/">gtf</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
     <article id="post-201806_python_decode" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
@@ -627,82 +699,6 @@
 			</span>
 			<span class="tags">
 				
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
-    <article id="post-201805_TophatFusion" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201805_TophatFusion/" class="article-date">
-  <time datetime="2018-05-17T10:45:52.000Z" itemprop="datePublished">2018-05-17</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201805_TophatFusion/">使用 topaht2-fusion 分析 Fusion-Gene</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<p>tophat2-fusion 文档搬运工：<a href="https://ccb.jhu.edu/software/tophat/fusion_tutorial.shtml" target="_blank" rel="noopener">https://ccb.jhu.edu/software/tophat/fusion_tutorial.shtml</a></p>
-<p>###step1.tophat</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tophat2 -p 8 -o $OUTPUT --fusion-search --keep-fasta-order --bowtie1 --no-coverage-search --fusion-anchor-length 10 --fusion-min-dist 100000 --mate-inner-dist 40 --mate-std-dev 100 $hg_bowtie1_index $read1.fastq.gz $read2.fastq.gz</span><br></pre></td></tr></table></figure>
-<p><strong>Note:</strong></p>
-<p><em>–fusion-search</em>，融合 reads 搜索</p>
-<p><em>–keep-fasta-order</em>,</p>
-<p><em>–bowtie1</em>，使用 bowtie1 代替 bowtie2 进行 reads 比对。需要使用 bowtie-1.1.2，最新版本 1.2.2 会报错</p>
-<p><img src="./images/2018/bowtie1.2_TophatFusion.png" alt=""></p>
-<p><em>–no-coverage-search</em>,</p>
-<p><em>–fusion-anchor-length 10</em> ,</p>
-<p><em>–fusion-min-dist 100000</em> ,</p>
-<p><em>–mate-inner-dist 40</em> ,</p>
-<p><em>–mate-std-dev 100</em> ,</p>
-<p>###step2.tophat-fusion-post</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tophat-fusion-post -p 8 --num-fusion-reads 1 --num-fusion-pairs 2 --num-fusion-both 5 $hg_bowtie1_index</span><br></pre></td></tr></table></figure>
-<p><strong>Note:</strong></p>
-<p>–num-fusion-reads* , 支持融合的最少 reads 数目</p>
-<p><em>–num-fusion-pairs</em>, 支持融合事件的最少配对 reads 数，表示为跨越融合点的测序片段</p>
-<p><em>–num-fusion-both</em>,  支持融合的最少 reads，包括跨越的 reads 对和 split reads</p>
-<p><em>–fusion-read-mismatches</em>, Reads support fusions if they map across fusion with at most this many mismatches. The default is 2.</p>
-<p><em>–fusion-multireads</em>, Reads that map to more than this many places will be ignored. The default is 2.</p>
-<p><em>–non-human</em>, If your annotation is different from that of human, use the option.</p>
-<p><em>–fusion-pair-dist</em>, Pairs with this specified distance are counted as supporting evidence for the fusion. The default threshold for the inner distance is 250.</p>
-<h3 id="results"><a href="#results" class="headerlink" title="results"></a>results</h3><p>测试了多个样品，多个参数，也根据官网数据、命令运行项目，都没有发现任何融合结果，bug还是打开方式不对</p>
-
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
-  </div>
-
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FusionGene/">FusionGene</a></li></ul>
-
 			</span>
 		</div>
 	</footer>

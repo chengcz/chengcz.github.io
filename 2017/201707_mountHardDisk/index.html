@@ -15,7 +15,7 @@
 <meta property="og:image" content="http://chengcz.github.io/2017/201707_mountHardDisk/images/2017/fdisk.png">
 <meta property="og:image" content="http://chengcz.github.io/2017/201707_mountHardDisk/images/2017/linux_parted.png">
 <meta property="og:image" content="http://chengcz.github.io/2017/201707_mountHardDisk/images/2017/mkfs.ext4.png">
-<meta property="og:updated_time" content="2018-05-17T11:14:55.221Z">
+<meta property="og:updated_time" content="2018-06-30T17:29:22.850Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="服务器挂载 4T 硬盘">
 <meta name="twitter:description" content="因为一些我并不理解的原因，服务器不能正确识别4T的NTFS移动硬盘，需要对其格式化成ext4格式，就我的一些操作记录。  fdisk -l，查看硬盘分配的硬件编号   parted /dev/sdg，对使用parted工具对硬盘进行分区  mklable gpt，把磁盘格式化为 gpt分区表  mkpart primary 0 4000G，创建一个主分区，起始位置-结束位置  mkpart ext">

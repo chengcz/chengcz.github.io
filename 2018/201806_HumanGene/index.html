@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>canonical transcripts | ChengCZ&#39;s Notebook</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="我们使用 snpEff, annovar 对得到的变异集注释，总会得到多个转录本注释结果，而只需要按照 HGVS 规范报告一个经典转录本(canonical transcripts) 对应注释结果，这时候就需要知道每个基因对应的经典转录本。 一般情况下，我们使用基因对应的最长转录本代表该基因，具体操作上，首先从 HGNC 下载经过确认的基因对应经典转录本信息，其中不确定基因再使用最长转录本代表。">
+<meta name="keywords" content="gtf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="canonical transcripts">
+<meta property="og:url" content="http://chengcz.github.io/2018/201806_HumanGene/index.html">
+<meta property="og:site_name" content="ChengCZ&#39;s Notebook">
+<meta property="og:description" content="我们使用 snpEff, annovar 对得到的变异集注释，总会得到多个转录本注释结果，而只需要按照 HGVS 规范报告一个经典转录本(canonical transcripts) 对应注释结果，这时候就需要知道每个基因对应的经典转录本。 一般情况下，我们使用基因对应的最长转录本代表该基因，具体操作上，首先从 HGNC 下载经过确认的基因对应经典转录本信息，其中不确定基因再使用最长转录本代表。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://chengcz.github.io/2018/201806_HumanGene/images/2018/gff2tab.png">
+<meta property="og:updated_time" content="2018-06-30T17:29:22.125Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="canonical transcripts">
+<meta name="twitter:description" content="我们使用 snpEff, annovar 对得到的变异集注释，总会得到多个转录本注释结果，而只需要按照 HGVS 规范报告一个经典转录本(canonical transcripts) 对应注释结果，这时候就需要知道每个基因对应的经典转录本。 一般情况下，我们使用基因对应的最长转录本代表该基因，具体操作上，首先从 HGNC 下载经过确认的基因对应经典转录本信息，其中不确定基因再使用最长转录本代表。">
+<meta name="twitter:image" content="http://chengcz.github.io/2018/201806_HumanGene/images/2018/gff2tab.png">
+  
+    <link rel="alternative" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+	<i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+	<h1 class="blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>
+	<nav class="nav">
+		<ul>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/about">About</a></li>
+			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+		</ul>
+	</nav>
+	<div id="search-form-wrap">
+		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://chengcz.github.io"></form>
+	</div>
+</header>
+    <div id="main">
+      <article id="post-201806_HumanGene" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201806_HumanGene/" class="article-date">
+  <time datetime="2018-06-30T15:33:23.000Z" itemprop="datePublished">2018-06-30</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      canonical transcripts
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>我们使用 <a href="https://chengcz.github.io/2018/201805_snpEff/">snpEff</a>, <a href="https://chengcz.github.io/2018/201806_ANNOVAR/">annovar</a> 对得到的变异集注释，总会得到多个转录本注释结果，而只需要按照 HGVS 规范报告一个经典转录本(canonical transcripts) 对应注释结果，这时候就需要知道每个基因对应的经典转录本。</p>
+<p>一般情况下，我们使用<strong>基因对应的最长转录本代表该基因</strong>，具体操作上，首先从 <a href="https://chengcz.github.io/2018/201805_HGVS/">HGNC</a> 下载经过确认的基因对应经典转录本信息，其中不确定基因再使用最长转录本代表。</p>
+<ol>
+<li><p>HGNC 下载编码蛋白基因对应转录本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> wget -c ftp://ftp.ebi.ac.uk/pub/databases/genenames/new/tsv/locus_types/gene_with_protein_product.txt</span><br></pre></td></tr></table></figure>
+<p>根据表格，很方便得到基因名字对应 hgnc_id, entrez_id, ensembl_gene_id, refseq_accession 等多数据库基因ID，使用 refseq_accession 进行 HGVS 表示，这里就只关注 refseq_accession ， 还是可以发现其中一些基因名并不能对应到唯一 refseq_accession，下面就需要我们进行第二步，结合 GFF 文件挑出经典转录本。</p>
+</li>
+<li><p>NCBI下载人类基因注释GFF文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> wget -c ftp://ftp.ncbi.nlm.nih.gov/refseq/H_sapiens/annotation/GRCh37_latest/refseq_identifiers/GRCh37_latest_genomic.gff.gz</span><br></pre></td></tr></table></figure>
+<p>使用脚本将 gff 转换为表格样式，方便筛选每个基因对应最长转录本，具体操作参考如下，其中 <a href="https://github.com/chengcz/pyGTF" target="_blank" rel="noopener">pyGTF</a> 为用来解析 gff 文件。</p>
+<p><img src="./images/2018/gff2tab.png" alt=""></p>
+<p>输出文件可以<a href="https://github.com/chengcz/BioResource/tree/master/HumanGene" target="_blank" rel="noopener">下载</a> , 其具体格式为：</p>
+<p>| gene_id | gene_name | gene_type | transcript_id | transcript_name | transcript_type | transcript_length | chromosome | start | end  | strand |<br>| ——- | ——— | ——— | ————- | ————— | ————— | —————– | ———- | —– | —- | —— |<br>| gene0 | DDX11L1 | misc_RNA | NR_046018.2 | NR_046018.2 | misc_RNA | 1652 | NC_000001.10 | 11874 | 14409    | + |<br>| gene1 | WASH7P | misc_RNA | NR_024540.1 | NR_024540.1 | misc_RNA | 1769 | NC_000001.10 | 14362 | 29370    | - |<br>| gene2 | MIR6859-1 | miRNA | NR_106918.1 | NR_106918.1 | precursor_RNA | 68 | NC_000001.10 | 17369 | 17436    | - |<br>| gene2 | MIR6859-1 | miRNA | hsa-miR-6859-3p | hsa-miR-6859-3p | miRNA | 23 | NC_000001.10 | 17369 | 17391    | - |<br>| gene2 | MIR6859-1 | miRNA | hsa-miR-6859-5p | hsa-miR-6859-5p | miRNA | 23 | NC_000001.10 | 17409 | 17431    | - |</p>
+<p>根据 gene_name, transcript_name, transcript_length 三列排序，就可以很方便筛选出基因对应最长转录本。</p>
+</li>
+<li><p>脚本整合 HGNC 和 GFF 两部分结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">gene, length = &#123;&#125;, &#123;&#125;</span><br><span class="line">gff = pd.read_table(<span class="string">'hg37.geneinfo.txt'</span>, header=<span class="keyword">None</span>)</span><br><span class="line">gff = gff[(gff[<span class="number">2</span>]==<span class="string">'protein_coding'</span>) | (gff[<span class="number">5</span>]==<span class="string">'protein_coding'</span>)]</span><br><span class="line">nrow, ncol = gff.shape</span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> range(nrow):</span><br><span class="line">    transcriptid = gff.iloc[index,<span class="number">3</span>]</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        transcriptid = transcriptid[:transcriptid.rindex(<span class="string">'.'</span>)]</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    gene.setdefault(gff.iloc[index,<span class="number">1</span>], []).append(transcriptid)</span><br><span class="line">    length[transcriptid] = gff.iloc[index,<span class="number">6</span>]</span><br><span class="line"></span><br><span class="line">hgnc = pd.read_table(<span class="string">'gene_with_protein_product.txt'</span>)</span><br><span class="line">hgnc[<span class="string">'symbol'</span>] = hgnc[<span class="string">'symbol'</span>].astype(str)</span><br><span class="line">hgnc[<span class="string">'refseq_accession'</span>] = hgnc[<span class="string">'refseq_accession'</span>].astype(str)</span><br><span class="line">nrow, ncol = hgnc.shape</span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> range(nrow):</span><br><span class="line">    genename = hgnc.loc[index, <span class="string">'symbol'</span>]</span><br><span class="line">    refseq = hgnc.loc[index, <span class="string">'refseq_accession'</span>]</span><br><span class="line">    tmp = refseq.split(<span class="string">'|'</span>)</span><br><span class="line">    <span class="keyword">if</span> len(tmp) == <span class="number">1</span>:</span><br><span class="line">        print(<span class="string">'&#123;&#125;\t&#123;&#125;\thgnc'</span>.format(genename, refseq))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> len(tmp) == <span class="number">0</span>:</span><br><span class="line">            tmp = gene[genename]</span><br><span class="line">        tmp = sorted(tmp, key=<span class="keyword">lambda</span> x: length.get(x, <span class="number">0</span>), reverse=<span class="keyword">True</span>)</span><br><span class="line">        print(<span class="string">'&#123;&#125;\t&#123;&#125;\tgff'</span>.format(genename, tmp[<span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
+<p>结果整理文件可下载：<a href="https://github.com/chengcz/BioResource/tree/master/HumanGene/protein_coding_gene_canonical_transcripts.txt" target="_blank" rel="noopener">https://github.com/chengcz/BioResource/tree/master/HumanGene/protein_coding_gene_canonical_transcripts.txt</a></p>
+</li>
+</ol>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gtf/">gtf</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/201806_python_decode/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          使用 python 正确读取不同编码方式文本
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+    </div>
+    <div class="mb-search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:chengcz.github.io">
+  </form>
+</div>
+<footer id="footer">
+	<!---<h1 class="footer-blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>--->
+	<span class="copyright">
+		&copy; 2018 ChengCZ<br>
+		<!---Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>--->
+	</span>
+</footer>
+
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>
