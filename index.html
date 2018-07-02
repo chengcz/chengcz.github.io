@@ -45,6 +45,77 @@
     <div id="main">
       
   
+    <article id="post-201807_matplotlib" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201807_matplotlib/" class="article-date">
+  <time datetime="2018-07-02T11:19:21.000Z" itemprop="datePublished">2018-07-02</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2018/201807_matplotlib/">matplotlib 画图的 Qt 问题</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<ol>
+<li><p>This application failed to start because it could not find or load the Qt platform plugin “xcb” in “”.</p>
+<p><img src="./images/2018/Snipaste_180702_14-11-26.png" alt=""></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export QT_PLUGIN_PATH="/data/software/anaconda2/plugins/"</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>QXcbConnection: Could not connect to display</p>
+<p><img src="./images/2018/Snipaste_180702_14-11-09.png" alt=""></p>
+<p>方法一：</p>
+<ul>
+<li>设置环境变量</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export QT_QPA_PLATFORM='offscreen'</span><br></pre></td></tr></table></figure>
+<p>方法二：</p>
+<ul>
+<li>python 画图脚本添加下面两行</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line">matplotlib.use(<span class="string">'Agg'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vcf/">vcf</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
     <article id="post-201806_HumanGene" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
@@ -633,58 +704,6 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行cmd并等待运行结束，返回执行状态码</span></span><br><span class="line">subprocess.call(<span class="string">'ls'</span>, shell=<span class="keyword">True</span>)    <span class="comment"># 与 os.system() 功能相似</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行cmd并等待运行结束，返回执行状态码</span></span><br><span class="line">subprocess.check_call(<span class="string">'ls'</span>, shell=<span class="keyword">True</span>)    <span class="comment"># 与subprocess.call()不同，returncode不为0，触发CalledProcessError异常</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行cmd并等待运行结束，返回 /dev/stdout 信息</span></span><br><span class="line">subprocess.check_output(<span class="string">'ls'</span>, shell=<span class="keyword">True</span>, </span><br><span class="line">                        universal_newlines=<span class="keyword">True</span>)    <span class="comment"># 以 string 形式返回 stdout 信息，而不是bytes，与 os.popen() 功能相似</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 不等待 cmd 运行结束</span></span><br><span class="line">job = subprocess.Popen(<span class="string">'ls -l'</span>,    <span class="comment"># string of cmd</span></span><br><span class="line">                       shell=<span class="keyword">True</span>,    <span class="comment"># 传入参数作为 shell 进行执行</span></span><br><span class="line">                       stdout=subprocess.PIPE,    <span class="comment"># 输出标准输出到subprocess流程</span></span><br><span class="line">                       stderr=subprocess.PIPE,    <span class="comment"># 输出标准错误到subprocess流程</span></span><br><span class="line">                       universal_newlines=<span class="keyword">True</span>)    <span class="comment"># stdout 返回时，使用 string 代替 bytes 类型</span></span><br><span class="line">pid = job.pid    <span class="comment"># 获得 cmd 本地执行的 pid</span></span><br><span class="line">job.wait()    <span class="comment"># 等待工作结束，默认Popen不等待 cmd 执行完毕即退出</span></span><br><span class="line">stdout, stderr = job.communicate()    <span class="comment"># 获得 cmd 执行返回标准输出、标准错误</span></span><br><span class="line"><span class="comment"># 设置 stdin=subprocess.PIPE 时，可以在communicate(input='...')传入参数</span></span><br><span class="line">job.returncode    <span class="comment"># 获得 cmd 执行状态码</span></span><br><span class="line">job.kill()    <span class="comment"># 杀死 cmd 进程</span></span><br></pre></td></tr></table></figure>
 <p>os 模块实现 linux cmd 执行</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">os.system(<span class="string">'ls -l'</span>)    <span class="comment"># 直接返回 cmd 执行状态码</span></span><br><span class="line"><span class="comment"># assert not os.system('ls')</span></span><br><span class="line">os.popen(<span class="string">'ls -l'</span>)    <span class="comment"># 以文件句柄的方式返回 cmd 执行的stdout信息</span></span><br></pre></td></tr></table></figure>
-
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/python/">python</a>
-  </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
-    <article id="post-201805_argparse" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201805_argparse/" class="article-date">
-  <time datetime="2018-05-17T11:15:52.000Z" itemprop="datePublished">2018-05-17</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201805_argparse/">python 参数解析 —— argsparse</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<p>argsparse 解析命令行参数，一些常用参数整理。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser(<span class="comment"># prog=__file__,    # 设置项目名称，__file__ 与 sys.argv[0] 一致，默认显示为 basename(__file__)</span></span><br><span class="line">      usage=<span class="string">'''</span></span><br><span class="line"><span class="string">      python %(prog)s [option]  '''</span>,    <span class="comment"># 设置脚本输出默认 USAGE 信息</span></span><br><span class="line">      description=<span class="string">''' some script description '''</span>,   <span class="comment"># 脚本功能描述等等</span></span><br><span class="line">      formatter_class=argparse.RawTextHelpFormatter,    <span class="comment"># 以脚本内原始文档格式输出描述等信息</span></span><br><span class="line">      epilog=<span class="string">'''</span></span><br><span class="line"><span class="string">      Note and input example, and so on.  '''</span>)    <span class="comment"># 脚本描述以外的其他信息</span></span><br><span class="line"></span><br><span class="line">parser.add_argument(<span class="string">'-v'</span>, <span class="string">'--version'</span>,    <span class="comment"># 添加脚本版本信息参数</span></span><br><span class="line">                    action=<span class="string">'version'</span>,</span><br><span class="line">                    version=<span class="string">'%(prog)s 2.0'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加一个普通的可选参数</span></span><br><span class="line">parser.add_argument(<span class="string">'-e'</span>,    <span class="comment"># 短参数</span></span><br><span class="line">                    <span class="string">'--example'</span>,    <span class="comment"># 长参数</span></span><br><span class="line">                    dest=<span class="string">'example'</span>,     <span class="comment"># 参数对应模块内部，唯一标识符</span></span><br><span class="line">                    metavar=<span class="string">''</span>,    <span class="comment"># 设置help信息中参数后字符</span></span><br><span class="line">                    action=<span class="string">'store'</span>,    <span class="comment"># 参数处理方式</span></span><br><span class="line">                    type=str,    <span class="comment"># 传入参数类型</span></span><br><span class="line">                    choices=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>],    <span class="comment"># 参数选择范围</span></span><br><span class="line">                    required=<span class="keyword">True</span>,    <span class="comment"># 表示该参数必须被设置</span></span><br><span class="line">                    default=<span class="string">'a'</span>,    <span class="comment"># 参数缺省时，该参数默认值</span></span><br><span class="line">                    nargs=<span class="string">'+'</span>,    <span class="comment"># 参数个数，*+？，表示至少一个输入</span></span><br><span class="line">                    help=<span class="string">'some help infor'</span>)    <span class="comment"># help信息</span></span><br><span class="line"><span class="comment"># action属性为store_true, store_false, store_const时，参数不接任何输入信息</span></span><br><span class="line">parser.add_argument(<span class="string">'--sum'</span>,</span><br><span class="line">                    dest=<span class="string">'accumulate'</span>,</span><br><span class="line">                    action=<span class="string">'store_const'</span>,    <span class="comment"># 该参数被设置时，参数取值成 const 对应值</span></span><br><span class="line">                    const=sum,</span><br><span class="line">                    default=max,</span><br><span class="line">                    help=<span class="string">'sum the integers (default: find the max)'</span>)</span><br><span class="line"><span class="comment"># 位置参数</span></span><br><span class="line">parser.add_argument(<span class="string">'pos'</span>,</span><br><span class="line">                    dest=<span class="string">'pos_argument'</span>,</span><br><span class="line">                    metavar=<span class="string">''</span>,</span><br><span class="line">                    nargs=<span class="string">'+'</span>,    <span class="comment"># 参数输入文件个数</span></span><br><span class="line">                    help=<span class="string">'some help infor'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 互斥参数组，组内参数不可同时出现，required=True表示组内必须有参数被设置</span></span><br><span class="line">exclusive = parser.add_mutually_exclusive_group(required=<span class="keyword">True</span>)    </span><br><span class="line">exclusive.add_argument(<span class="string">'-a'</span>, )</span><br><span class="line">exclusive.add_argument(<span class="string">'-b'</span>, )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置多个参数为一组，无实际意义，仅在打印help信息时，分组显示</span></span><br><span class="line">group = parser.add_argument_group(<span class="string">'argument group info'</span>)    </span><br><span class="line">group.add_argument(<span class="string">'-c'</span>, )</span><br><span class="line">group.add_argument(<span class="string">'-d'</span>, )</span><br><span class="line"></span><br><span class="line"><span class="comment"># parse.print_help()</span></span><br><span class="line">args = parser.parse_args()    <span class="comment"># 参数解析，生成可调用对象</span></span><br><span class="line"></span><br><span class="line">example = args.example</span><br><span class="line"><span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
 
     
 	</div>
