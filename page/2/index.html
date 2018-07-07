@@ -45,6 +45,60 @@
     <div id="main">
       
   
+    <article id="post-201805_subprocess" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201805_subprocess/" class="article-date">
+  <time datetime="2018-05-17T11:15:52.000Z" itemprop="datePublished">2018-05-17</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2018/201805_subprocess/">python 执行 linux 命令 —— subprocess</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>python 脚本内执行 linux 命令有多种方式，os.system(), os.popen()也可以，官方最新推荐方式为subprocess</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行cmd并等待运行结束，返回执行状态码</span></span><br><span class="line">subprocess.call(<span class="string">'ls'</span>, shell=<span class="keyword">True</span>)    <span class="comment"># 与 os.system() 功能相似</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行cmd并等待运行结束，返回执行状态码</span></span><br><span class="line">subprocess.check_call(<span class="string">'ls'</span>, shell=<span class="keyword">True</span>)    <span class="comment"># 与subprocess.call()不同，returncode不为0，触发CalledProcessError异常</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行cmd并等待运行结束，返回 /dev/stdout 信息</span></span><br><span class="line">subprocess.check_output(<span class="string">'ls'</span>, shell=<span class="keyword">True</span>, </span><br><span class="line">                        universal_newlines=<span class="keyword">True</span>)    <span class="comment"># 以 string 形式返回 stdout 信息，而不是bytes，与 os.popen() 功能相似</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 不等待 cmd 运行结束</span></span><br><span class="line">job = subprocess.Popen(<span class="string">'ls -l'</span>,    <span class="comment"># string of cmd</span></span><br><span class="line">                       shell=<span class="keyword">True</span>,    <span class="comment"># 传入参数作为 shell 进行执行</span></span><br><span class="line">                       stdout=subprocess.PIPE,    <span class="comment"># 输出标准输出到subprocess流程</span></span><br><span class="line">                       stderr=subprocess.PIPE,    <span class="comment"># 输出标准错误到subprocess流程</span></span><br><span class="line">                       universal_newlines=<span class="keyword">True</span>)    <span class="comment"># stdout 返回时，使用 string 代替 bytes 类型</span></span><br><span class="line">pid = job.pid    <span class="comment"># 获得 cmd 本地执行的 pid</span></span><br><span class="line">job.wait()    <span class="comment"># 等待工作结束，默认Popen不等待 cmd 执行完毕即退出</span></span><br><span class="line">stdout, stderr = job.communicate()    <span class="comment"># 获得 cmd 执行返回标准输出、标准错误</span></span><br><span class="line"><span class="comment"># 设置 stdin=subprocess.PIPE 时，可以在communicate(input='...')传入参数</span></span><br><span class="line">job.returncode    <span class="comment"># 获得 cmd 执行状态码</span></span><br><span class="line">job.kill()    <span class="comment"># 杀死 cmd 进程</span></span><br></pre></td></tr></table></figure>
+<p>os 模块实现 linux cmd 执行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">os.system(<span class="string">'ls -l'</span>)    <span class="comment"># 直接返回 cmd 执行状态码</span></span><br><span class="line"><span class="comment"># assert not os.system('ls')</span></span><br><span class="line">os.popen(<span class="string">'ls -l'</span>)    <span class="comment"># 以文件句柄的方式返回 cmd 执行的stdout信息</span></span><br></pre></td></tr></table></figure>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
     <article id="post-201805_argparse" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
@@ -702,87 +756,9 @@
 
 
   
-    <article id="post-201707_mountHardDisk" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2017/201707_mountHardDisk/" class="article-date">
-  <time datetime="2017-07-28T02:20:21.000Z" itemprop="datePublished">2017-07-28</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2017/201707_mountHardDisk/">服务器挂载 4T 硬盘</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<p>因为一些我并不理解的原因，服务器不能正确识别4T的NTFS移动硬盘，需要对其格式化成ext4格式，就我的一些操作记录。</p>
-<ol>
-<li><p><code>fdisk -l</code>，查看硬盘分配的硬件编号</p>
-<p><img src="./images/2017/fdisk.png" alt=""></p>
-</li>
-<li><p><code>parted /dev/sdg</code>，对使用parted工具对硬盘进行分区</p>
-<ul>
-<li><p><code>mklable gpt</code>，把磁盘格式化为 gpt分区表</p>
-</li>
-<li><p><code>mkpart primary 0 4000G</code>，创建一个主分区，起始位置-结束位置</p>
-</li>
-<li><p><code>mkpart extended 2000G 4000G</code>，可选，创建一个扩展分区</p>
-</li>
-<li><p><code>print</code>，打印出当前设备的信息</p>
-</li>
-<li><p><code>quit</code>，推出parted</p>
-</li>
-</ul>
-<p><img src="./images/2017/linux_parted.png" alt=""></p>
-</li>
-<li><p><code>mkfs.ext4 /dev/sdg1</code>，对硬盘进行格式化，如果存在多个分区，每个分区都需要进行格式化</p>
-<p><img src="./images/2017/mkfs.ext4.png" alt=""></p>
-</li>
-<li><p><code>mount /dev/sdg1 /mnt/usbmount1</code>，挂载硬盘到服务器</p>
-</li>
-<li><p><code>umount /dev/sdg1</code>，硬盘卸载</p>
-</li>
-</ol>
-
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-  </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
