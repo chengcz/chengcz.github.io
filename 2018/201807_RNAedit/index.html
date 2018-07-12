@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ChengCZ&#39;s Notebook</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="Quality Contorl of Fastq  Alignment to Reference Genome Recommended use STAR-2pass to mapping reads to genome  Pre-process of Bam File remove multi aglin, duplicate reads, splitN, and so on Detailed">
+<meta name="keywords" content="RNAediting">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ChengCZ&#39;s Notebook">
+<meta property="og:url" content="http://chengcz.github.io/2018/201807_RNAedit/index.html">
+<meta property="og:site_name" content="ChengCZ&#39;s Notebook">
+<meta property="og:description" content="Quality Contorl of Fastq  Alignment to Reference Genome Recommended use STAR-2pass to mapping reads to genome  Pre-process of Bam File remove multi aglin, duplicate reads, splitN, and so on Detailed">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-12T14:31:37.977Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ChengCZ&#39;s Notebook">
+<meta name="twitter:description" content="Quality Contorl of Fastq  Alignment to Reference Genome Recommended use STAR-2pass to mapping reads to genome  Pre-process of Bam File remove multi aglin, duplicate reads, splitN, and so on Detailed">
+  
+    <link rel="alternative" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+	<i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+	<h1 class="blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>
+	<nav class="nav">
+		<ul>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/about">About</a></li>
+			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+		</ul>
+	</nav>
+	<div id="search-form-wrap">
+		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://chengcz.github.io"></form>
+	</div>
+</header>
+    <div id="main">
+      <article id="post-201807_RNAedit" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201807_RNAedit/" class="article-date">
+  <time datetime="2018-07-12T14:31:21.000Z" itemprop="datePublished">2018-07-12</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+	</header>
+	<div class="entry-content">
+		
+    	<ol>
+<li><p>Quality Contorl of Fastq</p>
+</li>
+<li><p>Alignment to Reference Genome</p>
+<p>Recommended use STAR-2pass to mapping reads to genome</p>
+</li>
+<li><p>Pre-process of Bam File</p>
+<p>remove multi aglin, duplicate reads, splitN, and so on</p>
+<p>Detailed operation can refer: <a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=3891" target="_blank" rel="noopener">https://software.broadinstitute.org/gatk/documentation/article.php?id=3891</a></p>
+</li>
+<li><p>use GATK to call candidate site </p>
+</li>
+<li><p>Basic Variant filtering(optional)</p>
+</li>
+<li><p>Identification of editing sites</p>
+<ul>
+<li>Select single nucleotide variants(SNV) from all variant results , use snpEff to annot SNV</li>
+<li>Select A&gt;T changes in the gene interval, <strong>depending on the direction of gene transcription</strong></li>
+<li>Remove sites that appear in <a href="https://cancer.sanger.ac.uk/cosmic" target="_blank" rel="noopener">Cosmic</a>, <a href="https://www.ncbi.nlm.nih.gov/snp" target="_blank" rel="noopener">dbSNP</a>,  TCGA somatic mutations database</li>
+<li>Remove sites which the editing level  is 1.0 in all sample</li>
+<li>At least 10 reads in at least 1 sample</li>
+<li>RNA editing sites is exists at least 2 sample</li>
+</ul>
+</li>
+</ol>
+<h3 id="ref："><a href="#ref：" class="headerlink" title="ref："></a>ref：</h3><ul>
+<li>The Genomic Landscape and Clinical Relevance of A-to-I RNA Editing in Human Cancers </li>
+<li>Dynamic regulation of RNA editing in human brain development and disease </li>
+<li>ADAR1 promotes malignant progenitor reprogramming in chronic myeloid leukemia </li>
+<li>Genome-wide analysis of A-to-I RNA editing by single-molecule sequencing in Drosophila </li>
+</ul>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RNAediting/">RNAediting</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/201807_16S/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          转:16S基本分析点
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+    </div>
+    <div class="mb-search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:chengcz.github.io">
+  </form>
+</div>
+<footer id="footer">
+	<!---<h1 class="footer-blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>--->
+	<span class="copyright">
+		&copy; 2018 ChengCZ<br>
+		<!---Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>--->
+	</span>
+</footer>
+
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>
