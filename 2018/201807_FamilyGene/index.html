@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>家族基因分析的一般套路 | ChengCZ&#39;s Notebook</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="7/2016    分析前准备 分析前准备主要是两点，找文章，找序列。  找文章，该家族基因是否在研究物种或其他物种中报告，都进行了什么分析和试验； 找序列，获取该家族代表性序列进行后续分析   家族基因成员鉴定 主要 blast 和 hmmer 两种方式，一般讲来使用两个方式的并集，然后根据基因特征再一步确认过滤  blast hmmer   家族基因特征描述  染色体分布 基因结构 motif">
+<meta property="og:type" content="article">
+<meta property="og:title" content="家族基因分析的一般套路">
+<meta property="og:url" content="http://chengcz.github.io/2018/201807_FamilyGene/index.html">
+<meta property="og:site_name" content="ChengCZ&#39;s Notebook">
+<meta property="og:description" content="7/2016    分析前准备 分析前准备主要是两点，找文章，找序列。  找文章，该家族基因是否在研究物种或其他物种中报告，都进行了什么分析和试验； 找序列，获取该家族代表性序列进行后续分析   家族基因成员鉴定 主要 blast 和 hmmer 两种方式，一般讲来使用两个方式的并集，然后根据基因特征再一步确认过滤  blast hmmer   家族基因特征描述  染色体分布 基因结构 motif">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-19T11:25:06.390Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="家族基因分析的一般套路">
+<meta name="twitter:description" content="7/2016    分析前准备 分析前准备主要是两点，找文章，找序列。  找文章，该家族基因是否在研究物种或其他物种中报告，都进行了什么分析和试验； 找序列，获取该家族代表性序列进行后续分析   家族基因成员鉴定 主要 blast 和 hmmer 两种方式，一般讲来使用两个方式的并集，然后根据基因特征再一步确认过滤  blast hmmer   家族基因特征描述  染色体分布 基因结构 motif">
+  
+    <link rel="alternative" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+	<i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+	<h1 class="blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>
+	<nav class="nav">
+		<ul>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/about">About</a></li>
+			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+		</ul>
+	</nav>
+	<div id="search-form-wrap">
+		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://chengcz.github.io"></form>
+	</div>
+</header>
+    <div id="main">
+      <article id="post-201807_FamilyGene" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201807_FamilyGene/" class="article-date">
+  <time datetime="2018-07-19T11:07:27.000Z" itemprop="datePublished">2018-07-19</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      家族基因分析的一般套路
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>7/2016 </p>
+<hr>
+<ol>
+<li><p>分析前准备</p>
+<p>分析前准备主要是两点，找文章，找序列。</p>
+<ul>
+<li>找文章，该家族基因是否在研究物种或其他物种中报告，都进行了什么分析和试验；</li>
+<li>找序列，获取该家族代表性序列进行后续分析</li>
+</ul>
+</li>
+<li><p>家族基因成员鉴定</p>
+<p>主要 blast 和 hmmer 两种方式，一般讲来使用两个方式的并集，然后根据基因特征再一步确认过滤</p>
+<ul>
+<li>blast</li>
+<li>hmmer</li>
+</ul>
+</li>
+<li><p>家族基因特征描述</p>
+<ul>
+<li>染色体分布</li>
+<li>基因结构</li>
+<li>motif分析</li>
+<li>启动子序列分析</li>
+</ul>
+</li>
+<li><p>多物种进化关系分析</p>
+<ul>
+<li>构建分子进化树</li>
+<li>Ka/Ks计算等等</li>
+</ul>
+</li>
+<li><p>基因分类命名</p>
+<p>一般根据进化关系、或者分析特征进行分类，然后染色体顺序命名</p>
+</li>
+<li><p>基因表达分析</p>
+<ul>
+<li>多组织材料表达分析</li>
+<li>不同处理样品表达分析</li>
+<li>共表达分析</li>
+</ul>
+</li>
+<li><p>候选基因表达、功能验证</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[FamilyGene.seq] -- blast --&gt; B[FamilyGene.list]</span><br><span class="line">A[FamilyGene.hmm] -- hmmer --&gt; B[FamilyGene.list]</span><br><span class="line">B[FamilyGene.list] --&gt; C[FeatureAnalysis]</span><br><span class="line">C[FeatureAnalysis] --&gt; Ca[染色体分布]</span><br><span class="line">C[FeatureAnalysis] --&gt; Cb[基因结构]</span><br><span class="line">C[FeatureAnalysis] --&gt; Cc[motif分析]</span><br><span class="line">C[FeatureAnalysis] --&gt; Cd[promotor seq analysis]</span><br><span class="line">B[FamilyGene.list] --&gt; D[phylogenetics]</span><br><span class="line">B[FamilyGene.list] --&gt; E[Group,Name]</span><br><span class="line">B[FamilyGene.list] --&gt; F[Expression]</span><br><span class="line">F[Expression] --&gt; G[表达, 功能验证]</span><br></pre></td></tr></table></figure>
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+    
+<nav id="article-nav">
+  
+    <a href="/2018/201807_lnc_classification/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          lncRNA 根据染色体位置进行分类
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/201807_RNAedit/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          identification of A-to-I RNA Editing
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+    </div>
+    <div class="mb-search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:chengcz.github.io">
+  </form>
+</div>
+<footer id="footer">
+	<!---<h1 class="footer-blog-title">
+		<a href="/">ChengCZ&#39;s Notebook</a>
+	</h1>--->
+	<span class="copyright">
+		&copy; 2018 ChengCZ<br>
+		<!---Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>--->
+	</span>
+</footer>
+
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

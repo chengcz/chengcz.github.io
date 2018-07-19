@@ -45,6 +45,239 @@
     <div id="main">
       
   
+    <article id="post-201807_transvar" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201807_transvar/" class="article-date">
+  <time datetime="2018-07-19T11:25:21.000Z" itemprop="datePublished">2018-07-19</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2018/201807_transvar/">从 p.HGVS 到基因组变异位置</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<h3 id="transcvar-web-版"><a href="#transcvar-web-版" class="headerlink" title="transcvar web 版"></a>transcvar web 版</h3><p><img src="./images/2018/transvar_web.png" alt=""></p>
+<h3 id="transcvar-本地化"><a href="#transcvar-本地化" class="headerlink" title="transcvar 本地化"></a>transcvar 本地化</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> https://github.com/zwdzwd/transvar</span><br><span class="line">pip search transvar</span><br><span class="line">pip install transvar --user</span><br><span class="line"></span><br><span class="line">transvar config --download_ref --refversion hg19</span><br><span class="line">transvar config --download_anno --refversion hg19</span><br></pre></td></tr></table></figure>
+<p><img src="./images/2018/transvar.png" alt=""></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">head HGVS_cds</span><br><span class="line"><span class="meta">#</span> MLH1:c.100G&gt;A</span><br><span class="line"><span class="meta">#</span> MLH1:c.790+1G&gt;A</span><br><span class="line"><span class="meta">#</span> VHL:c.1_17del17</span><br><span class="line"><span class="meta">#</span> VHL:c.136G&gt;T</span><br><span class="line"></span><br><span class="line">transvar canno --refversion hg19 --refseq -l HGVS_cds --oneline &gt;HGVS_cds.transvar.txt</span><br><span class="line"></span><br><span class="line">head HGVS_cds.transvar.txt</span><br><span class="line"><span class="meta">#</span> input	transcript	gene	strand	coordinates(gDNA/cDNA/protein)	region	info</span><br><span class="line"><span class="meta">#</span> MLH1:c.100G&gt;A	NM_001167618 (protein_coding)	MLH1	+	chr3:g.37059029G&gt;A/c.100G&gt;A/p.A34T	inside_[cds_in_exon_10]	CSQN=Missense;reference_codon=GCC;alternative_codon=ACC;dbxref=GeneID:4292,HGNC:7127,HPRD:00390,MIM:120436;aliases=NP_001161090;source=RefSeq</span><br><span class="line"><span class="meta">#</span> MLH1:c.790+1G&gt;A	NM_001258271 (protein_coding)	MLH1	+	chr3:g.37056036G&gt;A/c.790+1G&gt;A/.	inside_[intron_between_exon_9_and_10]	CSQN=IntronicSNV;dbxref=GeneID:4292,HGNC:7127,HPRD:00390,MIM:120436;aliases=NP_001245200;source=RefSeq</span><br><span class="line"><span class="meta">#</span> VHL:c.1_17del17	NM_198156 (protein_coding)	VHL	+	chr3:g.10183532_10183548del17/c.1_17del17/.	inside_[cds_in_exon_1]	CSQN=CdsStartDeletion;left_align_gDNA=g.10183529_10183545del17;unaligned_gDNA=g.10183532_10183548del17;left_align_cDNA=c.1-3_14del17;unalign_cDNA=c.1_17del17;cds_start_at_chr3:10183532_lost;dbxref=GeneID:7428,HGNC:12687,HPRD:01905,MIM:608537;aliases=NP_937799;source=RefSeq</span><br></pre></td></tr></table></figure>
+<p>类似的也可以从 c.HGVS、g.HGVS 开始获得完整注释</p>
+<h3 id="本地化数据库配置"><a href="#本地化数据库配置" class="headerlink" title="本地化数据库配置"></a>本地化数据库配置</h3><p>软件提供数据库路径为：<a href="http://transvar.info/transvar_user/annotations/" target="_blank" rel="noopener">http://transvar.info/transvar_user/annotations/</a>，本地数据库配置详细如下：</p>
+<p><img src="./images/2018/transvar_config.png" alt=""></p>
+<p><img src="./images/2018/transvar_config2.png" alt=""></p>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hgvs/">hgvs</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
+    <article id="post-201807_lnc_classification" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201807_lnc_classification/" class="article-date">
+  <time datetime="2018-07-19T11:15:52.000Z" itemprop="datePublished">2018-07-19</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2018/201807_lnc_classification/">lncRNA 根据染色体位置进行分类</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>1/1/2018 </p>
+<hr>
+<p>根据与基因的相对位置，lncRNA可以分为<strong>Intergenic LncRNAs(lincRNA)</strong>, <strong>Bidirectional LncRNAs</strong>, <strong>Intronic LncRNAs</strong>, <strong>Antisense LncRNAs</strong>, <strong>Sense-overlapping LncRNAs</strong>五类，每类详细定义规则如下：</p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>ref: <a href="https://www.arraystar.com/reviews/v30-lncrna-classification/" target="_blank" rel="noopener">https://www.arraystar.com/reviews/v30-lncrna-classification/</a></p>
+<ol>
+<li><p>Intergenic LncRNAs</p>
+<p><img src="./images/2018/lnc_intergenic.jpeg" alt=""></p>
+<p>Intergenic LncRNAs are long non-coding RNAs which locate between annotated protein-coding genes and are at least 1 kb away from the nearest protein-coding genes. They are named according to their 3-protein-coding genes nearby. Gene expression patterns have implicated these LincRNAs in diverse biological processes, including cell-cycle regulation, immune surveillance and embryonic stem cell pluripotency. LincRNAs collaborate with chromatin modifying protein (PRC2, CoREST and SCMX) to regulate gene expression at specific loci.</p>
+</li>
+<li><p>Bidirectional LncRNAs</p>
+<p><img src="./images/2018/lnc_bidirectional.jpeg" alt=""></p>
+<p>A Bidirectional LncRNA is oriented head to head with a protein-coding gene within 1kb. A Bidirectional LncRNA transcript exhibits a similar expression pattern to its protein-coding counterpart which suggests that they may be subject to share regulatory pressures. However, the discordant expression relationships between bidirectional LncRNAs and protein coding gene pairs have also been found, challenging the assertion that LncRNA transcription occurs solely to “open” chromatin to promote the expression of neighboring coding genes.</p>
+</li>
+<li><p>Intronic LncRNAs</p>
+<p><img src="./images/2018/lnc_intronic.jpeg" alt=""></p>
+<p>Intronic LncRNAs are RNA molecules that overlap with the intron of annotated coding genes in either sense or antisense orientation. Most of the Intronic LncRNAs have the same tissue expression patterns as the corresponding coding genes, and may stabilize protein-coding transcripts or regulate their alternative splicing.</p>
+</li>
+<li><p>Antisense LncRNAs</p>
+<p><img src="./images/2018/lnc_antisense.jpeg" alt=""></p>
+<p>Antisense LncRNAs are RNA molecules that are transcribed from the antisense strand and overlap in part with well-defined spliced sense or intronless sense RNAs. Antisense-overlapping LncRNAs have a tendency to undergo fewer splicing events and typically show lower abundance than sense transcripts. The basal expression levels of antisense-overlapping LncRNAs and sense mRNAs in different tissues and cell lines can be either positively or negatively regulated. Antisense-overlapping LncRNAs are frequently functional and use diverse transcriptional and post-transcriptional gene regulatory mechanisms to carry out a wide variety of biological roles.</p>
+</li>
+<li><p>Sense-overlapping LncRNAs</p>
+<p><img src="./images/2018/lnc_sense.jpeg" alt=""></p>
+<p>These LncRNAs can be considered transcript variants of protein-coding mRNAs, as they overlap with a known annotated gene on the same genomic strand. The majority of these LncRNAs lack substantial open reading frames (ORFs) for protein translation, while others contain an open reading frame that shares the same start codon as a protein-coding transcript for that gene, but unlikely encode a protein for several reasons, including non-sense mediated decay (NMD) issues that limits the translation of mRNAs with premature termination stop codons and trigger NMD-mediated destruction of the mRNA, or an upstream alternative open reading frame which inhibits the translation of the predicted ORF.</p>
+</li>
+</ol>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> step0 prepare</span><br><span class="line">awk -F "\t" 'BEGIN&#123;OFS="\t"&#125;&#123;if ($3=="transcript") &#123;print $1,$4,$5,$9,$7&#125;&#125;' lnc.gtf | sed -e 's/gene_id.*transcript_id "//g' -e 's/".*\t/\t.\t/g' &gt;lnc.transcript.bed</span><br><span class="line">awk -F "\t" 'BEGIN&#123;OFS="\t"&#125;&#123;if ($3=="transcript") &#123;print $1,$4,$5,$9,$7&#125;&#125;' mRNA.gtf | sed -e 's/gene_id.*transcript_id "//g' -e 's/".*\t/\t.\t/g' &gt;mRNA.transcript.bed</span><br><span class="line">awk -F "\t" 'BEGIN&#123;OFS="\t"&#125;&#123;if ($3=="exon") &#123;print $1,$4,$5,$9,$7&#125;&#125;' mRNA.gtf | sed -e 's/gene_id.*transcript_id "//g' -e 's/".*\t/\t.\t/g' &gt;mRNA.exon.bed</span><br><span class="line"></span><br><span class="line">head mRNA.transcript.bed</span><br><span class="line"><span class="meta">#</span> chr1	65419	71585	ENST00000641515	.	+</span><br><span class="line"><span class="meta">#</span> chr1	69055	70108	ENST00000335137	.	+</span><br><span class="line"><span class="meta">#</span> chr1	450703	451697	ENST00000426406	.	-</span><br><span class="line"><span class="meta">#</span> chr1	685679	686673	ENST00000332831	.	-</span><br><span class="line"><span class="meta">#</span> chr1	923928	939291	ENST00000420190	.	+</span><br><span class="line"><span class="meta">#</span> chr1	925150	935793	ENST00000437963	.	+</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> step1 获得 Intergenic lncRNA</span><br><span class="line"><span class="meta">#</span> -v 取反，获得不和任何 coding-protein 基因（包括基因上下游 1000 bp范围）重合的 lncRNA</span><br><span class="line">bedtools window -a lnc.transcript.bed -b mRNA.transcript.bed -v &gt;lnc.Intergenic.bed</span><br><span class="line"><span class="meta">#</span>############## lnc.Intergenic.bed ###############</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> step2 基因 1000 bp 区间内的 lncRNA</span><br><span class="line"><span class="meta">#</span> 获得和 coding-protein 有重叠的 lncRNA ，lnc_gene.bed</span><br><span class="line">bedtools intersect -a lnc.transcript.bed -b mRNA.transcript.bed -wa | sort -u &gt; lnc_gene.bed</span><br><span class="line"><span class="meta">#</span> 获得 coding-protein 基因上下游 1000 bp 范围内的 lnc ，lnc_gene_1k.bed</span><br><span class="line">python -c 'with open("lnc.transcript.bed") as a, open("lnc_gene.bed") as m, open("lnc.Intergenic.bed") as i, open("lnc_gene_1k.bed", "w") as k1: k1.write("".join(set(a.readlines())-set(m.readlines())-set(i.readlines())))'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> step2b 根据转录方向进行分类</span><br><span class="line">bedtools window -a lnc_gene_1k.bed -b mRNA.transcript.bed -u -Sm | sort -u &gt;lnc.Bidirectional.bed</span><br><span class="line"><span class="meta">#</span>############## lnc.Bidirectional.bed ###############</span><br><span class="line">bedtools window -a lnc_gene_1k.bed -b mRNA.transcript.bed -u -sm | sort -u &gt;lnc.Enhancer.bed</span><br><span class="line"><span class="meta">#</span>############## lnc.Enhancer.bed ###############</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> step3 </span><br><span class="line"><span class="meta">#</span> 和 coding-protein 重叠，不和外显子重叠，得到内含子区域的lnc</span><br><span class="line">bedtools intersect -a lnc_gene.bed -b mRNA.exon.bed -v &gt; lnc.Intronic.bed</span><br><span class="line"><span class="meta">#</span>############## lnc.Intronic.bed ###############</span><br><span class="line"><span class="meta">#</span> 取相同链的 lnc</span><br><span class="line">bedtools intersect -a lnc_gene.bed -b mRNA.exon.bed -wa -s | sort -u &gt; lnc.Sense.bed</span><br><span class="line"><span class="meta">#</span>############## lnc.Sense.bed ###############</span><br><span class="line"><span class="meta">#</span> 取反向链的 lnc</span><br><span class="line">bedtools intersect -a lnc_gene.bed -b mRNA.exon.bed -wa -S | sort -u &gt; lnc.Antisense.bed</span><br><span class="line"><span class="meta">#</span>############## lnc.Antisense.bed ###############</span><br></pre></td></tr></table></figure>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lnc/">lnc</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
+    <article id="post-201807_FamilyGene" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/201807_FamilyGene/" class="article-date">
+  <time datetime="2018-07-19T11:07:27.000Z" itemprop="datePublished">2018-07-19</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2018/201807_FamilyGene/">家族基因分析的一般套路</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>7/2016 </p>
+<hr>
+<ol>
+<li><p>分析前准备</p>
+<p>分析前准备主要是两点，找文章，找序列。</p>
+<ul>
+<li>找文章，该家族基因是否在研究物种或其他物种中报告，都进行了什么分析和试验；</li>
+<li>找序列，获取该家族代表性序列进行后续分析</li>
+</ul>
+</li>
+<li><p>家族基因成员鉴定</p>
+<p>主要 blast 和 hmmer 两种方式，一般讲来使用两个方式的并集，然后根据基因特征再一步确认过滤</p>
+<ul>
+<li>blast</li>
+<li>hmmer</li>
+</ul>
+</li>
+<li><p>家族基因特征描述</p>
+<ul>
+<li>染色体分布</li>
+<li>基因结构</li>
+<li>motif分析</li>
+<li>启动子序列分析</li>
+</ul>
+</li>
+<li><p>多物种进化关系分析</p>
+<ul>
+<li>构建分子进化树</li>
+<li>Ka/Ks计算等等</li>
+</ul>
+</li>
+<li><p>基因分类命名</p>
+<p>一般根据进化关系、或者分析特征进行分类，然后染色体顺序命名</p>
+</li>
+<li><p>基因表达分析</p>
+<ul>
+<li>多组织材料表达分析</li>
+<li>不同处理样品表达分析</li>
+<li>共表达分析</li>
+</ul>
+</li>
+<li><p>候选基因表达、功能验证</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[FamilyGene.seq] -- blast --&gt; B[FamilyGene.list]</span><br><span class="line">A[FamilyGene.hmm] -- hmmer --&gt; B[FamilyGene.list]</span><br><span class="line">B[FamilyGene.list] --&gt; C[FeatureAnalysis]</span><br><span class="line">C[FeatureAnalysis] --&gt; Ca[染色体分布]</span><br><span class="line">C[FeatureAnalysis] --&gt; Cb[基因结构]</span><br><span class="line">C[FeatureAnalysis] --&gt; Cc[motif分析]</span><br><span class="line">C[FeatureAnalysis] --&gt; Cd[promotor seq analysis]</span><br><span class="line">B[FamilyGene.list] --&gt; D[phylogenetics]</span><br><span class="line">B[FamilyGene.list] --&gt; E[Group,Name]</span><br><span class="line">B[FamilyGene.list] --&gt; F[Expression]</span><br><span class="line">F[Expression] --&gt; G[表达, 功能验证]</span><br></pre></td></tr></table></figure>
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
     <article id="post-201807_RNAedit" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
@@ -634,232 +867,6 @@
 			<span class="tags">
 				
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vcf/">vcf</a></li></ul>
-
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
-    <article id="post-201806_vcf2tab" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201806_vcf2tab/" class="article-date">
-  <time datetime="2018-06-16T15:19:21.000Z" itemprop="datePublished">2018-06-16</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201806_vcf2tab/">从 vcf 文件准备 ANNOVAR 数据库</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<p>annovar可以说是最常用的变异注释软件了，除了基于基因位置进行注释，还有丰富的第三方数据库支持，clinvar, cosmic等等，但是annovar提供下载数据库版本较老，需要自行下载第三方 vcf 进行转换。</p>
-<p>以 clinvar 为例说说 vcf 格式转换成 annovar 可识别表格格式，annovar 仅需要 vcf 中部分信息，为了脚本通用这里输出vcf所有信息到 tab 格式，详细处理脚本如下，同时实现脚本存放 <a href="https://github.com/chengcz/BioResource/tree/master/vcf2tab" target="_blank" rel="noopener">github</a>。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gzip</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Parse_Variant_Annovar_Style</span><span class="params">(line)</span>:</span></span><br><span class="line">	CHROM, POS, ID, REF, ALT, QUAL, FILTER, INFO = line.split(<span class="string">'\t'</span>)[:<span class="number">8</span>]</span><br><span class="line">    <span class="comment"># 一般公共数据下载的 vcf 文件仅包含8列</span></span><br><span class="line">    POS = int(POS)</span><br><span class="line">    dat = &#123;&#125;</span><br><span class="line">    dat[<span class="string">'CHROM'</span>] = CHROM</span><br><span class="line">    dat[<span class="string">'ID'</span>] = ID</span><br><span class="line">    <span class="keyword">if</span> len(REF) == len(ALT) == <span class="number">1</span> <span class="keyword">and</span> REF != ALT:    <span class="comment"># SNV</span></span><br><span class="line">        dat[<span class="string">'START'</span>], dat[<span class="string">'END'</span>] = POS, POS</span><br><span class="line">        dat[<span class="string">'REF'</span>], dat[<span class="string">'ALT'</span>] = REF, ALT</span><br><span class="line">    <span class="keyword">elif</span> len(REF) == <span class="number">1</span> <span class="keyword">and</span> len(ALT) != <span class="number">1</span> <span class="keyword">and</span> ALT.startswith(REF):    <span class="comment"># Insert</span></span><br><span class="line">        dat[<span class="string">'START'</span>], dat[<span class="string">'END'</span>] = POS, POS</span><br><span class="line">        dat[<span class="string">'REF'</span>], dat[<span class="string">'ALT'</span>] = <span class="string">'-'</span>, ALT[<span class="number">1</span>:]</span><br><span class="line">    <span class="keyword">elif</span> len(REF) != <span class="number">1</span> <span class="keyword">and</span> len(ALT) == <span class="number">1</span> <span class="keyword">and</span> REF.startswith(ALT):    <span class="comment"># Delete</span></span><br><span class="line">        dat[<span class="string">'START'</span>], dat[<span class="string">'END'</span>] = POS+<span class="number">1</span>, POS+len(REF)<span class="number">-1</span></span><br><span class="line">        dat[<span class="string">'REF'</span>], dat[<span class="string">'ALT'</span>] = REF[<span class="number">1</span>:], <span class="string">'-'</span></span><br><span class="line">    <span class="keyword">else</span>:    <span class="comment"># complex variant</span></span><br><span class="line">        dat[<span class="string">'START'</span>], dat[<span class="string">'END'</span>] = POS, POS+len(REF)<span class="number">-1</span></span><br><span class="line">        dat[<span class="string">'REF'</span>], dat[<span class="string">'ALT'</span>] = REF, ALT</span><br><span class="line">    dat.update(INFO2dict(INFO))</span><br><span class="line">    <span class="keyword">return</span> dat</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Parse_Variant</span><span class="params">(line)</span>:</span></span><br><span class="line">	CHROM, POS, ID, REF, ALT, QUAL, FILTER, INFO = line.split(<span class="string">'\t'</span>)[:<span class="number">8</span>]</span><br><span class="line">    <span class="comment"># 一般公共数据下载的 vcf 文件仅包含8列</span></span><br><span class="line">    POS = int(POS)</span><br><span class="line">    dat = &#123;&#125;</span><br><span class="line">    dat[<span class="string">'CHROM'</span>] = CHROM</span><br><span class="line">    dat[<span class="string">'ID'</span>] = ID</span><br><span class="line">    dat[<span class="string">'START'</span>], dat[<span class="string">'END'</span>] = POS, POS+len(REF)<span class="number">-1</span></span><br><span class="line">    dat[<span class="string">'REF'</span>], dat[<span class="string">'ALT'</span>] = REF, ALT</span><br><span class="line">    dat.update(INFO2dict(INFO))</span><br><span class="line">    <span class="keyword">return</span> dat</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">INFO2dict</span><span class="params">(info)</span>:</span></span><br><span class="line">    tmp = [i.strip() <span class="keyword">for</span> i <span class="keyword">in</span> info.split(<span class="string">';'</span>) <span class="keyword">if</span> i.strip()]</span><br><span class="line">    infor = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> tmp:</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'='</span> <span class="keyword">in</span> i:</span><br><span class="line">            <span class="comment"># index = i.index('=')</span></span><br><span class="line">            <span class="comment"># infor[i[:index]] = i[index+1:]</span></span><br><span class="line">            i = i.split(<span class="string">'='</span>)</span><br><span class="line">            infor[i[<span class="number">0</span>]] = i[<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            infor[i] = <span class="string">'true'</span></span><br><span class="line">    <span class="keyword">return</span> infor</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fopen = gzip.open <span class="keyword">if</span> clinvar.endswith(<span class="string">'gz'</span>) <span class="keyword">else</span> open</span><br><span class="line"><span class="comment"># 这种文件打开适用于 python2, python3 中存在 bits 和 string 类型的差别</span></span><br><span class="line"><span class="keyword">with</span> fopen(input_vcf) <span class="keyword">as</span> f:</span><br><span class="line">    tags = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> f:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> i.strip():</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> i.startswith(<span class="string">'##INFO='</span>):</span><br><span class="line">             tags.append(i.split(<span class="string">','</span>)[<span class="number">0</span>].split(<span class="string">'='</span>)[<span class="number">-1</span>])</span><br><span class="line">        <span class="keyword">elif</span> i.startswith(<span class="string">'#CHROM'</span>):</span><br><span class="line">             print(<span class="string">'#CHROM\tSTART\tEND\tID\tREF\tALT\t&#123;&#125;\n'</span>.format(<span class="string">'\t'</span>.join(tags)))</span><br><span class="line">        <span class="keyword">elif</span> <span class="keyword">not</span> i.startswith(<span class="string">'#'</span>):</span><br><span class="line">             dat = Parse_Variant_Annovar_Style(i)</span><br><span class="line">             <span class="comment"># dat = Parse_Varitn(i)</span></span><br><span class="line">             <span class="keyword">for</span> x, label <span class="keyword">in</span> enumerate([<span class="string">'CHROM'</span>, <span class="string">'START'</span>, <span class="string">'END'</span>, <span class="string">'ID'</span>, <span class="string">'REF'</span>, <span class="string">'ALT'</span>]+tags):</span><br><span class="line">                <span class="keyword">if</span> x != <span class="number">0</span>:</span><br><span class="line">                    print(<span class="string">'\t'</span>)</span><br><span class="line">                print(dat.get(label, <span class="string">'--'</span>))    <span class="comment"># INFO 列中某些 tag 并不存在于所有行</span></span><br><span class="line">             print(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
-
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
-  </div>
-
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vcf/">vcf</a></li></ul>
-
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
-    <article id="post-201805_config" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201805_config/" class="article-date">
-  <time datetime="2018-05-28T15:13:32.000Z" itemprop="datePublished">2018-05-28</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201805_config/">编写 python 的几种 config 处理方式</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<p>编写分析流程时候，为了兼容性总会设置一些常用选项配置文件输入，不同配置方式各有一些特点，就用过的几种配置方式简单整理</p>
-<h3 id="script-——-config-py"><a href="#script-——-config-py" class="headerlink" title="script —— config.py"></a>script —— config.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="comment"># sys.path.insert(0, 'config_py_dirname')    # 使config.py文件位于PYTHONPATH路径下</span></span><br><span class="line"><span class="keyword">import</span> config</span><br><span class="line"></span><br><span class="line">option = config.option    <span class="comment"># 获取配置信息</span></span><br></pre></td></tr></table></figure>
-<p>书写方式完全按照python脚本进行，可读性较高，问题在于<strong>PYTHONPATH的处理</strong>，脚本环境内<strong>键值对可能产生的覆盖问题</strong>，准确导入分析流程</p>
-<h3 id="configparser-——-config-ini"><a href="#configparser-——-config-ini" class="headerlink" title="configparser —— config.ini"></a>configparser —— config.ini</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> configparser    <span class="comment"># python3</span></span><br><span class="line"><span class="comment"># import Configparser as configparser    # python2</span></span><br><span class="line"></span><br><span class="line">cf = configparser.ConfigParser()</span><br><span class="line">cf.read(<span class="string">'config.ini'</span>)</span><br><span class="line"></span><br><span class="line">sections = cf.sections()    <span class="comment"># 列出所有section</span></span><br><span class="line">options = cf.options(section)    <span class="comment"># 列出section对应的所有option</span></span><br><span class="line">value = cf.get(section,option)    <span class="comment"># 范围section对应option的值，string</span></span><br><span class="line"><span class="comment"># getint(section,option) 返回为int，</span></span><br><span class="line"><span class="comment"># getboolean(section,option) 返回bool，</span></span><br><span class="line"><span class="comment"># getfloat(section,option) 返回float</span></span><br></pre></td></tr></table></figure>
-<p>但是，<strong>在configparser模块中不区分section, option大小写，一次读取一条配置信息</strong></p>
-<h3 id="json-——-config-json"><a href="#json-——-config-json" class="headerlink" title="json —— config.json"></a>json —— config.json</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="comment"># 倒入配置json到python环境，config类型跟json内容相关</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'config.json'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    config = json.load(f)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 输出python对象到json文件</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'whatever.josn'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    json.dump(config, f, indent=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-<p>json文件格式要求较严格，书写配置文件容易手误出错，相比之下<strong>更适用于流程中数据传递</strong></p>
-<h3 id="yaml-——-config-yaml"><a href="#yaml-——-config-yaml" class="headerlink" title="yaml —— config.yaml"></a>yaml —— config.yaml</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'config.yaml'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    config = yaml.load(f)     <span class="comment"># dict OR list</span></span><br></pre></td></tr></table></figure>
-<h4 id="YAML-语法规则"><a href="#YAML-语法规则" class="headerlink" title="YAML 语法规则"></a>YAML 语法规则</h4><ul>
-<li>大小写敏感 </li>
-<li>使用缩进表示层级关系 </li>
-<li>使用空格缩进,不允许使用Tab键</li>
-<li>相同层级的元素左侧对齐即可</li>
-<li>使用 <strong>#</strong> 作为注释符号</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 表示 key-value 对</span></span><br><span class="line"><span class="attr">key1:</span> <span class="string">value2</span></span><br><span class="line"><span class="attr">key2:</span> <span class="string">value2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 表示 list</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">value1</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">value2</span></span><br><span class="line"><span class="comment"># [value1, value2]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 时间表示</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2018</span><span class="bullet">-05</span><span class="bullet">-24</span>    <span class="comment"># iso8601</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># None表示</span></span><br><span class="line"><span class="attr">key:</span> <span class="string">~</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># bool表示</span></span><br><span class="line"><span class="attr">flag1:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">flag2:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-<p>相比于上面几种方法，<strong>yaml可读性高，容易书写，不用考虑PYTHONPATH问题，批量导入配置信息</strong></p>
-
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/python/">python</a>
-  </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
-    <article id="post-201805_HGVS" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201805_HGVS/" class="article-date">
-  <time datetime="2018-05-20T06:38:32.000Z" itemprop="datePublished">2018-05-20</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201805_HGVS/">HGVS 变异描述规则</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<p><a href="http://varnomen.hgvs.org/recommendations/" target="_blank" rel="noopener">http://varnomen.hgvs.org/recommendations/</a>, 描述规则基本格式为：<strong>[identifier]:[levels].[Description of variant]</strong></p>
-<h3 id="identifier"><a href="#identifier" class="headerlink" title="[identifier]"></a>[identifier]</h3><p><img src="./images/2018/hgvs_identifier.png" alt=""></p>
-<ul>
-<li>only public files from NCBI or EBI are accepted as reference sequence files</li>
-<li>a reference sequence file identifier should contain both the <strong>accession</strong> and <strong>version number</strong></li>
-<li>specifications to a specific annotated segment of a reference sequence can be given in parentheses directly after the reference sequence</li>
-<li>the reference sequence used <strong>must contain</strong> the variant residue described</li>
-</ul>
-<p>其他具体要求描述可以参考：<a href="http://varnomen.hgvs.org/bg-material/refseq/" target="_blank" rel="noopener">http://varnomen.hgvs.org/bg-material/refseq/</a></p>
-<h3 id="levels"><a href="#levels" class="headerlink" title="[levels]"></a>[levels]</h3><p><img src="./images/2018/hgvs_prefix.png" alt=""></p>
-<p>Reference Sequence Types主要有g, c, n, m, r, p六种，其中c, p, g使用最多</p>
-<h3 id="Description-of-variant"><a href="#Description-of-variant" class="headerlink" title="[Description of variant]"></a>[Description of variant]</h3><ul>
-<li>替换<ul>
-<li>cDNA: <code>c.255C&gt;A</code></li>
-<li>protein: <code>p.Trp24Cys</code>, <code>p.Trp24*</code>, <code>p.Cys188=</code></li>
-</ul>
-</li>
-<li>缺失<ul>
-<li>cDNA: <code>c.19_21del</code></li>
-<li>protein: <code>p.Lys23_Val25del</code></li>
-</ul>
-</li>
-<li>插入<ul>
-<li>cDNA: <code>c.240_241insAGG</code></li>
-<li>protein: <code>p.Lys2_Gly3insGlnSerLys</code></li>
-</ul>
-</li>
-<li>重复<ul>
-<li>cDNA: <code>c.20_23dup</code></li>
-<li>protein: <code>p.Ser6dup</code></li>
-</ul>
-</li>
-<li>插入缺失<ul>
-<li>cDNA: <code>c.142_144delinsTGG</code></li>
-<li>protein: <code>p.Arg48Trp</code></li>
-</ul>
-</li>
-<li>移码突变<ul>
-<li>protein: <code>p.Arg97fs</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h3><ul>
-<li>坐标系统为 1-based, <img src="./images/2018/hgvs_loc.png" alt=""></li>
-<li>描述核酸和蛋白变异的差别，<code>g.123A&gt;G</code> 和 <code>p.Trp26Ter</code></li>
-<li>可使用在线网站 <a href="https://mutalyzer.nl/" target="_blank" rel="noopener">mutalyzer</a> 检验变异描述是否合规，也可进行c -&gt; g坐标转换等等</li>
-</ul>
-<p>###<strong>Ref</strong>:</p>
-<ul>
-<li>DOI: <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/humu.22981" target="_blank" rel="noopener">10.1002/humu.22981</a></li>
-<li><a href="http://varnomen.hgvs.org/recommendations/general" target="_blank" rel="noopener">http://varnomen.hgvs.org/recommendations/general</a></li>
-</ul>
-
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
-  </div>
-
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HGVS/">HGVS</a></li></ul>
 
 			</span>
 		</div>

@@ -45,6 +45,294 @@
     <div id="main">
       
   
+    <article id="post-201705_anaconda" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2017/201705_anaconda/" class="article-date">
+  <time datetime="2017-05-07T14:12:08.000Z" itemprop="datePublished">2017-05-07</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2017/201705_anaconda/">python 科学计算 —— anaconda</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>python大法好，但是坑爹的版本，坑爹的包管理，折腾死大把大把工作时间。anaconda实现了python2和python3和谐共存，同时conda更方便的进行包管理，支持win，linux，mac多系统平台。</p>
+<p>还有一些小小的便利，anaconda已经提供了python科学计算常用包，numpy, pandas, matplotlib等等，python notebook也必然是有的，目前已更名为<code>jupyter notebook</code>，输出文档很方便进行交流展示。</p>
+<p>清华大学TUNA镜像网站提供了anaconda安装包，<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/，不必被下载速度折磨死。" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/，不必被下载速度折磨死。</a></p>
+<h2 id="anaconda安装"><a href="#anaconda安装" class="headerlink" title="anaconda安装"></a>anaconda安装</h2><p>和python一样，anaconda存在2和3两个版本，目前都更新到4.3.1版，但是，，，还有一个但是，选择安装哪一个版本并没有太大区别，可以方便的通过anaconda环境管理切换不同的python版本。</p>
+<p>针对unix like用户，anaconda还有一个非常重要的特性，非root用户也能方便的进行安装(默认安装到<code>~/anaconda2/</code>)，添加<code>~/anaconda2/bin</code>到环境变量<code>$PATH</code>，而后即可享受anaconda。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>创建名为python3的环境，python版本为3.4，该命令仅安装python基本模块</span><br><span class="line">conda create --name python3 python=3.4</span><br><span class="line"><span class="meta">#</span>创建新环境，同时针对新环境安装anaconda</span><br><span class="line">conda create --name python3 python=3.4 anaconda</span><br><span class="line"><span class="meta">#</span>激活python3环境</span><br><span class="line">source activate python3</span><br><span class="line"><span class="meta">#</span>关闭环境</span><br><span class="line">source deactivate python3</span><br><span class="line"><span class="meta">#</span>删除环境</span><br><span class="line">conda remove --name python3 --all</span><br></pre></td></tr></table></figure>
+<h2 id="conda安装包"><a href="#conda安装包" class="headerlink" title="conda安装包"></a>conda安装包</h2><p>conda于pip类似，对python包进行管理，还能管理python和conda本身</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>列出当前环境中已安装的包</span><br><span class="line">conda list    </span><br><span class="line"><span class="meta">#</span>搜索，安装，升级，删除指定特定的包</span><br><span class="line">conda [search|install|update|remove] package_name</span><br><span class="line"><span class="meta">#</span>可以使用-n参数，对指定特定环境中的包进行操作</span><br><span class="line">conda list -n env_name</span><br><span class="line"><span class="meta">#</span>升级python或者conda，升级python至当前大版本的最新版本</span><br><span class="line">conda update python</span><br></pre></td></tr></table></figure>
+<h2 id="anaconda镜像设置"><a href="#anaconda镜像设置" class="headerlink" title="anaconda镜像设置"></a>anaconda镜像设置</h2><p>anaconda主机在国外，conda在线安装包速度慢到怀疑人生，这时绝壁选择使用国内镜像网站，首先将仓库镜像加入conda配置，具体命令为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 添加Anaconda的TUNA镜像</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line"><span class="meta">#</span> 设置搜索时显示通道地址</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
+<p>或者直接编辑文件<code>~/.condarc</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ssl_verify: true</span><br><span class="line">channels:</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">  - defaults</span><br><span class="line">show_channel_urls: true</span><br></pre></td></tr></table></figure>
+<p>然后，你就可以尽情享受python编程的快乐，不被各种包折磨死</p>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
+    <article id="post-201704_rankabundance" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2017/201704_rankabundance/" class="article-date">
+  <time datetime="2017-04-20T01:23:01.000Z" itemprop="datePublished">2017-04-20</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2017/201704_rankabundance/">使用 ggplot 绘制扩增子 rank abundance 曲线</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>ggplot2实现微生物rank abundance绘图，另发现了<code>reshape2</code>能方便的进行dataframe格式整理，长表格，宽表格相互转换</p>
+<p>具体代码实现如下：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(ggplot2)</span><br><span class="line"><span class="keyword">library</span>(reshape2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># otu_table    抽平后的otu table，第一列为OTU编号，最后一列为tax注释</span></span><br><span class="line">otu_table &lt;- read.table(otu_table, sep=<span class="string">"\t"</span>, header=<span class="literal">TRUE</span>)</span><br><span class="line">otu_table &lt;- otu_table[,<span class="number">2</span>:(length(otu_table)-<span class="number">1</span>)]</span><br><span class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:length(otu_table))&#123;    <span class="comment"># 计算等级相对丰度</span></span><br><span class="line">  sample &lt;- otu_table[,i]</span><br><span class="line">  otu_table[,i]&lt;- rev(sort(sample/sum(sample)))</span><br><span class="line">&#125;</span><br><span class="line">rank_abundance &lt;- otu_table</span><br><span class="line">rank_abundance$rank &lt;- <span class="number">1</span>:dim(rank_abundance)[<span class="number">1</span>]    <span class="comment"># 添加等级</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 宽表格整理成长表格</span></span><br><span class="line">dat &lt;- melt(rank_abundance, id.vars = c(<span class="string">'rank'</span>), variable.name=<span class="string">'sample'</span>)</span><br><span class="line"><span class="comment"># 整合样品分组信息</span></span><br><span class="line">group &lt;- read.table(group, sep=<span class="string">'\t'</span>, col.names=c(<span class="string">'sample'</span>, <span class="string">'group'</span>))</span><br><span class="line">dat &lt;- merge(dat, group, by=c(<span class="string">'sample'</span>), all=<span class="literal">TRUE</span>)</span><br><span class="line"><span class="comment"># 移除0值</span></span><br><span class="line">dat &lt;- dat[dat$value&gt;<span class="number">0</span>,]</span><br><span class="line"></span><br><span class="line">g &lt;- ggplot(dat, aes(rank, log10(dat$value), group=sample)) + </span><br><span class="line">  geom_step(aes(color=group)) + <span class="comment">#ylim(-4,0) + xlim(0,2000) + </span></span><br><span class="line">  labs(x=<span class="string">"Species Rank"</span>, y=<span class="string">"Relative Abundance"</span>) + </span><br><span class="line">  <span class="comment"># 设置y轴指示刻度，针对不同数据，可能需要调整</span></span><br><span class="line">  scale_y_continuous(breaks=c(-<span class="number">4</span>,-<span class="number">3</span>,-<span class="number">2</span>,-<span class="number">1</span>), labels=c(<span class="string">'1e-4'</span>,<span class="string">'1e-3'</span>,<span class="string">'1e-2'</span>,<span class="string">'1e-1'</span>)) + </span><br><span class="line">  <span class="comment"># 调整y轴指示刻度显示方法</span></span><br><span class="line">  theme(axis.text.y = element_text(angle=<span class="number">90</span>, hjust=<span class="number">0.5</span>, vjust=<span class="number">1</span>)) + </span><br><span class="line"></span><br><span class="line">ggsave(<span class="string">"rank_abundance.pdf"</span>)</span><br></pre></td></tr></table></figure>
+<p>结果展示：</p>
+<p><img src="./images/2017/rank_abundance.png" alt=""></p>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/R/">R</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/amplicon/">amplicon</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ggplot/">ggplot</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
+    <article id="post-201703_linuxcmd" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2017/201703_linuxcmd/" class="article-date">
+  <time datetime="2017-03-15T02:39:31.000Z" itemprop="datePublished">2017-03-15</time>
+</a>
+		</span>
+		<span class="meta-elements author">ChengCZ</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2017/201703_linuxcmd/">linux 基本命令介绍</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<h1 id="linux-登录"><a href="#linux-登录" class="headerlink" title="linux 登录"></a>linux 登录</h1><p>远程登录linux服务器具体原理呢，水平还不够，说不清，先简单粗暴上方法。一般采取<code>ssh</code>的方式远程登录，常用ssh客户端有<a href="http://www.netsarang.com/" target="_blank" rel="noopener">xshell</a>, <a href="http://www.putty.org/" target="_blank" rel="noopener">putty</a>，本地电脑与服务器间数据传输一般是ftp客户端的方式，可以使用<a href="http://www.netsarang.com/" target="_blank" rel="noopener">xftp</a>, <a href="https://filezilla-project.org/" target="_blank" rel="noopener">FileZilla</a>。</p>
+<p>登录需要<strong>帐号</strong>，<strong>密码</strong>，<strong>主机地址</strong>(ip或可解析网址)，一般ssh登录端口选择<strong>22</strong>，ftp登录端口选择<strong>21</strong>。</p>
+<h1 id="basic-command"><a href="#basic-command" class="headerlink" title="basic command"></a>basic command</h1><ol>
+<li><p><code>ls</code>：列出当前路径（或特定路径）下的文件、文件夹</p>
+<p>-l    先是完整信息，包括文件属主、时间、权限等信息</p>
+<p>-a   列出包括隐藏文件在内的所有问价，linux下隐藏文件以<code>.</code>开头</p>
+<p>-h    文件大小以人类友好的方式显示，直观结果为文件大小以k, m, g等代替bit</p>
+<p>-t    安装文件修改时间进行排列</p>
+</li>
+<li><p><code>pwd</code>：显示当前所在路径</p>
+</li>
+<li><p><code>cd</code>：进入文件夹，后接相对路径或全路径</p>
+</li>
+<li><p><code>mv</code>：更名，移动文件</p>
+</li>
+<li><p><code>cp</code>：拷贝文件</p>
+<p>-L    拷贝源文件为链接时，追踪拷贝原始文件</p>
+<p>-r    针对文件夹拷贝，递归拷贝文件夹下所有子目录或文件</p>
+</li>
+<li><p><code>ln</code>：创建文件链接</p>
+<p>-s    创建软链接，相比<code>ln</code>创建链接方式，<code>ln -s</code>创建链接不占用硬盘空间</p>
+</li>
+<li><p><code>mkdir</code>：创建文件夹</p>
+<p>-p    递归创建多级文件夹，eg：<code>mkdir -p /path/to/a/b/c</code>，其中文件夹a原本不存在，创建a同时创建子目录b子目录c</p>
+</li>
+<li><p><code>rmdir</code>：删除空文件夹</p>
+</li>
+<li><p><code>rm</code>：删除文件或文件夹</p>
+<p>-r    递归删除，通常用于删除非空文件夹</p>
+<p>-f     强制删除，不显示提示消息</p>
+</li>
+</ol>
+<h1 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h1><ol>
+<li><p><code>cat</code>, <code>zcat</code>：zcat支持打开压缩文件</p>
+</li>
+<li><p><code>head</code>, <code>tail</code>：显示文件前10（默认）行，后10行</p>
+<p>-n  num     指定显示行数</p>
+</li>
+<li><p><code>more</code>, <code>less</code></p>
+</li>
+<li><p><code>paste</code>：横向合并两个文本</p>
+</li>
+<li><p><code>touch</code>：创建文件</p>
+</li>
+<li><p><code>cut</code>：</p>
+<p>-f n-m    显示文件第n到m列</p>
+<p>-d     设置分隔符，默认‘\t’</p>
+</li>
+<li><p><code>join</code></p>
+</li>
+<li><p><code>vim</code>：文本编辑器</p>
+</li>
+<li><p><code>wc</code></p>
+<p>-l    统计文件行数</p>
+</li>
+</ol>
+<h1 id="打包压缩"><a href="#打包压缩" class="headerlink" title="打包压缩"></a>打包压缩</h1><ol>
+<li><p><code>tar</code>：文档打包，通过调用gzip或bzip2压缩</p>
+<p>-c    打包，创建新的tar文件</p>
+<p>-x    解包，从tar文件中提取文件</p>
+<p>-f    tar包文件</p>
+<p>-v    显示当前正在处理的文件</p>
+<p>-z    调用gzip进行压缩或解压缩</p>
+<p>-j    调用bzip2进行压缩或解压缩</p>
+<p>-J    调用xz进行压缩或解压缩</p>
+</li>
+<li><p><code>gzip</code>：压缩和解压gz后缀文件</p>
+<p>-d    解压gzip压缩文件</p>
+<p>-c    压缩或解压结果输出到STDOUT</p>
+<p>-num  [1-9]    数字越小压缩比率越低，速度越快，<code>-1</code>等效于<code>-fast</code>，<code>-9</code>等效于<code>-best</code></p>
+</li>
+<li><p><code>unzip</code>：解压zip后缀文件</p>
+</li>
+<li><p><code>bzip2</code></p>
+</li>
+</ol>
+<h1 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h1><ol>
+<li><p><code>chmod</code>：修改文件读写执行等权限，只能修改属主为自己的文件或文件夹</p>
+<p>4, r代表read权限，2, w代表write权限，1, x代表execution权限</p>
+<p>eg: <code>chmod +x file</code>    添加文件执行权限</p>
+<p>​      <code>chomd 755 file</code>    修改文件权限为属主读写执行，用户组读写，所有用户读写权限</p>
+</li>
+<li><p><code>chown</code>：修改文件属主信息，eg：<code>chown -R user:group file</code></p>
+<p>-R    递归修改子文件、目录属主信息</p>
+</li>
+</ol>
+<h1 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h1><ol>
+<li><p><code>grep</code>, <code>zgrep</code>：文件内容查找</p>
+<p>-f  file    查找pattern在file中</p>
+<p>-v    取反，显示不包含pattern的行</p>
+<p>-c    计数，输出包含pattern的行数</p>
+</li>
+<li><p><code>find</code>：查找文件，指定文件路径下</p>
+</li>
+<li><p><code>locate</code>：查找文件，所有硬盘内</p>
+</li>
+<li><p><code>awk</code>：这个命令可以学，详细教程可参考<a href="https://github.com/mylxsw/growing-up/blob/master/doc/%E4%B8%89%E5%8D%81%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9AAWK.md" target="_blank" rel="noopener">https://github.com/mylxsw/growing-up/blob/master/doc/%E4%B8%89%E5%8D%81%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9AAWK.md</a></p>
+</li>
+<li><p><code>sed</code>：这个也可以学，详细教程可参考<a href="https://github.com/mylxsw/growing-up/blob/master/doc/%E4%B8%89%E5%8D%81%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9ASED.md" target="_blank" rel="noopener">https://github.com/mylxsw/growing-up/blob/master/doc/%E4%B8%89%E5%8D%81%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9ASED.md</a></p>
+</li>
+</ol>
+<h1 id="系统命令"><a href="#系统命令" class="headerlink" title="系统命令"></a>系统命令</h1><ol>
+<li><p><code>top</code>：显示进程</p>
+<p>-c    显示详细命令</p>
+<p>-u  user    显示特定user进程</p>
+</li>
+<li><p><code>ps</code></p>
+</li>
+<li><p><code>kill</code>： kill进程</p>
+</li>
+<li><p><code>free</code>：查看内存</p>
+</li>
+<li><p><code>history</code>：查看shell执行历史记录</p>
+</li>
+</ol>
+<p>Linux系统命令可以通过<code>man command</code>或者<code>command --help</code>的方式查看详细帮助信息</p>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/command/">command</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
     <article id="post-201703_parsePEfastq" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
