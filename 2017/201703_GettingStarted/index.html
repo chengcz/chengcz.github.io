@@ -1,11 +1,85 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
+
+
+
   
-  <title>&#39;XXX，从入门到放弃&#39; | ChengCZ&#39;s Notebook</title>
-  <meta name="viewport" content="width=device-width">
-  <meta name="description" content="生物背景从事生物信息分析工作，本科时候对统计、计算机之类的有些兴趣，觉着“生物信息”很高大上的样子，什毛都不懂就如了生信的坑，这一路下来，知道越多越觉得需要了解、懂的东西也越多，经常有“我擦勒，要学这么多东西啊” ， linux, R, python, perl…… 微博上看了各种从入门到放弃系列，觉得很有意思，这里也不自知的写个从入门到放弃吧，生物信息是一个多学科的交叉学科，遗传、生理、计算机、">
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="生物背景从事生物信息分析工作，本科时候对统计、计算机之类的有些兴趣，觉着“生物信息”很高大上的样子，什毛都不懂就如了生信的坑，这一路下来，知道越多越觉得需要了解、懂的东西也越多，经常有“我擦勒，要学这么多东西啊” ， linux, R, python, perl…… 微博上看了各种从入门到放弃系列，觉得很有意思，这里也不自知的写个从入门到放弃吧，生物信息是一个多学科的交叉学科，遗传、生理、计算机、">
 <meta property="og:type" content="article">
 <meta property="og:title" content="&#39;XXX，从入门到放弃&#39;">
 <meta property="og:url" content="http://chengcz.github.io/2017/201703_GettingStarted/index.html">
@@ -16,62 +90,258 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="&#39;XXX，从入门到放弃&#39;">
 <meta name="twitter:description" content="生物背景从事生物信息分析工作，本科时候对统计、计算机之类的有些兴趣，觉着“生物信息”很高大上的样子，什毛都不懂就如了生信的坑，这一路下来，知道越多越觉得需要了解、懂的东西也越多，经常有“我擦勒，要学这么多东西啊” ， linux, R, python, perl…… 微博上看了各种从入门到放弃系列，觉得很有意思，这里也不自知的写个从入门到放弃吧，生物信息是一个多学科的交叉学科，遗传、生理、计算机、">
-  
-    <link rel="alternative" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
-</head>
-<body>
-  <div id="container">
-    <div class="mobile-nav-panel">
-	<i class="icon-reorder icon-large"></i>
-</div>
-<header id="header">
-	<h1 class="blog-title">
-		<a href="/">ChengCZ&#39;s Notebook</a>
-	</h1>
-	<nav class="nav">
-		<ul>
-			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/about">About</a></li>
-			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
-			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
-		</ul>
-	</nav>
-	<div id="search-form-wrap">
-		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://chengcz.github.io"></form>
-	</div>
-</header>
-    <div id="main">
-      <article id="post-201703_GettingStarted" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2017/201703_GettingStarted/" class="article-date">
-  <time datetime="2017-03-11T02:57:34.000Z" itemprop="datePublished">2017-03-11</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 class="article-title entry-title" itemprop="name">
-      &#39;XXX，从入门到放弃&#39;
-    </h1>
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://chengcz.github.io/2017/201703_GettingStarted/"/>
+
+
+
+
+
+  <title>'XXX，从入门到放弃' | ChengCZ's Notebook</title>
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<p>生物背景从事生物信息分析工作，本科时候对统计、计算机之类的有些兴趣，觉着“<strong>生物信息</strong>”很高大上的样子，什毛都不懂就如了生信的坑，这一路下来，知道越多越觉得需要了解、懂的东西也越多，经常有“<strong>我擦勒，要学这么多东西啊</strong>” ， <code>linux</code>, <code>R</code>, <code>python</code>, <code>perl</code>…… 微博上看了各种从入门到放弃系列，觉得很有意思，这里也不自知的写个从入门到放弃吧，生物信息是一个多学科的交叉学科，遗传、生理、计算机、统计基础好像都须知道一些，“<strong>XXX，从入门到放弃</strong>”，我也不知道是啥从入门到放弃。</p>
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a79f8c7f932a2d3ed822562170533a8d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ChengCZ's Notebook</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2017/201703_GettingStarted/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">'XXX，从入门到放弃'</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-11T10:57:34+08:00">
+                2017-03-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bioinfor/" itemprop="url" rel="index">
+                    <span itemprop="name">bioinfor</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>生物背景从事生物信息分析工作，本科时候对统计、计算机之类的有些兴趣，觉着“<strong>生物信息</strong>”很高大上的样子，什毛都不懂就如了生信的坑，这一路下来，知道越多越觉得需要了解、懂的东西也越多，经常有“<strong>我擦勒，要学这么多东西啊</strong>” ， <code>linux</code>, <code>R</code>, <code>python</code>, <code>perl</code>…… 微博上看了各种从入门到放弃系列，觉得很有意思，这里也不自知的写个从入门到放弃吧，生物信息是一个多学科的交叉学科，遗传、生理、计算机、统计基础好像都须知道一些，“<strong>XXX，从入门到放弃</strong>”，我也不知道是啥从入门到放弃。</p>
 <p>很早就有利用博客整理、交流学习思路的想法，懒癌穷癌很成功的阻止了我，看到很多利用github的教程，简单粗暴，终于鼓起勇气试试。</p>
 <p>讲真，统计不是很懂，遗传不知道怎么说起，那就说说生信分析的linux、R、python这些咯。</p>
 <h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><p>分析主要工作环境，<strong>命令行</strong>操作，分析工具众多。</p>
@@ -93,72 +363,373 @@
 <p><a href="https://typora.io/" target="_blank" rel="noopener">Typore</a>：免费markdown编辑器里面最好的，界面简洁，支持多种格式（pdf，html，docx等等）导出。</p>
 <h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><p>可以掌握的技能。关注<a href="https://www.docker.com/" target="_blank" rel="noopener">docker</a>，这是因为同事提到工作流程迁移系统环境兼容的问题，docker完全免去了这些烦恼。无奈，工作系统版本太低，无法安装，还没有试过。</p>
 
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/201703_parsePEfastq/" rel="prev" title="parse pe fastq file use python">
+                parse pe fastq file use python <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
     
-<nav id="article-nav">
-  
-    <a href="/2017/201703_parsePEfastq/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          parse pe fastq file use python
-        
-      </div>
-    </a>
-  
-  
-</nav>
+    <div class="sidebar-inner">
 
-  
-</article>
+      
 
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ChengCZ</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
 
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux"><span class="nav-number">1.</span> <span class="nav-text">Linux</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#R"><span class="nav-number">2.</span> <span class="nav-text">R</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python"><span class="nav-number">3.</span> <span class="nav-text">python</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#perl"><span class="nav-number">4.</span> <span class="nav-text">perl</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他技能"><span class="nav-number">5.</span> <span class="nav-text">其他技能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MarkDown"><span class="nav-number">5.1.</span> <span class="nav-text">MarkDown</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker"><span class="nav-number">5.2.</span> <span class="nav-text">Docker</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
 
     </div>
-    <div class="mb-search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
-    <input type="hidden" name="q" value="site:chengcz.github.io">
-  </form>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChengCZ</span>
+
+  
 </div>
-<footer id="footer">
-	<!---<h1 class="footer-blog-title">
-		<a href="/">ChengCZ&#39;s Notebook</a>
-	</h1>--->
-	<span class="copyright">
-		&copy; 2018 ChengCZ<br>
-		<!---Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
-		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>--->
-	</span>
-</footer>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
 
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
   </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>

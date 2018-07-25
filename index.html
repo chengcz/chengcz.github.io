@@ -1,75 +1,348 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
+
+
+
   
-  <title>ChengCZ&#39;s Notebook</title>
-  <meta name="viewport" content="width=device-width">
-  <meta property="og:type" content="website">
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
 <meta property="og:title" content="ChengCZ&#39;s Notebook">
 <meta property="og:url" content="http://chengcz.github.io/index.html">
 <meta property="og:site_name" content="ChengCZ&#39;s Notebook">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ChengCZ&#39;s Notebook">
-  
-    <link rel="alternative" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
-</head>
-<body>
-  <div id="container">
-    <div class="mobile-nav-panel">
-	<i class="icon-reorder icon-large"></i>
-</div>
-<header id="header">
-	<h1 class="blog-title">
-		<a href="/">ChengCZ&#39;s Notebook</a>
-	</h1>
-	<nav class="nav">
-		<ul>
-			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/about">About</a></li>
-			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
-			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
-		</ul>
-	</nav>
-	<div id="search-form-wrap">
-		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://chengcz.github.io"></form>
-	</div>
-</header>
-    <div id="main">
-      
-  
-    <article id="post-201807_transvar" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201807_transvar/" class="article-date">
-  <time datetime="2018-07-19T11:25:21.000Z" itemprop="datePublished">2018-07-19</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201807_transvar/">从 p.HGVS 到基因组变异位置</a>
-    </h1>
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://chengcz.github.io/"/>
+
+
+
+
+
+  <title>ChengCZ's Notebook</title>
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<h3 id="transcvar-web-版"><a href="#transcvar-web-版" class="headerlink" title="transcvar web 版"></a>transcvar web 版</h3><p><img src="./images/2018/transvar_web.png" alt=""></p>
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a79f8c7f932a2d3ed822562170533a8d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ChengCZ's Notebook</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201807_transvar/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201807_transvar/" itemprop="url">从 p.HGVS 到基因组变异位置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-19T19:25:21+08:00">
+                2018-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bioinfor/" itemprop="url" rel="index">
+                    <span itemprop="name">bioinfor</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="transcvar-web-版"><a href="#transcvar-web-版" class="headerlink" title="transcvar web 版"></a>transcvar web 版</h3><p><img src="./images/2018/transvar_web.png" alt=""></p>
 <h3 id="transcvar-本地化"><a href="#transcvar-本地化" class="headerlink" title="transcvar 本地化"></a>transcvar 本地化</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> https://github.com/zwdzwd/transvar</span><br><span class="line">pip search transvar</span><br><span class="line">pip install transvar --user</span><br><span class="line"></span><br><span class="line">transvar config --download_ref --refversion hg19</span><br><span class="line">transvar config --download_anno --refversion hg19</span><br></pre></td></tr></table></figure>
 <p><img src="./images/2018/transvar.png" alt=""></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">head HGVS_cds</span><br><span class="line"><span class="meta">#</span> MLH1:c.100G&gt;A</span><br><span class="line"><span class="meta">#</span> MLH1:c.790+1G&gt;A</span><br><span class="line"><span class="meta">#</span> VHL:c.1_17del17</span><br><span class="line"><span class="meta">#</span> VHL:c.136G&gt;T</span><br><span class="line"></span><br><span class="line">transvar canno --refversion hg19 --refseq -l HGVS_cds --oneline &gt;HGVS_cds.transvar.txt</span><br><span class="line"></span><br><span class="line">head HGVS_cds.transvar.txt</span><br><span class="line"><span class="meta">#</span> input	transcript	gene	strand	coordinates(gDNA/cDNA/protein)	region	info</span><br><span class="line"><span class="meta">#</span> MLH1:c.100G&gt;A	NM_001167618 (protein_coding)	MLH1	+	chr3:g.37059029G&gt;A/c.100G&gt;A/p.A34T	inside_[cds_in_exon_10]	CSQN=Missense;reference_codon=GCC;alternative_codon=ACC;dbxref=GeneID:4292,HGNC:7127,HPRD:00390,MIM:120436;aliases=NP_001161090;source=RefSeq</span><br><span class="line"><span class="meta">#</span> MLH1:c.790+1G&gt;A	NM_001258271 (protein_coding)	MLH1	+	chr3:g.37056036G&gt;A/c.790+1G&gt;A/.	inside_[intron_between_exon_9_and_10]	CSQN=IntronicSNV;dbxref=GeneID:4292,HGNC:7127,HPRD:00390,MIM:120436;aliases=NP_001245200;source=RefSeq</span><br><span class="line"><span class="meta">#</span> VHL:c.1_17del17	NM_198156 (protein_coding)	VHL	+	chr3:g.10183532_10183548del17/c.1_17del17/.	inside_[cds_in_exon_1]	CSQN=CdsStartDeletion;left_align_gDNA=g.10183529_10183545del17;unaligned_gDNA=g.10183532_10183548del17;left_align_cDNA=c.1-3_14del17;unalign_cDNA=c.1_17del17;cds_start_at_chr3:10183532_lost;dbxref=GeneID:7428,HGNC:12687,HPRD:01905,MIM:608537;aliases=NP_937799;source=RefSeq</span><br></pre></td></tr></table></figure>
@@ -78,58 +351,147 @@
 <p><img src="./images/2018/transvar_config.png" alt=""></p>
 <p><img src="./images/2018/transvar_config2.png" alt=""></p>
 
+          
+        
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
-
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hgvs/">hgvs</a></li></ul>
-
-			</span>
-		</div>
-	</footer>
-	
-</article>
+  
+  
+  
+  </article>
 
 
-	<hr class="article-devider">
-
-
+    
+      
 
   
-    <article id="post-201807_lnc_classification" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201807_lnc_classification/" class="article-date">
-  <time datetime="2018-07-19T11:15:52.000Z" itemprop="datePublished">2018-07-19</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
+
   
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201807_lnc_classification/">lncRNA 根据染色体位置进行分类</a>
-    </h1>
+  
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<p>1/1/2018 </p>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201807_lnc_classification/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201807_lnc_classification/" itemprop="url">lncRNA 根据染色体位置进行分类</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-19T19:15:52+08:00">
+                2018-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bioinfor/" itemprop="url" rel="index">
+                    <span itemprop="name">bioinfor</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1/1/2018 </p>
 <hr>
 <p>根据与基因的相对位置，lncRNA可以分为<strong>Intergenic LncRNAs(lincRNA)</strong>, <strong>Bidirectional LncRNAs</strong>, <strong>Intronic LncRNAs</strong>, <strong>Antisense LncRNAs</strong>, <strong>Sense-overlapping LncRNAs</strong>五类，每类详细定义规则如下：</p>
 <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>ref: <a href="https://www.arraystar.com/reviews/v30-lncrna-classification/" target="_blank" rel="noopener">https://www.arraystar.com/reviews/v30-lncrna-classification/</a></p>
@@ -157,58 +519,147 @@
 </ol>
 <h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> step0 prepare</span><br><span class="line">awk -F "\t" 'BEGIN&#123;OFS="\t"&#125;&#123;if ($3=="transcript") &#123;print $1,$4,$5,$9,$7&#125;&#125;' lnc.gtf | sed -e 's/gene_id.*transcript_id "//g' -e 's/".*\t/\t.\t/g' &gt;lnc.transcript.bed</span><br><span class="line">awk -F "\t" 'BEGIN&#123;OFS="\t"&#125;&#123;if ($3=="transcript") &#123;print $1,$4,$5,$9,$7&#125;&#125;' mRNA.gtf | sed -e 's/gene_id.*transcript_id "//g' -e 's/".*\t/\t.\t/g' &gt;mRNA.transcript.bed</span><br><span class="line">awk -F "\t" 'BEGIN&#123;OFS="\t"&#125;&#123;if ($3=="exon") &#123;print $1,$4,$5,$9,$7&#125;&#125;' mRNA.gtf | sed -e 's/gene_id.*transcript_id "//g' -e 's/".*\t/\t.\t/g' &gt;mRNA.exon.bed</span><br><span class="line"></span><br><span class="line">head mRNA.transcript.bed</span><br><span class="line"><span class="meta">#</span> chr1	65419	71585	ENST00000641515	.	+</span><br><span class="line"><span class="meta">#</span> chr1	69055	70108	ENST00000335137	.	+</span><br><span class="line"><span class="meta">#</span> chr1	450703	451697	ENST00000426406	.	-</span><br><span class="line"><span class="meta">#</span> chr1	685679	686673	ENST00000332831	.	-</span><br><span class="line"><span class="meta">#</span> chr1	923928	939291	ENST00000420190	.	+</span><br><span class="line"><span class="meta">#</span> chr1	925150	935793	ENST00000437963	.	+</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> step1 获得 Intergenic lncRNA</span><br><span class="line"><span class="meta">#</span> -v 取反，获得不和任何 coding-protein 基因（包括基因上下游 1000 bp范围）重合的 lncRNA</span><br><span class="line">bedtools window -a lnc.transcript.bed -b mRNA.transcript.bed -v &gt;lnc.Intergenic.bed</span><br><span class="line"><span class="meta">#</span>############## lnc.Intergenic.bed ###############</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> step2 基因 1000 bp 区间内的 lncRNA</span><br><span class="line"><span class="meta">#</span> 获得和 coding-protein 有重叠的 lncRNA ，lnc_gene.bed</span><br><span class="line">bedtools intersect -a lnc.transcript.bed -b mRNA.transcript.bed -wa | sort -u &gt; lnc_gene.bed</span><br><span class="line"><span class="meta">#</span> 获得 coding-protein 基因上下游 1000 bp 范围内的 lnc ，lnc_gene_1k.bed</span><br><span class="line">python -c 'with open("lnc.transcript.bed") as a, open("lnc_gene.bed") as m, open("lnc.Intergenic.bed") as i, open("lnc_gene_1k.bed", "w") as k1: k1.write("".join(set(a.readlines())-set(m.readlines())-set(i.readlines())))'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> step2b 根据转录方向进行分类</span><br><span class="line">bedtools window -a lnc_gene_1k.bed -b mRNA.transcript.bed -u -Sm | sort -u &gt;lnc.Bidirectional.bed</span><br><span class="line"><span class="meta">#</span>############## lnc.Bidirectional.bed ###############</span><br><span class="line">bedtools window -a lnc_gene_1k.bed -b mRNA.transcript.bed -u -sm | sort -u &gt;lnc.Enhancer.bed</span><br><span class="line"><span class="meta">#</span>############## lnc.Enhancer.bed ###############</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> step3 </span><br><span class="line"><span class="meta">#</span> 和 coding-protein 重叠，不和外显子重叠，得到内含子区域的lnc</span><br><span class="line">bedtools intersect -a lnc_gene.bed -b mRNA.exon.bed -v &gt; lnc.Intronic.bed</span><br><span class="line"><span class="meta">#</span>############## lnc.Intronic.bed ###############</span><br><span class="line"><span class="meta">#</span> 取相同链的 lnc</span><br><span class="line">bedtools intersect -a lnc_gene.bed -b mRNA.exon.bed -wa -s | sort -u &gt; lnc.Sense.bed</span><br><span class="line"><span class="meta">#</span>############## lnc.Sense.bed ###############</span><br><span class="line"><span class="meta">#</span> 取反向链的 lnc</span><br><span class="line">bedtools intersect -a lnc_gene.bed -b mRNA.exon.bed -wa -S | sort -u &gt; lnc.Antisense.bed</span><br><span class="line"><span class="meta">#</span>############## lnc.Antisense.bed ###############</span><br></pre></td></tr></table></figure>
 
+          
+        
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
-
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lnc/">lnc</a></li></ul>
-
-			</span>
-		</div>
-	</footer>
-	
-</article>
+  
+  
+  
+  </article>
 
 
-	<hr class="article-devider">
-
-
+    
+      
 
   
-    <article id="post-201807_FamilyGene" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201807_FamilyGene/" class="article-date">
-  <time datetime="2018-07-19T11:07:27.000Z" itemprop="datePublished">2018-07-19</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
+
   
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201807_FamilyGene/">家族基因分析的一般套路</a>
-    </h1>
+  
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<p>7/2016 </p>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201807_FamilyGene/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201807_FamilyGene/" itemprop="url">家族基因分析的一般套路</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-19T19:07:27+08:00">
+                2018-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bioinfor/" itemprop="url" rel="index">
+                    <span itemprop="name">bioinfor</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>7/2016 </p>
 <hr>
 <ol>
 <li><p>分析前准备</p>
@@ -253,56 +704,147 @@
 </li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[FamilyGene.seq] -- blast --&gt; B[FamilyGene.list]</span><br><span class="line">A[FamilyGene.hmm] -- hmmer --&gt; B[FamilyGene.list]</span><br><span class="line">B[FamilyGene.list] --&gt; C[FeatureAnalysis]</span><br><span class="line">C[FeatureAnalysis] --&gt; Ca[染色体分布]</span><br><span class="line">C[FeatureAnalysis] --&gt; Cb[基因结构]</span><br><span class="line">C[FeatureAnalysis] --&gt; Cc[motif分析]</span><br><span class="line">C[FeatureAnalysis] --&gt; Cd[promotor seq analysis]</span><br><span class="line">B[FamilyGene.list] --&gt; D[phylogenetics]</span><br><span class="line">B[FamilyGene.list] --&gt; E[Group,Name]</span><br><span class="line">B[FamilyGene.list] --&gt; F[Expression]</span><br><span class="line">F[Expression] --&gt; G[表达, 功能验证]</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
+  
+  
+  
+  </article>
 
 
-	<hr class="article-devider">
-
-
+    
+      
 
   
-    <article id="post-201807_RNAedit" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201807_RNAedit/" class="article-date">
-  <time datetime="2018-07-12T14:31:21.000Z" itemprop="datePublished">2018-07-12</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
+
   
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201807_RNAedit/">identification of A-to-I RNA Editing</a>
-    </h1>
+  
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<ol>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201807_RNAedit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201807_RNAedit/" itemprop="url">identification of A-to-I RNA Editing</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-12T22:31:21+08:00">
+                2018-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bioinfor/" itemprop="url" rel="index">
+                    <span itemprop="name">bioinfor</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
 <li><p>Quality Contorl of Fastq</p>
 </li>
 <li><p>Alignment to Reference Genome</p>
@@ -335,58 +877,147 @@
 <li>Genome-wide analysis of A-to-I RNA editing by single-molecule sequencing in Drosophila </li>
 </ul>
 
+          
+        
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
-
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RNAediting/">RNAediting</a></li></ul>
-
-			</span>
-		</div>
-	</footer>
-	
-</article>
+  
+  
+  
+  </article>
 
 
-	<hr class="article-devider">
-
-
+    
+      
 
   
-    <article id="post-201807_16S" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201807_16S/" class="article-date">
-  <time datetime="2018-07-07T00:35:21.000Z" itemprop="datePublished">2018-07-07</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
+
   
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201807_16S/">转:16S基本分析点</a>
-    </h1>
+  
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<p>8/23/2016 8:35 PM </p>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201807_16S/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201807_16S/" itemprop="url">转:16S基本分析点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-07T08:35:21+08:00">
+                2018-07-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bioinfor/" itemprop="url" rel="index">
+                    <span itemprop="name">bioinfor</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>8/23/2016 8:35 PM </p>
 <hr>
 <h2 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h2><h3 id="为什么选择16S测序？"><a href="#为什么选择16S测序？" class="headerlink" title="为什么选择16S测序？"></a>为什么选择16S测序？</h3><p>细菌中唯一的细胞器是核糖体，它的沉降系数是70S，由50S的大亚基和30S的小亚基组成，其中rRNA按沉降系数可分为5S、16S和23S三种，5S和23S rRNA在核糖体大亚基中，16S rRNA在核糖体小亚基中。5S rRNA的序列长度最长达400nt，信息量少；23S rRNA的序列长度长达2900nt，序列太长，测序通量、深度等要求高；而16S rRNA序列长度适中，约为1542nt。<br>沉降系数：离心法时，大分子沉降速度的量度，等于每单位离心场的速度。沉降系数10-13秒称为一个Svedberg单位，简写S，量纲为秒。</p>
 <h3 id="16S测序区域如何选择？"><a href="#16S测序区域如何选择？" class="headerlink" title="16S测序区域如何选择？"></a>16S测序区域如何选择？</h3><p>16S rDNA是编码16S rRNA的DNA序列，存在于所有的细菌和古菌的基因组中，一般由9个保守区和9个可变区组成，保守区在细菌间无显著差异，可用于构建所有生命的统一进化树，而可变区在不同细菌中存在一定的差异，可将菌群鉴定精细到分类学上属，甚至种的级别。</p>
@@ -504,56 +1135,147 @@
 <h3 id="Beta多样性分析还有什么要点？"><a href="#Beta多样性分析还有什么要点？" class="headerlink" title="Beta多样性分析还有什么要点？"></a>Beta多样性分析还有什么要点？</h3><p>上面的Unifra、PCoA、NMDS、Anosim和UPGMA分析均可做考虑物种丰度（加权，Weight）和不考虑物种丰度（非加权，Unweight）的两种展现形式，可以根据你的研究目的选择合适的计算方法。</p>
 <hr>
 
+          
+        
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
+  
+  
+  
+  </article>
 
 
-	<hr class="article-devider">
-
-
+    
+      
 
   
-    <article id="post-201807_matplotlib" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201807_matplotlib/" class="article-date">
-  <time datetime="2018-07-02T11:19:21.000Z" itemprop="datePublished">2018-07-02</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
+
   
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201807_matplotlib/">matplotlib 画图的 Qt 问题</a>
-    </h1>
+  
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<ol>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201807_matplotlib/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201807_matplotlib/" itemprop="url">matplotlib 画图的 Qt 问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-02T19:19:21+08:00">
+                2018-07-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bioinfor/" itemprop="url" rel="index">
+                    <span itemprop="name">bioinfor</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
 <li><p>This application failed to start because it could not find or load the Qt platform plugin “xcb” in “”.</p>
 <p><img src="./images/2018/Snipaste_180702_14-11-26.png" alt=""></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export QT_PLUGIN_PATH="/data/software/anaconda2/plugins/"</span><br></pre></td></tr></table></figure>
@@ -573,58 +1295,147 @@
 </li>
 </ol>
 
+          
+        
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
-
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vcf/">vcf</a></li></ul>
-
-			</span>
-		</div>
-	</footer>
-	
-</article>
+  
+  
+  
+  </article>
 
 
-	<hr class="article-devider">
-
-
+    
+      
 
   
-    <article id="post-201806_HumanGene" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201806_HumanGene/" class="article-date">
-  <time datetime="2018-06-30T15:33:23.000Z" itemprop="datePublished">2018-06-30</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
+
   
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201806_HumanGene/">canonical transcripts of Human protein coding gene</a>
-    </h1>
+  
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<p>我们使用 <a href="https://chengcz.github.io/2018/201805_snpEff/">snpEff</a>, <a href="https://chengcz.github.io/2018/201806_ANNOVAR/">annovar</a> 对得到的变异集注释，总会得到多个转录本注释结果，而只需要按照 HGVS 规范报告一个经典转录本(canonical transcripts) 对应注释结果，这时候就需要知道每个基因对应的经典转录本。</p>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201806_HumanGene/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201806_HumanGene/" itemprop="url">canonical transcripts of Human protein coding gene</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-30T23:33:23+08:00">
+                2018-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bioinfor/" itemprop="url" rel="index">
+                    <span itemprop="name">bioinfor</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>我们使用 <a href="https://chengcz.github.io/2018/201805_snpEff/">snpEff</a>, <a href="https://chengcz.github.io/2018/201806_ANNOVAR/">annovar</a> 对得到的变异集注释，总会得到多个转录本注释结果，而只需要按照 HGVS 规范报告一个经典转录本(canonical transcripts) 对应注释结果，这时候就需要知道每个基因对应的经典转录本。</p>
 <p>一般情况下，我们使用<strong>基因对应的最长转录本代表该基因</strong>，具体操作上，首先从 <a href="https://chengcz.github.io/2018/201805_HGVS/">HGNC</a> 下载经过确认的基因对应经典转录本信息，其中不确定基因再使用最长转录本代表。</p>
 <ol>
 <li><p>HGNC 下载编码蛋白基因对应转录本</p>
@@ -645,111 +1456,291 @@
 </li>
 </ol>
 
+          
+        
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
-
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gtf/">gtf</a></li></ul>
-
-			</span>
-		</div>
-	</footer>
-	
-</article>
+  
+  
+  
+  </article>
 
 
-	<hr class="article-devider">
-
-
+    
+      
 
   
-    <article id="post-201806_python_decode" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201806_python_decode/" class="article-date">
-  <time datetime="2018-06-27T15:15:52.000Z" itemprop="datePublished">2018-06-27</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
+
   
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201806_python_decode/">使用 python 正确读取不同编码方式文本</a>
-    </h1>
+  
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<p>通常情况下，都会默认输入文件以 utf-8 的方式进行编码，总会有几个奇葩输入文件存在，导入分析流程，啊额，编码问题运行终止，再来一遍呢还是再来一遍。</p>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201806_python_decode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201806_python_decode/" itemprop="url">使用 python 正确读取不同编码方式文本</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-27T23:15:52+08:00">
+                2018-06-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>通常情况下，都会默认输入文件以 utf-8 的方式进行编码，总会有几个奇葩输入文件存在，导入分析流程，啊额，编码问题运行终止，再来一遍呢还是再来一遍。</p>
 <p>技术问题还是选择用技术手段解决好些，是吧，一个简单的例子如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> io <span class="keyword">import</span> open</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Read_File_Right_Encode</span><span class="params">(fp, encodelst=None)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="comment"># content = subprocess.check_output('iconv -f GBK -t utf-8 &#123;file&#125;')</span></span><br><span class="line">    <span class="keyword">with</span> open(fp, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        tmp = f.read()</span><br><span class="line">    <span class="keyword">if</span> encodelst <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">	    encodelst = [<span class="string">'gbk'</span>, <span class="string">'ascii'</span>, <span class="string">'utf-8'</span>]</span><br><span class="line">    x = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="keyword">if</span> x == len(encodelst):</span><br><span class="line">            <span class="keyword">raise</span> Exception(<span class="string">'Can\'t find right coding format of &#123;&#125; in decode list: &#123;&#125;'</span>.format(fp, <span class="string">', '</span>.join(encodelst)))</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            content = tmp.decode(encodelst[x])</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        x += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> content</span><br></pre></td></tr></table></figure>
 
+          
+        
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/python/">python</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
+  
+  
+  
+  </article>
 
 
-	<hr class="article-devider">
-
-
+    
+      
 
   
-    <article id="post-201806_compare_vcf" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201806_compare_vcf/" class="article-date">
-  <time datetime="2018-06-25T16:02:01.000Z" itemprop="datePublished">2018-06-26</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
+
   
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201806_compare_vcf/">NA12878 全外显子数据分析结果比较</a>
-    </h1>
+  
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<p>一直都比较有兴趣分析 human DNA 变异，参照 gatk 流程分析了 NA12878 的全外数据，正好有参考变异集，比较下分析准确性，也好参数调整优化之类，吧吧吧，下面就是一些详细步骤粘贴整理</p>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201806_compare_vcf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201806_compare_vcf/" itemprop="url">NA12878 全外显子数据分析结果比较</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T00:02:01+08:00">
+                2018-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bioinfor/" itemprop="url" rel="index">
+                    <span itemprop="name">bioinfor</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一直都比较有兴趣分析 human DNA 变异，参照 gatk 流程分析了 NA12878 的全外数据，正好有参考变异集，比较下分析准确性，也好参数调整优化之类，吧吧吧，下面就是一些详细步骤粘贴整理</p>
 <h3 id="NA12878-vcf-处理"><a href="#NA12878-vcf-处理" class="headerlink" title="NA12878.vcf 处理"></a>NA12878.vcf 处理</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> wget -c ftp://ftp-trace.ncbi.nih.gov/giab/ftp/data/NA12878/Garvan_NA12878_HG001_HiSeq_Exome/project.NIST.hc.snps.indels.vcf</span><br><span class="line">hc_snp_indel=project.NIST.hc.snps.indels.vcf</span><br><span class="line"><span class="meta">#</span> wget -c ftp://ftp-trace.ncbi.nih.gov/giab/ftp/data/NA12878/Garvan_NA12878_HG001_HiSeq_Exome/nexterarapidcapture_expandedexome_targetedregions.bed</span><br><span class="line">intervals=nexterarapidcapture_expandedexome_targetedregions.bed</span><br><span class="line"></span><br><span class="line">java -jar GenomeAnalysisTK.jar \</span><br><span class="line">    -T SelectVariants \</span><br><span class="line">    -R $genome \</span><br><span class="line">    -V $hc_snp_indel \</span><br><span class="line">    -L $intervals \</span><br><span class="line">    -sn NIST7035 \</span><br><span class="line">    -select 'DP &gt; 5' \</span><br><span class="line">    --excludeNonVariants \</span><br><span class="line">    -o ref.NIST7035.hc.snps.indels.vcf.gz</span><br><span class="line"><span class="meta">#</span> 选择特定区间内 DP 大于5，样品 NIST7035 的变异位点</span><br></pre></td></tr></table></figure>
 <h3 id="vcf-处理"><a href="#vcf-处理" class="headerlink" title="vcf 处理"></a>vcf 处理</h3><p>ref: <a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=2806" target="_blank" rel="noopener">https://software.broadinstitute.org/gatk/documentation/article.php?id=2806</a></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> SNP</span><br><span class="line">java -jar GenomeAnalysisTK.jar \</span><br><span class="line">    -T SelectVariants \</span><br><span class="line">    -R $genome \</span><br><span class="line">    -L $intervals \</span><br><span class="line">    -selectType SNP \</span><br><span class="line">    -V  NIST7035.vcf.gz \</span><br><span class="line">    -o NIST7035.snp.vcf.gz</span><br><span class="line">java -jar GenomeAnalysisTK.jar \</span><br><span class="line">    -T VariantFiltration \</span><br><span class="line">    -R $genome \</span><br><span class="line">    --filterExpression "DP &lt; 5" --filterName "LowDepth"  \</span><br><span class="line">    --filterExpression "FS &gt; 60.0 || SOR &gt; 3.0" --filterName "StrandBias"  \</span><br><span class="line">    --filterExpression "QD &lt; 2.0  || MQ &lt; 40.0 || MQRankSum &lt; -12.5" \</span><br><span class="line">    --filterName "snp_Filter"  \</span><br><span class="line">    --filterExpression "ReadPosRankSum &lt; -8.0" --filterName "endOfRead"  \</span><br><span class="line">    -V  NIST7035.snp.vcf.gz \</span><br><span class="line">    -o  NIST7035.snp.filter.vcf.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Indel</span><br><span class="line">java -jar GenomeAnalysisTK.jar \</span><br><span class="line">    -T SelectVariants \</span><br><span class="line">    -R $genome \</span><br><span class="line">    -L $intervals \</span><br><span class="line">    -selectType INDEL \</span><br><span class="line">    -V  NIST7035.vcf.gz \</span><br><span class="line">    -o NIST7035.indel.vcf.gz</span><br><span class="line">java -jar GenomeAnalysisTK.jar \</span><br><span class="line">    -T VariantFiltration \</span><br><span class="line">    -R $genome \</span><br><span class="line">    --filterExpression "DP &lt; 5" --filterName "LowDepth"  \</span><br><span class="line">    --filterExpression "QD &lt; 2.0 || FS &gt; 200.0" \</span><br><span class="line">    --filterName "InDels_Filter" \</span><br><span class="line">    --filterExpression "ReadPosRankSum &lt; -20.0" --filterName "endOfRead" \</span><br><span class="line">    -V NIST7035.indel.vcf.gz \</span><br><span class="line">    -o NIST7035.indel.filter.vcf.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> MergeVcf</span><br><span class="line">java -jar picard.jar MergeVcfs \</span><br><span class="line">    I=NIST7035.indel.filter.vcf.gz \</span><br><span class="line">    I=NIST7035.snp.filter.vcf.gz \</span><br><span class="line">    O=NIST7035.filter.vcf.gz\</span><br><span class="line">    D=$genome.dict</span><br></pre></td></tr></table></figure>
@@ -775,58 +1766,147 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> http://vcftools.github.io/</span><br><span class="line">vcftools --vcf ref.vcf --diff alt.vcf --out prefix</span><br><span class="line"><span class="meta">#</span> ref.vcf.gz    # 则需要使用--gzvcf</span><br><span class="line"><span class="meta">#</span> alt.vcf.gz    # 则需要使用--gzdiff</span><br></pre></td></tr></table></figure>
 <h3 id="质控参数调整思路"><a href="#质控参数调整思路" class="headerlink" title="质控参数调整思路"></a>质控参数调整思路</h3><p>根据质控结果比较来看，参控参数都还需要进行再调整，一个初步的参数调整思路是，对高质量变异集各项质控指标分布进行统计，然后进行阈值选择；或者对 <strong>NA12878</strong> 全基因组水平的变异进行 <strong><a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=2805" target="_blank" rel="noopener">VQSR</a></strong> 分析，统计高质量变异位点质控指标分布</p>
 
+          
+        
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
-
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NA12878/">NA12878</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WES/">WES</a></li></ul>
-
-			</span>
-		</div>
-	</footer>
-	
-</article>
+  
+  
+  
+  </article>
 
 
-	<hr class="article-devider">
-
-
+    
+      
 
   
-    <article id="post-201806_ANNOVAR" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201806_ANNOVAR/" class="article-date">
-  <time datetime="2018-06-16T15:40:21.000Z" itemprop="datePublished">2018-06-16</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
+
   
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201806_ANNOVAR/">vcf 注释 —— ANNOVAR</a>
-    </h1>
+  
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<p>最先知道的 VCF 注释软件，但是呢没有搞定构建研究物种的注释数据库，于是转向snpEff，工作转向临床分析时候，发现 ANNOVAR 在人类数据注释多种第三方数据库支持，变异频率、HGVS、ACMG致病性、dbSNP、Cosmic支持等等</p>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201806_ANNOVAR/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201806_ANNOVAR/" itemprop="url">vcf 注释 —— ANNOVAR</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-16T23:40:21+08:00">
+                2018-06-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bioinfor/" itemprop="url" rel="index">
+                    <span itemprop="name">bioinfor</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最先知道的 VCF 注释软件，但是呢没有搞定构建研究物种的注释数据库，于是转向snpEff，工作转向临床分析时候，发现 ANNOVAR 在人类数据注释多种第三方数据库支持，变异频率、HGVS、ACMG致病性、dbSNP、Cosmic支持等等</p>
 <p>软件文档镇楼: <a href="http://annovar.openbioinformatics.org/en/latest/" target="_blank" rel="noopener">http://annovar.openbioinformatics.org/en/latest/</a></p>
 <h3 id="软件下载"><a href="#软件下载" class="headerlink" title="软件下载"></a>软件下载</h3><p>ANNOVAR 由 perl 实现，下载即用，软件下载地址为：<a href="http://www.openbioinformatics.org/annovar/annovar_download_form.php" target="_blank" rel="noopener">http://www.openbioinformatics.org/annovar/annovar_download_form.php</a> ，软件包包括下面几个功能脚本：</p>
 <ul>
@@ -853,67 +1933,329 @@
 <h3 id="软件运行"><a href="#软件运行" class="headerlink" title="软件运行"></a>软件运行</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> input file format: vcf</span><br><span class="line">table_annovar.pl example/ex2.vcf humandb/ -buildver hg19 -out myanno -remove -protocol refGene,cytoBand,esp6500siv2_all,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_eas,1000g2015aug_eur,snp138,dbnsfp30a -operation g,r,f,f,f,f,f,f,f -nastring . -vcfinput</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 不同于snpEff，ANNOVAR 所有注释结果都在 vcf 文件 INFO 列添加key-value</span><br></pre></td></tr></table></figure>
 <h3 id="非人物种数据库整理"><a href="#非人物种数据库整理" class="headerlink" title="非人物种数据库整理"></a>非人物种数据库整理</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 下载物种基因序列、注释文件</span><br><span class="line">wget -c ftp://ftp.ensemblgenomes.org/pub/release-27/plants/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.27.dna.genome.fa.gz</span><br><span class="line">wget -c ftp://ftp.ensemblgenomes.org/pub/release-27/plants/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.27.gtf.gz</span><br><span class="line">gzip -d Arabidopsis_thaliana.TAIR10.27.dna.genome.fa.gz</span><br><span class="line">gzip -d Arabidopsis_thaliana.TAIR10.27.gtf.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> gtf文件格式转换</span><br><span class="line">gtfToGenePred -genePredExt Arabidopsis_thaliana.TAIR10.27.gtf AT_refGene.txt</span><br><span class="line"><span class="meta">#</span> wget -c http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/gtfToGenePred</span><br><span class="line"><span class="meta">#</span> 另一种格式转换方法，https://github.com/chengcz/pyGTF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 使用软件包提供脚本build物种数据库，数据库buildver为AT，名称为refGene</span><br><span class="line">perl retrieve_seq_from_fasta.pl --format refGene --seqfile Arabidopsis_thaliana.TAIR10.27.dna.genome.fa AT_refGene.txt --out AT_refGeneMrna.fa</span><br></pre></td></tr></table></figure>
 
+          
+        
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
   </div>
 
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vcf/">vcf</a></li></ul>
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
 
-			</span>
-		</div>
-	</footer>
-	
-</article>
+      
 
+      
 
-	<hr class="article-devider">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ChengCZ</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
 
+          <nav class="site-state motion-element">
 
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
 
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
-  
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
 
     </div>
-    <div class="mb-search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
-    <input type="hidden" name="q" value="site:chengcz.github.io">
-  </form>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChengCZ</span>
+
+  
 </div>
-<footer id="footer">
-	<!---<h1 class="footer-blog-title">
-		<a href="/">ChengCZ&#39;s Notebook</a>
-	</h1>--->
-	<span class="copyright">
-		&copy; 2018 ChengCZ<br>
-		<!---Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
-		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>--->
-	</span>
-</footer>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
 
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
   </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>

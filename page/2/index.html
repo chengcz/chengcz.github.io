@@ -1,130 +1,492 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
+
+
+
   
-  <title>ChengCZ&#39;s Notebook</title>
-  <meta name="viewport" content="width=device-width">
-  <meta property="og:type" content="website">
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
 <meta property="og:title" content="ChengCZ&#39;s Notebook">
 <meta property="og:url" content="http://chengcz.github.io/page/2/index.html">
 <meta property="og:site_name" content="ChengCZ&#39;s Notebook">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ChengCZ&#39;s Notebook">
-  
-    <link rel="alternative" href="/atom.xml" title="ChengCZ&#39;s Notebook" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
-</head>
-<body>
-  <div id="container">
-    <div class="mobile-nav-panel">
-	<i class="icon-reorder icon-large"></i>
-</div>
-<header id="header">
-	<h1 class="blog-title">
-		<a href="/">ChengCZ&#39;s Notebook</a>
-	</h1>
-	<nav class="nav">
-		<ul>
-			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/about">About</a></li>
-			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
-			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
-		</ul>
-	</nav>
-	<div id="search-form-wrap">
-		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://chengcz.github.io"></form>
-	</div>
-</header>
-    <div id="main">
-      
-  
-    <article id="post-201806_vcf2tab" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201806_vcf2tab/" class="article-date">
-  <time datetime="2018-06-16T15:19:21.000Z" itemprop="datePublished">2018-06-16</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201806_vcf2tab/">从 vcf 文件准备 ANNOVAR 数据库</a>
-    </h1>
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://chengcz.github.io/page/2/"/>
+
+
+
+
+
+  <title>ChengCZ's Notebook</title>
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<p>annovar可以说是最常用的变异注释软件了，除了基于基因位置进行注释，还有丰富的第三方数据库支持，clinvar, cosmic等等，但是annovar提供下载数据库版本较老，需要自行下载第三方 vcf 进行转换。</p>
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a79f8c7f932a2d3ed822562170533a8d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ChengCZ's Notebook</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201806_vcf2tab/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201806_vcf2tab/" itemprop="url">从 vcf 文件准备 ANNOVAR 数据库</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-16T23:19:21+08:00">
+                2018-06-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bioinfor/" itemprop="url" rel="index">
+                    <span itemprop="name">bioinfor</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>annovar可以说是最常用的变异注释软件了，除了基于基因位置进行注释，还有丰富的第三方数据库支持，clinvar, cosmic等等，但是annovar提供下载数据库版本较老，需要自行下载第三方 vcf 进行转换。</p>
 <p>以 clinvar 为例说说 vcf 格式转换成 annovar 可识别表格格式，annovar 仅需要 vcf 中部分信息，为了脚本通用这里输出vcf所有信息到 tab 格式，详细处理脚本如下，同时实现脚本存放 <a href="https://github.com/chengcz/BioResource/tree/master/vcf2tab" target="_blank" rel="noopener">github</a>。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gzip</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Parse_Variant_Annovar_Style</span><span class="params">(line)</span>:</span></span><br><span class="line">	CHROM, POS, ID, REF, ALT, QUAL, FILTER, INFO = line.split(<span class="string">'\t'</span>)[:<span class="number">8</span>]</span><br><span class="line">    <span class="comment"># 一般公共数据下载的 vcf 文件仅包含8列</span></span><br><span class="line">    POS = int(POS)</span><br><span class="line">    dat = &#123;&#125;</span><br><span class="line">    dat[<span class="string">'CHROM'</span>] = CHROM</span><br><span class="line">    dat[<span class="string">'ID'</span>] = ID</span><br><span class="line">    <span class="keyword">if</span> len(REF) == len(ALT) == <span class="number">1</span> <span class="keyword">and</span> REF != ALT:    <span class="comment"># SNV</span></span><br><span class="line">        dat[<span class="string">'START'</span>], dat[<span class="string">'END'</span>] = POS, POS</span><br><span class="line">        dat[<span class="string">'REF'</span>], dat[<span class="string">'ALT'</span>] = REF, ALT</span><br><span class="line">    <span class="keyword">elif</span> len(REF) == <span class="number">1</span> <span class="keyword">and</span> len(ALT) != <span class="number">1</span> <span class="keyword">and</span> ALT.startswith(REF):    <span class="comment"># Insert</span></span><br><span class="line">        dat[<span class="string">'START'</span>], dat[<span class="string">'END'</span>] = POS, POS</span><br><span class="line">        dat[<span class="string">'REF'</span>], dat[<span class="string">'ALT'</span>] = <span class="string">'-'</span>, ALT[<span class="number">1</span>:]</span><br><span class="line">    <span class="keyword">elif</span> len(REF) != <span class="number">1</span> <span class="keyword">and</span> len(ALT) == <span class="number">1</span> <span class="keyword">and</span> REF.startswith(ALT):    <span class="comment"># Delete</span></span><br><span class="line">        dat[<span class="string">'START'</span>], dat[<span class="string">'END'</span>] = POS+<span class="number">1</span>, POS+len(REF)<span class="number">-1</span></span><br><span class="line">        dat[<span class="string">'REF'</span>], dat[<span class="string">'ALT'</span>] = REF[<span class="number">1</span>:], <span class="string">'-'</span></span><br><span class="line">    <span class="keyword">else</span>:    <span class="comment"># complex variant</span></span><br><span class="line">        dat[<span class="string">'START'</span>], dat[<span class="string">'END'</span>] = POS, POS+len(REF)<span class="number">-1</span></span><br><span class="line">        dat[<span class="string">'REF'</span>], dat[<span class="string">'ALT'</span>] = REF, ALT</span><br><span class="line">    dat.update(INFO2dict(INFO))</span><br><span class="line">    <span class="keyword">return</span> dat</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Parse_Variant</span><span class="params">(line)</span>:</span></span><br><span class="line">	CHROM, POS, ID, REF, ALT, QUAL, FILTER, INFO = line.split(<span class="string">'\t'</span>)[:<span class="number">8</span>]</span><br><span class="line">    <span class="comment"># 一般公共数据下载的 vcf 文件仅包含8列</span></span><br><span class="line">    POS = int(POS)</span><br><span class="line">    dat = &#123;&#125;</span><br><span class="line">    dat[<span class="string">'CHROM'</span>] = CHROM</span><br><span class="line">    dat[<span class="string">'ID'</span>] = ID</span><br><span class="line">    dat[<span class="string">'START'</span>], dat[<span class="string">'END'</span>] = POS, POS+len(REF)<span class="number">-1</span></span><br><span class="line">    dat[<span class="string">'REF'</span>], dat[<span class="string">'ALT'</span>] = REF, ALT</span><br><span class="line">    dat.update(INFO2dict(INFO))</span><br><span class="line">    <span class="keyword">return</span> dat</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">INFO2dict</span><span class="params">(info)</span>:</span></span><br><span class="line">    tmp = [i.strip() <span class="keyword">for</span> i <span class="keyword">in</span> info.split(<span class="string">';'</span>) <span class="keyword">if</span> i.strip()]</span><br><span class="line">    infor = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> tmp:</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'='</span> <span class="keyword">in</span> i:</span><br><span class="line">            <span class="comment"># index = i.index('=')</span></span><br><span class="line">            <span class="comment"># infor[i[:index]] = i[index+1:]</span></span><br><span class="line">            i = i.split(<span class="string">'='</span>)</span><br><span class="line">            infor[i[<span class="number">0</span>]] = i[<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            infor[i] = <span class="string">'true'</span></span><br><span class="line">    <span class="keyword">return</span> infor</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fopen = gzip.open <span class="keyword">if</span> clinvar.endswith(<span class="string">'gz'</span>) <span class="keyword">else</span> open</span><br><span class="line"><span class="comment"># 这种文件打开适用于 python2, python3 中存在 bits 和 string 类型的差别</span></span><br><span class="line"><span class="keyword">with</span> fopen(input_vcf) <span class="keyword">as</span> f:</span><br><span class="line">    tags = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> f:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> i.strip():</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> i.startswith(<span class="string">'##INFO='</span>):</span><br><span class="line">             tags.append(i.split(<span class="string">','</span>)[<span class="number">0</span>].split(<span class="string">'='</span>)[<span class="number">-1</span>])</span><br><span class="line">        <span class="keyword">elif</span> i.startswith(<span class="string">'#CHROM'</span>):</span><br><span class="line">             print(<span class="string">'#CHROM\tSTART\tEND\tID\tREF\tALT\t&#123;&#125;\n'</span>.format(<span class="string">'\t'</span>.join(tags)))</span><br><span class="line">        <span class="keyword">elif</span> <span class="keyword">not</span> i.startswith(<span class="string">'#'</span>):</span><br><span class="line">             dat = Parse_Variant_Annovar_Style(i)</span><br><span class="line">             <span class="comment"># dat = Parse_Varitn(i)</span></span><br><span class="line">             <span class="keyword">for</span> x, label <span class="keyword">in</span> enumerate([<span class="string">'CHROM'</span>, <span class="string">'START'</span>, <span class="string">'END'</span>, <span class="string">'ID'</span>, <span class="string">'REF'</span>, <span class="string">'ALT'</span>]+tags):</span><br><span class="line">                <span class="keyword">if</span> x != <span class="number">0</span>:</span><br><span class="line">                    print(<span class="string">'\t'</span>)</span><br><span class="line">                print(dat.get(label, <span class="string">'--'</span>))    <span class="comment"># INFO 列中某些 tag 并不存在于所有行</span></span><br><span class="line">             print(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
 
+          
+        
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
-
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vcf/">vcf</a></li></ul>
-
-			</span>
-		</div>
-	</footer>
-	
-</article>
+  
+  
+  
+  </article>
 
 
-	<hr class="article-devider">
-
-
+    
+      
 
   
-    <article id="post-201805_config" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201805_config/" class="article-date">
-  <time datetime="2018-05-28T15:13:32.000Z" itemprop="datePublished">2018-05-28</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
+
   
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201805_config/">编写 python 的几种 config 处理方式</a>
-    </h1>
+  
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<p>编写分析流程时候，为了兼容性总会设置一些常用选项配置文件输入，不同配置方式各有一些特点，就用过的几种配置方式简单整理</p>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201805_config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201805_config/" itemprop="url">编写 python 的几种 config 处理方式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-28T23:13:32+08:00">
+                2018-05-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>编写分析流程时候，为了兼容性总会设置一些常用选项配置文件输入，不同配置方式各有一些特点，就用过的几种配置方式简单整理</p>
 <h3 id="script-——-config-py"><a href="#script-——-config-py" class="headerlink" title="script —— config.py"></a>script —— config.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="comment"># sys.path.insert(0, 'config_py_dirname')    # 使config.py文件位于PYTHONPATH路径下</span></span><br><span class="line"><span class="keyword">import</span> config</span><br><span class="line"></span><br><span class="line">option = config.option    <span class="comment"># 获取配置信息</span></span><br></pre></td></tr></table></figure>
 <p>书写方式完全按照python脚本进行，可读性较高，问题在于<strong>PYTHONPATH的处理</strong>，脚本环境内<strong>键值对可能产生的覆盖问题</strong>，准确导入分析流程</p>
 <h3 id="configparser-——-config-ini"><a href="#configparser-——-config-ini" class="headerlink" title="configparser —— config.ini"></a>configparser —— config.ini</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> configparser    <span class="comment"># python3</span></span><br><span class="line"><span class="comment"># import Configparser as configparser    # python2</span></span><br><span class="line"></span><br><span class="line">cf = configparser.ConfigParser()</span><br><span class="line">cf.read(<span class="string">'config.ini'</span>)</span><br><span class="line"></span><br><span class="line">sections = cf.sections()    <span class="comment"># 列出所有section</span></span><br><span class="line">options = cf.options(section)    <span class="comment"># 列出section对应的所有option</span></span><br><span class="line">value = cf.get(section,option)    <span class="comment"># 范围section对应option的值，string</span></span><br><span class="line"><span class="comment"># getint(section,option) 返回为int，</span></span><br><span class="line"><span class="comment"># getboolean(section,option) 返回bool，</span></span><br><span class="line"><span class="comment"># getfloat(section,option) 返回float</span></span><br></pre></td></tr></table></figure>
@@ -142,56 +504,147 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 表示 key-value 对</span></span><br><span class="line"><span class="attr">key1:</span> <span class="string">value2</span></span><br><span class="line"><span class="attr">key2:</span> <span class="string">value2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 表示 list</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">value1</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">value2</span></span><br><span class="line"><span class="comment"># [value1, value2]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 时间表示</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2018</span><span class="bullet">-05</span><span class="bullet">-24</span>    <span class="comment"># iso8601</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># None表示</span></span><br><span class="line"><span class="attr">key:</span> <span class="string">~</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># bool表示</span></span><br><span class="line"><span class="attr">flag1:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">flag2:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
 <p>相比于上面几种方法，<strong>yaml可读性高，容易书写，不用考虑PYTHONPATH问题，批量导入配置信息</strong></p>
 
+          
+        
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/python/">python</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
+  
+  
+  
+  </article>
 
 
-	<hr class="article-devider">
-
-
+    
+      
 
   
-    <article id="post-201805_HGVS" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201805_HGVS/" class="article-date">
-  <time datetime="2018-05-20T06:38:32.000Z" itemprop="datePublished">2018-05-20</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
+
   
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201805_HGVS/">HGVS 变异描述规则</a>
-    </h1>
+  
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<p><a href="http://varnomen.hgvs.org/recommendations/" target="_blank" rel="noopener">http://varnomen.hgvs.org/recommendations/</a>, 描述规则基本格式为：<strong>[identifier]:[levels].[Description of variant]</strong></p>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201805_HGVS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201805_HGVS/" itemprop="url">HGVS 变异描述规则</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-20T14:38:32+08:00">
+                2018-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bioinfor/" itemprop="url" rel="index">
+                    <span itemprop="name">bioinfor</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="http://varnomen.hgvs.org/recommendations/" target="_blank" rel="noopener">http://varnomen.hgvs.org/recommendations/</a>, 描述规则基本格式为：<strong>[identifier]:[levels].[Description of variant]</strong></p>
 <h3 id="identifier"><a href="#identifier" class="headerlink" title="[identifier]"></a>[identifier]</h3><p><img src="./images/2018/hgvs_identifier.png" alt=""></p>
 <ul>
 <li>only public files from NCBI or EBI are accepted as reference sequence files</li>
@@ -244,218 +697,580 @@
 <li><a href="http://varnomen.hgvs.org/recommendations/general" target="_blank" rel="noopener">http://varnomen.hgvs.org/recommendations/general</a></li>
 </ul>
 
+          
+        
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
-
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HGVS/">HGVS</a></li></ul>
-
-			</span>
-		</div>
-	</footer>
-	
-</article>
+  
+  
+  
+  </article>
 
 
-	<hr class="article-devider">
-
-
+    
+      
 
   
-    <article id="post-201805_pandas" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201805_pandas/" class="article-date">
-  <time datetime="2018-05-18T10:45:52.000Z" itemprop="datePublished">2018-05-18</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
+
   
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201805_pandas/">python 表格处理 —— pandas</a>
-    </h1>
+  
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<p>pandas 表格数据处理，唰唰唰…</p>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201805_pandas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201805_pandas/" itemprop="url">python 表格处理 —— pandas</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-18T18:45:52+08:00">
+                2018-05-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>pandas 表格数据处理，唰唰唰…</p>
 <h2 id="Data-frame"><a href="#Data-frame" class="headerlink" title="Data frame"></a>Data frame</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据框转制</span></span><br><span class="line">dat = dat.T</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据列进行合并</span></span><br><span class="line">dat = pd.merge(dat1, dat2, </span><br><span class="line">               on=<span class="string">'col'</span>,    <span class="comment"># col在两个数据框中同时存在时，设置on</span></span><br><span class="line">               left_on=<span class="string">'col1'</span>, right_on=<span class="string">'col2'</span>,    <span class="comment"># 两个列名不同时存在，分贝设置合并列名</span></span><br><span class="line">               left_index=<span class="keyword">False</span>, right_index=<span class="keyword">False</span>,    <span class="comment"># 使用df的index进行合并</span></span><br><span class="line">               how=<span class="string">'outdir'</span>)    <span class="comment"># &#123;'left', 'right', 'outer', 'inner'&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># concat 合并列数据</span></span><br><span class="line">dat = pd.concat(dflst, </span><br><span class="line">                axis=<span class="number">1</span>,    <span class="comment"># 左右合并</span></span><br><span class="line">                join=<span class="string">'outer'</span>)    <span class="comment"># &#123;'inner', 'outer'&#125;</span></span><br><span class="line"><span class="comment"># concat 行追加</span></span><br><span class="line">dat = pd.concat(dflst, axis=<span class="number">0</span>, ignore_index=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除数据框行或者列</span></span><br><span class="line">dat = dat.drop(col_lst, axis=<span class="number">1</span>)    <span class="comment"># 删除 列</span></span><br><span class="line">dat = dat.drop(index_lst, axis=<span class="number">0</span>)    <span class="comment"># 删除 行</span></span><br><span class="line">dat = dat.drop_duplicates()    <span class="comment"># 删除 重复行</span></span><br><span class="line">dat = dat.dropna(axis=<span class="number">0</span>,     <span class="comment"># 0，1 0表示行，1表示列</span></span><br><span class="line">                 how=<span class="string">'all'</span>)    <span class="comment"># &#123;'any', 'all'&#125;, all表示删除所有值缺失，any表示删除任意一个值缺失</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 长表格 ==&gt; 宽表格转换</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">dat = pd.pivot_table(df, index=[<span class="string">"Product"</span>],    <span class="comment"># 设置保留字段</span></span><br><span class="line">                     columns=[<span class="string">'Year'</span>],    <span class="comment"># 扩展列</span></span><br><span class="line">                     values=[<span class="string">"Price"</span>],    <span class="comment"># 选定列对应数值</span></span><br><span class="line">                     aggfunc=[np.sum], fill_value=<span class="number">0</span>)    <span class="comment"># 设置数据合并的具体操作</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 宽表格 ==&gt; 长表格转换</span></span><br><span class="line">df = df.melt(id_vars=[<span class="string">"Name"</span>,<span class="string">"Product"</span>],    <span class="comment"># 保留的主字段</span></span><br><span class="line">             var_name=<span class="string">"Year"</span>,    <span class="comment"># 分类名</span></span><br><span class="line">             value_name=<span class="string">"Price"</span>)    <span class="comment"># 变量名</span></span><br></pre></td></tr></table></figure>
 <h2 id="read-table"><a href="#read-table" class="headerlink" title="read table"></a>read table</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">dat = pd.read_table(<span class="string">'data.csv'</span>, </span><br><span class="line">                    sep=<span class="string">'\t'</span>,     <span class="comment"># 设置表格分隔符，read_table默认为‘\t’，read_csv默认为‘,’</span></span><br><span class="line">                    index_col=<span class="number">0</span>,    <span class="comment"># 使用第1列作为数据框index，默认range(0, num_line)作为index</span></span><br><span class="line">                    header=<span class="keyword">None</span>,     <span class="comment"># 表示文件不存在表头，默认第一行为表头</span></span><br><span class="line">                    names=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">''</span>])    <span class="comment"># 表头不存在时，添加表头为...</span></span><br><span class="line"><span class="comment"># dat = pd.read_csv(...)</span></span><br><span class="line">dat = pd.read_excel(<span class="string">'data.xlsx'</span>, </span><br><span class="line">                    sheet_name=<span class="string">'sheet1'</span>)    <span class="comment"># 读取data.xlsx工作簿中sheet1的表格</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取文件前特定行数</span></span><br><span class="line">dat = pd.read_csv(<span class="string">'data.csv'</span>, nrows=<span class="number">500</span>)   </span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取超大文件</span></span><br><span class="line">reader = pd.read_csv(<span class="string">'data.csv'</span>, </span><br><span class="line">                     iterator=<span class="keyword">True</span>)    <span class="comment"># 产生一个迭代器</span></span><br><span class="line">chunkSize = <span class="number">100000</span></span><br><span class="line">chunks = []</span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        chunk = reader.get_chunk(chunkSize)    <span class="comment"># 一次读取特定行</span></span><br><span class="line">        <span class="comment"># chunk     # 进行一些过滤、处理</span></span><br><span class="line">        chunks.append(chunk)</span><br><span class="line">    <span class="keyword">except</span> StopIteration:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">df = pd.concat(chunks, axis=<span class="number">0</span>, ignore_index=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
 <h2 id="save-table"><a href="#save-table" class="headerlink" title="save table"></a>save table</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出数据到txt文本</span></span><br><span class="line">dat.to_csv(<span class="string">'data.xls'</span>, </span><br><span class="line">           index=<span class="keyword">False</span>,    <span class="comment"># 是否输出df的index</span></span><br><span class="line">           header=<span class="keyword">False</span>,    <span class="comment"># 是否输出表头</span></span><br><span class="line">           na_rep=<span class="string">''</span>,    <span class="comment"># 缺省值替换</span></span><br><span class="line">           sep=<span class="string">'\t'</span>,    <span class="comment"># 使用tab作为分隔符</span></span><br><span class="line">           encoding=<span class="string">'utf-8'</span>)    <span class="comment"># 输出文件使用utf-8编码</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出数据框到excel</span></span><br><span class="line">writer = pd.ExcelWriter(<span class="string">'output.xlsx'</span>)    <span class="comment"># 创建输出文件</span></span><br><span class="line">df1.to_excel(writer, </span><br><span class="line">             sheet_name=<span class="string">'Sheet1'</span>, )    <span class="comment"># 输出到工作簿中名为Sheet1的工作表</span></span><br><span class="line">df2.to_excel(writer, </span><br><span class="line">             sheet_name=<span class="string">'Sheet2'</span>, )    <span class="comment"># 输出到工作簿中名为Sheet2的工作表</span></span><br><span class="line"><span class="comment"># ... </span></span><br><span class="line">writer.save()    <span class="comment"># 保存工作簿</span></span><br></pre></td></tr></table></figure>
 
+          
+        
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/python/">python</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
+  
+  
+  
+  </article>
 
 
-	<hr class="article-devider">
-
-
+    
+      
 
   
-    <article id="post-201805_subprocess" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201805_subprocess/" class="article-date">
-  <time datetime="2018-05-17T11:15:52.000Z" itemprop="datePublished">2018-05-17</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
+
   
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201805_subprocess/">python 执行 linux 命令 —— subprocess</a>
-    </h1>
+  
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<p>python 脚本内执行 linux 命令有多种方式，os.system(), os.popen()也可以，官方最新推荐方式为subprocess</p>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201805_subprocess/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201805_subprocess/" itemprop="url">python 执行 linux 命令 —— subprocess</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-17T19:15:52+08:00">
+                2018-05-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>python 脚本内执行 linux 命令有多种方式，os.system(), os.popen()也可以，官方最新推荐方式为subprocess</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行cmd并等待运行结束，返回执行状态码</span></span><br><span class="line">subprocess.call(<span class="string">'ls'</span>, shell=<span class="keyword">True</span>)    <span class="comment"># 与 os.system() 功能相似</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行cmd并等待运行结束，返回执行状态码</span></span><br><span class="line">subprocess.check_call(<span class="string">'ls'</span>, shell=<span class="keyword">True</span>)    <span class="comment"># 与subprocess.call()不同，returncode不为0，触发CalledProcessError异常</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行cmd并等待运行结束，返回 /dev/stdout 信息</span></span><br><span class="line">subprocess.check_output(<span class="string">'ls'</span>, shell=<span class="keyword">True</span>, </span><br><span class="line">                        universal_newlines=<span class="keyword">True</span>)    <span class="comment"># 以 string 形式返回 stdout 信息，而不是bytes，与 os.popen() 功能相似</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 不等待 cmd 运行结束</span></span><br><span class="line">job = subprocess.Popen(<span class="string">'ls -l'</span>,    <span class="comment"># string of cmd</span></span><br><span class="line">                       shell=<span class="keyword">True</span>,    <span class="comment"># 传入参数作为 shell 进行执行</span></span><br><span class="line">                       stdout=subprocess.PIPE,    <span class="comment"># 输出标准输出到subprocess流程</span></span><br><span class="line">                       stderr=subprocess.PIPE,    <span class="comment"># 输出标准错误到subprocess流程</span></span><br><span class="line">                       universal_newlines=<span class="keyword">True</span>)    <span class="comment"># stdout 返回时，使用 string 代替 bytes 类型</span></span><br><span class="line">pid = job.pid    <span class="comment"># 获得 cmd 本地执行的 pid</span></span><br><span class="line">job.wait()    <span class="comment"># 等待工作结束，默认Popen不等待 cmd 执行完毕即退出</span></span><br><span class="line">stdout, stderr = job.communicate()    <span class="comment"># 获得 cmd 执行返回标准输出、标准错误</span></span><br><span class="line"><span class="comment"># 设置 stdin=subprocess.PIPE 时，可以在communicate(input='...')传入参数</span></span><br><span class="line">job.returncode    <span class="comment"># 获得 cmd 执行状态码</span></span><br><span class="line">job.kill()    <span class="comment"># 杀死 cmd 进程</span></span><br></pre></td></tr></table></figure>
 <p>os 模块实现 linux cmd 执行</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">os.system(<span class="string">'ls -l'</span>)    <span class="comment"># 直接返回 cmd 执行状态码</span></span><br><span class="line"><span class="comment"># assert not os.system('ls')</span></span><br><span class="line">os.popen(<span class="string">'ls -l'</span>)    <span class="comment"># 以文件句柄的方式返回 cmd 执行的stdout信息</span></span><br></pre></td></tr></table></figure>
 
+          
+        
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/python/">python</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
+  
+  
+  
+  </article>
 
 
-	<hr class="article-devider">
-
-
+    
+      
 
   
-    <article id="post-201805_argparse" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201805_argparse/" class="article-date">
-  <time datetime="2018-05-17T11:15:52.000Z" itemprop="datePublished">2018-05-17</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
+
   
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201805_argparse/">python 参数解析 —— argsparse</a>
-    </h1>
+  
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<p>argsparse 解析命令行参数，一些常用参数整理。</p>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201805_argparse/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201805_argparse/" itemprop="url">python 参数解析 —— argsparse</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-17T19:15:52+08:00">
+                2018-05-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>argsparse 解析命令行参数，一些常用参数整理。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser(<span class="comment"># prog=__file__,    # 设置项目名称，__file__ 与 sys.argv[0] 一致，默认显示为 basename(__file__)</span></span><br><span class="line">      usage=<span class="string">'''</span></span><br><span class="line"><span class="string">      python %(prog)s [option]  '''</span>,    <span class="comment"># 设置脚本输出默认 USAGE 信息</span></span><br><span class="line">      description=<span class="string">''' some script description '''</span>,   <span class="comment"># 脚本功能描述等等</span></span><br><span class="line">      formatter_class=argparse.RawTextHelpFormatter,    <span class="comment"># 以脚本内原始文档格式输出描述等信息</span></span><br><span class="line">      epilog=<span class="string">'''</span></span><br><span class="line"><span class="string">      Note and input example, and so on.  '''</span>)    <span class="comment"># 脚本描述以外的其他信息</span></span><br><span class="line"></span><br><span class="line">parser.add_argument(<span class="string">'-v'</span>, <span class="string">'--version'</span>,    <span class="comment"># 添加脚本版本信息参数</span></span><br><span class="line">                    action=<span class="string">'version'</span>,</span><br><span class="line">                    version=<span class="string">'%(prog)s 2.0'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加一个普通的可选参数</span></span><br><span class="line">parser.add_argument(<span class="string">'-e'</span>,    <span class="comment"># 短参数</span></span><br><span class="line">                    <span class="string">'--example'</span>,    <span class="comment"># 长参数</span></span><br><span class="line">                    dest=<span class="string">'example'</span>,     <span class="comment"># 参数对应模块内部，唯一标识符</span></span><br><span class="line">                    metavar=<span class="string">''</span>,    <span class="comment"># 设置help信息中参数后字符</span></span><br><span class="line">                    action=<span class="string">'store'</span>,    <span class="comment"># 参数处理方式</span></span><br><span class="line">                    type=str,    <span class="comment"># 传入参数类型</span></span><br><span class="line">                    choices=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>],    <span class="comment"># 参数选择范围</span></span><br><span class="line">                    required=<span class="keyword">True</span>,    <span class="comment"># 表示该参数必须被设置</span></span><br><span class="line">                    default=<span class="string">'a'</span>,    <span class="comment"># 参数缺省时，该参数默认值</span></span><br><span class="line">                    nargs=<span class="string">'+'</span>,    <span class="comment"># 参数个数，*+？，表示至少一个输入</span></span><br><span class="line">                    help=<span class="string">'some help infor'</span>)    <span class="comment"># help信息</span></span><br><span class="line"><span class="comment"># action属性为store_true, store_false, store_const时，参数不接任何输入信息</span></span><br><span class="line">parser.add_argument(<span class="string">'--sum'</span>,</span><br><span class="line">                    dest=<span class="string">'accumulate'</span>,</span><br><span class="line">                    action=<span class="string">'store_const'</span>,    <span class="comment"># 该参数被设置时，参数取值成 const 对应值</span></span><br><span class="line">                    const=sum,</span><br><span class="line">                    default=max,</span><br><span class="line">                    help=<span class="string">'sum the integers (default: find the max)'</span>)</span><br><span class="line"><span class="comment"># 位置参数</span></span><br><span class="line">parser.add_argument(<span class="string">'pos'</span>,</span><br><span class="line">                    dest=<span class="string">'pos_argument'</span>,</span><br><span class="line">                    metavar=<span class="string">''</span>,</span><br><span class="line">                    nargs=<span class="string">'+'</span>,    <span class="comment"># 参数输入文件个数</span></span><br><span class="line">                    help=<span class="string">'some help infor'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 互斥参数组，组内参数不可同时出现，required=True表示组内必须有参数被设置</span></span><br><span class="line">exclusive = parser.add_mutually_exclusive_group(required=<span class="keyword">True</span>)    </span><br><span class="line">exclusive.add_argument(<span class="string">'-a'</span>, )</span><br><span class="line">exclusive.add_argument(<span class="string">'-b'</span>, )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置多个参数为一组，无实际意义，仅在打印help信息时，分组显示</span></span><br><span class="line">group = parser.add_argument_group(<span class="string">'argument group info'</span>)    </span><br><span class="line">group.add_argument(<span class="string">'-c'</span>, )</span><br><span class="line">group.add_argument(<span class="string">'-d'</span>, )</span><br><span class="line"></span><br><span class="line"><span class="comment"># parse.print_help()</span></span><br><span class="line">args = parser.parse_args()    <span class="comment"># 参数解析，生成可调用对象</span></span><br><span class="line"></span><br><span class="line">example = args.example</span><br><span class="line"><span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
 
+          
+        
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/python/">python</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
+  
+  
+  
+  </article>
 
 
-	<hr class="article-devider">
-
-
+    
+      
 
   
-    <article id="post-201805_TophatFusion" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201805_TophatFusion/" class="article-date">
-  <time datetime="2018-05-17T10:45:52.000Z" itemprop="datePublished">2018-05-17</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
+
   
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201805_TophatFusion/">使用 topaht2-fusion 分析 Fusion-Gene</a>
-    </h1>
+  
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<p>tophat2-fusion 文档搬运工：<a href="https://ccb.jhu.edu/software/tophat/fusion_tutorial.shtml" target="_blank" rel="noopener">https://ccb.jhu.edu/software/tophat/fusion_tutorial.shtml</a></p>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201805_TophatFusion/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201805_TophatFusion/" itemprop="url">使用 topaht2-fusion 分析 Fusion-Gene</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-17T18:45:52+08:00">
+                2018-05-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bioinfor/" itemprop="url" rel="index">
+                    <span itemprop="name">bioinfor</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>tophat2-fusion 文档搬运工：<a href="https://ccb.jhu.edu/software/tophat/fusion_tutorial.shtml" target="_blank" rel="noopener">https://ccb.jhu.edu/software/tophat/fusion_tutorial.shtml</a></p>
 <p>###step1.tophat</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tophat2 -p 8 -o $OUTPUT --fusion-search --keep-fasta-order --bowtie1 --no-coverage-search --fusion-anchor-length 10 --fusion-min-dist 100000 --mate-inner-dist 40 --mate-std-dev 100 $hg_bowtie1_index $read1.fastq.gz $read2.fastq.gz</span><br></pre></td></tr></table></figure>
 <p><strong>Note:</strong></p>
@@ -480,58 +1295,147 @@
 <p><em>–fusion-pair-dist</em>, Pairs with this specified distance are counted as supporting evidence for the fusion. The default threshold for the inner distance is 250.</p>
 <h3 id="results"><a href="#results" class="headerlink" title="results"></a>results</h3><p>测试了多个样品，多个参数，也根据官网数据、命令运行项目，都没有发现任何融合结果，bug还是打开方式不对</p>
 
+          
+        
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
-
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FusionGene/">FusionGene</a></li></ul>
-
-			</span>
-		</div>
-	</footer>
-	
-</article>
+  
+  
+  
+  </article>
 
 
-	<hr class="article-devider">
-
-
+    
+      
 
   
-    <article id="post-201805_STARFusion" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201805_STARFusion/" class="article-date">
-  <time datetime="2018-05-15T14:14:52.000Z" itemprop="datePublished">2018-05-15</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
+
   
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201805_STARFusion/">使用 STAR-fusion 分析 Fusion-Gene</a>
-    </h1>
+  
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<p>软件文档：<a href="https://github.com/STAR-Fusion/STAR-Fusion/wiki" target="_blank" rel="noopener">https://github.com/STAR-Fusion/STAR-Fusion/wiki</a></p>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201805_STARFusion/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201805_STARFusion/" itemprop="url">使用 STAR-fusion 分析 Fusion-Gene</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-15T22:14:52+08:00">
+                2018-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bioinfor/" itemprop="url" rel="index">
+                    <span itemprop="name">bioinfor</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>软件文档：<a href="https://github.com/STAR-Fusion/STAR-Fusion/wiki" target="_blank" rel="noopener">https://github.com/STAR-Fusion/STAR-Fusion/wiki</a></p>
 <p>##软件安装</p>
 <ol>
 <li>STAR，<a href="https://github.com/alexdobin/STAR" target="_blank" rel="noopener">https://github.com/alexdobin/STAR</a></li>
@@ -562,58 +1466,147 @@
 <h2 id="结果比较"><a href="#结果比较" class="headerlink" title="结果比较"></a>结果比较</h2><p>真是一个悲伤的故事，根据官网给的两种运行方式，结果差别这么大。查看 STAR-Fusion 脚本，使用的 mapping 参数差异有点大啊，哪一个比较合理呢（一个新坑）？？？</p>
 <p><img src="./images/2018/star_fusion.results.png" alt=""></p>
 
+          
+        
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
-
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FusionGene/">FusionGene</a></li></ul>
-
-			</span>
-		</div>
-	</footer>
-	
-</article>
+  
+  
+  
+  </article>
 
 
-	<hr class="article-devider">
-
-
+    
+      
 
   
-    <article id="post-201805_trimmomatic" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201805_trimmomatic/" class="article-date">
-  <time datetime="2018-05-13T07:47:30.000Z" itemprop="datePublished">2018-05-13</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
+
   
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201805_trimmomatic/">使用 trimmomatic 进行数据质控</a>
-    </h1>
+  
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<p>trimmomatic 使用 java 编写，免安装多平台运行，同时运行速度非常快。</p>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201805_trimmomatic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201805_trimmomatic/" itemprop="url">使用 trimmomatic 进行数据质控</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-13T15:47:30+08:00">
+                2018-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bioinfor/" itemprop="url" rel="index">
+                    <span itemprop="name">bioinfor</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>trimmomatic 使用 java 编写，免安装多平台运行，同时运行速度非常快。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> paired end </span><br><span class="line">java -jar trimmomatic-0.32.jar PE -threads 8 -phred33 \</span><br><span class="line">    sample_R1.fastq.gz sample_R2.fastq.gz \</span><br><span class="line">    sample_R1_paired.fastq.gz sample_R1_unpaired.fastq.gz \</span><br><span class="line">    sample_R2_paired.fastq.gz sample_R2_unpaired.fastq.gz \</span><br><span class="line">    ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 SLIDINGWINDOW:4:15 MINLEN:36</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> single end</span><br><span class="line">java -jar trimmomatic-0.32.jar PE -threads 8 -phred33 \</span><br><span class="line">    sample.fastq.gz sample_clean.fastq.gz \</span><br><span class="line">    ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 SLIDINGWINDOW:4:15 MINLEN:36</span><br></pre></td></tr></table></figure>
 <p>参数选择<br><strong>PE/SE</strong></p>
 <blockquote>
@@ -653,56 +1646,147 @@
 <p>转换碱基质量格式，Illumina HiSeq 2000质量系统为phred-64，可用该参数转换到phred-33</p>
 </blockquote>
 
+          
+        
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
+  
+  
+  
+  </article>
 
 
-	<hr class="article-devider">
-
-
+    
+      
 
   
-    <article id="post-201805_snpEff" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/201805_snpEff/" class="article-date">
-  <time datetime="2018-05-09T13:45:52.000Z" itemprop="datePublished">2018-05-09</time>
-</a>
-		</span>
-		<span class="meta-elements author">ChengCZ</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
+
   
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/201805_snpEff/">VCF 注释 —— SnpEff</a>
-    </h1>
+  
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<p>日常工作之读文档，了解参数改变、新方法功能，对已有流程进行修改。</p>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201805_snpEff/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201805_snpEff/" itemprop="url">VCF 注释 —— SnpEff</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-09T21:45:52+08:00">
+                2018-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bioinfor/" itemprop="url" rel="index">
+                    <span itemprop="name">bioinfor</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>日常工作之读文档，了解参数改变、新方法功能，对已有流程进行修改。</p>
 <p>各种文档看一边遍一遍，使用需要又一次看 SnpEff （<a href="http://snpeff.sourceforge.net/index.html" target="_blank" rel="noopener">http://snpeff.sourceforge.net/index.html</a> ），进行一些整理如下，不过还是建议<a href="http://snpeff.sourceforge.net/SnpEff_manual.html" target="_blank" rel="noopener">原文</a>，鬼知道我会在哪里写错理解错。</p>
 <h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><ol>
 <li><p>annotation</p>
@@ -728,67 +1812,329 @@
 <h3 id="注释结果"><a href="#注释结果" class="headerlink" title="注释结果"></a>注释结果</h3><p><img src="./images/2018/snpEff.png" alt=""></p>
 <p>可以看到注释信息被添加到了 VCF 中每个变异 INFO 信息中，以 ANN= 特征开始，详细的注释说明可查看<a href="./appendix/snpEff.pdf">官方文档</a> <a href="http://snpeff.sourceforge.net/VCFannotationformat_v1.0.pdf" target="_blank" rel="noopener">http://snpeff.sourceforge.net/VCFannotationformat_v1.0.pdf</a>。因为基因多个转录本、相互重叠基因等原因，可以看到变异位点被多次注释，需根据实际需求进行筛选。</p>
 
+          
+        
+      
+    </div>
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bioinfor/">bioinfor</a>
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
   </div>
 
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vcf/">vcf</a></li></ul>
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
 
-			</span>
-		</div>
-	</footer>
-	
-</article>
+      
 
+      
 
-	<hr class="article-devider">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ChengCZ</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
 
+          <nav class="site-state motion-element">
 
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
 
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
-    </nav>
-  
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
 
     </div>
-    <div class="mb-search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
-    <input type="hidden" name="q" value="site:chengcz.github.io">
-  </form>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChengCZ</span>
+
+  
 </div>
-<footer id="footer">
-	<!---<h1 class="footer-blog-title">
-		<a href="/">ChengCZ&#39;s Notebook</a>
-	</h1>--->
-	<span class="copyright">
-		&copy; 2018 ChengCZ<br>
-		<!---Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
-		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>--->
-	</span>
-</footer>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
 
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
   </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>
