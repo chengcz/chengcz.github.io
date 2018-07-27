@@ -122,14 +122,14 @@
 <meta property="og:site_name" content="ChengCZ&#39;s Notebook">
 <meta property="og:description" content="因为一些我并不理解的原因，服务器不能正确识别4T的NTFS移动硬盘，需要对其格式化成ext4格式，就我的一些操作记录。  fdisk -l，查看硬盘分配的硬件编号   parted /dev/sdg，对使用parted工具对硬盘进行分区  mklable gpt，把磁盘格式化为 gpt分区表  mkpart primary 0 4000G，创建一个主分区，起始位置-结束位置  mkpart ext">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://chengcz.github.io/2017/201707_mountHardDisk/images/2017/fdisk.png">
-<meta property="og:image" content="http://chengcz.github.io/2017/201707_mountHardDisk/images/2017/linux_parted.png">
-<meta property="og:image" content="http://chengcz.github.io/2017/201707_mountHardDisk/images/2017/mkfs.ext4.png">
-<meta property="og:updated_time" content="2018-06-30T17:29:22.850Z">
+<meta property="og:image" content="http://or5pz0a28.bkt.clouddn.com/images/2017/fdisk.png">
+<meta property="og:image" content="http://or5pz0a28.bkt.clouddn.com/images/2017/linux_parted.png">
+<meta property="og:image" content="http://or5pz0a28.bkt.clouddn.com/images/2017/mkfs.ext4.png">
+<meta property="og:updated_time" content="2018-07-27T16:02:58.776Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="服务器挂载 4T 硬盘">
 <meta name="twitter:description" content="因为一些我并不理解的原因，服务器不能正确识别4T的NTFS移动硬盘，需要对其格式化成ext4格式，就我的一些操作记录。  fdisk -l，查看硬盘分配的硬件编号   parted /dev/sdg，对使用parted工具对硬盘进行分区  mklable gpt，把磁盘格式化为 gpt分区表  mkpart primary 0 4000G，创建一个主分区，起始位置-结束位置  mkpart ext">
-<meta name="twitter:image" content="http://chengcz.github.io/2017/201707_mountHardDisk/images/2017/fdisk.png">
+<meta name="twitter:image" content="http://or5pz0a28.bkt.clouddn.com/images/2017/fdisk.png">
 
 
 
@@ -419,7 +419,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-01 01:29:22" itemprop="dateModified" datetime="2018-07-01T01:29:22+08:00">2018-07-01</time>
+                <time title="修改时间：2018-07-28 00:02:58" itemprop="dateModified" datetime="2018-07-28T00:02:58+08:00">2018-07-28</time>
               
             
           </span>
@@ -473,7 +473,7 @@
         <p>因为一些我并不理解的原因，服务器不能正确识别4T的NTFS移动硬盘，需要对其格式化成ext4格式，就我的一些操作记录。</p>
 <ol>
 <li><p><code>fdisk -l</code>，查看硬盘分配的硬件编号</p>
-<p><img src="/2017/201707_mountHardDisk/./images/2017/fdisk.png" alt=""></p>
+<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2017/fdisk.png" alt=""></p>
 </li>
 <li><p><code>parted /dev/sdg</code>，对使用parted工具对硬盘进行分区</p>
 <ul>
@@ -488,10 +488,10 @@
 <li><p><code>quit</code>，推出parted</p>
 </li>
 </ul>
-<p><img src="/2017/201707_mountHardDisk/./images/2017/linux_parted.png" alt=""></p>
+<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2017/linux_parted.png" alt=""></p>
 </li>
 <li><p><code>mkfs.ext4 /dev/sdg1</code>，对硬盘进行格式化，如果存在多个分区，每个分区都需要进行格式化</p>
-<p><img src="/2017/201707_mountHardDisk/./images/2017/mkfs.ext4.png" alt=""></p>
+<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2017/mkfs.ext4.png" alt=""></p>
 </li>
 <li><p><code>mount /dev/sdg1 /mnt/usbmount1</code>，挂载硬盘到服务器</p>
 </li>

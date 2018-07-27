@@ -123,15 +123,15 @@
 <meta property="og:site_name" content="ChengCZ&#39;s Notebook">
 <meta property="og:description" content="transcvar web 版 transcvar 本地化123456# https://github.com/zwdzwd/transvarpip search transvarpip install transvar --usertransvar config --download_ref --refversion hg19transvar config --download_anno --r">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://chengcz.github.io/2018/201807_transvar/images/2018/transvar_web.png">
-<meta property="og:image" content="http://chengcz.github.io/2018/201807_transvar/images/2018/transvar.png">
-<meta property="og:image" content="http://chengcz.github.io/2018/201807_transvar/images/2018/transvar_config.png">
-<meta property="og:image" content="http://chengcz.github.io/2018/201807_transvar/images/2018/transvar_config2.png">
-<meta property="og:updated_time" content="2018-07-26T14:19:27.260Z">
+<meta property="og:image" content="http://or5pz0a28.bkt.clouddn.com/images/2018/transvar_web.png">
+<meta property="og:image" content="http://or5pz0a28.bkt.clouddn.com/images/2018/transvar.png">
+<meta property="og:image" content="http://or5pz0a28.bkt.clouddn.com/images/2018/transvar_config.png">
+<meta property="og:image" content="http://or5pz0a28.bkt.clouddn.com/images/2018/transvar_config2.png">
+<meta property="og:updated_time" content="2018-07-27T16:01:13.168Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从 p.HGVS 到基因组变异位置">
 <meta name="twitter:description" content="transcvar web 版 transcvar 本地化123456# https://github.com/zwdzwd/transvarpip search transvarpip install transvar --usertransvar config --download_ref --refversion hg19transvar config --download_anno --r">
-<meta name="twitter:image" content="http://chengcz.github.io/2018/201807_transvar/images/2018/transvar_web.png">
+<meta name="twitter:image" content="http://or5pz0a28.bkt.clouddn.com/images/2018/transvar_web.png">
 
 
 
@@ -421,7 +421,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-26 22:19:27" itemprop="dateModified" datetime="2018-07-26T22:19:27+08:00">2018-07-26</time>
+                <time title="修改时间：2018-07-28 00:01:13" itemprop="dateModified" datetime="2018-07-28T00:01:13+08:00">2018-07-28</time>
               
             
           </span>
@@ -472,14 +472,14 @@
       
 
       
-        <h3 id="transcvar-web-版"><a href="#transcvar-web-版" class="headerlink" title="transcvar web 版"></a>transcvar web 版</h3><p><img src="./images/2018/transvar_web.png" alt=""></p>
+        <h3 id="transcvar-web-版"><a href="#transcvar-web-版" class="headerlink" title="transcvar web 版"></a>transcvar web 版</h3><p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/transvar_web.png" alt=""></p>
 <h3 id="transcvar-本地化"><a href="#transcvar-本地化" class="headerlink" title="transcvar 本地化"></a>transcvar 本地化</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> https://github.com/zwdzwd/transvar</span><br><span class="line">pip search transvar</span><br><span class="line">pip install transvar --user</span><br><span class="line"></span><br><span class="line">transvar config --download_ref --refversion hg19</span><br><span class="line">transvar config --download_anno --refversion hg19</span><br></pre></td></tr></table></figure>
-<p><img src="./images/2018/transvar.png" alt=""></p>
+<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/transvar.png" alt=""></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">head HGVS_cds</span><br><span class="line"><span class="meta">#</span> MLH1:c.100G&gt;A</span><br><span class="line"><span class="meta">#</span> MLH1:c.790+1G&gt;A</span><br><span class="line"><span class="meta">#</span> VHL:c.1_17del17</span><br><span class="line"><span class="meta">#</span> VHL:c.136G&gt;T</span><br><span class="line"></span><br><span class="line">transvar canno --refversion hg19 --refseq -l HGVS_cds --oneline &gt;HGVS_cds.transvar.txt</span><br><span class="line"></span><br><span class="line">head HGVS_cds.transvar.txt</span><br><span class="line"><span class="meta">#</span> input	transcript	gene	strand	coordinates(gDNA/cDNA/protein)	region	info</span><br><span class="line"><span class="meta">#</span> MLH1:c.100G&gt;A	NM_001167618 (protein_coding)	MLH1	+	chr3:g.37059029G&gt;A/c.100G&gt;A/p.A34T	inside_[cds_in_exon_10]	CSQN=Missense;reference_codon=GCC;alternative_codon=ACC;dbxref=GeneID:4292,HGNC:7127,HPRD:00390,MIM:120436;aliases=NP_001161090;source=RefSeq</span><br><span class="line"><span class="meta">#</span> MLH1:c.790+1G&gt;A	NM_001258271 (protein_coding)	MLH1	+	chr3:g.37056036G&gt;A/c.790+1G&gt;A/.	inside_[intron_between_exon_9_and_10]	CSQN=IntronicSNV;dbxref=GeneID:4292,HGNC:7127,HPRD:00390,MIM:120436;aliases=NP_001245200;source=RefSeq</span><br><span class="line"><span class="meta">#</span> VHL:c.1_17del17	NM_198156 (protein_coding)	VHL	+	chr3:g.10183532_10183548del17/c.1_17del17/.	inside_[cds_in_exon_1]	CSQN=CdsStartDeletion;left_align_gDNA=g.10183529_10183545del17;unaligned_gDNA=g.10183532_10183548del17;left_align_cDNA=c.1-3_14del17;unalign_cDNA=c.1_17del17;cds_start_at_chr3:10183532_lost;dbxref=GeneID:7428,HGNC:12687,HPRD:01905,MIM:608537;aliases=NP_937799;source=RefSeq</span><br></pre></td></tr></table></figure>
 <p>类似的也可以从 c.HGVS、g.HGVS 开始获得完整注释</p>
 <h3 id="本地化数据库配置"><a href="#本地化数据库配置" class="headerlink" title="本地化数据库配置"></a>本地化数据库配置</h3><p>软件提供数据库路径为：<a href="http://transvar.info/transvar_user/annotations/" target="_blank" rel="noopener">http://transvar.info/transvar_user/annotations/</a>，本地数据库配置详细如下：</p>
-<p><img src="./images/2018/transvar_config.png" alt=""></p>
-<p><img src="./images/2018/transvar_config2.png" alt=""></p>
+<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/transvar_config.png" alt=""></p>
+<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/transvar_config2.png" alt=""></p>
 
       
     </div>
