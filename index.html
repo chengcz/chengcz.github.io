@@ -353,6 +353,196 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201808_ScISOr-Seq/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201808_ScISOr-Seq/" itemprop="url">
+                  Single-cell isoform RNA sequencing (ScISOr-Seq) across thousands of cells reveals isoforms of cerebellar cell types
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-31 19:18:19 / 修改时间：19:31:19" itemprop="dateCreated datePublished" datetime="2018-07-31T19:18:19+08:00">2018-07-31</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/read/" itemprop="url" rel="index"><span itemprop="name">read</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>三代平台喜获单细胞测序技能</p>
+<p><a href="https://www.biorxiv.org/content/early/2018/07/08/364950" target="_blank" rel="noopener"><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/ScISOr-Seq.png" alt=""></a></p>
+<h2 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h2><ul>
+<li>we employ microfluidics to produce amplified <strong>full-length cDNAs barcoded</strong> for their cell of origin</li>
+<li>one pool for 3’ sequencing to measure gene expression(<strong>Pacific</strong>, <strong>Nanopore</strong>)</li>
+<li>another pool for long-read sequencing and isoform expression(<strong>10xGenomics</strong>)</li>
+</ul>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><h3 id="a-expression"><a href="#a-expression" class="headerlink" title="a.expression"></a>a.expression</h3><ul>
+<li>We sequence a mean of 17,885 reads per cell</li>
+<li>After filtering cells and considering only reads confidently mapped to genes, we have 3,875 unique molecular identifiers (UMIs) and 1,448 genes per cell during 3’end sequencing</li>
+<li>6,627 cells were clustered into 17 groups    </li>
+<li>To assess stability of clusters, we tripled Illumina sequencing depth for rep2    </li>
+</ul>
+<h3 id="b-Full-length-cDNAs"><a href="#b-Full-length-cDNAs" class="headerlink" title="b.Full-length cDNAs"></a>b.Full-length cDNAs</h3><ul>
+<li>generate ~5.2 million PacBio circular consensus reads    </li>
+<li>cellular barcodes are located close to the polyA-tail, we first searched for polyA-tails    </li>
+<li>chimeras, which were removed from further analysis    </li>
+<li>for 58.0% (compared to 74.0% for 10x-3’seq) of the polyA-tail-containing CCS, we identified a perfect-match 16mer cellular barcode     </li>
+</ul>
+<h3 id="c-ScISOr-Seq-using-Nanopore-sequencing"><a href="#c-ScISOr-Seq-using-Nanopore-sequencing" class="headerlink" title="c.ScISOr-Seq using Nanopore sequencing"></a>c.ScISOr-Seq using Nanopore sequencing</h3><ul>
+<li>Using 1µg of barcoded cDNA</li>
+<li>~31.4% (1D) and ~35.2% (passed 1D2) of Nanopore reads have a 30bp window with &gt;=25 Ts   </li>
+<li>nanopore 需要比 pacbio 更高的样品起始量，nanopore 数据错误率更高</li>
+</ul>
+<h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><ol>
+<li>三代数据仍然只是用于转录本组装、注释，需要二代数据定量。分析逻辑约等于三代注释，cell特异转录本，外加二代scRNAseq</li>
+<li>single cell full-length cDNAs 带 barcode 扩增原理？？？</li>
+<li></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201807_transvar/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -416,7 +606,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-28 00:01:13" itemprop="dateModified" datetime="2018-07-28T00:01:13+08:00">2018-07-28</time>
+                <time title="修改时间：2018-07-31 19:36:05" itemprop="dateModified" datetime="2018-07-31T19:36:05+08:00">2018-07-31</time>
               
             
           </span>
@@ -597,7 +787,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-28 00:00:50" itemprop="dateModified" datetime="2018-07-28T00:00:50+08:00">2018-07-28</time>
+                <time title="修改时间：2018-07-31 19:30:07" itemprop="dateModified" datetime="2018-07-31T19:30:07+08:00">2018-07-31</time>
               
             
           </span>
@@ -614,7 +804,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/bioinfor/" itemprop="url" rel="index"><span itemprop="name">bioinfor</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/RNAseq/" itemprop="url" rel="index"><span itemprop="name">RNAseq</span></a></span>
 
                 
                 
@@ -780,12 +970,24 @@
                 
               
 
-              <time title="创建时间：2018-07-19 19:07:27 / 修改时间：19:25:06" itemprop="dateCreated datePublished" datetime="2018-07-19T19:07:27+08:00">2018-07-19</time>
+              <time title="创建时间：2018-07-19 19:07:27" itemprop="dateCreated datePublished" datetime="2018-07-19T19:07:27+08:00">2018-07-19</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-31 19:14:38" itemprop="dateModified" datetime="2018-07-31T19:14:38+08:00">2018-07-31</time>
               
             
           </span>
@@ -939,6 +1141,215 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201807_singleTcell_NSCLC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201807_singleTcell_NSCLC/" itemprop="url">
+                  Global characterization of T cells in non-small-cell lung cancer by single-cell sequencing
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-16 19:18:19" itemprop="dateCreated datePublished" datetime="2018-07-16T19:18:19+08:00">2018-07-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-31 19:30:40" itemprop="dateModified" datetime="2018-07-31T19:30:40+08:00">2018-07-31</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/read/" itemprop="url" rel="index"><span itemprop="name">read</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>肺癌T细胞 scRNAseq 分析</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pubmed/29942094" target="_blank" rel="noopener"><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/singleTcell_NSCLC.png" alt=""></a></p>
+<h3 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h3><ol>
+<li><p>we performed deep single-cell RNA sequencing on T cells isolated from <strong>tumor</strong>, <strong>adjacent normal tissues</strong> and <strong>peripheral blood</strong> for 14 treatment-naïve patients, including <strong>11 adenocarcinomas</strong> and <strong>three squamous cell carcinomas</strong>    </p>
+</li>
+<li><p>After confirming the existence of T cell infiltration in NSCLC tumors (Supplementary Fig. 1a), we sorted various T cell subtypes based on <strong>cell surface markers CD3/ CD4/CD8/CD25 by fluorescence-activated cell sorting</strong>    </p>
+</li>
+<li><p>A total of 12,346 cells were sequenced at an <strong>average depth of 1.04 million uniquely-mapped read pairs</strong> per cell</p>
+<blockquote>
+<p>The final expression table contained <strong>12,415 genes</strong> and <strong>11,769 cells</strong>    </p>
+</blockquote>
+</li>
+<li><p>Dimensional reduction analysis (t-SNE) applied to the expression data revealed that T cells clustered primarily based on their tissue origins and subtypes      </p>
+</li>
+<li><p>To further address the intrinsic T cell heterogeneity, we applied unsupervised clustering based on t-SNE+ densityClust and identified seven CD8 and nine CD4 clusters    </p>
+</li>
+<li><p>To gain insight into the clonal relationship among individual T cells, we reconstructed their T cell receptor (TCR) sequences    </p>
+<blockquote>
+<p>We obtained full-length TCRs with both alpha and beta chains for 8,038 cells of the 16 clusters, including 5,015 harboring unique TCRs and 3,023 harboring repeated use of TCRs, indicative of clonal expansion    </p>
+</blockquote>
+</li>
+<li><p>Detection of Treg marker genes    </p>
+</li>
+<li><p>Survival analysis. </p>
+</li>
+</ol>
+<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><ol>
+<li>As well as tumor-infiltrating CD8+ T cells undergoing exhaustion, we observed two clusters of cells exhibiting states preceding exhaustion, and a high ratio of “pre-exhausted” to exhausted T cells was associated with better prognosis of lung adenocarcinoma.</li>
+<li><p>we observed further heterogeneity within the tumor regulatory T cells (Tregs), characterized by the bimodal distribution of TNFRSF9, an activation marker for antigenspecific Tregs. The gene signature of those activated tumor Tregs, which included IL1R2, correlated with poor prognosis in lung adenocarcinoma. </p>
+</li>
+<li><p>…</p>
+</li>
+</ol>
+<h3 id="points"><a href="#points" class="headerlink" title="points"></a>points</h3><ul>
+<li>通常，CX3CR1在正常组织中表达高于肿瘤组织</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201807_RNAedit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -985,12 +1396,24 @@
                 
               
 
-              <time title="创建时间：2018-07-12 22:31:21 / 修改时间：22:41:47" itemprop="dateCreated datePublished" datetime="2018-07-12T22:31:21+08:00">2018-07-12</time>
+              <time title="创建时间：2018-07-12 22:31:21" itemprop="dateCreated datePublished" datetime="2018-07-12T22:31:21+08:00">2018-07-12</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-31 19:30:16" itemprop="dateModified" datetime="2018-07-31T19:30:16+08:00">2018-07-31</time>
               
             
           </span>
@@ -1007,7 +1430,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/bioinfor/" itemprop="url" rel="index"><span itemprop="name">bioinfor</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/RNAseq/" itemprop="url" rel="index"><span itemprop="name">RNAseq</span></a></span>
 
                 
                 
@@ -1178,12 +1601,24 @@
                 
               
 
-              <time title="创建时间：2018-07-07 08:35:21 / 修改时间：20:26:25" itemprop="dateCreated datePublished" datetime="2018-07-07T08:35:21+08:00">2018-07-07</time>
+              <time title="创建时间：2018-07-07 08:35:21" itemprop="dateCreated datePublished" datetime="2018-07-07T08:35:21+08:00">2018-07-07</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-31 19:29:47" itemprop="dateModified" datetime="2018-07-31T19:29:47+08:00">2018-07-31</time>
               
             
           </span>
@@ -1200,7 +1635,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/bioinfor/" itemprop="url" rel="index"><span itemprop="name">bioinfor</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/microbe/" itemprop="url" rel="index"><span itemprop="name">microbe</span></a></span>
 
                 
                 
@@ -1473,7 +1908,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-28 00:01:01" itemprop="dateModified" datetime="2018-07-28T00:01:01+08:00">2018-07-28</time>
+                <time title="修改时间：2018-07-31 19:02:43" itemprop="dateModified" datetime="2018-07-31T19:02:43+08:00">2018-07-31</time>
               
             
           </span>
@@ -1490,7 +1925,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/bioinfor/" itemprop="url" rel="index"><span itemprop="name">bioinfor</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
 
                 
                 
@@ -1665,7 +2100,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-28 00:00:22" itemprop="dateModified" datetime="2018-07-28T00:00:22+08:00">2018-07-28</time>
+                <time title="修改时间：2018-07-31 19:10:22" itemprop="dateModified" datetime="2018-07-31T19:10:22+08:00">2018-07-31</time>
               
             
           </span>
@@ -1841,12 +2276,24 @@
                 
               
 
-              <time title="创建时间：2018-06-27 23:15:52 / 修改时间：23:50:55" itemprop="dateCreated datePublished" datetime="2018-06-27T23:15:52+08:00">2018-06-27</time>
+              <time title="创建时间：2018-06-27 23:15:52" itemprop="dateCreated datePublished" datetime="2018-06-27T23:15:52+08:00">2018-06-27</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-31 19:10:42" itemprop="dateModified" datetime="2018-07-31T19:10:42+08:00">2018-07-31</time>
               
             
           </span>
@@ -1902,403 +2349,6 @@
             <p>通常情况下，都会默认输入文件以 utf-8 的方式进行编码，总会有几个奇葩输入文件存在，导入分析流程，啊额，编码问题运行终止，再来一遍呢还是再来一遍。</p>
 <p>技术问题还是选择用技术手段解决好些，是吧，一个简单的例子如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> io <span class="keyword">import</span> open</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Read_File_Right_Encode</span><span class="params">(fp, encodelst=None)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="comment"># content = subprocess.check_output('iconv -f GBK -t utf-8 &#123;file&#125;')</span></span><br><span class="line">    <span class="keyword">with</span> open(fp, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        tmp = f.read()</span><br><span class="line">    <span class="keyword">if</span> encodelst <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">	    encodelst = [<span class="string">'gbk'</span>, <span class="string">'ascii'</span>, <span class="string">'utf-8'</span>]</span><br><span class="line">    x = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="keyword">if</span> x == len(encodelst):</span><br><span class="line">            <span class="keyword">raise</span> Exception(<span class="string">'Can\'t find right coding format of &#123;&#125; in decode list: &#123;&#125;'</span>.format(fp, <span class="string">', '</span>.join(encodelst)))</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            content = tmp.decode(encodelst[x])</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        x += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> content</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201806_compare_vcf/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ChengCZ">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChengCZ's Notebook">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/201806_compare_vcf/" itemprop="url">
-                  NA12878 全外显子数据分析结果比较
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-06-26 00:02:01" itemprop="dateCreated datePublished" datetime="2018-06-26T00:02:01+08:00">2018-06-26</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-28 00:00:39" itemprop="dateModified" datetime="2018-07-28T00:00:39+08:00">2018-07-28</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/bioinfor/" itemprop="url" rel="index"><span itemprop="name">bioinfor</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>一直都比较有兴趣分析 human DNA 变异，参照 gatk 流程分析了 NA12878 的全外数据，正好有参考变异集，比较下分析准确性，也好参数调整优化之类，吧吧吧，下面就是一些详细步骤粘贴整理</p>
-<h3 id="NA12878-vcf-处理"><a href="#NA12878-vcf-处理" class="headerlink" title="NA12878.vcf 处理"></a>NA12878.vcf 处理</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> wget -c ftp://ftp-trace.ncbi.nih.gov/giab/ftp/data/NA12878/Garvan_NA12878_HG001_HiSeq_Exome/project.NIST.hc.snps.indels.vcf</span><br><span class="line">hc_snp_indel=project.NIST.hc.snps.indels.vcf</span><br><span class="line"><span class="meta">#</span> wget -c ftp://ftp-trace.ncbi.nih.gov/giab/ftp/data/NA12878/Garvan_NA12878_HG001_HiSeq_Exome/nexterarapidcapture_expandedexome_targetedregions.bed</span><br><span class="line">intervals=nexterarapidcapture_expandedexome_targetedregions.bed</span><br><span class="line"></span><br><span class="line">java -jar GenomeAnalysisTK.jar \</span><br><span class="line">    -T SelectVariants \</span><br><span class="line">    -R $genome \</span><br><span class="line">    -V $hc_snp_indel \</span><br><span class="line">    -L $intervals \</span><br><span class="line">    -sn NIST7035 \</span><br><span class="line">    -select 'DP &gt; 5' \</span><br><span class="line">    --excludeNonVariants \</span><br><span class="line">    -o ref.NIST7035.hc.snps.indels.vcf.gz</span><br><span class="line"><span class="meta">#</span> 选择特定区间内 DP 大于5，样品 NIST7035 的变异位点</span><br></pre></td></tr></table></figure>
-<h3 id="vcf-处理"><a href="#vcf-处理" class="headerlink" title="vcf 处理"></a>vcf 处理</h3><p>ref: <a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=2806" target="_blank" rel="noopener">https://software.broadinstitute.org/gatk/documentation/article.php?id=2806</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> SNP</span><br><span class="line">java -jar GenomeAnalysisTK.jar \</span><br><span class="line">    -T SelectVariants \</span><br><span class="line">    -R $genome \</span><br><span class="line">    -L $intervals \</span><br><span class="line">    -selectType SNP \</span><br><span class="line">    -V  NIST7035.vcf.gz \</span><br><span class="line">    -o NIST7035.snp.vcf.gz</span><br><span class="line">java -jar GenomeAnalysisTK.jar \</span><br><span class="line">    -T VariantFiltration \</span><br><span class="line">    -R $genome \</span><br><span class="line">    --filterExpression "DP &lt; 5" --filterName "LowDepth"  \</span><br><span class="line">    --filterExpression "FS &gt; 60.0 || SOR &gt; 3.0" --filterName "StrandBias"  \</span><br><span class="line">    --filterExpression "QD &lt; 2.0  || MQ &lt; 40.0 || MQRankSum &lt; -12.5" \</span><br><span class="line">    --filterName "snp_Filter"  \</span><br><span class="line">    --filterExpression "ReadPosRankSum &lt; -8.0" --filterName "endOfRead"  \</span><br><span class="line">    -V  NIST7035.snp.vcf.gz \</span><br><span class="line">    -o  NIST7035.snp.filter.vcf.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Indel</span><br><span class="line">java -jar GenomeAnalysisTK.jar \</span><br><span class="line">    -T SelectVariants \</span><br><span class="line">    -R $genome \</span><br><span class="line">    -L $intervals \</span><br><span class="line">    -selectType INDEL \</span><br><span class="line">    -V  NIST7035.vcf.gz \</span><br><span class="line">    -o NIST7035.indel.vcf.gz</span><br><span class="line">java -jar GenomeAnalysisTK.jar \</span><br><span class="line">    -T VariantFiltration \</span><br><span class="line">    -R $genome \</span><br><span class="line">    --filterExpression "DP &lt; 5" --filterName "LowDepth"  \</span><br><span class="line">    --filterExpression "QD &lt; 2.0 || FS &gt; 200.0" \</span><br><span class="line">    --filterName "InDels_Filter" \</span><br><span class="line">    --filterExpression "ReadPosRankSum &lt; -20.0" --filterName "endOfRead" \</span><br><span class="line">    -V NIST7035.indel.vcf.gz \</span><br><span class="line">    -o NIST7035.indel.filter.vcf.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> MergeVcf</span><br><span class="line">java -jar picard.jar MergeVcfs \</span><br><span class="line">    I=NIST7035.indel.filter.vcf.gz \</span><br><span class="line">    I=NIST7035.snp.filter.vcf.gz \</span><br><span class="line">    O=NIST7035.filter.vcf.gz\</span><br><span class="line">    D=$genome.dict</span><br></pre></td></tr></table></figure>
-<h3 id="compare-use-bcftools"><a href="#compare-use-bcftools" class="headerlink" title="compare use bcftools"></a>compare use bcftools</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">bcftools isec NIST7035.filter.vcf.gz ref.NIST7035.hc.snps.indels.vcf.gz -p bcftools</span><br><span class="line"><span class="meta">#</span> ref.vcf.gz, alt.vcf.gz 使用 bgzip 压缩，同时 tabix 进行 index</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> output: README.txt</span><br><span class="line"><span class="meta">#</span> This file was produced by vcfisec.</span><br><span class="line"><span class="meta">#</span> The command line was:   bcftools isec  -p bcftools NIST7035.filter.vcf.gz ref.NIST7035.hc.snps.indels.vcf.gz</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span> Using the following file names:</span><br><span class="line"><span class="meta">#</span> bcftools/0000.vcf  for records private to  NIST7035.filter.vcf.gz</span><br><span class="line"><span class="meta">#</span> bcftools/0001.vcf  for records private to  ref.NIST7035.hc.snps.indels.vcf.gz</span><br><span class="line"><span class="meta">#</span> bcftools/0002.vcf  for records from NIST7035.filter.vcf.gz shared by both  NIST7035.filter.vcf.gz ref.NIST7035.hc.snps.indels.vcf.gz</span><br><span class="line"><span class="meta">#</span> bcftools/0003.vcf  for records from ref.NIST7035.hc.snps.indels.vcf.gz shared by both      NIST7035.filter.vcf.gz ref.NIST7035.hc.snps.indels.vcf.gz</span><br><span class="line"></span><br><span class="line">cat ref.NIST7035.hc.snps.indels.vcf.gz | grep -v '^#' | wc -l    # 54077</span><br><span class="line"></span><br><span class="line">cat 0000.vcf | grep -cv '^#'    # 3863, 假阳性</span><br><span class="line">cat 0001.vcf | grep -cv '^#'    # 2131, 假阴性</span><br><span class="line">cat 0002.vcf | grep -cv '^#'    # 51946</span><br><span class="line">cat 0003.vcf | grep -cv '^#'    # 51946</span><br><span class="line"></span><br><span class="line">cat 0000.vcf| grep -v '^#' | grep PASS | wc -l    # 1334</span><br><span class="line">cat 0002.vcf| grep -v '^#' | grep PASS | wc -l    # 47143</span><br></pre></td></tr></table></figure>
-<p>不考虑snp、indels过滤情况下，计算假阳性、假阴性率。</p>
-<blockquote>
-<p>假阳性: 3863/54077 = 7.14 %</p>
-<p>假阴性: 2131/54077 = 3.94 %</p>
-</blockquote>
-<p>哈哈哈哈，瞎了，没法看的样子。还是考虑下变异过滤结果吧</p>
-<blockquote>
-<p>假阳性: 1334/54077 = 2.46 %</p>
-<p>假阴性: (2131+51946-47143)/54077 = 12.82 %</p>
-</blockquote>
-<p>更加让人没话说，这个假阴性太感人，过滤标准不太合适啊</p>
-  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 先看被过滤掉的这部分阴性</span><br><span class="line">cat 0002.vcf | grep -v '^#' | grep -v PASS | awk '&#123;n[$7]+=1&#125;END&#123;for (i in n)&#123;print i,n[i]&#125;&#125;'</span><br><span class="line"><span class="meta">#</span> LowDepth 11</span><br><span class="line"><span class="meta">#</span> StrandBias;snp_Filter 277</span><br><span class="line"><span class="meta">#</span> LowDepth;snp_Filter 2</span><br><span class="line"><span class="meta">#</span> InDels_Filter 265</span><br><span class="line"><span class="meta">#</span> StrandBias 3098</span><br><span class="line"><span class="meta">#</span> LowDepth;StrandBias 2</span><br><span class="line"><span class="meta">#</span> snp_Filter 1148</span><br></pre></td></tr></table></figure>
-<p>过滤掉位点最严重的两项分别是<strong>StrandBias</strong>, <strong>snp_Filter</strong>，对应过滤指标分别为<code>FS &gt; 60.0 || SOR &gt; 3.0</code>, <code>QD &lt; 2.0  || MQ &lt; 40.0 || MQRankSum &lt; -12.5</code>，转换vcf文件到tab格式（脚本：<a href="https://github.com/chengcz/BioResource/tree/master/vcf2tab" target="_blank" rel="noopener">github</a>），对其中一些指标进行分布检查。</p>
-<p>先看 <strong>StrandBias</strong>，对 <code>FS</code>,  <code>SOR</code> 两个参数分析，分布结果如下，可看出被过滤的位点基本上都是由于 <strong>SOR</strong> 参数（作图时FS&gt;60无显示），与 <strong>NA12878</strong> 变异集相比，需调整 <strong>SOR</strong> 临界值到更大水平。</p>
-<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/StrandBias_density.png" alt=""></p>
-<p>再看 <strong>snp_Filter</strong> 对应的<code>QD &lt; 2.0  || MQ &lt; 40.0 || MQRankSum &lt; -12.5</code>，其中 MQRankSum 对应67个位点，QD 对应557个位点，MQ 对应 1168 个位点，看出 <strong>MQ</strong>, <strong>QD</strong> 标准需要进行调整。</p>
-<p>以现在质控指标对文件<code>0001.vcf</code> <strong>2131</strong> 变异质控，<strong>QD</strong> 过滤掉949，<strong>MQRankSum</strong> 过滤掉14，<strong>MQ</strong> 过滤掉195，<strong>FS</strong> 过滤掉135，根据这部分参考变异集质量指标，同样 <strong>QD</strong>, <strong>MQ</strong>, <strong>FS</strong> 参数需要进行调整。</p>
-<p>另，vcftools 也可以很方便进行两个 vcf 文件的比较，还没 bcftools 对 vcf 文件必须排序、index的要求，输出结果也相应不同，因为我需要看阳性、阴性位点是否被过滤以及过滤情况，就不再用 vcftools 整理了，具体命令可参考如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> http://vcftools.github.io/</span><br><span class="line">vcftools --vcf ref.vcf --diff alt.vcf --out prefix</span><br><span class="line"><span class="meta">#</span> ref.vcf.gz    # 则需要使用--gzvcf</span><br><span class="line"><span class="meta">#</span> alt.vcf.gz    # 则需要使用--gzdiff</span><br></pre></td></tr></table></figure>
-<h3 id="质控参数调整思路"><a href="#质控参数调整思路" class="headerlink" title="质控参数调整思路"></a>质控参数调整思路</h3><p>根据质控结果比较来看，参控参数都还需要进行再调整，一个初步的参数调整思路是，对高质量变异集各项质控指标分布进行统计，然后进行阈值选择；或者对 <strong>NA12878</strong> 全基因组水平的变异进行 <strong><a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=2805" target="_blank" rel="noopener">VQSR</a></strong> 分析，统计高质量变异位点质控指标分布</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201806_ANNOVAR/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ChengCZ">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChengCZ's Notebook">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/201806_ANNOVAR/" itemprop="url">
-                  vcf 注释 —— ANNOVAR
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-06-16 23:40:21" itemprop="dateCreated datePublished" datetime="2018-06-16T23:40:21+08:00">2018-06-16</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-06-17 00:18:25" itemprop="dateModified" datetime="2018-06-17T00:18:25+08:00">2018-06-17</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/bioinfor/" itemprop="url" rel="index"><span itemprop="name">bioinfor</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最先知道的 VCF 注释软件，但是呢没有搞定构建研究物种的注释数据库，于是转向snpEff，工作转向临床分析时候，发现 ANNOVAR 在人类数据注释多种第三方数据库支持，变异频率、HGVS、ACMG致病性、dbSNP、Cosmic支持等等</p>
-<p>软件文档镇楼: <a href="http://annovar.openbioinformatics.org/en/latest/" target="_blank" rel="noopener">http://annovar.openbioinformatics.org/en/latest/</a></p>
-<h3 id="软件下载"><a href="#软件下载" class="headerlink" title="软件下载"></a>软件下载</h3><p>ANNOVAR 由 perl 实现，下载即用，软件下载地址为：<a href="http://www.openbioinformatics.org/annovar/annovar_download_form.php" target="_blank" rel="noopener">http://www.openbioinformatics.org/annovar/annovar_download_form.php</a> ，软件包包括下面几个功能脚本：</p>
-<ul>
-<li><em>annotate_variation.pl</em>, 主程序，数据库下载，变异注释等等</li>
-<li><em>coding_change.pl</em>, 推断蛋白序列的变化</li>
-<li><em>convert2annovar.pl</em>, </li>
-<li><em>retrieve_seq_from_fasta.pl</em>, </li>
-<li><em>table_annovar.pl</em>, 注释程序，根据数据库选择完成不同类型变异注释</li>
-<li><em>variants_reduction.pl</em>, </li>
-</ul>
-<h3 id="数据库下载、整理"><a href="#数据库下载、整理" class="headerlink" title="数据库下载、整理"></a>数据库下载、整理</h3><p>ANNOVAR 注释变异可以分成有基于基因、基于染色体区间和变异数据等三种类型</p>
-<ol>
-<li><p>基于gene的注释</p>
-<p>注释结果为突变位点位于基因的相对位置，是否改变氨基酸编码，获得变异位点的HGVS命名方式</p>
-</li>
-<li><p>基于染色体区间的注释</p>
-<p>获取变异位点是否存在于某些特定的区间内，Identify cytogenetic band, 转录因子结合区等等</p>
-</li>
-<li><p>变异数据库的注释</p>
-<p>包括Clinvar, dbSNP, Cosmic, ExAC, gnomAD等等，突变数据库整理可参考<a href="https://chengcz.github.io/2018/201806_vcf2tab/index.html"><strong><em>从 vcf 文件准备 ANNOVAR 数据库</em></strong></a></p>
-</li>
-</ol>
-<p>ANNOVAR 数据库文件实际上为特定格式的文本文件，其数据库文件命名规则为:  <strong>\${path_database}/\${buildver}_\${database_name}.txt</strong></p>
-<h3 id="软件运行"><a href="#软件运行" class="headerlink" title="软件运行"></a>软件运行</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> input file format: vcf</span><br><span class="line">table_annovar.pl example/ex2.vcf humandb/ -buildver hg19 -out myanno -remove -protocol refGene,cytoBand,esp6500siv2_all,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_eas,1000g2015aug_eur,snp138,dbnsfp30a -operation g,r,f,f,f,f,f,f,f -nastring . -vcfinput</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 不同于snpEff，ANNOVAR 所有注释结果都在 vcf 文件 INFO 列添加key-value</span><br></pre></td></tr></table></figure>
-<h3 id="非人物种数据库整理"><a href="#非人物种数据库整理" class="headerlink" title="非人物种数据库整理"></a>非人物种数据库整理</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 下载物种基因序列、注释文件</span><br><span class="line">wget -c ftp://ftp.ensemblgenomes.org/pub/release-27/plants/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.27.dna.genome.fa.gz</span><br><span class="line">wget -c ftp://ftp.ensemblgenomes.org/pub/release-27/plants/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.27.gtf.gz</span><br><span class="line">gzip -d Arabidopsis_thaliana.TAIR10.27.dna.genome.fa.gz</span><br><span class="line">gzip -d Arabidopsis_thaliana.TAIR10.27.gtf.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> gtf文件格式转换</span><br><span class="line">gtfToGenePred -genePredExt Arabidopsis_thaliana.TAIR10.27.gtf AT_refGene.txt</span><br><span class="line"><span class="meta">#</span> wget -c http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/gtfToGenePred</span><br><span class="line"><span class="meta">#</span> 另一种格式转换方法，https://github.com/chengcz/pyGTF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 使用软件包提供脚本build物种数据库，数据库buildver为AT，名称为refGene</span><br><span class="line">perl retrieve_seq_from_fasta.pl --format refGene --seqfile Arabidopsis_thaliana.TAIR10.27.dna.genome.fa AT_refGene.txt --out AT_refGeneMrna.fa</span><br></pre></td></tr></table></figure>
 
           
         

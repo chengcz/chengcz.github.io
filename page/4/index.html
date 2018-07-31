@@ -353,6 +353,364 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2017/201705_parsefasta/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/201705_parsefasta/" itemprop="url">
+                  fasta 序列解析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-05-11 11:40:15" itemprop="dateCreated datePublished" datetime="2017-05-11T11:40:15+08:00">2017-05-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-31 19:33:35" itemprop="dateModified" datetime="2018-07-31T19:33:35+08:00">2018-07-31</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/bioformat/" itemprop="url" rel="index"><span itemprop="name">bioformat</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>fasta格式最常见，也最常用，也是分析中最简单的格式吧，以<code>&gt;</code>开始后续字符表示序列名称，<code>空格</code>后对序列进行描述（可能不存在），换行即为序列信息，可包括换行。下面是一个fasta格式序列实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;gi|187608668|ref|NM_001043364.2| Bombyx mori moricin (Mor), mRNA</span><br><span class="line">AAACCGCGCAGTTATTTAAAATATGAATATTTTAAAACTTTTCTTTGTTTTTA</span><br><span class="line">CAACGACAACTGTGTACTATTTTTTATATTTGGTTCGAAAAGTTGCATTATTA</span><br><span class="line">ACGATTTTAGAAAATAAAACTACTTTACTTTTACACG</span><br></pre></td></tr></table></figure>
+<p>这个实例中序列名字为<strong>gi|187608668|ref|NM_001043364.2|</strong>，下面就直接贴上常用的fasta解析脚本：</p>
+<h2 id="python手动解析"><a href="#python手动解析" class="headerlink" title="python手动解析"></a>python手动解析</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_fasta</span><span class="params">(fa)</span>:</span></span><br><span class="line">    seq = &#123;&#125;</span><br><span class="line">    <span class="keyword">with</span> oepn(fa) <span class="keyword">as</span> fa:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> fa:</span><br><span class="line">            <span class="keyword">if</span> i.startswith(<span class="string">"&gt;"</span>):</span><br><span class="line">                name = i[<span class="number">1</span>:].partition(<span class="string">' '</span>)[<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">elif</span>:</span><br><span class="line">                seq[name] = seq.get(name, <span class="string">''</span>) + i.strip()</span><br><span class="line">    <span class="keyword">return</span> seq</span><br></pre></td></tr></table></figure>
+<h2 id="使用HTSeq模块"><a href="#使用HTSeq模块" class="headerlink" title="使用HTSeq模块"></a>使用HTSeq模块</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_fasta_by_HTSeq</span><span class="params">(fa)</span>:</span></span><br><span class="line">    <span class="keyword">import</span> HTSeq</span><br><span class="line">    <span class="keyword">return</span> &#123;i.name:i.seq <span class="keyword">for</span> i <span class="keyword">in</span> HTSeq.FastaReader(fa)&#125;</span><br></pre></td></tr></table></figure>
+<p>当然还能使用biopython进行解析，我不太常用这一模块，就不写了</p>
+<h2 id="fasta输出格式化"><a href="#fasta输出格式化" class="headerlink" title="fasta输出格式化"></a>fasta输出格式化</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">format_fasta</span><span class="params">(seq, len=<span class="number">60</span>)</span>:</span></span><br><span class="line">    tmp = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range((len(seq)//len)+<span class="number">1</span>):</span><br><span class="line">        tmp += <span class="string">'&#123;&#125;\n'</span>.format(seq[(i*<span class="number">60</span>):((i+<span class="number">1</span>)*<span class="number">60</span>)])</span><br><span class="line">    <span class="keyword">return</span> tmp</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2017/201705_RefSeqGFF2GTF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/201705_RefSeqGFF2GTF/" itemprop="url">
+                  RefSeq 数据库 GFF 格式转换
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-05-10 22:33:43" itemprop="dateCreated datePublished" datetime="2017-05-10T22:33:43+08:00">2017-05-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-31 19:27:42" itemprop="dateModified" datetime="2018-07-31T19:27:42+08:00">2018-07-31</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/bioformat/" itemprop="url" rel="index"><span itemprop="name">bioformat</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近一项目被RefSeq数据库中gff注释格式折磨死，流程总是不能正确识别，各种方法改了格式，勉强运行，后续步骤继续报错，想着以后肯定还有更多这种情况，自己对文件格式的理解，写了格式转换脚本。</p>
+<p>GFF和GTF格式非常类似，都被用来基因结构注释，由9列表示不同意义的特征组成，多行共同注释一个基因的详细结构。然而两者又有很大差异，脚本处理起来也是不同。相比而言GTF处理起来简单些，第三列<code>feature</code>可能是<strong>gene, transcript, exon, CDS</strong>这少数几种情况，最重要的描述基因类型名称的第九列<code>attr</code>很统一，都会包括一般常用的<strong>gene_id, gene_biotype, transcript_id, transcript_biotype</strong>等特征。而GFF文件包括一个明确的层级关系，<strong>gene</strong>是<strong>transcript</strong>（存在mRNA，lncRNA，ncRNA，rRNA，tRNA等多种不同组织方式）的父节点，而<strong>transcript</strong>又是<strong>exon</strong>和<strong>CDS</strong>的父节点，特征层级不同也决定了第九列<code>attr</code>的注释信息不同，gene id, name等信息也是层次关系关联，文件处理较麻烦。</p>
+<p>NCBI RefSeq数据库中GFF注释格式感觉更是复杂怪异，废话不多说，直接上代码，愚蠢方法手撕GFF</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> gzip</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GFF_parser</span><span class="params">(file)</span>:</span></span><br><span class="line">    openfile = gzip.open <span class="keyword">if</span> file.endswith(<span class="string">'gz'</span>) <span class="keyword">else</span> open</span><br><span class="line">    <span class="keyword">with</span> openfile(file) <span class="keyword">as</span> anno_file:</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> anno_file:</span><br><span class="line">            <span class="keyword">if</span> line.startswith(<span class="string">'#'</span>):</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            seqname, source, feature, start, end, score, strand, \</span><br><span class="line">            frame, attributeStr = line.strip().split(<span class="string">'\t'</span>)</span><br><span class="line">            attribute = [i.strip() <span class="keyword">for</span> i <span class="keyword">in</span> attributeStr.split(<span class="string">';'</span>) <span class="keyword">if</span> i.strip() != <span class="string">''</span>]</span><br><span class="line">            attr = &#123;i.partition(<span class="string">'='</span>)[<span class="number">0</span>]:i.partition(<span class="string">'='</span>)[<span class="number">2</span>] <span class="keyword">for</span> i <span class="keyword">in</span> attribute&#125;</span><br><span class="line">            <span class="keyword">yield</span> seqname, source, feature, int(start), int(end), score, strand, frame, attr</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">format_gtf_line</span><span class="params">(chro, feature, start, end, strand, attr, \</span></span></span><br><span class="line"><span class="function"><span class="params">    source=None, score=None, frame=None)</span>:</span></span><br><span class="line">    source = source <span class="keyword">if</span> source <span class="keyword">else</span> <span class="string">'RefSeq'</span></span><br><span class="line">    score = score <span class="keyword">if</span> score <span class="keyword">else</span> <span class="string">'.'</span></span><br><span class="line">    frame = frame <span class="keyword">if</span> frame <span class="keyword">else</span> <span class="string">'.'</span></span><br><span class="line">    attrstr = <span class="string">''</span>.join([<span class="string">'&#123;&#125; "&#123;&#125;"; '</span>.format(i[<span class="number">0</span>], i[<span class="number">1</span>]) <span class="keyword">for</span> i <span class="keyword">in</span> sorted(attr.items())])</span><br><span class="line">    gtf_line = <span class="string">'&#123;chro&#125;\t&#123;source&#125;\t&#123;feature&#125;\t&#123;start&#125;\t&#123;end&#125;\t&#123;score&#125;\t\</span></span><br><span class="line"><span class="string">        &#123;strand&#125;\t&#123;frame&#125;\t&#123;attrstr&#125;'</span>.format(**locals())</span><br><span class="line">    <span class="keyword">return</span> gtf_line</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(gff, output)</span>:</span></span><br><span class="line">    gtf_out = open(output, <span class="string">'w'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># RefSeq数据库中GFF文件feature收集，或去除无意义项，或替换</span></span><br><span class="line">    skip = [<span class="string">'region'</span>, <span class="string">'miRNA'</span>, <span class="string">'cDNA_match'</span>, <span class="string">'repeat_region'</span>, <span class="string">'D_loop'</span>, \</span><br><span class="line">            <span class="string">'match'</span>, <span class="string">'origin_of_replication'</span>, <span class="string">'centromere'</span>, <span class="string">'sequence_feature'</span>]</span><br><span class="line">    transcript = [<span class="string">'mRNA'</span>, <span class="string">'lnc_RNA'</span>, <span class="string">'primary_transcript'</span>, <span class="string">'tRNA'</span>, <span class="string">'rRNA'</span>, \</span><br><span class="line">            <span class="string">'C_gene_segment'</span>, <span class="string">'V_gene_segment'</span>, <span class="string">'SRP_RNA'</span>, <span class="string">'ncRNA'</span>, <span class="string">'transcript'</span>]</span><br><span class="line">    biotype = [<span class="string">'lnc_RNA'</span>, <span class="string">'tRNA'</span>, <span class="string">'rRNA'</span>, <span class="string">'SRP_RNA'</span>]</span><br><span class="line"></span><br><span class="line">    order = []</span><br><span class="line">    gene_info = defaultdict(dict)</span><br><span class="line">    transcript_info = defaultdict(dict)</span><br><span class="line">    check_gene_name = &#123;&#125;    <span class="comment">#检查重复gene_name</span></span><br><span class="line">    check_transcript_name = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> GFF_parser(gff):</span><br><span class="line">        chro, source, feature, start, end, score, strand, frame, attr = i</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> feature <span class="keyword">in</span> skip:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">elif</span> feature == <span class="string">'gene'</span>:</span><br><span class="line">            gene_id = attr[<span class="string">'ID'</span>]</span><br><span class="line">            gene_info[gene_id][<span class="string">'name'</span>] = attr[<span class="string">'Name'</span>]</span><br><span class="line">            gene_info[gene_id][<span class="string">'biotype'</span>] = attr[<span class="string">'gene_biotype'</span>]</span><br><span class="line">            check_gene_name[gene_id] = attr[<span class="string">'Name'</span>]</span><br><span class="line">        <span class="comment">#使用字典transcript_info储存转录本信息</span></span><br><span class="line">        <span class="keyword">elif</span> feature <span class="keyword">in</span> transcript:</span><br><span class="line">            transcript_id = attr[<span class="string">'ID'</span>]</span><br><span class="line">            gene_id = attr[<span class="string">'Parent'</span>] <span class="keyword">if</span> <span class="string">'Parent'</span> <span class="keyword">in</span> attr <span class="keyword">else</span> transcript_id</span><br><span class="line">            transcript_name = attr[<span class="string">'transcript_id'</span>] <span class="keyword">if</span> <span class="string">'transcript_id'</span> \</span><br><span class="line">                <span class="keyword">in</span> attr <span class="keyword">else</span> transcript_id</span><br><span class="line">            order.append(transcript_id)</span><br><span class="line">            transcript_info[transcript_id][<span class="string">'gtf_info'</span>] = [chro, start, end, strand]</span><br><span class="line">            transcript_info[transcript_id][<span class="string">'name'</span>] = transcript_name</span><br><span class="line">            transcript_info[transcript_id][<span class="string">'gene'</span>] = gene_id</span><br><span class="line">            <span class="comment"># 部分转录本不存在对应gene信息，直接关联转录类型</span></span><br><span class="line">            <span class="keyword">if</span> feature <span class="keyword">in</span> biotype:</span><br><span class="line">                transcript_info[transcript_id][<span class="string">'biotype'</span>] = feature</span><br><span class="line">            check_transcript_name[transcript_id] = transcript_name</span><br><span class="line">        <span class="keyword">elif</span> feature == <span class="string">'exon'</span>:</span><br><span class="line">            transcript_id = attr[<span class="string">'Parent'</span>]</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                transcript_info[transcript_id][<span class="string">'exon'</span>][<span class="number">1</span>].append(start)</span><br><span class="line">                transcript_info[transcript_id][<span class="string">'exon'</span>][<span class="number">2</span>].append(end)</span><br><span class="line">            <span class="keyword">except</span> KeyError:</span><br><span class="line">                transcript_info[transcript_id][<span class="string">'exon'</span>] = [chro, [start,], \</span><br><span class="line">                    [end,], strand]</span><br><span class="line">        <span class="keyword">elif</span> feature == <span class="string">'CDS'</span>:</span><br><span class="line">            transcript_id = attr[<span class="string">'Parent'</span>]</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                transcript_info[transcript_id][<span class="string">'CDS'</span>][<span class="number">1</span>].append(start)</span><br><span class="line">                transcript_info[transcript_id][<span class="string">'CDS'</span>][<span class="number">2</span>].append(end)</span><br><span class="line">                transcript_info[transcript_id][<span class="string">'CDS'</span>][<span class="number">4</span>].append(frame)</span><br><span class="line">            <span class="keyword">except</span> KeyError:</span><br><span class="line">                transcript_info[transcript_id][<span class="string">'CDS'</span>] = [chro, [start,], \</span><br><span class="line">                    [end,], strand, [frame,]]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            sys.stderr.write(<span class="string">'Warning: Annotation Feature "&#123;&#125;" is not collected, '</span>\</span><br><span class="line">                <span class="string">'Unknown error may occur.\n'</span>.format(feature))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查重复gene_name， transcript_names，进行替换</span></span><br><span class="line">    dup_name = <span class="keyword">lambda</span> list_in: set([i[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> Counter(list_in).items() <span class="keyword">if</span> i[<span class="number">1</span>] &gt; <span class="number">1</span>])</span><br><span class="line">    gene_name = [i[<span class="number">1</span>] <span class="keyword">for</span> i <span class="keyword">in</span> check_gene_name.items()]</span><br><span class="line">    dup_gene_name = dup_name(gene_name)</span><br><span class="line"></span><br><span class="line">    transcript_name = [i[<span class="number">1</span>] <span class="keyword">for</span> i <span class="keyword">in</span> check_transcript_name.items()]</span><br><span class="line">    dup_transcript_name = dup_name(transcript_name)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出GTF文件，order控制输出顺序</span></span><br><span class="line">    <span class="keyword">for</span> transcript <span class="keyword">in</span> order:</span><br><span class="line">        attr = &#123;&#125;</span><br><span class="line">        gene_id = transcript_info[transcript][<span class="string">'gene'</span>]</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            gene_name = gene_info[gene_id][<span class="string">'name'</span>]</span><br><span class="line">            gene_name = gene_id <span class="keyword">if</span> gene_name <span class="keyword">in</span> dup_gene_name <span class="keyword">else</span> gene_name</span><br><span class="line">        <span class="keyword">except</span> KeyError:</span><br><span class="line">            gene_name = gene_id</span><br><span class="line">        attr[<span class="string">'gene_id'</span>] = gene_name</span><br><span class="line">        transcript_name = transcript_info[transcript][<span class="string">'name'</span>]</span><br><span class="line">        transcript_name = transcript <span class="keyword">if</span> transcript_name <span class="keyword">in</span> 、</span><br><span class="line">            dup_transcript_name <span class="keyword">else</span> transcript_name</span><br><span class="line">        attr[<span class="string">'transcript_id'</span>] = transcript_name</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            attr[<span class="string">'transcript_biotype'</span>] = transcript_info[transcript][<span class="string">'biotype'</span>]</span><br><span class="line">        <span class="keyword">except</span> KeyError:</span><br><span class="line">            attr[<span class="string">'transcript_biotype'</span>] = gene_info[gene_id][<span class="string">'biotype'</span>]</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            attr[<span class="string">'gene_biotype'</span>] =  gene_info[gene_id][<span class="string">'biotype'</span>]</span><br><span class="line">        <span class="keyword">except</span> KeyError:</span><br><span class="line">            attr[<span class="string">'gene_biotype'</span>] =  transcript_info[transcript][<span class="string">'biotype'</span>]</span><br><span class="line">        chro, start, end, strand = transcript_info[transcript][<span class="string">'gtf_info'</span>]</span><br><span class="line">        gtf_out.write(<span class="string">'&#123;&#125;\n'</span>.format(format_gtf_line(chro,<span class="string">'transcript'</span>,、</span><br><span class="line">            start,end,strand,attr)))</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            exon_feature = transcript_info[transcript][<span class="string">'exon'</span>]</span><br><span class="line">        <span class="keyword">except</span> KeyError:</span><br><span class="line">            exon_feature = transcript_info[transcript][<span class="string">'CDS'</span>][:<span class="number">-1</span>]</span><br><span class="line">        chro, start, end, strand = exon_feature</span><br><span class="line">        <span class="keyword">for</span> i,j <span class="keyword">in</span> enumerate(start):</span><br><span class="line">            gtf_out.write(<span class="string">'&#123;&#125;\n'</span>.format(format_gtf_line(chro,<span class="string">'exon'</span>,、</span><br><span class="line">                start[i],end[i],strand,attr)))</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            cds_feature = transcript_info[transcript][<span class="string">'CDS'</span>]</span><br><span class="line">            chro, start, end, strand, frame = cds_feature</span><br><span class="line">            <span class="keyword">for</span> i,j <span class="keyword">in</span> enumerate(start):</span><br><span class="line">                gtf_out.write(<span class="string">'&#123;&#125;\n'</span>.format(format_gtf_line(chro, <span class="string">'CDS'</span>, start[i], \</span><br><span class="line">                        end[i], strand, attr, frame=frame[i])))</span><br><span class="line">        <span class="keyword">except</span> KeyError:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="comment">#部分注释信息不完善，多次使用try... except...输出替代的对应注释信息</span></span><br><span class="line">    gtf_out.close()</span><br></pre></td></tr></table></figure>
+<p>GFF格式包括<strong>gene, transcript, exon(CDS)</strong>三个层级，其中<strong>transcript</strong>进行上下关联最为重要，这里脚本以<strong>transcript</strong>作为键值进行数据处理，另外脚本还有一个假设就是<strong>gene, transcript</strong>对应ID在文件中唯一。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2017/201705_anaconda/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -416,7 +774,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-05-17 22:30:07" itemprop="dateModified" datetime="2018-05-17T22:30:07+08:00">2018-05-17</time>
+                <time title="修改时间：2018-07-31 19:14:51" itemprop="dateModified" datetime="2018-07-31T19:14:51+08:00">2018-07-31</time>
               
             
           </span>
@@ -602,7 +960,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-28 00:02:45" itemprop="dateModified" datetime="2018-07-28T00:02:45+08:00">2018-07-28</time>
+                <time title="修改时间：2018-07-31 19:26:21" itemprop="dateModified" datetime="2018-07-31T19:26:21+08:00">2018-07-31</time>
               
             
           </span>
@@ -780,7 +1138,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-05-17 19:13:45" itemprop="dateModified" datetime="2018-05-17T19:13:45+08:00">2018-05-17</time>
+                <time title="修改时间：2018-07-31 19:26:05" itemprop="dateModified" datetime="2018-07-31T19:26:05+08:00">2018-07-31</time>
               
             
           </span>
@@ -1069,7 +1427,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-05-07 21:19:55" itemprop="dateModified" datetime="2018-05-07T21:19:55+08:00">2018-05-07</time>
+                <time title="修改时间：2018-07-31 19:33:55" itemprop="dateModified" datetime="2018-07-31T19:33:55+08:00">2018-07-31</time>
               
             
           </span>
@@ -1086,7 +1444,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/bioformat/" itemprop="url" rel="index"><span itemprop="name">bioformat</span></a></span>
 
                 
                 
