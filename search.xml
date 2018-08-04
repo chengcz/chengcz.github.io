@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Whole Genome Amplification Technologies:MALBAC]]></title>
+    <url>%2F2018%2F201808-MALBAC-md%2F</url>
+    <content type="text"><![CDATA[Technical principles A single cell is picked and lysed. First, genomic DNA of the single cell is melted into single-stranded DNA molecules at 94°C. Picograms of DNA fragments (~10 to 100 kb) MALBAC primers then anneal randomly to single-stranded DNA molecules at 0°C and are extended by a polymerase with displacement activity at elevated temperatures, creating semiamplicons. random primers, each having a common 27-nucleotide sequence and 8 variable nucleotides In the following five temperature cycles, after the step of looping the full amplicons, singlestranded amplicons and the genomic DNA are used as a template to produce full amplicons and additional semiamplicons, respectively. For full amplicons, the 3′ end is complementary to the sequence on the 5′ end. The two ends hybridize to form looped DNA, which can efficiently prevent the full amplicon from being used as a template, therefore warranting a close-to-linear amplification. After the five cycles of linear preamplification, only the full amplicons can be exponentially amplified in the following PCR using the common 27- nucleotide sequence as the primer. PCR reaction will generate microgram level of DNA material for sequencing experiments. Advantages quasi-linear amplification accuracy in CNV detection, especially after signal normalization with a reference cell ###Disadvantages MALBAC is not free from sequence-dependent bias MALBAC is that it has a high false positive rate for SNV detection underamplified regions of the genome are sometimes lost during amplification ref 单细胞全基因组扩增技术: MALBAC文章全文翻译 Zong, Chenghang, et al. “Genome-Wide Detection of Single-Nucleotide and Copy-Number Variations of a Single Human Cell.” Science, vol. 338, no. 6114, 2012, pp. 1622–1626. L, Huang, et al. “Single-Cell Whole-Genome Amplification and Sequencing: Methodology and Applications.” Annual Review of Genomics and Human Genetics, vol. 16, no. 1, 2015, pp. 79–102.]]></content>
+      <tags>
+        <tag>WGA</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Single-cell isoform RNA sequencing (ScISOr-Seq) across thousands of cells reveals isoforms of cerebellar cell types]]></title>
     <url>%2F2018%2F201808_ScISOr-Seq%2F</url>
     <content type="text"><![CDATA[三代平台喜获单细胞测序技能 Methods we employ microfluidics to produce amplified full-length cDNAs barcoded for their cell of origin one pool for 3’ sequencing to measure gene expression(Pacific, Nanopore) another pool for long-read sequencing and isoform expression(10xGenomics) Resultsa.expression We sequence a mean of 17,885 reads per cell After filtering cells and considering only reads confidently mapped to genes, we have 3,875 unique molecular identifiers (UMIs) and 1,448 genes per cell during 3’end sequencing 6,627 cells were clustered into 17 groups To assess stability of clusters, we tripled Illumina sequencing depth for rep2 b.Full-length cDNAs generate ~5.2 million PacBio circular consensus reads cellular barcodes are located close to the polyA-tail, we first searched for polyA-tails chimeras, which were removed from further analysis for 58.0% (compared to 74.0% for 10x-3’seq) of the polyA-tail-containing CCS, we identified a perfect-match 16mer cellular barcode c.ScISOr-Seq using Nanopore sequencing Using 1µg of barcoded cDNA ~31.4% (1D) and ~35.2% (passed 1D2) of Nanopore reads have a 30bp window with &gt;=25 Ts nanopore 需要比 pacbio 更高的样品起始量，nanopore 数据错误率更高 Question 三代数据仍然只是用于转录本组装、注释，需要二代数据定量。分析逻辑约等于三代注释，cell特异转录本，外加二代scRNAseq single cell full-length cDNAs 带 barcode 扩增原理？？？]]></content>
@@ -8,8 +16,8 @@
         <category>read</category>
       </categories>
       <tags>
-        <tag>pacbio</tag>
         <tag>singlecell</tag>
+        <tag>pacbio</tag>
       </tags>
   </entry>
   <entry>
@@ -31,8 +39,8 @@
         <category>RNAseq</category>
       </categories>
       <tags>
-        <tag>classification</tag>
         <tag>lncRNA</tag>
+        <tag>classification</tag>
       </tags>
   </entry>
   <entry>
@@ -54,10 +62,10 @@
         <category>read</category>
       </categories>
       <tags>
-        <tag>scRNAseq</tag>
-        <tag>TCR</tag>
         <tag>singlecell</tag>
         <tag>cancer</tag>
+        <tag>scRNAseq</tag>
+        <tag>TCR</tag>
       </tags>
   </entry>
   <entry>
