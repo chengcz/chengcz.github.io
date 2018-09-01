@@ -353,6 +353,183 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201809_tRFs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201809_tRFs/" itemprop="url">
+                  identification of tRFs from sRNA deep-sequencing data
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-09-02 00:43:24 / Modified: 00:43:53" itemprop="dateCreated datePublished" datetime="2018-09-02T00:43:24+08:00">2018-09-02</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="methods"><a href="#methods" class="headerlink" title="methods"></a>methods</h3><p>参考 <a href="http://genome.bioch.virginia.edu/trfdb/method.php" target="_blank" rel="noopener">http://genome.bioch.virginia.edu/trfdb/method.php</a>，详细方法描述如下：</p>
+<p>tRNA 基因信息从 <a href="http://gtrnadb.ucsc.edu/" target="_blank" rel="noopener">Genomic tRNA database</a> 或者 NCBI 下载，根据注释基因组版本，tRNA 基因链关系，在成熟 rRNA 基因上下游分别延申 100 bp 提取序列</p>
+<blockquote>
+<p>Information about the tRNA genes for species R. sphaeroides (Bacteria; ATCC_17025), S. pombe (schiPomb1), Droshophila (dm3), C. elegans (ce6), Xenopus (xenTro3), zebra fish (Zv9), mouse (mm9) and human (hg19) was either downloaded from the “<strong>Genomic tRNA database</strong>“ (<a href="http://gtrnadb.ucsc.edu/" target="_blank" rel="noopener">http://gtrnadb.ucsc.edu/</a>) or “ <strong>NCBI</strong>“ (<a href="http://www.ncbi.nlm.nih.gov/)" target="_blank" rel="noopener">http://www.ncbi.nlm.nih.gov/)</a>. We extracted sequences that spanned 100bp upstream and 100bp downstream to the mature tRNA genes from the same genome assembly on which the tRNA gene coordinates were built. The genomic sequences were extracted based on the strand information of tRNA gene transcription. </p>
+</blockquote>
+<p>物种特异的 blastdb 被构建，每一个 sRNA 通过 blastn 比对到对应的物种数据库。通常只有 100% 比对到上 db 数据的 sRNA read 进入后续分析步骤。</p>
+<blockquote>
+<p>A species-specific tRNAdb  blast database was built to query the small RNA sequences. To find the tRNA-related RNA sequences in each library, the small RNAs were mapped to the species-specific tRNAdb, using BLASTn (Altschul, Madden et al. 1997). In general we considered only those alignments where the query sequence (small RNA) was mapped to the database sequence (tRNA) along 100% of its length. </p>
+</blockquote>
+<p>blast 输出结果通过 in-house 脚本得到 sRNA 比对的 tRNA 基因上的位置。Blastdb 数据库考虑了基因链信息，因此只有 blast 比对到相同链的 read 被考虑</p>
+<blockquote>
+<p>Blast output file was parsed using an in-house developed script to get the information of mapped positions of small RNA on tRNA genes. Since custom tRNA database was built considering the strand information of tRNA gene therefore only those blast alignments were considered where queries mapped on to the positive strand of the subject sequence. </p>
+</blockquote>
+<p>根据比对从 tRNA 第一个剪辑到最后一个碱基提取 sRNA 信息，最多允许1个错配。在 tRNA 成熟过程中 tRNA 核苷酸转移酶在 tRNA 3’末端添加了“CCA”，因此 tRNA 3‘ 末端的 sRNA 特异的允许不超过3个碱基的错配</p>
+<blockquote>
+<p>We extracted the information for small RNAs aligned from its first to the last base with tRNA sequences, allowing either one or no mismatch. Since “CCA” is added at the 3’ end of tRNA by tRNA nucleotidyltransferase during maturation of tRNA (Xiong and Steitz 2006) therefore a special exception for the small RNA mapping to the 3’ ends of tRNAs in the tRNAdb was devised allowing a terminal mismatch of &lt;=3 bases. </p>
+</blockquote>
+<p>为了消除假阳性，比对到 tRNA blastdb 的 sRNA read，再次使用 blast 进行全基因组搜索，排除不在 tRNA 位点的 read。最后，只有那些只定位于 tRNA 位点的 read 被认定为可能的 tRFs</p>
+<blockquote>
+<p>To eliminate any false positives, the small RNAs that mapped on to the “tRNAdb” were again searched against the whole genome database using blast search excluding the tRNA loci. Finally only those small RNAs were qualified as probable tRFs that mapped exclusively on tRNA loci.</p>
+</blockquote>
+<p> 映射在tRNA基因上的sRNA的末端用于获得tRNA上任何映射的sRNA的显着富集</p>
+<blockquote>
+<p>The ends of the small RNA mapped on tRNA genes was used to access the significant enrichment of any mapped small RNA on tRNA. </p>
+</blockquote>
+<p>如果 tRF 是 tRNA 转录物随机降解的产物，则tRF的末端将沿着tRNA基因的长度以相当的频率均等分布。然而，大多数 sRNA（在单个 tRNA 的总比对读数的90％以上）映射在三个特定区域：成熟 tRNA 的5’末端（tRF-5），3’末端（tRF-3）和 3’ tRNA基因前体的区域（tRF-1）。因此，仅考虑映射到这些特定位置的tRF用于进一步分析。 </p>
+<blockquote>
+<p>If the tRFs were a result of the random degradation of tRNA transcript, the ends of the tRFs would be equally distributed along the lengths of the tRNA genes with comparable frequency. However, the small RNA mostly (&gt;90% of total mapped reads on individual tRNA) mapped on three specific regions: extreme 5’ end (tRF-5), extreme 3’ end (tRF-3) of mature tRNA and 3’ trailer region (tRF-1) of primary tRNA genes. Therefore tRFs mapped only to these specific locations were considered for further analysis. </p>
+</blockquote>
+<p>如下图所示，对于每个 tRF 都存在一种丰富特别高的 sRNA read（例如tRF-5“GCATTGGTGGTTCAGTGGTAGA”以8258读数/百万份进行测序），占到映射到该位点的读数的80％以上。这将主 tRF 与 其他低丰度的核酸酶降解产物区分开，或者可能来自 tRNA 和 tRF 的随机降解。最后，数据库中仅包含高度丰富的tRF（至少一个库中每百万&gt; 20个读数）。</p>
+<blockquote>
+<p>As shown in Figure for each tRF there is one most abundant RNA sequenced (example the tRF-5 “GCATTGGTGGTTCAGTGGTAGA” was sequenced at 8258 reads per million) accounting for more than 80% of the reads mapping to that site. This distinguishes the main tRF from other low abundance products created by nucleases digesting the main tRF, or possibly from random degradation of tRNAs and tRFs. Finally, only highly abundant tRFs (&gt;20 reads per million in at least one library) were included in the database. </p>
+</blockquote>
+<p><img src="http://genome.bioch.virginia.edu/trfdb/Fig2.jpg" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201808-MALBAC-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2167,199 +2344,6 @@
 <li>python 画图脚本添加下面两行</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line">matplotlib.use(<span class="string">'Agg'</span>)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201806_HumanGene/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ChengCZ">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChengCZ's Notebook">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/201806_HumanGene/" itemprop="url">
-                  canonical transcripts of Human protein coding gene
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-06-30 23:33:23" itemprop="dateCreated datePublished" datetime="2018-06-30T23:33:23+08:00">2018-06-30</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-07-31 19:10:22" itemprop="dateModified" datetime="2018-07-31T19:10:22+08:00">2018-07-31</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/bioinfor/" itemprop="url" rel="index"><span itemprop="name">bioinfor</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>我们使用 <a href="https://chengcz.github.io/2018/201805_snpEff/">snpEff</a>, <a href="https://chengcz.github.io/2018/201806_ANNOVAR/">annovar</a> 对得到的变异集注释，总会得到多个转录本注释结果，而只需要按照 HGVS 规范报告一个经典转录本(canonical transcripts) 对应注释结果，这时候就需要知道每个基因对应的经典转录本。</p>
-<p>一般情况下，我们使用<strong>基因对应的最长转录本代表该基因</strong>，具体操作上，首先从 <a href="https://chengcz.github.io/2018/201805_HGVS/">HGNC</a> 下载经过确认的基因对应经典转录本信息，其中不确定基因再使用最长转录本代表。</p>
-<ol>
-<li><p>HGNC 下载编码蛋白基因对应转录本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> wget -c ftp://ftp.ebi.ac.uk/pub/databases/genenames/new/tsv/locus_types/gene_with_protein_product.txt</span><br></pre></td></tr></table></figure>
-<p>根据表格，很方便得到基因名字对应 hgnc_id, entrez_id, ensembl_gene_id, refseq_accession 等多数据库基因ID，使用 refseq_accession 进行 HGVS 表示，这里就只关注 refseq_accession ， 还是可以发现其中一些基因名并不能对应到唯一 refseq_accession，下面就需要我们进行第二步，结合 GFF 文件挑出经典转录本。</p>
-</li>
-<li><p>NCBI下载人类基因注释GFF文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> wget -c ftp://ftp.ncbi.nlm.nih.gov/refseq/H_sapiens/annotation/GRCh37_latest/refseq_identifiers/GRCh37_latest_genomic.gff.gz</span><br></pre></td></tr></table></figure>
-<p>使用脚本将 gff 转换为表格样式，方便筛选每个基因对应最长转录本，具体操作参考如下，其中 <a href="https://github.com/chengcz/pyGTF" target="_blank" rel="noopener">pyGTF</a> 为用来解析 gff 文件。</p>
-<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/gff2tab.png" alt=""></p>
-<p>输出文件可以<a href="https://github.com/chengcz/BioResource/tree/master/HumanGene" target="_blank" rel="noopener">下载</a> , 其具体格式为：</p>
-<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/gff_tab.png" alt=""></p>
-<p>表头分别是：gene_id, gene_name, gene_type, transcript_id, transcript_name, transcript_type, transcript_length, chromosome, start, end, strand，根据 gene_name, transcript_name, transcript_length 三列排序，就可以很方便筛选出基因对应最长转录本。</p>
-</li>
-<li><p>脚本整合 HGNC 和 GFF 两部分结果</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">gene, length = &#123;&#125;, &#123;&#125;</span><br><span class="line">gff = pd.read_table(<span class="string">'hg37.geneinfo.txt'</span>, header=<span class="keyword">None</span>)</span><br><span class="line">gff = gff[(gff[<span class="number">2</span>]==<span class="string">'protein_coding'</span>) | (gff[<span class="number">5</span>]==<span class="string">'protein_coding'</span>)]</span><br><span class="line">nrow, ncol = gff.shape</span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> range(nrow):</span><br><span class="line">    transcriptid = gff.iloc[index,<span class="number">3</span>]</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        transcriptid = transcriptid[:transcriptid.rindex(<span class="string">'.'</span>)]</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    gene.setdefault(gff.iloc[index,<span class="number">1</span>], []).append(transcriptid)</span><br><span class="line">    length[transcriptid] = gff.iloc[index,<span class="number">6</span>]</span><br><span class="line"></span><br><span class="line">hgnc = pd.read_table(<span class="string">'gene_with_protein_product.txt'</span>)</span><br><span class="line">hgnc[<span class="string">'symbol'</span>] = hgnc[<span class="string">'symbol'</span>].astype(str)</span><br><span class="line">hgnc[<span class="string">'refseq_accession'</span>] = hgnc[<span class="string">'refseq_accession'</span>].astype(str)</span><br><span class="line">nrow, ncol = hgnc.shape</span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> range(nrow):</span><br><span class="line">    genename = hgnc.loc[index, <span class="string">'symbol'</span>]</span><br><span class="line">    refseq = hgnc.loc[index, <span class="string">'refseq_accession'</span>]</span><br><span class="line">    tmp = refseq.split(<span class="string">'|'</span>)</span><br><span class="line">    <span class="keyword">if</span> len(tmp) == <span class="number">1</span>:</span><br><span class="line">        print(<span class="string">'&#123;&#125;\t&#123;&#125;\thgnc'</span>.format(genename, refseq))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> len(tmp) == <span class="number">0</span>:</span><br><span class="line">            tmp = gene[genename]</span><br><span class="line">        tmp = sorted(tmp, key=<span class="keyword">lambda</span> x: length.get(x, <span class="number">0</span>), reverse=<span class="keyword">True</span>)</span><br><span class="line">        print(<span class="string">'&#123;&#125;\t&#123;&#125;\tgff'</span>.format(genename, tmp[<span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
-<p>结果整理文件可下载：<a href="https://github.com/chengcz/BioResource/tree/master/HumanGene/protein_coding_gene_canonical_transcripts.txt" target="_blank" rel="noopener">https://github.com/chengcz/BioResource/tree/master/HumanGene/protein_coding_gene_canonical_transcripts.txt</a></p>
 </li>
 </ol>
 
