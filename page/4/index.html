@@ -353,6 +353,533 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2017/201707_mountHardDisk/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/201707_mountHardDisk/" itemprop="url">
+                  服务器挂载 4T 硬盘
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-07-28 10:20:21" itemprop="dateCreated datePublished" datetime="2017-07-28T10:20:21+08:00">2017-07-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-07-28 00:02:58" itemprop="dateModified" datetime="2018-07-28T00:02:58+08:00">2018-07-28</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>因为一些我并不理解的原因，服务器不能正确识别4T的NTFS移动硬盘，需要对其格式化成ext4格式，就我的一些操作记录。</p>
+<ol>
+<li><p><code>fdisk -l</code>，查看硬盘分配的硬件编号</p>
+<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2017/fdisk.png" alt=""></p>
+</li>
+<li><p><code>parted /dev/sdg</code>，对使用parted工具对硬盘进行分区</p>
+<ul>
+<li><p><code>mklable gpt</code>，把磁盘格式化为 gpt分区表</p>
+</li>
+<li><p><code>mkpart primary 0 4000G</code>，创建一个主分区，起始位置-结束位置</p>
+</li>
+<li><p><code>mkpart extended 2000G 4000G</code>，可选，创建一个扩展分区</p>
+</li>
+<li><p><code>print</code>，打印出当前设备的信息</p>
+</li>
+<li><p><code>quit</code>，推出parted</p>
+</li>
+</ul>
+<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2017/linux_parted.png" alt=""></p>
+</li>
+<li><p><code>mkfs.ext4 /dev/sdg1</code>，对硬盘进行格式化，如果存在多个分区，每个分区都需要进行格式化</p>
+<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2017/mkfs.ext4.png" alt=""></p>
+</li>
+<li><p><code>mount /dev/sdg1 /mnt/usbmount1</code>，挂载硬盘到服务器</p>
+</li>
+<li><p><code>umount /dev/sdg1</code>，硬盘卸载</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2017/201707_VariableName/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/201707_VariableName/" itemprop="url">
+                  一次诡异的 python 错误排查
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-07-03 00:07:27" itemprop="dateCreated datePublished" datetime="2017-07-03T00:07:27+08:00">2017-07-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-05-17 19:15:04" itemprop="dateModified" datetime="2018-05-17T19:15:04+08:00">2018-05-17</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>输入表格示例：</p>
+<table>
+<thead>
+<tr>
+<th>library</th>
+<th>reads_num</th>
+<th>reads_len</th>
+<th>bases_num</th>
+<th>GC</th>
+<th>avgQ</th>
+<th>Q20</th>
+<th>Q30</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A-Ctrl</td>
+<td>46,875,170</td>
+<td>150.0</td>
+<td>7.00 Gb</td>
+<td>49.90%</td>
+<td>36.6</td>
+<td>93.24%</td>
+<td>85.97%</td>
+</tr>
+<tr>
+<td>B-Ctrl</td>
+<td>154,351,882</td>
+<td>150.0</td>
+<td>23.00 Gb</td>
+<td>45.40%</td>
+<td>36.9</td>
+<td>93.80%</td>
+<td>86.93%</td>
+</tr>
+<tr>
+<td>C-Ctrl</td>
+<td>58,126,912</td>
+<td>150.0</td>
+<td>8.00 Gb</td>
+<td>60.05%</td>
+<td>36.05</td>
+<td>92.19%</td>
+<td>83.96%</td>
+</tr>
+<tr>
+<td>D-Ctrl</td>
+<td>143,761,494</td>
+<td>150.0</td>
+<td>21.00 Gb</td>
+<td>42.00%</td>
+<td>37.25</td>
+<td>94.46%</td>
+<td>88.15%</td>
+</tr>
+</tbody>
+</table>
+<h2 id="初次尝试"><a href="#初次尝试" class="headerlink" title="初次尝试"></a>初次尝试</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 错误的结果</span></span><br><span class="line">table = open(<span class="string">'qc.stat'</span>, <span class="string">'r'</span>)</span><br><span class="line">header = [[],] * len(table.readline().strip().split(<span class="string">'\t'</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> table:</span><br><span class="line">    <span class="keyword">for</span> x,y <span class="keyword">in</span> enumerate(i.strip().split(<span class="string">'\t'</span>)):</span><br><span class="line">        header[x].append(y)</span><br><span class="line">header</span><br><span class="line"><span class="comment"># table.close()</span></span><br></pre></td></tr></table></figure>
+<h3 id="结果输出"><a href="#结果输出" class="headerlink" title="结果输出"></a>结果输出</h3><pre><code>[[&apos;A&apos;,
+  &apos;46,875,170&apos;,
+  &apos;150.0&apos;,
+  &apos;7.00 Gb&apos;,
+  &apos;49.90%&apos;,
+  &apos;36.6&apos;,
+  &apos;93.24%&apos;,
+  &apos;85.97%&apos;,
+  &apos;B&apos;,
+  &apos;154,351,882&apos;,
+  &apos;150.0&apos;,
+  &apos;23.00 Gb&apos;,
+  &apos;45.40%&apos;,
+  &apos;36.9&apos;,
+  &apos;93.80%&apos;,
+  &apos;86.93%&apos;,
+  &apos;C&apos;,
+  &apos;58,126,912&apos;,
+  &apos;150.0&apos;,
+  &apos;8.00 Gb&apos;,
+  &apos;60.05%&apos;,
+  &apos;36.05&apos;,
+  &apos;92.19%&apos;,
+  &apos;83.96%&apos;,
+  &apos;D&apos;,
+  &apos;143,761,494&apos;,
+  &apos;150.0&apos;,
+  &apos;21.00 Gb&apos;,
+  &apos;42.00%&apos;,
+  &apos;37.25&apos;,
+  &apos;94.46%&apos;,
+  &apos;88.15%&apos;],
+ [&apos;A&apos;,
+  &apos;46,875,170&apos;,
+  &apos;150.0&apos;,
+  &apos;7.00 Gb&apos;,
+  &apos;49.90%&apos;,
+  &apos;36.6&apos;,
+  &apos;93.24%&apos;,
+  &apos;85.97%&apos;,
+  &apos;B&apos;,
+  &apos;154,351,882&apos;,
+  &apos;150.0&apos;,
+  &apos;23.00 Gb&apos;,
+  &apos;45.40%&apos;,
+  &apos;36.9&apos;,
+  &apos;93.80%&apos;,
+  &apos;86.93%&apos;,
+  &apos;C&apos;,
+  &apos;58,126,912&apos;,
+  &apos;150.0&apos;,
+  &apos;8.00 Gb&apos;,
+  &apos;60.05%&apos;,
+  &apos;36.05&apos;,
+  &apos;92.19%&apos;,
+  &apos;83.96%&apos;,
+  &apos;D&apos;,
+  &apos;143,761,494&apos;,
+  &apos;150.0&apos;,
+  &apos;21.00 Gb&apos;,
+  &apos;42.00%&apos;,
+  &apos;37.25&apos;,
+  &apos;94.46%&apos;,
+  &apos;88.15%&apos;],
+ ...]
+</code></pre><h2 id="正确解析"><a href="#正确解析" class="headerlink" title="正确解析"></a>正确解析</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 正确代码</span></span><br><span class="line">table = open(<span class="string">'qc.stat'</span>, <span class="string">'r'</span>)</span><br><span class="line">header = [[i,] <span class="keyword">for</span> i <span class="keyword">in</span> table.readline().strip().split(<span class="string">'\t'</span>)]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> table:</span><br><span class="line">    <span class="keyword">for</span> x,y <span class="keyword">in</span> enumerate(i.strip().split(<span class="string">'\t'</span>)):</span><br><span class="line">        header[x].append(y)</span><br><span class="line">header</span><br><span class="line"><span class="comment"># table.close()</span></span><br></pre></td></tr></table></figure>
+<h3 id="结果输出-1"><a href="#结果输出-1" class="headerlink" title="结果输出"></a>结果输出</h3><pre><code>[[&apos;library&apos;, &apos;A&apos;, &apos;B&apos;, &apos;C&apos;, &apos;D&apos;],
+ [&apos;reads_num&apos;, &apos;46,875,170&apos;, &apos;154,351,882&apos;, &apos;58,126,912&apos;, &apos;143,761,494&apos;],
+ [&apos;reads_len&apos;, &apos;150.0&apos;, &apos;150.0&apos;, &apos;150.0&apos;, &apos;150.0&apos;],
+ [&apos;bases_num&apos;, &apos;7.00 Gb&apos;, &apos;23.00 Gb&apos;, &apos;8.00 Gb&apos;, &apos;21.00 Gb&apos;],
+ [&apos;GC&apos;, &apos;49.90%&apos;, &apos;45.40%&apos;, &apos;60.05%&apos;, &apos;42.00%&apos;],
+ [&apos;avgQ&apos;, &apos;36.6&apos;, &apos;36.9&apos;, &apos;36.05&apos;, &apos;37.25&apos;],
+ [&apos;Q20&apos;, &apos;93.24%&apos;, &apos;93.80%&apos;, &apos;92.19%&apos;, &apos;94.46%&apos;],
+ [&apos;Q30&apos;, &apos;85.97%&apos;, &apos;86.93%&apos;, &apos;83.96%&apos;, &apos;88.15%&apos;]]
+</code></pre><h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 错误原因查找</span></span><br><span class="line"></span><br><span class="line">head = <span class="string">'#library\treads_num\treads_len\tbases_num\tGC\tavgQ\tQ20\tQ30'</span></span><br><span class="line"></span><br><span class="line">header = [[], ] * len(head.strip().split(<span class="string">'\t'</span>))</span><br><span class="line"><span class="keyword">print</span> <span class="string">'error method...'</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> header:</span><br><span class="line">    <span class="keyword">print</span> id(i)</span><br><span class="line"></span><br><span class="line">header = [[i,] <span class="keyword">for</span> i <span class="keyword">in</span> head.strip().split(<span class="string">'\t'</span>)]</span><br><span class="line"><span class="keyword">print</span> <span class="string">'\nright method...'</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> header:</span><br><span class="line">    <span class="keyword">print</span> id(i)</span><br></pre></td></tr></table></figure>
+<pre><code>error method...
+4435237272
+4435237272
+4435237272
+4435237272
+4435237272
+4435237272
+4435237272
+4435237272
+
+right method...
+4435236984
+4435354904
+4435318688
+4435237416
+4435318040
+4435319768
+4435318472
+4435319624
+</code></pre><p><strong>python独特的变量命名方式</strong>：变量名（&gt;= 1个）指向储存数据物理地址，使用其中任何一个名称都可以对数据进行操作</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2017/201706_pythondict/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1923,205 +2450,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2017/201703_GettingStarted/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ChengCZ">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChengCZ's Notebook">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/201703_GettingStarted/" itemprop="url">
-                  'XXX，从入门到放弃'
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2017-03-11 10:57:34" itemprop="dateCreated datePublished" datetime="2017-03-11T10:57:34+08:00">2017-03-11</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-05-09 21:48:27" itemprop="dateModified" datetime="2018-05-09T21:48:27+08:00">2018-05-09</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/bioinfor/" itemprop="url" rel="index"><span itemprop="name">bioinfor</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>生物背景从事生物信息分析工作，本科时候对统计、计算机之类的有些兴趣，觉着“<strong>生物信息</strong>”很高大上的样子，什毛都不懂就如了生信的坑，这一路下来，知道越多越觉得需要了解、懂的东西也越多，经常有“<strong>我擦勒，要学这么多东西啊</strong>” ， <code>linux</code>, <code>R</code>, <code>python</code>, <code>perl</code>…… 微博上看了各种从入门到放弃系列，觉得很有意思，这里也不自知的写个从入门到放弃吧，生物信息是一个多学科的交叉学科，遗传、生理、计算机、统计基础好像都须知道一些，“<strong>XXX，从入门到放弃</strong>”，我也不知道是啥从入门到放弃。</p>
-<p>很早就有利用博客整理、交流学习思路的想法，懒癌穷癌很成功的阻止了我，看到很多利用github的教程，简单粗暴，终于鼓起勇气试试。</p>
-<p>讲真，统计不是很懂，遗传不知道怎么说起，那就说说生信分析的linux、R、python这些咯。</p>
-<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><p>分析主要工作环境，<strong>命令行</strong>操作，分析工具众多。</p>
-<p>基础命令：cd，pwd，ls，mkdir，rm，touch，cp，mv，echo，wc，ln</p>
-<p>文件查看：head，tail，more，less，cat (zcat)</p>
-<p>打包压缩：tar，gzip，zip，bzip2</p>
-<p>文件处理：vim，awk，sed，grep (zgrep)，join</p>
-<p>其他几个有用的命令：find，top，ps，kill，free</p>
-<p>Linux系统命令可以通过<code>man command</code>或者<code>command --help</code>的方式查看帮助信息</p>
-<p><strong>其他几个须知的点</strong>：重定向<code>&gt;</code>，文本追加<code>&gt;&gt;</code>，管道<code>|</code>，后台运行<code>&amp;</code>和<code>nohup</code>，标准输入、标准输出和标准错误</p>
-<h1 id="R"><a href="#R" class="headerlink" title="R"></a>R</h1><p>两个功能，分析和绘图。分析这个主要是利用一些现成R package，例如转录组分析中DESeq、edgeR这些；绘图，当时还是ggplot2，教程很多，我这个R战五渣没有发言权。学习R，当然要有<a href="https://www.rstudio.com/" target="_blank" rel="noopener">RStudio</a>，R书籍什么的， <a href="">R语言实战</a>、<a href="">ggplot2数据分析与图形艺术</a>都可以看下。</p>
-<h1 id="python"><a href="#python" class="headerlink" title="python"></a>python</h1><p>主要是文件整理吧，不同格式转换，提取有效信息。python语法简单，基本上很快都能写出实现自己功能的代码，有很多第三方modules帮你实现想要的功能，另外学习的人多啊，不怕找不到人问问题。</p>
-<p>编程能力这个还是靠<strong>多练习</strong>了，一些知识点就只能自己看书看教程背，现在网上也很多python相关的资料教程，边看边练习，入门很快的。记得，我当时看了很多七七八八的教程，然而少练习，折腾挺长时间，廖雪峰的<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000" target="_blank" rel="noopener">python教程 (2.7)</a>，<a href="">笨方法学python</a> ，github上也是有很多python学习笔记或者英文书籍翻译。</p>
-<p>强烈推荐<a href="http://ipython.org/" target="_blank" rel="noopener">ipython</a>，可以理解为python里的Rstudio吧，可以生成富文本(<strong>filename.ipynb</strong>)文件，很方便用于脚本展示、交流。</p>
-<p><a href="https://www.continuum.io/" target="_blank" rel="noopener">Anaconda</a> ，一个python科学计算环境，包括了常用的numpy、pandas、matplotlib、ipython等modules，管理python工作环境，实现<code>python2</code>, <code>python3</code>和谐共存，这个也是刚开始了解，熟悉的朋友可以交流交流。</p>
-<h1 id="perl"><a href="#perl" class="headerlink" title="perl"></a>perl</h1><p>和python类似吧，文件整理。这个这个，只会打印<code>hello, world</code>，算是不会了，网上也很多博客教程，可以参考学习。</p>
-<hr>
-<h1 id="其他技能"><a href="#其他技能" class="headerlink" title="其他技能"></a>其他技能</h1><h2 id="MarkDown"><a href="#MarkDown" class="headerlink" title="MarkDown"></a>MarkDown</h2><p>语法简单，结果展示酷炫，低门槛装逼利器。</p>
-<p><a href="https://typora.io/" target="_blank" rel="noopener">Typore</a>：免费markdown编辑器里面最好的，界面简洁，支持多种格式（pdf，html，docx等等）导出。</p>
-<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><p>可以掌握的技能。关注<a href="https://www.docker.com/" target="_blank" rel="noopener">docker</a>，这是因为同事提到工作流程迁移系统环境兼容的问题，docker完全免去了这些烦恼。无奈，工作系统版本太低，无法安装，还没有试过。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 

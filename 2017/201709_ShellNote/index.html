@@ -123,7 +123,7 @@
 <meta property="og:site_name" content="ChengCZ&#39;s Notebook">
 <meta property="og:description" content="&amp;amp;&amp;amp;，cmd1 &amp;amp;&amp;amp; cmd2 如果cmd1成功执行（返回0，注意设置中脚本执行返回值），那么执行cmd2 ​  ||，cmd1 || cmd2 如果cmd1执行失败，那么执行cmd2 ​  (), {}组合逻辑控制 ()组合来控制命令； {}组合控制子shell ​  条件判断 123456789101112131415161718192021222324252">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-07-31T11:06:25.680Z">
+<meta property="og:updated_time" content="2018-09-01T16:50:06.600Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="shell 命令使用笔记">
 <meta name="twitter:description" content="&amp;amp;&amp;amp;，cmd1 &amp;amp;&amp;amp; cmd2 如果cmd1成功执行（返回0，注意设置中脚本执行返回值），那么执行cmd2 ​  ||，cmd1 || cmd2 如果cmd1执行失败，那么执行cmd2 ​  (), {}组合逻辑控制 ()组合来控制命令； {}组合控制子shell ​  条件判断 123456789101112131415161718192021222324252">
@@ -416,7 +416,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-31 19:06:25" itemprop="dateModified" datetime="2018-07-31T19:06:25+08:00">2018-07-31</time>
+                <time title="Modified: 2018-09-02 00:50:06" itemprop="dateModified" datetime="2018-09-02T00:50:06+08:00">2018-09-02</time>
               
             
           </span>
@@ -484,7 +484,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">if [ condition ]; then</span><br><span class="line"><span class="meta">#</span> if test condition; then</span><br><span class="line">    echo 'yes'</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>使用[]判断条件时，[]和condition之间必须用空格分隔开</span><br><span class="line"><span class="meta">#</span> -d        判断是不是文件夹</span><br><span class="line"><span class="meta">#</span> -f        判断是不是文件</span><br><span class="line"><span class="meta">#</span> -L        判断是不是链接</span><br><span class="line"><span class="meta">#</span> -s        判断文件是否存在且非空</span><br><span class="line"><span class="meta">#</span> -r        判断文件是否可读</span><br><span class="line"><span class="meta">#</span> -w        判断文件是否可写</span><br><span class="line"><span class="meta">#</span> -x        判断文件是否可执行</span><br><span class="line"><span class="meta">#</span> -z        判断是否空字符串</span><br><span class="line"><span class="meta">#</span> -n        判断是否非空字符串</span><br><span class="line"><span class="meta">#</span> =         判断字符串是否相等</span><br><span class="line"><span class="meta">#</span> !=        判断字符串是否不等</span><br><span class="line"><span class="meta">#</span> -eq       判断数值是否相等</span><br><span class="line"><span class="meta">#</span> -ne       判断数值是否不等</span><br><span class="line"><span class="meta">#</span> -gt       第一个数大于第二个数</span><br><span class="line"><span class="meta">#</span> -ge       第一个数大于等于第二个数</span><br><span class="line"><span class="meta">#</span> -lt       第一个数小于第二个数</span><br><span class="line"><span class="meta">#</span> -le       第一个数小于等于第二个数</span><br><span class="line"><span class="meta">#</span> -a        逻辑与</span><br><span class="line"><span class="meta">#</span> -o        逻辑或</span><br><span class="line"><span class="meta">#</span> !         逻辑否</span><br></pre></td></tr></table></figure>
 <p>​</p>
 </li>
-<li><p>推出状态</p>
+<li><p>退出状态</p>
 <p><code>exit n</code>，其中n表示数字，0表示脚本执行成功无错误，1表示执行失败某处有错误</p>
 <blockquote>
 <p>可以使用 <strong>$?</strong> 获得最后执行命令推出状态</p>
