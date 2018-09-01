@@ -353,6 +353,196 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2017/201703_SeqSearch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/201703_SeqSearch/" itemprop="url">
+                  task about Local Sequence Search tool
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-03-14 19:32:54" itemprop="dateCreated datePublished" datetime="2017-03-14T19:32:54+08:00">2017-03-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-09-02 01:08:13" itemprop="dateModified" datetime="2018-09-02T01:08:13+08:00">2018-09-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/bioinfor/" itemprop="url" rel="index"><span itemprop="name">bioinfor</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>生物狗应该都知道、用过blast的吧，出于代码维护等原因，NCBI在原有核心算法基础上重写了blast，使用分别的<code>blastp</code>, <code>blastn</code>, <code>blastx</code>, <code>tblastn</code>, <code>tblastx</code>代替了原来的<code>blastall</code>，软件包名称也变成blast+（与之前老版本blast区分），以下文中blast都指新版blast+。</p>
+<h2 id="blast"><a href="#blast" class="headerlink" title="blast"></a>blast</h2><p><a href="ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/" target="_blank" rel="noopener">ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/</a>下载系统对应版本，linux用户可直接下载编译好的版本，解包急用，简单粗暴，windows用户下载<code>ncbi-blast+</code>，和正常windows软件一样安装(<strong>建议安装非系统盘</strong>，存放数据库文件，占用系统盘空间)，最后添加<code>环境变量</code>就好。</p>
+<p>###blast 输出格式</p>
+<p>blast支持<code>txt</code>、<code>xml</code>、<code>ASN.1</code>等多种输出格式，具体可通过参数<code>-outfmt int</code>参数进行设置（<code>int</code>取值<code>0-11</code> ），其中以xml（<code>-outfmt 5</code> ）和txt（<code>-outfmt 6</code> ）使用较多。</p>
+<p>xml输出信息全面，可能不便于查看，txt格式便于查看，而仅显示有限的匹配信息，但是blast支持<strong>自定义输出</strong>信息，可通过<code>-outfmt &quot;6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore&quot;</code>实现，具体输出信息参考<code>blastp -help</code>信息。</p>
+<p>###blast task 参数设置</p>
+<p>一直很好奇为啥<a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi" target="_blank" rel="noopener">网页版 blast </a>中的 blastn 有<code>megablast</code>, <code>discontiguous megablast</code>, <code>blastn</code>三种选项，而在单机版中找不到对应可执行程序，看NCBI介绍也有说 megablast 对比速度上更快一些，一直想要自己动手试试，找不到执行程序。某天瞎逛各种论坛的时候，偶然发现了还有<code>-task</code>这么一个参数选择不同的比对模式，就先记录了解下，准备后续测试。</p>
+<ul>
+<li>blastp，<code>-task</code>参数有<code>blastp</code> , <code>blastp-short</code>和<code>deltablast</code>三种选择</li>
+<li>blastn，<code>-task</code>参数可选<code>blastn</code>, <code>blastn-short</code>, <code>dc-megablast</code>, <code>megablast</code>, <code>rmblastn</code>，这里blastn软件默认就采用<code>megablast</code>进行同源搜索</li>
+<li>blastx，<code>-task</code>参数可选<code>blastx</code>, <code>blastx-fast</code>，测试结果可以参看 genedock 博客，<a href="https://www.genedock.com/blog/2017/02/22/20170222_blastx-survey/" target="_blank" rel="noopener">https://www.genedock.com/blog/2017/02/22/20170222_blastx-survey/</a></li>
+</ul>
+<p>###其他比对工具</p>
+<ol>
+<li><a href="https://github.com/bbuchfink/diamond" target="_blank" rel="noopener">Diamond</a>, 类blast程序吧，运行时间、速度上甩blast+ n条街，空间换时间的策略吧，占用内存、CPU也是够够的了，不过最新版本加入了<code>-b</code>参数限制内存、虚拟磁盘空间的占用，同时新增<code>--sensitive</code>和<code>--more-sensitive</code>参数比对结果的灵敏性</li>
+<li>Blat, UCSC出品，没仔细研究，某些时候比 blast 好用</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2017/201703_GettingStarted/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
