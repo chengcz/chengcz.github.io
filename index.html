@@ -353,185 +353,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201809_parseXML/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ChengCZ">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChengCZ's Notebook">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/201809_parseXML/" itemprop="url">
-                  parse blast XML use python
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-09-03 00:05:10" itemprop="dateCreated datePublished" datetime="2018-09-03T00:05:10+08:00">2018-09-03</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-09-02 00:48:18" itemprop="dateModified" datetime="2018-09-02T00:48:18+08:00">2018-09-02</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/bioformat/" itemprop="url" rel="index"><span itemprop="name">bioformat</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>2017.05</p>
-<hr>
-<p>blast 输出 <strong>xml</strong> 格式结果，包括最完整的比对信息，经常需要自己从  blast.xml 结果中提取想要的信息，最开始都自己循环 xml 一行行匹配，一点都不 pythonic，陆续发现了一些新的 xml 解析实现，整理如下：</p>
-<h3 id="re-search"><a href="#re-search" class="headerlink" title="re.search"></a>re.search</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_BLAST_XML</span><span class="params">(infile)</span>:</span></span><br><span class="line">    get = <span class="keyword">lambda</span> x: re.search(<span class="string">'&gt;.*?&lt;'</span>, x).group(<span class="number">0</span>)[<span class="number">1</span>:<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line">    r_query_id = re.compile(<span class="string">"&lt;Iteration_query-ID&gt;"</span>)</span><br><span class="line">    r_query_def = re.compile(<span class="string">"&lt;Iteration_query-def&gt;"</span>)</span><br><span class="line">    r_query_len = re.compile(<span class="string">"&lt;Iteration_query-len&gt;"</span>)</span><br><span class="line">    r_hit_num = re.compile(<span class="string">"&lt;Hit_num&gt;"</span>)</span><br><span class="line">    r_hit_id = re.compile(<span class="string">"&lt;Hit_id&gt;"</span>)</span><br><span class="line">    r_hit_def = re.compile(<span class="string">"&lt;Hit_def&gt;"</span>)</span><br><span class="line">    r_hit_accession = re.compile(<span class="string">"&lt;Hit_accession&gt;"</span>)</span><br><span class="line">    r_hit_len = re.compile(<span class="string">"&lt;Hit_len&gt;"</span>)</span><br><span class="line">    r_hsp_num = re.compile(<span class="string">"&lt;Hsp_num&gt;"</span>)</span><br><span class="line">    r_hsp_bit_score = re.compile(<span class="string">"&lt;Hsp_bit-score&gt;"</span>)</span><br><span class="line">    r_hsp_score = re.compile(<span class="string">"&lt;Hsp_score&gt;"</span>)</span><br><span class="line">    r_hsp_evalue = re.compile(<span class="string">"&lt;Hsp_evalue&gt;"</span>)</span><br><span class="line">    r_hsp_query_from = re.compile(<span class="string">"&lt;Hsp_query-from&gt;"</span>)</span><br><span class="line">    r_hsp_query_to = re.compile(<span class="string">"&lt;Hsp_query-to&gt;"</span>)</span><br><span class="line">    r_hsp_hit_from = re.compile(<span class="string">"&lt;Hsp_hit-from&gt;"</span>)</span><br><span class="line">    r_hsp_hit_to = re.compile(<span class="string">"&lt;Hsp_hit-to&gt;"</span>)</span><br><span class="line">    r_hsp_query_frame = re.compile(<span class="string">"&lt;Hsp_query-frame&gt;"</span>)</span><br><span class="line">    r_hsp_hit_frame = re.compile(<span class="string">"&lt;Hsp_hit-frame&gt;"</span>)</span><br><span class="line">    r_hsp_identity = re.compile(<span class="string">"&lt;Hsp_identity&gt;"</span>)</span><br><span class="line">    r_hsp_positive = re.compile(<span class="string">"&lt;Hsp_positive&gt;"</span>)</span><br><span class="line">    r_hsp_gaps = re.compile(<span class="string">"&lt;Hsp_gaps&gt;"</span>)</span><br><span class="line">    r_hsp_align_len = re.compile(<span class="string">"&lt;Hsp_align-len&gt;"</span>)</span><br><span class="line">    r_hsp_qseq = re.compile(<span class="string">"&lt;Hsp_qseq&gt;"</span>)</span><br><span class="line">    r_hsp_hseq = re.compile(<span class="string">"&lt;Hsp_hseq&gt;"</span>)</span><br><span class="line">    r_hsp_midline = re.compile(<span class="string">"&lt;Hsp_midline&gt;"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> open(infile,<span class="string">'r'</span>):</span><br><span class="line">        <span class="keyword">if</span> r_query_id.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            query_id =  get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_query_def.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            query_def = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_query_len.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            query_len = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hit_num.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hit_num = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hit_id.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hit_id = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hit_def.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hit_def = get(line)</span><br><span class="line">   </span><br><span class="line">        <span class="keyword">elif</span> r_hit_accession.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hit_accession = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hit_len.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hit_len = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_num.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_num = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_bit_score.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_bit_score = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_score.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_score = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_evalue.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_evalue = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_query_from.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_query_from = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_query_to.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_query_to = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_hit_from.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_hit_from = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_hit_to.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_hit_to = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_query_frame.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_query_frame = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_hit_frame.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_hit_frame = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_identity.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_identity = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_positive.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_positive = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_gaps.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_gaps = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_align_len.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_align_len = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_qseq.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_qseq = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_hseq.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_hseq = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_midline.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_midline = get(line)</span><br><span class="line"></span><br><span class="line">            percent_ident = <span class="string">"%5.2f"</span> %  (((float(hsp_identity)/float(hsp_align_len))*<span class="number">100</span>))</span><br><span class="line">            mismatch = str(int(hsp_align_len) - int(hsp_identity))</span><br><span class="line">            <span class="comment"># ['query id', 'query name', 'subject id', 'identity(%)', 'alignment length', 'mismatches', 'gap opens', 'q. start', 'q. end', 's. start', 's. end', 'evalue', 'bit score', 'subject description']</span></span><br><span class="line">            <span class="keyword">yield</span> [query_id, query_def, hit_id, percent_ident, hsp_align_len, mismatch, hsp_gaps, hsp_query_from, hsp_query_to, hsp_hit_from, hsp_hit_to, hsp_evalue, hsp_bit_score, hit_def]</span><br></pre></td></tr></table></figure>
-<h3 id="Bio-Blast-NCBIXML-parse"><a href="#Bio-Blast-NCBIXML-parse" class="headerlink" title="Bio.Blast.NCBIXML.parse"></a>Bio.Blast.NCBIXML.parse</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> division</span><br><span class="line"><span class="keyword">from</span> Bio.Blast <span class="keyword">import</span> NCBIXML</span><br><span class="line"><span class="comment"># biopython</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_blast_xml</span><span class="params">(result, threshold=<span class="number">1e-5</span>)</span>:</span></span><br><span class="line">	<span class="string">'''</span></span><br><span class="line"><span class="string">		result: opened file handle of xml format</span></span><br><span class="line"><span class="string">	'''</span></span><br><span class="line">    <span class="keyword">for</span> blastrecords <span class="keyword">in</span> NCBIXML.parse(result):</span><br><span class="line">        query_id, _, query_descri = blastrecords.query.partition(<span class="string">' '</span>)</span><br><span class="line">        query_len = blastrecords.query_length</span><br><span class="line">        <span class="keyword">for</span> align <span class="keyword">in</span> blastrecords.alignments:</span><br><span class="line">            sbjct_title = align.title</span><br><span class="line">            sbjct_accession = align.accession</span><br><span class="line">            sbjct_descri = align.hit_def</span><br><span class="line">            sbjct_len = align.length</span><br><span class="line">            <span class="keyword">for</span> hsp <span class="keyword">in</span> align.hsps:</span><br><span class="line">                hsp_evalue = hsp.expect</span><br><span class="line">                <span class="keyword">if</span> hsp_evalue &gt; threshold:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                hsp_score = hsp.score</span><br><span class="line">                hsp_gap = hsp.gaps</span><br><span class="line">                hsp_len = hsp.align_length</span><br><span class="line">                hsp_match = hsp.identities</span><br><span class="line">                hsp_frame = hsp.frame    <span class="comment"># nucl blast to protein database</span></span><br><span class="line">                hsp_strand = hsp.strand    <span class="comment"># nucl2prot</span></span><br><span class="line">                query_seq = hsp.query</span><br><span class="line">                query_start = hsp.query_start</span><br><span class="line">                query_end = hsp.query_end</span><br><span class="line">                sbjct_seq = hsp.sbjct</span><br><span class="line">                sbjct_start = hsp.sbjct_start</span><br><span class="line">                sbjct_end = hsp.sbjct_end</span><br><span class="line">                tmp = [</span><br><span class="line">                    query_id, </span><br><span class="line">                    query_descri, </span><br><span class="line">                    query_seq, </span><br><span class="line">                    query_len, </span><br><span class="line">                    <span class="comment"># hsp_frame, </span></span><br><span class="line">                    <span class="comment"># hsp_strand,</span></span><br><span class="line">                    sbjct_accession,    </span><br><span class="line">                    <span class="comment"># sbjct_title,</span></span><br><span class="line">                    sbjct_descri,</span><br><span class="line">                    sbjct_seq,</span><br><span class="line">                    sbjct_len,</span><br><span class="line">                    hsp_match / hsp_len,</span><br><span class="line">                    hsp_len,</span><br><span class="line">                    hsp_len - hsp_match,</span><br><span class="line">                    hsp_gap,</span><br><span class="line">                    query_start, </span><br><span class="line">                    query_end, </span><br><span class="line">                    sbjct_start, </span><br><span class="line">                    sbjct_end,</span><br><span class="line">                    hsp_evalue,</span><br><span class="line">                    hsp_score,</span><br><span class="line">                ]</span><br><span class="line">                <span class="comment"># qaccver saccver pident length mismatch gapopen qstart qend sstart send evalue bitscore</span></span><br><span class="line">                <span class="keyword">yield</span> tmp</span><br></pre></td></tr></table></figure>
-<h3 id="other-python-modules"><a href="#other-python-modules" class="headerlink" title="other python modules"></a>other python modules</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># http://pythonguidecn.readthedocs.io/zh/latest/scenarios/xml.html</span></span><br><span class="line"><span class="comment"># http://www.runoob.com/python/python-xml.html</span></span><br><span class="line"><span class="comment"># 懒得再去看各种文档，挖坑...</span></span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201809_tRFs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -825,6 +646,173 @@
 </li>
 </ol>
 <p>4. </p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201809_parseXML/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201809_parseXML/" itemprop="url">
+                  parse blast XML use python
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-09-02 00:05:10 / Modified: 01:10:21" itemprop="dateCreated datePublished" datetime="2018-09-02T00:05:10+08:00">2018-09-02</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/bioformat/" itemprop="url" rel="index"><span itemprop="name">bioformat</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>2017.05</p>
+<hr>
+<p>blast 输出 <strong>xml</strong> 格式结果，包括最完整的比对信息，经常需要自己从  blast.xml 结果中提取想要的信息，最开始都自己循环 xml 一行行匹配，一点都不 pythonic，陆续发现了一些新的 xml 解析实现，整理如下：</p>
+<h3 id="re-search"><a href="#re-search" class="headerlink" title="re.search"></a>re.search</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_BLAST_XML</span><span class="params">(infile)</span>:</span></span><br><span class="line">    get = <span class="keyword">lambda</span> x: re.search(<span class="string">'&gt;.*?&lt;'</span>, x).group(<span class="number">0</span>)[<span class="number">1</span>:<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line">    r_query_id = re.compile(<span class="string">"&lt;Iteration_query-ID&gt;"</span>)</span><br><span class="line">    r_query_def = re.compile(<span class="string">"&lt;Iteration_query-def&gt;"</span>)</span><br><span class="line">    r_query_len = re.compile(<span class="string">"&lt;Iteration_query-len&gt;"</span>)</span><br><span class="line">    r_hit_num = re.compile(<span class="string">"&lt;Hit_num&gt;"</span>)</span><br><span class="line">    r_hit_id = re.compile(<span class="string">"&lt;Hit_id&gt;"</span>)</span><br><span class="line">    r_hit_def = re.compile(<span class="string">"&lt;Hit_def&gt;"</span>)</span><br><span class="line">    r_hit_accession = re.compile(<span class="string">"&lt;Hit_accession&gt;"</span>)</span><br><span class="line">    r_hit_len = re.compile(<span class="string">"&lt;Hit_len&gt;"</span>)</span><br><span class="line">    r_hsp_num = re.compile(<span class="string">"&lt;Hsp_num&gt;"</span>)</span><br><span class="line">    r_hsp_bit_score = re.compile(<span class="string">"&lt;Hsp_bit-score&gt;"</span>)</span><br><span class="line">    r_hsp_score = re.compile(<span class="string">"&lt;Hsp_score&gt;"</span>)</span><br><span class="line">    r_hsp_evalue = re.compile(<span class="string">"&lt;Hsp_evalue&gt;"</span>)</span><br><span class="line">    r_hsp_query_from = re.compile(<span class="string">"&lt;Hsp_query-from&gt;"</span>)</span><br><span class="line">    r_hsp_query_to = re.compile(<span class="string">"&lt;Hsp_query-to&gt;"</span>)</span><br><span class="line">    r_hsp_hit_from = re.compile(<span class="string">"&lt;Hsp_hit-from&gt;"</span>)</span><br><span class="line">    r_hsp_hit_to = re.compile(<span class="string">"&lt;Hsp_hit-to&gt;"</span>)</span><br><span class="line">    r_hsp_query_frame = re.compile(<span class="string">"&lt;Hsp_query-frame&gt;"</span>)</span><br><span class="line">    r_hsp_hit_frame = re.compile(<span class="string">"&lt;Hsp_hit-frame&gt;"</span>)</span><br><span class="line">    r_hsp_identity = re.compile(<span class="string">"&lt;Hsp_identity&gt;"</span>)</span><br><span class="line">    r_hsp_positive = re.compile(<span class="string">"&lt;Hsp_positive&gt;"</span>)</span><br><span class="line">    r_hsp_gaps = re.compile(<span class="string">"&lt;Hsp_gaps&gt;"</span>)</span><br><span class="line">    r_hsp_align_len = re.compile(<span class="string">"&lt;Hsp_align-len&gt;"</span>)</span><br><span class="line">    r_hsp_qseq = re.compile(<span class="string">"&lt;Hsp_qseq&gt;"</span>)</span><br><span class="line">    r_hsp_hseq = re.compile(<span class="string">"&lt;Hsp_hseq&gt;"</span>)</span><br><span class="line">    r_hsp_midline = re.compile(<span class="string">"&lt;Hsp_midline&gt;"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> open(infile,<span class="string">'r'</span>):</span><br><span class="line">        <span class="keyword">if</span> r_query_id.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            query_id =  get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_query_def.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            query_def = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_query_len.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            query_len = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hit_num.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hit_num = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hit_id.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hit_id = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hit_def.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hit_def = get(line)</span><br><span class="line">   </span><br><span class="line">        <span class="keyword">elif</span> r_hit_accession.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hit_accession = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hit_len.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hit_len = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_num.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_num = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_bit_score.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_bit_score = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_score.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_score = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_evalue.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_evalue = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_query_from.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_query_from = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_query_to.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_query_to = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_hit_from.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_hit_from = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_hit_to.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_hit_to = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_query_frame.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_query_frame = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_hit_frame.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_hit_frame = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_identity.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_identity = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_positive.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_positive = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_gaps.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_gaps = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_align_len.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_align_len = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_qseq.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_qseq = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_hseq.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_hseq = get(line)</span><br><span class="line">        <span class="keyword">elif</span> r_hsp_midline.search(line) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            hsp_midline = get(line)</span><br><span class="line"></span><br><span class="line">            percent_ident = <span class="string">"%5.2f"</span> %  (((float(hsp_identity)/float(hsp_align_len))*<span class="number">100</span>))</span><br><span class="line">            mismatch = str(int(hsp_align_len) - int(hsp_identity))</span><br><span class="line">            <span class="comment"># ['query id', 'query name', 'subject id', 'identity(%)', 'alignment length', 'mismatches', 'gap opens', 'q. start', 'q. end', 's. start', 's. end', 'evalue', 'bit score', 'subject description']</span></span><br><span class="line">            <span class="keyword">yield</span> [query_id, query_def, hit_id, percent_ident, hsp_align_len, mismatch, hsp_gaps, hsp_query_from, hsp_query_to, hsp_hit_from, hsp_hit_to, hsp_evalue, hsp_bit_score, hit_def]</span><br></pre></td></tr></table></figure>
+<h3 id="Bio-Blast-NCBIXML-parse"><a href="#Bio-Blast-NCBIXML-parse" class="headerlink" title="Bio.Blast.NCBIXML.parse"></a>Bio.Blast.NCBIXML.parse</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> division</span><br><span class="line"><span class="keyword">from</span> Bio.Blast <span class="keyword">import</span> NCBIXML</span><br><span class="line"><span class="comment"># biopython</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_blast_xml</span><span class="params">(result, threshold=<span class="number">1e-5</span>)</span>:</span></span><br><span class="line">	<span class="string">'''</span></span><br><span class="line"><span class="string">		result: opened file handle of xml format</span></span><br><span class="line"><span class="string">	'''</span></span><br><span class="line">    <span class="keyword">for</span> blastrecords <span class="keyword">in</span> NCBIXML.parse(result):</span><br><span class="line">        query_id, _, query_descri = blastrecords.query.partition(<span class="string">' '</span>)</span><br><span class="line">        query_len = blastrecords.query_length</span><br><span class="line">        <span class="keyword">for</span> align <span class="keyword">in</span> blastrecords.alignments:</span><br><span class="line">            sbjct_title = align.title</span><br><span class="line">            sbjct_accession = align.accession</span><br><span class="line">            sbjct_descri = align.hit_def</span><br><span class="line">            sbjct_len = align.length</span><br><span class="line">            <span class="keyword">for</span> hsp <span class="keyword">in</span> align.hsps:</span><br><span class="line">                hsp_evalue = hsp.expect</span><br><span class="line">                <span class="keyword">if</span> hsp_evalue &gt; threshold:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                hsp_score = hsp.score</span><br><span class="line">                hsp_gap = hsp.gaps</span><br><span class="line">                hsp_len = hsp.align_length</span><br><span class="line">                hsp_match = hsp.identities</span><br><span class="line">                hsp_frame = hsp.frame    <span class="comment"># nucl blast to protein database</span></span><br><span class="line">                hsp_strand = hsp.strand    <span class="comment"># nucl2prot</span></span><br><span class="line">                query_seq = hsp.query</span><br><span class="line">                query_start = hsp.query_start</span><br><span class="line">                query_end = hsp.query_end</span><br><span class="line">                sbjct_seq = hsp.sbjct</span><br><span class="line">                sbjct_start = hsp.sbjct_start</span><br><span class="line">                sbjct_end = hsp.sbjct_end</span><br><span class="line">                tmp = [</span><br><span class="line">                    query_id, </span><br><span class="line">                    query_descri, </span><br><span class="line">                    query_seq, </span><br><span class="line">                    query_len, </span><br><span class="line">                    <span class="comment"># hsp_frame, </span></span><br><span class="line">                    <span class="comment"># hsp_strand,</span></span><br><span class="line">                    sbjct_accession,    </span><br><span class="line">                    <span class="comment"># sbjct_title,</span></span><br><span class="line">                    sbjct_descri,</span><br><span class="line">                    sbjct_seq,</span><br><span class="line">                    sbjct_len,</span><br><span class="line">                    hsp_match / hsp_len,</span><br><span class="line">                    hsp_len,</span><br><span class="line">                    hsp_len - hsp_match,</span><br><span class="line">                    hsp_gap,</span><br><span class="line">                    query_start, </span><br><span class="line">                    query_end, </span><br><span class="line">                    sbjct_start, </span><br><span class="line">                    sbjct_end,</span><br><span class="line">                    hsp_evalue,</span><br><span class="line">                    hsp_score,</span><br><span class="line">                ]</span><br><span class="line">                <span class="comment"># qaccver saccver pident length mismatch gapopen qstart qend sstart send evalue bitscore</span></span><br><span class="line">                <span class="keyword">yield</span> tmp</span><br></pre></td></tr></table></figure>
+<h3 id="other-python-modules"><a href="#other-python-modules" class="headerlink" title="other python modules"></a>other python modules</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># http://pythonguidecn.readthedocs.io/zh/latest/scenarios/xml.html</span></span><br><span class="line"><span class="comment"># http://www.runoob.com/python/python-xml.html</span></span><br><span class="line"><span class="comment"># 懒得再去看各种文档，挖坑...</span></span><br></pre></td></tr></table></figure>
 
           
         
