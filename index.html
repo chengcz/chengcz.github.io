@@ -353,6 +353,172 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201809_pysam/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201809_pysam/" itemprop="url">
+                  python 高效处理 bam 等生物格式 —— pysam
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-09-15 17:05:10 / Modified: 17:15:20" itemprop="dateCreated datePublished" datetime="2018-09-15T17:05:10+08:00">2018-09-15</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Pysam 打包 htslib C 代码， 处理 bam 等生物格式文件的 python 工具包，文档参考：<a href="https://pysam.readthedocs.io/en/latest/api.html" target="_blank" rel="noopener">https://pysam.readthedocs.io/en/latest/api.html</a></p>
+<h3 id="install"><a href="#install" class="headerlink" title="install"></a>install</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pip search pysam</span><br><span class="line"><span class="meta">#</span> conda search pysam</span><br><span class="line">pip install pysam</span><br><span class="line"><span class="meta">#</span> conda install pysam</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> pysam 打包了 htslib 提供了一个 python 接口用来处理 bam, vcf 等常用生物格式</span><br></pre></td></tr></table></figure>
+<h3 id="解析sam"><a href="#解析sam" class="headerlink" title="解析sam"></a>解析sam</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pysam</span><br><span class="line">fp = pysam.AlignmentFile(<span class="string">'bam'</span>, <span class="string">'rb)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">fout = pysam.AlignmentFile("allpaired.bam", "wb", template=fp)</span></span><br><span class="line"><span class="string">for read in fp.fetch():</span></span><br><span class="line"><span class="string">    if read.is_paired:</span></span><br><span class="line"><span class="string">        fout.write(read)</span></span><br><span class="line"><span class="string">    # dir(read)</span></span><br><span class="line"><span class="string">    # 查看 read 对象的全部方法或属性</span></span><br><span class="line"><span class="string">                         </span></span><br><span class="line"><span class="string"># 特定位置 reads 读取，bam文件需要index</span></span><br><span class="line"><span class="string">for pileupcolumn in fp.fetch('</span>chr1<span class="string">', 100, 120):</span></span><br><span class="line"><span class="string">    for read in pileupcolumn.pileups:</span></span><br><span class="line"><span class="string">        print(read)</span></span><br><span class="line"><span class="string">        # ...</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">fout.close()</span></span><br><span class="line"><span class="string">fp.close()</span></span><br></pre></td></tr></table></figure>
+<h3 id="解析fasta"><a href="#解析fasta" class="headerlink" title="解析fasta"></a>解析fasta</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fp = pysam.FastaFile('fasta')</span><br><span class="line"><span class="meta">#</span> 提取序列, 0-based，fasta文件需要index</span><br><span class="line">seq = fp.fetch(reference=chro, start=start, end=end)</span><br><span class="line">fp.close()</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 也可以使用with ... as ... 上下文管理</span><br><span class="line">with pysam.FastaFile('fasta') as fp:</span><br><span class="line">    fp.fetch(reference=chro, start=start, end=end)</span><br></pre></td></tr></table></figure>
+<h3 id="解析VCF"><a href="#解析VCF" class="headerlink" title="解析VCF"></a>解析VCF</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fp = pysam.VariantFile('vcf')</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 获得vcf包含的所有sample lst</span><br><span class="line">samples = list((fp.header.samples))</span><br><span class="line"></span><br><span class="line">for rec in bcf_in.fetch():</span><br><span class="line"><span class="meta">#</span> fp.fetch('chr1', 100000, 200000) 获取特定位置区间内的vairant，index后的vcf文件可用</span><br><span class="line">    print(rec)</span><br><span class="line"><span class="meta">	#</span> dir(rec) 查看 rec 的所有方法属性</span><br><span class="line">fp.colse()</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201809_tRFs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1998,211 +2164,6 @@
 </ol>
 <h3 id="points"><a href="#points" class="headerlink" title="points"></a>points</h3><ul>
 <li>通常，CX3CR1在正常组织中表达高于肿瘤组织</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201807_RNAedit/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ChengCZ">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChengCZ's Notebook">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/201807_RNAedit/" itemprop="url">
-                  identification of A-to-I RNA Editing
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-07-12 22:31:21" itemprop="dateCreated datePublished" datetime="2018-07-12T22:31:21+08:00">2018-07-12</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-07-31 19:30:16" itemprop="dateModified" datetime="2018-07-31T19:30:16+08:00">2018-07-31</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/RNAseq/" itemprop="url" rel="index"><span itemprop="name">RNAseq</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li><p>Quality Contorl of Fastq</p>
-</li>
-<li><p>Alignment to Reference Genome</p>
-<p>Recommended use STAR-2pass to mapping reads to genome</p>
-</li>
-<li><p>Pre-process of Bam File</p>
-<p>remove multi aglin, duplicate reads, splitN, and so on</p>
-<p>Detailed operation can refer: <a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=3891" target="_blank" rel="noopener">https://software.broadinstitute.org/gatk/documentation/article.php?id=3891</a></p>
-</li>
-<li><p>use GATK to call candidate site </p>
-</li>
-<li><p>Basic Variant filtering(optional)</p>
-</li>
-<li><p>Identification of editing sites</p>
-<ul>
-<li>Select single nucleotide variants(SNV) from all variant results , use snpEff to annot SNV</li>
-<li>Select A&gt;T changes in the gene interval, <strong>depending on the direction of gene transcription</strong></li>
-<li>Remove sites that appear in <a href="https://cancer.sanger.ac.uk/cosmic" target="_blank" rel="noopener">Cosmic</a>, <a href="https://www.ncbi.nlm.nih.gov/snp" target="_blank" rel="noopener">dbSNP</a>,  TCGA somatic mutations database</li>
-<li>Remove sites which the editing level  is 1.0 in all sample</li>
-<li>At least 10 reads in at least 1 sample</li>
-<li>RNA editing sites is exists at least 2 sample</li>
-</ul>
-</li>
-</ol>
-<h3 id="ref："><a href="#ref：" class="headerlink" title="ref："></a>ref：</h3><ul>
-<li>The Genomic Landscape and Clinical Relevance of A-to-I RNA Editing in Human Cancers </li>
-<li>Dynamic regulation of RNA editing in human brain development and disease </li>
-<li>A disrupted RNA editing balance mediated by ADARs (Adenosine DeAminases that act on RNA) in human hepatocellular carcinoma </li>
-<li>ADAR1 promotes malignant progenitor reprogramming in chronic myeloid leukemia </li>
-<li>Genome-wide analysis of A-to-I RNA editing by single-molecule sequencing in Drosophila </li>
 </ul>
 
           
