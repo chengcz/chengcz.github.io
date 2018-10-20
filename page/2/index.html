@@ -353,6 +353,223 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201807_FamilyGene/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201807_FamilyGene/" itemprop="url">
+                  家族基因分析的一般套路
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-19 19:07:27" itemprop="dateCreated datePublished" datetime="2018-07-19T19:07:27+08:00">2018-07-19</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-07-31 19:14:38" itemprop="dateModified" datetime="2018-07-31T19:14:38+08:00">2018-07-31</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/bioinfor/" itemprop="url" rel="index"><span itemprop="name">bioinfor</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>7/2016 </p>
+<hr>
+<ol>
+<li><p>分析前准备</p>
+<p>分析前准备主要是两点，找文章，找序列。</p>
+<ul>
+<li>找文章，该家族基因是否在研究物种或其他物种中报告，都进行了什么分析和试验；</li>
+<li>找序列，获取该家族代表性序列进行后续分析</li>
+</ul>
+</li>
+<li><p>家族基因成员鉴定</p>
+<p>主要 blast 和 hmmer 两种方式，一般讲来使用两个方式的并集，然后根据基因特征再一步确认过滤</p>
+<ul>
+<li>blast</li>
+<li>hmmer</li>
+</ul>
+</li>
+<li><p>家族基因特征描述</p>
+<ul>
+<li>染色体分布</li>
+<li>基因结构</li>
+<li>motif分析</li>
+<li>启动子序列分析</li>
+</ul>
+</li>
+<li><p>多物种进化关系分析</p>
+<ul>
+<li>构建分子进化树</li>
+<li>Ka/Ks计算等等</li>
+</ul>
+</li>
+<li><p>基因分类命名</p>
+<p>一般根据进化关系、或者分析特征进行分类，然后染色体顺序命名</p>
+</li>
+<li><p>基因表达分析</p>
+<ul>
+<li>多组织材料表达分析</li>
+<li>不同处理样品表达分析</li>
+<li>共表达分析</li>
+</ul>
+</li>
+<li><p>候选基因表达、功能验证</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[FamilyGene.seq] -- blast --&gt; B[FamilyGene.list]</span><br><span class="line">A[FamilyGene.hmm] -- hmmer --&gt; B[FamilyGene.list]</span><br><span class="line">B[FamilyGene.list] --&gt; C[FeatureAnalysis]</span><br><span class="line">C[FeatureAnalysis] --&gt; Ca[染色体分布]</span><br><span class="line">C[FeatureAnalysis] --&gt; Cb[基因结构]</span><br><span class="line">C[FeatureAnalysis] --&gt; Cc[motif分析]</span><br><span class="line">C[FeatureAnalysis] --&gt; Cd[promotor seq analysis]</span><br><span class="line">B[FamilyGene.list] --&gt; D[phylogenetics]</span><br><span class="line">B[FamilyGene.list] --&gt; E[Group,Name]</span><br><span class="line">B[FamilyGene.list] --&gt; F[Expression]</span><br><span class="line">F[Expression] --&gt; G[表达, 功能验证]</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201807_singleTcell_NSCLC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2134,196 +2351,6 @@
             <p>annovar可以说是最常用的变异注释软件了，除了基于基因位置进行注释，还有丰富的第三方数据库支持，clinvar, cosmic等等，但是annovar提供下载数据库版本较老，需要自行下载第三方 vcf 进行转换。</p>
 <p>以 clinvar 为例说说 vcf 格式转换成 annovar 可识别表格格式，annovar 仅需要 vcf 中部分信息，为了脚本通用这里输出vcf所有信息到 tab 格式，详细处理脚本如下，同时实现脚本存放 <a href="https://github.com/chengcz/BioResource/tree/master/vcf2tab" target="_blank" rel="noopener">github</a>。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gzip</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Parse_Variant_Annovar_Style</span><span class="params">(line)</span>:</span></span><br><span class="line">	CHROM, POS, ID, REF, ALT, QUAL, FILTER, INFO = line.split(<span class="string">'\t'</span>)[:<span class="number">8</span>]</span><br><span class="line">    <span class="comment"># 一般公共数据下载的 vcf 文件仅包含8列</span></span><br><span class="line">    POS = int(POS)</span><br><span class="line">    dat = &#123;&#125;</span><br><span class="line">    dat[<span class="string">'CHROM'</span>] = CHROM</span><br><span class="line">    dat[<span class="string">'ID'</span>] = ID</span><br><span class="line">    <span class="keyword">if</span> len(REF) == len(ALT) == <span class="number">1</span> <span class="keyword">and</span> REF != ALT:    <span class="comment"># SNV</span></span><br><span class="line">        dat[<span class="string">'START'</span>], dat[<span class="string">'END'</span>] = POS, POS</span><br><span class="line">        dat[<span class="string">'REF'</span>], dat[<span class="string">'ALT'</span>] = REF, ALT</span><br><span class="line">    <span class="keyword">elif</span> len(REF) == <span class="number">1</span> <span class="keyword">and</span> len(ALT) != <span class="number">1</span> <span class="keyword">and</span> ALT.startswith(REF):    <span class="comment"># Insert</span></span><br><span class="line">        dat[<span class="string">'START'</span>], dat[<span class="string">'END'</span>] = POS, POS</span><br><span class="line">        dat[<span class="string">'REF'</span>], dat[<span class="string">'ALT'</span>] = <span class="string">'-'</span>, ALT[<span class="number">1</span>:]</span><br><span class="line">    <span class="keyword">elif</span> len(REF) != <span class="number">1</span> <span class="keyword">and</span> len(ALT) == <span class="number">1</span> <span class="keyword">and</span> REF.startswith(ALT):    <span class="comment"># Delete</span></span><br><span class="line">        dat[<span class="string">'START'</span>], dat[<span class="string">'END'</span>] = POS+<span class="number">1</span>, POS+len(REF)<span class="number">-1</span></span><br><span class="line">        dat[<span class="string">'REF'</span>], dat[<span class="string">'ALT'</span>] = REF[<span class="number">1</span>:], <span class="string">'-'</span></span><br><span class="line">    <span class="keyword">else</span>:    <span class="comment"># complex variant</span></span><br><span class="line">        dat[<span class="string">'START'</span>], dat[<span class="string">'END'</span>] = POS, POS+len(REF)<span class="number">-1</span></span><br><span class="line">        dat[<span class="string">'REF'</span>], dat[<span class="string">'ALT'</span>] = REF, ALT</span><br><span class="line">    dat.update(INFO2dict(INFO))</span><br><span class="line">    <span class="keyword">return</span> dat</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Parse_Variant</span><span class="params">(line)</span>:</span></span><br><span class="line">	CHROM, POS, ID, REF, ALT, QUAL, FILTER, INFO = line.split(<span class="string">'\t'</span>)[:<span class="number">8</span>]</span><br><span class="line">    <span class="comment"># 一般公共数据下载的 vcf 文件仅包含8列</span></span><br><span class="line">    POS = int(POS)</span><br><span class="line">    dat = &#123;&#125;</span><br><span class="line">    dat[<span class="string">'CHROM'</span>] = CHROM</span><br><span class="line">    dat[<span class="string">'ID'</span>] = ID</span><br><span class="line">    dat[<span class="string">'START'</span>], dat[<span class="string">'END'</span>] = POS, POS+len(REF)<span class="number">-1</span></span><br><span class="line">    dat[<span class="string">'REF'</span>], dat[<span class="string">'ALT'</span>] = REF, ALT</span><br><span class="line">    dat.update(INFO2dict(INFO))</span><br><span class="line">    <span class="keyword">return</span> dat</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">INFO2dict</span><span class="params">(info)</span>:</span></span><br><span class="line">    tmp = [i.strip() <span class="keyword">for</span> i <span class="keyword">in</span> info.split(<span class="string">';'</span>) <span class="keyword">if</span> i.strip()]</span><br><span class="line">    infor = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> tmp:</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'='</span> <span class="keyword">in</span> i:</span><br><span class="line">            <span class="comment"># index = i.index('=')</span></span><br><span class="line">            <span class="comment"># infor[i[:index]] = i[index+1:]</span></span><br><span class="line">            i = i.split(<span class="string">'='</span>)</span><br><span class="line">            infor[i[<span class="number">0</span>]] = i[<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            infor[i] = <span class="string">'true'</span></span><br><span class="line">    <span class="keyword">return</span> infor</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fopen = gzip.open <span class="keyword">if</span> clinvar.endswith(<span class="string">'gz'</span>) <span class="keyword">else</span> open</span><br><span class="line"><span class="comment"># 这种文件打开适用于 python2, python3 中存在 bits 和 string 类型的差别</span></span><br><span class="line"><span class="keyword">with</span> fopen(input_vcf) <span class="keyword">as</span> f:</span><br><span class="line">    tags = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> f:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> i.strip():</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> i.startswith(<span class="string">'##INFO='</span>):</span><br><span class="line">             tags.append(i.split(<span class="string">','</span>)[<span class="number">0</span>].split(<span class="string">'='</span>)[<span class="number">-1</span>])</span><br><span class="line">        <span class="keyword">elif</span> i.startswith(<span class="string">'#CHROM'</span>):</span><br><span class="line">             print(<span class="string">'#CHROM\tSTART\tEND\tID\tREF\tALT\t&#123;&#125;\n'</span>.format(<span class="string">'\t'</span>.join(tags)))</span><br><span class="line">        <span class="keyword">elif</span> <span class="keyword">not</span> i.startswith(<span class="string">'#'</span>):</span><br><span class="line">             dat = Parse_Variant_Annovar_Style(i)</span><br><span class="line">             <span class="comment"># dat = Parse_Varitn(i)</span></span><br><span class="line">             <span class="keyword">for</span> x, label <span class="keyword">in</span> enumerate([<span class="string">'CHROM'</span>, <span class="string">'START'</span>, <span class="string">'END'</span>, <span class="string">'ID'</span>, <span class="string">'REF'</span>, <span class="string">'ALT'</span>]+tags):</span><br><span class="line">                <span class="keyword">if</span> x != <span class="number">0</span>:</span><br><span class="line">                    print(<span class="string">'\t'</span>)</span><br><span class="line">                print(dat.get(label, <span class="string">'--'</span>))    <span class="comment"># INFO 列中某些 tag 并不存在于所有行</span></span><br><span class="line">             print(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201805_config/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ChengCZ">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChengCZ's Notebook">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/201805_config/" itemprop="url">
-                  编写 python 的几种 config 处理方式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-05-28 23:13:32" itemprop="dateCreated datePublished" datetime="2018-05-28T23:13:32+08:00">2018-05-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-07-31 19:28:17" itemprop="dateModified" datetime="2018-07-31T19:28:17+08:00">2018-07-31</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>编写分析流程时候，为了兼容性总会设置一些常用选项配置文件输入，不同配置方式各有一些特点，就用过的几种配置方式简单整理</p>
-<h3 id="script-——-config-py"><a href="#script-——-config-py" class="headerlink" title="script —— config.py"></a>script —— config.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="comment"># sys.path.insert(0, 'config_py_dirname')    # 使config.py文件位于PYTHONPATH路径下</span></span><br><span class="line"><span class="keyword">import</span> config</span><br><span class="line"></span><br><span class="line">option = config.option    <span class="comment"># 获取配置信息</span></span><br></pre></td></tr></table></figure>
-<p>书写方式完全按照python脚本进行，可读性较高，问题在于<strong>PYTHONPATH的处理</strong>，脚本环境内<strong>键值对可能产生的覆盖问题</strong>，准确导入分析流程</p>
-<h3 id="configparser-——-config-ini"><a href="#configparser-——-config-ini" class="headerlink" title="configparser —— config.ini"></a>configparser —— config.ini</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> configparser    <span class="comment"># python3</span></span><br><span class="line"><span class="comment"># import Configparser as configparser    # python2</span></span><br><span class="line"></span><br><span class="line">cf = configparser.ConfigParser()</span><br><span class="line">cf.read(<span class="string">'config.ini'</span>)</span><br><span class="line"></span><br><span class="line">sections = cf.sections()    <span class="comment"># 列出所有section</span></span><br><span class="line">options = cf.options(section)    <span class="comment"># 列出section对应的所有option</span></span><br><span class="line">value = cf.get(section,option)    <span class="comment"># 范围section对应option的值，string</span></span><br><span class="line"><span class="comment"># getint(section,option) 返回为int，</span></span><br><span class="line"><span class="comment"># getboolean(section,option) 返回bool，</span></span><br><span class="line"><span class="comment"># getfloat(section,option) 返回float</span></span><br></pre></td></tr></table></figure>
-<p>但是，<strong>在configparser模块中不区分section, option大小写，一次读取一条配置信息</strong></p>
-<h3 id="json-——-config-json"><a href="#json-——-config-json" class="headerlink" title="json —— config.json"></a>json —— config.json</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="comment"># 倒入配置json到python环境，config类型跟json内容相关</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'config.json'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    config = json.load(f)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 输出python对象到json文件</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'whatever.josn'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    json.dump(config, f, indent=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-<p>json文件格式要求较严格，书写配置文件容易手误出错，相比之下<strong>更适用于流程中数据传递</strong></p>
-<h3 id="yaml-——-config-yaml"><a href="#yaml-——-config-yaml" class="headerlink" title="yaml —— config.yaml"></a>yaml —— config.yaml</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'config.yaml'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    config = yaml.load(f)     <span class="comment"># dict OR list</span></span><br></pre></td></tr></table></figure>
-<h4 id="YAML-语法规则"><a href="#YAML-语法规则" class="headerlink" title="YAML 语法规则"></a>YAML 语法规则</h4><ul>
-<li>大小写敏感 </li>
-<li>使用缩进表示层级关系 </li>
-<li>使用空格缩进,不允许使用Tab键</li>
-<li>相同层级的元素左侧对齐即可</li>
-<li>使用 <strong>#</strong> 作为注释符号</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 表示 key-value 对</span></span><br><span class="line"><span class="attr">key1:</span> <span class="string">value2</span></span><br><span class="line"><span class="attr">key2:</span> <span class="string">value2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 表示 list</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">value1</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">value2</span></span><br><span class="line"><span class="comment"># [value1, value2]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 时间表示</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2018</span><span class="bullet">-05</span><span class="bullet">-24</span>    <span class="comment"># iso8601</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># None表示</span></span><br><span class="line"><span class="attr">key:</span> <span class="string">~</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># bool表示</span></span><br><span class="line"><span class="attr">flag1:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">flag2:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-<p>相比于上面几种方法，<strong>yaml可读性高，容易书写，不用考虑PYTHONPATH问题，批量导入配置信息</strong></p>
 
           
         

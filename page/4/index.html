@@ -353,6 +353,230 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2017/201709_ShellNote/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/201709_ShellNote/" itemprop="url">
+                  shell 命令使用笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-09-15 16:38:30" itemprop="dateCreated datePublished" datetime="2017-09-15T16:38:30+08:00">2017-09-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-09-02 00:50:06" itemprop="dateModified" datetime="2018-09-02T00:50:06+08:00">2018-09-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><p><code>&amp;&amp;</code>，cmd1 &amp;&amp; cmd2</p>
+<p>如果cmd1成功执行（返回0，注意设置中脚本执行返回值），那么执行cmd2</p>
+<p>​</p>
+</li>
+<li><p><code>||</code>，cmd1 || cmd2</p>
+<p>如果cmd1执行失败，那么执行cmd2</p>
+<p>​</p>
+</li>
+<li><p><code>()</code>, <code>{}</code>组合逻辑控制</p>
+<p>()组合来控制命令； {}组合控制子shell</p>
+<p>​</p>
+</li>
+<li><p>条件判断</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">if [ condition ]; then</span><br><span class="line"><span class="meta">#</span> if test condition; then</span><br><span class="line">    echo 'yes'</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>使用[]判断条件时，[]和condition之间必须用空格分隔开</span><br><span class="line"><span class="meta">#</span> -d        判断是不是文件夹</span><br><span class="line"><span class="meta">#</span> -f        判断是不是文件</span><br><span class="line"><span class="meta">#</span> -L        判断是不是链接</span><br><span class="line"><span class="meta">#</span> -s        判断文件是否存在且非空</span><br><span class="line"><span class="meta">#</span> -r        判断文件是否可读</span><br><span class="line"><span class="meta">#</span> -w        判断文件是否可写</span><br><span class="line"><span class="meta">#</span> -x        判断文件是否可执行</span><br><span class="line"><span class="meta">#</span> -z        判断是否空字符串</span><br><span class="line"><span class="meta">#</span> -n        判断是否非空字符串</span><br><span class="line"><span class="meta">#</span> =         判断字符串是否相等</span><br><span class="line"><span class="meta">#</span> !=        判断字符串是否不等</span><br><span class="line"><span class="meta">#</span> -eq       判断数值是否相等</span><br><span class="line"><span class="meta">#</span> -ne       判断数值是否不等</span><br><span class="line"><span class="meta">#</span> -gt       第一个数大于第二个数</span><br><span class="line"><span class="meta">#</span> -ge       第一个数大于等于第二个数</span><br><span class="line"><span class="meta">#</span> -lt       第一个数小于第二个数</span><br><span class="line"><span class="meta">#</span> -le       第一个数小于等于第二个数</span><br><span class="line"><span class="meta">#</span> -a        逻辑与</span><br><span class="line"><span class="meta">#</span> -o        逻辑或</span><br><span class="line"><span class="meta">#</span> !         逻辑否</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>退出状态</p>
+<p><code>exit n</code>，其中n表示数字，0表示脚本执行成功无错误，1表示执行失败某处有错误</p>
+<blockquote>
+<p>可以使用 <strong>$?</strong> 获得最后执行命令推出状态</p>
+</blockquote>
+<p>​</p>
+</li>
+<li><p>shell脚本</p>
+<ul>
+<li><p>[ ] <strong>$#</strong> 获取脚本输出参数长度</p>
+</li>
+<li><p>[ ] <strong>$@</strong> 获取脚本所有参数</p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="7">
+<li><p>循环</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in `ls `</span><br><span class="line">    do</span><br><span class="line">        echo 'yes'</span><br><span class="line">    done</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>序列生成</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">seq 3    # 1 2 3</span><br><span class="line">seq 3 5    # 3 4 5</span><br><span class="line">seq 5 2 10    # 5 7 9</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>随机数生成</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">echo $RANDOM</span><br><span class="line"><span class="meta">#</span> RANDOM是bash的一个内建函数，会返回一个[0, 32676]内的整数</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 生成一定范围内的随机数</span><br><span class="line">beg=5</span><br><span class="line">end=15</span><br><span class="line">echo $((RANDOM % ($end - $beg) + $beg))</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>shell 数学计算</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo $((9-4))    # 5</span><br><span class="line">echo $((9/4))    # 2</span><br><span class="line">echo $((9/-4))    # -2</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2017/201709_submitDataToSRA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2124,184 +2348,6 @@ right method...
 <p>或者直接编辑文件<code>~/.condarc</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ssl_verify: true</span><br><span class="line">channels:</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">  - defaults</span><br><span class="line">show_channel_urls: true</span><br></pre></td></tr></table></figure>
 <p>然后，你就可以尽情享受python编程的快乐，不被各种包折磨死</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2017/201704_rankabundance/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ChengCZ">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChengCZ's Notebook">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/201704_rankabundance/" itemprop="url">
-                  使用 ggplot 绘制扩增子 rank abundance 曲线
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2017-04-20 09:23:01" itemprop="dateCreated datePublished" datetime="2017-04-20T09:23:01+08:00">2017-04-20</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-07-31 19:26:21" itemprop="dateModified" datetime="2018-07-31T19:26:21+08:00">2018-07-31</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/R/" itemprop="url" rel="index"><span itemprop="name">R</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>ggplot2实现微生物rank abundance绘图，另发现了<code>reshape2</code>能方便的进行dataframe格式整理，长表格，宽表格相互转换</p>
-<p>具体代码实现如下：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(ggplot2)</span><br><span class="line"><span class="keyword">library</span>(reshape2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># otu_table    抽平后的otu table，第一列为OTU编号，最后一列为tax注释</span></span><br><span class="line">otu_table &lt;- read.table(otu_table, sep=<span class="string">"\t"</span>, header=<span class="literal">TRUE</span>)</span><br><span class="line">otu_table &lt;- otu_table[,<span class="number">2</span>:(length(otu_table)-<span class="number">1</span>)]</span><br><span class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:length(otu_table))&#123;    <span class="comment"># 计算等级相对丰度</span></span><br><span class="line">  sample &lt;- otu_table[,i]</span><br><span class="line">  otu_table[,i]&lt;- rev(sort(sample/sum(sample)))</span><br><span class="line">&#125;</span><br><span class="line">rank_abundance &lt;- otu_table</span><br><span class="line">rank_abundance$rank &lt;- <span class="number">1</span>:dim(rank_abundance)[<span class="number">1</span>]    <span class="comment"># 添加等级</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 宽表格整理成长表格</span></span><br><span class="line">dat &lt;- melt(rank_abundance, id.vars = c(<span class="string">'rank'</span>), variable.name=<span class="string">'sample'</span>)</span><br><span class="line"><span class="comment"># 整合样品分组信息</span></span><br><span class="line">group &lt;- read.table(group, sep=<span class="string">'\t'</span>, col.names=c(<span class="string">'sample'</span>, <span class="string">'group'</span>))</span><br><span class="line">dat &lt;- merge(dat, group, by=c(<span class="string">'sample'</span>), all=<span class="literal">TRUE</span>)</span><br><span class="line"><span class="comment"># 移除0值</span></span><br><span class="line">dat &lt;- dat[dat$value&gt;<span class="number">0</span>,]</span><br><span class="line"></span><br><span class="line">g &lt;- ggplot(dat, aes(rank, log10(dat$value), group=sample)) + </span><br><span class="line">  geom_step(aes(color=group)) + <span class="comment">#ylim(-4,0) + xlim(0,2000) + </span></span><br><span class="line">  labs(x=<span class="string">"Species Rank"</span>, y=<span class="string">"Relative Abundance"</span>) + </span><br><span class="line">  <span class="comment"># 设置y轴指示刻度，针对不同数据，可能需要调整</span></span><br><span class="line">  scale_y_continuous(breaks=c(-<span class="number">4</span>,-<span class="number">3</span>,-<span class="number">2</span>,-<span class="number">1</span>), labels=c(<span class="string">'1e-4'</span>,<span class="string">'1e-3'</span>,<span class="string">'1e-2'</span>,<span class="string">'1e-1'</span>)) + </span><br><span class="line">  <span class="comment"># 调整y轴指示刻度显示方法</span></span><br><span class="line">  theme(axis.text.y = element_text(angle=<span class="number">90</span>, hjust=<span class="number">0.5</span>, vjust=<span class="number">1</span>)) + </span><br><span class="line"></span><br><span class="line">ggsave(<span class="string">"rank_abundance.pdf"</span>)</span><br></pre></td></tr></table></figure>
-<p>结果展示：</p>
-<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2017/rank_abundance.png" alt=""></p>
 
           
         

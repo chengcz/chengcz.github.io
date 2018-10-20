@@ -353,6 +353,171 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201810_OrderLabel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/201810_OrderLabel/" itemprop="url">
+                  ggplot2 控制 x, y 轴排序
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-10-20 13:05:10 / Modified: 14:00:33" itemprop="dateCreated datePublished" datetime="2018-10-20T13:05:10+08:00">2018-10-20</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/R/" itemprop="url" rel="index"><span itemprop="name">R</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="GO-Scatter-plot"><a href="#GO-Scatter-plot" class="headerlink" title="GO Scatter plot"></a>GO Scatter plot</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">df &lt;- read.table(<span class="string">'b63c49b49d7ba1e7.xls'</span>,header=<span class="literal">TRUE</span>,sep=<span class="string">"\t"</span>,fill=<span class="literal">TRUE</span>)</span><br><span class="line">head(df)</span><br><span class="line"><span class="comment"># pathway_term	rich_factor	qvalue	gene_number</span></span><br><span class="line"><span class="comment"># TNF signaling pathway	0.0909090909090909	1.86317868673e-10	10</span></span><br><span class="line"><span class="comment"># MAPK signaling pathway	0.0308880308880309	4.96846435452e-05	8</span></span><br><span class="line"><span class="comment"># MicroRNAs in cancer	0.0233463035019455	0.00358055919246	6</span></span><br><span class="line"><span class="comment"># Small cell lung cancer	0.0454545454545455	0.00358055919246	4</span></span><br><span class="line"></span><br><span class="line">gplot(df, aes(rich_factor, pathway_term)) +</span><br><span class="line">  geom_point(aes(colour=-log10(qvalue), size=gene_number)) +</span><br><span class="line">  scale_colour_gradientn(colours=c(<span class="string">'#436EEE'</span>,<span class="string">'#FF0000'</span>), guide = <span class="string">"colourbar"</span>) +</span><br><span class="line">  ggtitle(<span class="string">"Statistics of Pathway Enrichment"</span>) +</span><br><span class="line">  xlab(<span class="string">"Rich factor"</span>) +ylab(<span class="string">""</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/goScatter.png" alt=""></p>
+<h3 id="order-labels"><a href="#order-labels" class="headerlink" title="order labels"></a>order labels</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">df$pathway_term &lt;- factor(df$pathway_term, levels=df$pathway_term[order(df$rich_factor, decreasing=<span class="literal">FALSE</span>)])</span><br><span class="line">gplot(df, aes(rich_factor, pathway_term)) +</span><br><span class="line">  geom_point(aes(colour=-log10(qvalue), size=gene_number)) +</span><br><span class="line">  scale_colour_gradientn(colours=c(<span class="string">'#436EEE'</span>,<span class="string">'#FF0000'</span>), guide = <span class="string">"colourbar"</span>) +</span><br><span class="line">  ggtitle(<span class="string">"Statistics of Pathway Enrichment"</span>) +</span><br><span class="line">  xlab(<span class="string">"Rich factor"</span>) +ylab(<span class="string">""</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/goScatter.order.png" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201810_MSI/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1944,223 +2109,6 @@
 </ol>
 <h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> step0 prepare</span><br><span class="line">awk -F "\t" 'BEGIN&#123;OFS="\t"&#125;&#123;if ($3=="transcript") &#123;print $1,$4,$5,$9,$7&#125;&#125;' lnc.gtf | sed -e 's/gene_id.*transcript_id "//g' -e 's/".*\t/\t.\t/g' &gt;lnc.transcript.bed</span><br><span class="line">awk -F "\t" 'BEGIN&#123;OFS="\t"&#125;&#123;if ($3=="transcript") &#123;print $1,$4,$5,$9,$7&#125;&#125;' mRNA.gtf | sed -e 's/gene_id.*transcript_id "//g' -e 's/".*\t/\t.\t/g' &gt;mRNA.transcript.bed</span><br><span class="line">awk -F "\t" 'BEGIN&#123;OFS="\t"&#125;&#123;if ($3=="exon") &#123;print $1,$4,$5,$9,$7&#125;&#125;' mRNA.gtf | sed -e 's/gene_id.*transcript_id "//g' -e 's/".*\t/\t.\t/g' &gt;mRNA.exon.bed</span><br><span class="line"></span><br><span class="line">head mRNA.transcript.bed</span><br><span class="line"><span class="meta">#</span> chr1	65419	71585	ENST00000641515	.	+</span><br><span class="line"><span class="meta">#</span> chr1	69055	70108	ENST00000335137	.	+</span><br><span class="line"><span class="meta">#</span> chr1	450703	451697	ENST00000426406	.	-</span><br><span class="line"><span class="meta">#</span> chr1	685679	686673	ENST00000332831	.	-</span><br><span class="line"><span class="meta">#</span> chr1	923928	939291	ENST00000420190	.	+</span><br><span class="line"><span class="meta">#</span> chr1	925150	935793	ENST00000437963	.	+</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> step1 获得 Intergenic lncRNA</span><br><span class="line"><span class="meta">#</span> -v 取反，获得不和任何 coding-protein 基因（包括基因上下游 1000 bp范围）重合的 lncRNA</span><br><span class="line">bedtools window -a lnc.transcript.bed -b mRNA.transcript.bed -v &gt;lnc.Intergenic.bed</span><br><span class="line"><span class="meta">#</span>############## lnc.Intergenic.bed ###############</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> step2 基因 1000 bp 区间内的 lncRNA</span><br><span class="line"><span class="meta">#</span> 获得和 coding-protein 有重叠的 lncRNA ，lnc_gene.bed</span><br><span class="line">bedtools intersect -a lnc.transcript.bed -b mRNA.transcript.bed -wa | sort -u &gt; lnc_gene.bed</span><br><span class="line"><span class="meta">#</span> 获得 coding-protein 基因上下游 1000 bp 范围内的 lnc ，lnc_gene_1k.bed</span><br><span class="line">python -c 'with open("lnc.transcript.bed") as a, open("lnc_gene.bed") as m, open("lnc.Intergenic.bed") as i, open("lnc_gene_1k.bed", "w") as k1: k1.write("".join(set(a.readlines())-set(m.readlines())-set(i.readlines())))'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> step2b 根据转录方向进行分类</span><br><span class="line">bedtools window -a lnc_gene_1k.bed -b mRNA.transcript.bed -u -Sm | sort -u &gt;lnc.Bidirectional.bed</span><br><span class="line"><span class="meta">#</span>############## lnc.Bidirectional.bed ###############</span><br><span class="line">bedtools window -a lnc_gene_1k.bed -b mRNA.transcript.bed -u -sm | sort -u &gt;lnc.Enhancer.bed</span><br><span class="line"><span class="meta">#</span>############## lnc.Enhancer.bed ###############</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> step3 </span><br><span class="line"><span class="meta">#</span> 和 coding-protein 重叠，不和外显子重叠，得到内含子区域的lnc</span><br><span class="line">bedtools intersect -a lnc_gene.bed -b mRNA.exon.bed -v &gt; lnc.Intronic.bed</span><br><span class="line"><span class="meta">#</span>############## lnc.Intronic.bed ###############</span><br><span class="line"><span class="meta">#</span> 取相同链的 lnc</span><br><span class="line">bedtools intersect -a lnc_gene.bed -b mRNA.exon.bed -wa -s | sort -u &gt; lnc.Sense.bed</span><br><span class="line"><span class="meta">#</span>############## lnc.Sense.bed ###############</span><br><span class="line"><span class="meta">#</span> 取反向链的 lnc</span><br><span class="line">bedtools intersect -a lnc_gene.bed -b mRNA.exon.bed -wa -S | sort -u &gt; lnc.Antisense.bed</span><br><span class="line"><span class="meta">#</span>############## lnc.Antisense.bed ###############</span><br></pre></td></tr></table></figure>
 
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201807_FamilyGene/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ChengCZ">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChengCZ's Notebook">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/201807_FamilyGene/" itemprop="url">
-                  家族基因分析的一般套路
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-07-19 19:07:27" itemprop="dateCreated datePublished" datetime="2018-07-19T19:07:27+08:00">2018-07-19</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-07-31 19:14:38" itemprop="dateModified" datetime="2018-07-31T19:14:38+08:00">2018-07-31</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/bioinfor/" itemprop="url" rel="index"><span itemprop="name">bioinfor</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>7/2016 </p>
-<hr>
-<ol>
-<li><p>分析前准备</p>
-<p>分析前准备主要是两点，找文章，找序列。</p>
-<ul>
-<li>找文章，该家族基因是否在研究物种或其他物种中报告，都进行了什么分析和试验；</li>
-<li>找序列，获取该家族代表性序列进行后续分析</li>
-</ul>
-</li>
-<li><p>家族基因成员鉴定</p>
-<p>主要 blast 和 hmmer 两种方式，一般讲来使用两个方式的并集，然后根据基因特征再一步确认过滤</p>
-<ul>
-<li>blast</li>
-<li>hmmer</li>
-</ul>
-</li>
-<li><p>家族基因特征描述</p>
-<ul>
-<li>染色体分布</li>
-<li>基因结构</li>
-<li>motif分析</li>
-<li>启动子序列分析</li>
-</ul>
-</li>
-<li><p>多物种进化关系分析</p>
-<ul>
-<li>构建分子进化树</li>
-<li>Ka/Ks计算等等</li>
-</ul>
-</li>
-<li><p>基因分类命名</p>
-<p>一般根据进化关系、或者分析特征进行分类，然后染色体顺序命名</p>
-</li>
-<li><p>基因表达分析</p>
-<ul>
-<li>多组织材料表达分析</li>
-<li>不同处理样品表达分析</li>
-<li>共表达分析</li>
-</ul>
-</li>
-<li><p>候选基因表达、功能验证</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[FamilyGene.seq] -- blast --&gt; B[FamilyGene.list]</span><br><span class="line">A[FamilyGene.hmm] -- hmmer --&gt; B[FamilyGene.list]</span><br><span class="line">B[FamilyGene.list] --&gt; C[FeatureAnalysis]</span><br><span class="line">C[FeatureAnalysis] --&gt; Ca[染色体分布]</span><br><span class="line">C[FeatureAnalysis] --&gt; Cb[基因结构]</span><br><span class="line">C[FeatureAnalysis] --&gt; Cc[motif分析]</span><br><span class="line">C[FeatureAnalysis] --&gt; Cd[promotor seq analysis]</span><br><span class="line">B[FamilyGene.list] --&gt; D[phylogenetics]</span><br><span class="line">B[FamilyGene.list] --&gt; E[Group,Name]</span><br><span class="line">B[FamilyGene.list] --&gt; F[Expression]</span><br><span class="line">F[Expression] --&gt; G[表达, 功能验证]</span><br></pre></td></tr></table></figure>
           
         
       
