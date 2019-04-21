@@ -123,12 +123,12 @@
 <meta property="og:site_name" content="ChengCZ&#39;s Notebook">
 <meta property="og:description" content="一直都比较有兴趣分析 human DNA 变异，参照 gatk 流程分析了 NA12878 的全外数据，正好有参考变异集，比较下分析准确性，也好参数调整优化之类，吧吧吧，下面就是一些详细步骤粘贴整理 NA12878.vcf 处理123456789101112131415# wget -c ftp://ftp-trace.ncbi.nih.gov/giab/ftp/data/NA12878/Garv">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://or5pz0a28.bkt.clouddn.com/images/2018/StrandBias_density.png">
-<meta property="og:updated_time" content="2018-07-31T11:29:08.964Z">
+<meta property="og:image" content="http://chengcz.github.io/2018/201806_compare_vcf/StrandBias_density.png">
+<meta property="og:updated_time" content="2019-04-21T06:39:30.909Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NA12878 全外显子数据分析结果比较">
 <meta name="twitter:description" content="一直都比较有兴趣分析 human DNA 变异，参照 gatk 流程分析了 NA12878 的全外数据，正好有参考变异集，比较下分析准确性，也好参数调整优化之类，吧吧吧，下面就是一些详细步骤粘贴整理 NA12878.vcf 处理123456789101112131415# wget -c ftp://ftp-trace.ncbi.nih.gov/giab/ftp/data/NA12878/Garv">
-<meta name="twitter:image" content="http://or5pz0a28.bkt.clouddn.com/images/2018/StrandBias_density.png">
+<meta name="twitter:image" content="http://chengcz.github.io/2018/201806_compare_vcf/StrandBias_density.png">
 
 
 
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-31 19:29:08" itemprop="dateModified" datetime="2018-07-31T19:29:08+08:00">2018-07-31</time>
+                <time title="Modified: 2019-04-21 14:39:30" itemprop="dateModified" datetime="2019-04-21T14:39:30+08:00">2019-04-21</time>
               
             
           </span>
@@ -488,7 +488,7 @@
   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 先看被过滤掉的这部分阴性</span><br><span class="line">cat 0002.vcf | grep -v '^#' | grep -v PASS | awk '&#123;n[$7]+=1&#125;END&#123;for (i in n)&#123;print i,n[i]&#125;&#125;'</span><br><span class="line"><span class="meta">#</span> LowDepth 11</span><br><span class="line"><span class="meta">#</span> StrandBias;snp_Filter 277</span><br><span class="line"><span class="meta">#</span> LowDepth;snp_Filter 2</span><br><span class="line"><span class="meta">#</span> InDels_Filter 265</span><br><span class="line"><span class="meta">#</span> StrandBias 3098</span><br><span class="line"><span class="meta">#</span> LowDepth;StrandBias 2</span><br><span class="line"><span class="meta">#</span> snp_Filter 1148</span><br></pre></td></tr></table></figure>
 <p>过滤掉位点最严重的两项分别是<strong>StrandBias</strong>, <strong>snp_Filter</strong>，对应过滤指标分别为<code>FS &gt; 60.0 || SOR &gt; 3.0</code>, <code>QD &lt; 2.0  || MQ &lt; 40.0 || MQRankSum &lt; -12.5</code>，转换vcf文件到tab格式（脚本：<a href="https://github.com/chengcz/BioResource/tree/master/vcf2tab" target="_blank" rel="noopener">github</a>），对其中一些指标进行分布检查。</p>
 <p>先看 <strong>StrandBias</strong>，对 <code>FS</code>,  <code>SOR</code> 两个参数分析，分布结果如下，可看出被过滤的位点基本上都是由于 <strong>SOR</strong> 参数（作图时FS&gt;60无显示），与 <strong>NA12878</strong> 变异集相比，需调整 <strong>SOR</strong> 临界值到更大水平。</p>
-<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/StrandBias_density.png" alt=""></p>
+<p><img src="/2018/201806_compare_vcf/./StrandBias_density.png" alt=""></p>
 <p>再看 <strong>snp_Filter</strong> 对应的<code>QD &lt; 2.0  || MQ &lt; 40.0 || MQRankSum &lt; -12.5</code>，其中 MQRankSum 对应67个位点，QD 对应557个位点，MQ 对应 1168 个位点，看出 <strong>MQ</strong>, <strong>QD</strong> 标准需要进行调整。</p>
 <p>以现在质控指标对文件<code>0001.vcf</code> <strong>2131</strong> 变异质控，<strong>QD</strong> 过滤掉949，<strong>MQRankSum</strong> 过滤掉14，<strong>MQ</strong> 过滤掉195，<strong>FS</strong> 过滤掉135，根据这部分参考变异集质量指标，同样 <strong>QD</strong>, <strong>MQ</strong>, <strong>FS</strong> 参数需要进行调整。</p>
 <p>另，vcftools 也可以很方便进行两个 vcf 文件的比较，还没 bcftools 对 vcf 文件必须排序、index的要求，输出结果也相应不同，因为我需要看阳性、阴性位点是否被过滤以及过滤情况，就不再用 vcftools 整理了，具体命令可参考如下：</p>

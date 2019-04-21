@@ -123,12 +123,12 @@
 <meta property="og:site_name" content="ChengCZ&#39;s Notebook">
 <meta property="og:description" content="ggplot2实现微生物rank abundance绘图，另发现了reshape2能方便的进行dataframe格式整理，长表格，宽表格相互转换 具体代码实现如下： 123456789101112131415161718192021222324252627282930library(ggplot2)library(reshape2)# otu_table    抽平后的otu table，第一列为">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://or5pz0a28.bkt.clouddn.com/images/2017/rank_abundance.png">
-<meta property="og:updated_time" content="2018-07-31T11:26:21.734Z">
+<meta property="og:image" content="http://chengcz.github.io/2017/201704_rankabundance/rank_abundance.png">
+<meta property="og:updated_time" content="2019-04-21T06:28:06.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 ggplot 绘制扩增子 rank abundance 曲线">
 <meta name="twitter:description" content="ggplot2实现微生物rank abundance绘图，另发现了reshape2能方便的进行dataframe格式整理，长表格，宽表格相互转换 具体代码实现如下： 123456789101112131415161718192021222324252627282930library(ggplot2)library(reshape2)# otu_table    抽平后的otu table，第一列为">
-<meta name="twitter:image" content="http://or5pz0a28.bkt.clouddn.com/images/2017/rank_abundance.png">
+<meta name="twitter:image" content="http://chengcz.github.io/2017/201704_rankabundance/rank_abundance.png">
 
 
 
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-31 19:26:21" itemprop="dateModified" datetime="2018-07-31T19:26:21+08:00">2018-07-31</time>
+                <time title="Modified: 2019-04-21 14:28:06" itemprop="dateModified" datetime="2019-04-21T14:28:06+08:00">2019-04-21</time>
               
             
           </span>
@@ -473,7 +473,7 @@
 <p>具体代码实现如下：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(ggplot2)</span><br><span class="line"><span class="keyword">library</span>(reshape2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># otu_table    抽平后的otu table，第一列为OTU编号，最后一列为tax注释</span></span><br><span class="line">otu_table &lt;- read.table(otu_table, sep=<span class="string">"\t"</span>, header=<span class="literal">TRUE</span>)</span><br><span class="line">otu_table &lt;- otu_table[,<span class="number">2</span>:(length(otu_table)-<span class="number">1</span>)]</span><br><span class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:length(otu_table))&#123;    <span class="comment"># 计算等级相对丰度</span></span><br><span class="line">  sample &lt;- otu_table[,i]</span><br><span class="line">  otu_table[,i]&lt;- rev(sort(sample/sum(sample)))</span><br><span class="line">&#125;</span><br><span class="line">rank_abundance &lt;- otu_table</span><br><span class="line">rank_abundance$rank &lt;- <span class="number">1</span>:dim(rank_abundance)[<span class="number">1</span>]    <span class="comment"># 添加等级</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 宽表格整理成长表格</span></span><br><span class="line">dat &lt;- melt(rank_abundance, id.vars = c(<span class="string">'rank'</span>), variable.name=<span class="string">'sample'</span>)</span><br><span class="line"><span class="comment"># 整合样品分组信息</span></span><br><span class="line">group &lt;- read.table(group, sep=<span class="string">'\t'</span>, col.names=c(<span class="string">'sample'</span>, <span class="string">'group'</span>))</span><br><span class="line">dat &lt;- merge(dat, group, by=c(<span class="string">'sample'</span>), all=<span class="literal">TRUE</span>)</span><br><span class="line"><span class="comment"># 移除0值</span></span><br><span class="line">dat &lt;- dat[dat$value&gt;<span class="number">0</span>,]</span><br><span class="line"></span><br><span class="line">g &lt;- ggplot(dat, aes(rank, log10(dat$value), group=sample)) + </span><br><span class="line">  geom_step(aes(color=group)) + <span class="comment">#ylim(-4,0) + xlim(0,2000) + </span></span><br><span class="line">  labs(x=<span class="string">"Species Rank"</span>, y=<span class="string">"Relative Abundance"</span>) + </span><br><span class="line">  <span class="comment"># 设置y轴指示刻度，针对不同数据，可能需要调整</span></span><br><span class="line">  scale_y_continuous(breaks=c(-<span class="number">4</span>,-<span class="number">3</span>,-<span class="number">2</span>,-<span class="number">1</span>), labels=c(<span class="string">'1e-4'</span>,<span class="string">'1e-3'</span>,<span class="string">'1e-2'</span>,<span class="string">'1e-1'</span>)) + </span><br><span class="line">  <span class="comment"># 调整y轴指示刻度显示方法</span></span><br><span class="line">  theme(axis.text.y = element_text(angle=<span class="number">90</span>, hjust=<span class="number">0.5</span>, vjust=<span class="number">1</span>)) + </span><br><span class="line"></span><br><span class="line">ggsave(<span class="string">"rank_abundance.pdf"</span>)</span><br></pre></td></tr></table></figure>
 <p>结果展示：</p>
-<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2017/rank_abundance.png" alt=""></p>
+<p><img src="/2017/201704_rankabundance/./rank_abundance.png" alt=""></p>
 
       
     </div>

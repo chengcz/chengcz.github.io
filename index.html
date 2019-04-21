@@ -416,7 +416,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-04-21 13:52:14" itemprop="dateModified" datetime="2019-04-21T13:52:14+08:00">2019-04-21</time>
+                <time title="Modified: 2019-04-21 14:42:47" itemprop="dateModified" datetime="2019-04-21T14:42:47+08:00">2019-04-21</time>
               
             
           </span>
@@ -470,9 +470,9 @@
         
           
             <h3 id="GO-Scatter-plot"><a href="#GO-Scatter-plot" class="headerlink" title="GO Scatter plot"></a>GO Scatter plot</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">df &lt;- read.table(<span class="string">'b63c49b49d7ba1e7.xls'</span>,header=<span class="literal">TRUE</span>,sep=<span class="string">"\t"</span>,fill=<span class="literal">TRUE</span>)</span><br><span class="line">head(df)</span><br><span class="line"><span class="comment"># pathway_term	rich_factor	qvalue	gene_number</span></span><br><span class="line"><span class="comment"># TNF signaling pathway	0.0909090909090909	1.86317868673e-10	10</span></span><br><span class="line"><span class="comment"># MAPK signaling pathway	0.0308880308880309	4.96846435452e-05	8</span></span><br><span class="line"><span class="comment"># MicroRNAs in cancer	0.0233463035019455	0.00358055919246	6</span></span><br><span class="line"><span class="comment"># Small cell lung cancer	0.0454545454545455	0.00358055919246	4</span></span><br><span class="line"></span><br><span class="line">gplot(df, aes(rich_factor, pathway_term)) +</span><br><span class="line">  geom_point(aes(colour=-log10(qvalue), size=gene_number)) +</span><br><span class="line">  scale_colour_gradientn(colours=c(<span class="string">'#436EEE'</span>,<span class="string">'#FF0000'</span>), guide = <span class="string">"colourbar"</span>) +</span><br><span class="line">  ggtitle(<span class="string">"Statistics of Pathway Enrichment"</span>) +</span><br><span class="line">  xlab(<span class="string">"Rich factor"</span>) +ylab(<span class="string">""</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2018/201810_OrderLabel/./images/2018/goScatter.png" alt=""></p>
+<p><img src="/2018/201810_OrderLabel/./goScatter.png" alt=""></p>
 <h3 id="order-labels"><a href="#order-labels" class="headerlink" title="order labels"></a>order labels</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">df$pathway_term &lt;- factor(df$pathway_term, levels=df$pathway_term[order(df$rich_factor, decreasing=<span class="literal">FALSE</span>)])</span><br><span class="line">gplot(df, aes(rich_factor, pathway_term)) +</span><br><span class="line">  geom_point(aes(colour=-log10(qvalue), size=gene_number)) +</span><br><span class="line">  scale_colour_gradientn(colours=c(<span class="string">'#436EEE'</span>,<span class="string">'#FF0000'</span>), guide = <span class="string">"colourbar"</span>) +</span><br><span class="line">  ggtitle(<span class="string">"Statistics of Pathway Enrichment"</span>) +</span><br><span class="line">  xlab(<span class="string">"Rich factor"</span>) +ylab(<span class="string">""</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2018/201810_OrderLabel/./images/2018/goScatter.order.png" alt=""></p>
+<p><img src="/2018/201810_OrderLabel/./goScatter.order.png" alt=""></p>
 
           
         
@@ -576,12 +576,24 @@
                 
               
 
-              <time title="Created: 2018-10-07 15:05:10 / Modified: 15:48:51" itemprop="dateCreated datePublished" datetime="2018-10-07T15:05:10+08:00">2018-10-07</time>
+              <time title="Created: 2018-10-07 15:05:10" itemprop="dateCreated datePublished" datetime="2018-10-07T15:05:10+08:00">2018-10-07</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-21 14:43:10" itemprop="dateModified" datetime="2019-04-21T14:43:10+08:00">2019-04-21</time>
               
             
           </span>
@@ -662,18 +674,18 @@
 <li>MSIseq[^7]</li>
 <li>Count altered MS loci per Mb[^8]</li>
 </ul>
-<h2 id="Landscape-of-MSI"><a href="#Landscape-of-MSI" class="headerlink" title="Landscape of MSI"></a>Landscape of MSI</h2><p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/TMB_Landscape.png" alt=""></p>
+<h2 id="Landscape-of-MSI"><a href="#Landscape-of-MSI" class="headerlink" title="Landscape of MSI"></a>Landscape of MSI</h2><p><img src="/2018/201810_MSI/./TMB_Landscape.png" alt=""></p>
 <blockquote>
 <p>Fig 1. Prevalence of microsatellite instability (MSI) across 39 human cancer types.[^9]</p>
 </blockquote>
 <h2 id="MSI-and-TMB"><a href="#MSI-and-TMB" class="headerlink" title="MSI and TMB"></a>MSI and TMB</h2><ul>
 <li><p>Both studies[^3][^9] looked at mutational burden and found that MSI tumors have a significantly<br>higher mutational burden compared with microsatellite stable (MSS) tumors.[^10]</p>
-<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/TMB_30211344.png" alt=""></p>
+<p><img src="/2018/201810_MSI/./TMB_30211344.png" alt=""></p>
 </li>
 <li><p>The vast majority (85%) of MSI-High cases also had high TMB, but the converse was not true. TMB and MSI status in cancer genomes are correlated and that the majority of MSI-High cases also had high overall TMB.[^11]</p>
 </li>
 <li><p>Thirty percent of MSI-H cases were TMB-low, and only 26% of MSI-H cases were PD-L1 positive. The overlap between TMB, MSI, and PD-L1 differed among cancer types.[^8]</p>
-<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/TMB_29436178.png" alt=""></p>
+<p><img src="/2018/201810_MSI/./TMB_29436178.png" alt=""></p>
 </li>
 </ul>
 <h2 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h2><p>[^2]: Boland, C.Richard, and Ajay Goel. “<a href="https://www.ncbi.nlm.nih.gov/pubmed/22933939" target="_blank" rel="noopener">Microsatellite Instability in Colorectal Cancer.</a>” <em>Gastroenterology</em>, vol. 138, no. 6, 2010, pp. 2073–2087.<br>[^3]: Middha S, Zhang L, Nafa K, et al. <a href="https://www.ncbi.nlm.nih.gov/pubmed/30211344" target="_blank" rel="noopener">Reliable pan-cancer microsatellite instability assessment by using targeted next-generation sequencing data</a>[J]. JCO Precision Oncology, 2017, 1: 1-17.<br>[^4]: Salipante S J, Scroggins S M, Hampel H L, et al. <a href="https://www.ncbi.nlm.nih.gov/pubmed/24987110" target="_blank" rel="noopener">Microsatellite instability detection by next generation sequencing</a>[J]. Clinical chemistry, 2014: clinchem. 2014.223677.<br>[^5]: Niu B, Ye K, Zhang Q, et al. <a href="https://www.ncbi.nlm.nih.gov/pubmed/24371154" target="_blank" rel="noopener">MSIsensor: microsatellite instability detection using paired tumor-normal sequence data</a>[J]. Bioinformatics, 2013, 30(7): 1015-1016.<br>[^6]: Kautto E A, Bonneville R, Miya J, et al. <a href="(https://www.ncbi.nlm.nih.gov/pubmed/27980218">Performance evaluation for rapid detection of pan-cancer microsatellite instability with MANTIS</a>)[J]. Oncotarget, 2017, 8(5): 7452.<br>[^7]: Huang M N, McPherson J R, Cutcutache I, et al. <a href="https://www.ncbi.nlm.nih.gov/pubmed/26306458/" target="_blank" rel="noopener">MSIseq: software for assessing microsatellite instability from catalogs of somatic mutations</a>[J]. Scientific reports, 2015, 5: 13321.<br>[^8]: Vanderwalde A, Spetzler D, Xiao N, et al. <a href="https://www.ncbi.nlm.nih.gov/pubmed/29436178/" target="_blank" rel="noopener">Microsatellite instability status determined by next‐generation sequencing and compared with PD‐L1 and tumor mutational burden in 11,348 patients</a>[J]. Cancer medicine, 2018, 7(3): 746-756.<br>[^9]: Bonneville R, Krook M A, Kautto E A, et al. <a href="https://www.ncbi.nlm.nih.gov/pubmed/29850653/" target="_blank" rel="noopener">Landscape of microsatellite instability across 39 cancer types</a>[J]. JCO precision oncology, 2017, 1: 1-15.<br>[^10]: Haraldsdottir S. <a href="https://www.ncbi.nlm.nih.gov/pubmed/24987110" target="_blank" rel="noopener">Microsatellite Instability Testing Using Next-Generation Sequencing Data and Therapy Implications</a>[J]. 2017.<br>[^11]: Frampton G M, Fabrizio D A, Chalmers Z R, et al. <a href="https://academic.oup.com/annonc/article/27/suppl_6/52O/2798777" target="_blank" rel="noopener">Assessment and comparison of tumor mutational burden and microsatellite instability status in&gt; 40,000 cancer genomes</a>[J]. Annals of Oncology, 2016, 27(suppl_6).</p>
@@ -946,12 +958,24 @@
                 
               
 
-              <time title="Created: 2018-09-02 00:43:24 / Modified: 00:43:53" itemprop="dateCreated datePublished" datetime="2018-09-02T00:43:24+08:00">2018-09-02</time>
+              <time title="Created: 2018-09-02 00:43:24" itemprop="dateCreated datePublished" datetime="2018-09-02T00:43:24+08:00">2018-09-02</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-21 14:33:21" itemprop="dateModified" datetime="2019-04-21T14:33:21+08:00">2019-04-21</time>
               
             
           </span>
@@ -1019,7 +1043,7 @@
 <blockquote>
 <p>As shown in Figure for each tRF there is one most abundant RNA sequenced (example the tRF-5 “GCATTGGTGGTTCAGTGGTAGA” was sequenced at 8258 reads per million) accounting for more than 80% of the reads mapping to that site. This distinguishes the main tRF from other low abundance products created by nucleases digesting the main tRF, or possibly from random degradation of tRNAs and tRFs. Finally, only highly abundant tRFs (&gt;20 reads per million in at least one library) were included in the database. </p>
 </blockquote>
-<p><img src="http://genome.bioch.virginia.edu/trfdb/Fig2.jpg" alt=""></p>
+<p><img src="/2018/201809_tRFs/./Fig2.jpg" alt=""></p>
 
           
         
@@ -1417,7 +1441,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201808-MALBAC-md/">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201808-MALBAC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ChengCZ">
@@ -1436,7 +1460,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/201808-MALBAC-md/" itemprop="url">
+                <a class="post-title-link" href="/2018/201808-MALBAC/" itemprop="url">
                   Whole Genome Amplification Technologies:MALBAC
                 </a>
               
@@ -1480,7 +1504,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-08-05 14:39:31" itemprop="dateModified" datetime="2018-08-05T14:39:31+08:00">2018-08-05</time>
+                <time title="Modified: 2019-04-21 14:34:10" itemprop="dateModified" datetime="2019-04-21T14:34:10+08:00">2019-04-21</time>
               
             
           </span>
@@ -1515,7 +1539,7 @@
       
         
           
-            <h3 id="Technical-principles"><a href="#Technical-principles" class="headerlink" title="Technical principles"></a>Technical principles</h3><p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/MALBAC.png" alt=""></p>
+            <h3 id="Technical-principles"><a href="#Technical-principles" class="headerlink" title="Technical principles"></a>Technical principles</h3><p><img src="/2018/201808-MALBAC/./MALBAC.png" alt=""></p>
 <ol>
 <li><p>A single cell is picked and lysed. First, genomic DNA of the single cell is melted into single-stranded DNA molecules at 94°C. </p>
 <blockquote>
@@ -1652,12 +1676,24 @@
                 
               
 
-              <time title="Created: 2018-07-31 19:18:19 / Modified: 19:31:19" itemprop="dateCreated datePublished" datetime="2018-07-31T19:18:19+08:00">2018-07-31</time>
+              <time title="Created: 2018-07-31 19:18:19" itemprop="dateCreated datePublished" datetime="2018-07-31T19:18:19+08:00">2018-07-31</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-21 14:34:53" itemprop="dateModified" datetime="2019-04-21T14:34:53+08:00">2019-04-21</time>
               
             
           </span>
@@ -1711,7 +1747,7 @@
         
           
             <p>三代平台喜获单细胞测序技能</p>
-<p><a href="https://www.biorxiv.org/content/early/2018/07/08/364950" target="_blank" rel="noopener"><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/ScISOr-Seq.png" alt=""></a></p>
+<p><a href="https://www.biorxiv.org/content/early/2018/07/08/364950" target="_blank" rel="noopener"><img src="/2018/201808_ScISOr-Seq/./ScISOr-Seq.png" alt=""></a></p>
 <h2 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h2><ul>
 <li>we employ microfluidics to produce amplified <strong>full-length cDNAs barcoded</strong> for their cell of origin</li>
 <li>one pool for 3’ sequencing to measure gene expression(<strong>Pacific</strong>, <strong>Nanopore</strong>)</li>
@@ -1859,7 +1895,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-31 19:36:05" itemprop="dateModified" datetime="2018-07-31T19:36:05+08:00">2018-07-31</time>
+                <time title="Modified: 2019-04-21 14:35:54" itemprop="dateModified" datetime="2019-04-21T14:35:54+08:00">2019-04-21</time>
               
             
           </span>
@@ -1912,14 +1948,14 @@
       
         
           
-            <h3 id="transcvar-web-版"><a href="#transcvar-web-版" class="headerlink" title="transcvar web 版"></a>transcvar web 版</h3><p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/transvar_web.png" alt=""></p>
+            <h3 id="transcvar-web-版"><a href="#transcvar-web-版" class="headerlink" title="transcvar web 版"></a>transcvar web 版</h3><p><img src="/2018/201807_transvar/./transvar_web.png" alt=""></p>
 <h3 id="transcvar-本地化"><a href="#transcvar-本地化" class="headerlink" title="transcvar 本地化"></a>transcvar 本地化</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> https://github.com/zwdzwd/transvar</span><br><span class="line">pip search transvar</span><br><span class="line">pip install transvar --user</span><br><span class="line"></span><br><span class="line">transvar config --download_ref --refversion hg19</span><br><span class="line">transvar config --download_anno --refversion hg19</span><br></pre></td></tr></table></figure>
-<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/transvar.png" alt=""></p>
+<p><img src="/2018/201807_transvar/./transvar.png" alt=""></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">head HGVS_cds</span><br><span class="line"><span class="meta">#</span> MLH1:c.100G&gt;A</span><br><span class="line"><span class="meta">#</span> MLH1:c.790+1G&gt;A</span><br><span class="line"><span class="meta">#</span> VHL:c.1_17del17</span><br><span class="line"><span class="meta">#</span> VHL:c.136G&gt;T</span><br><span class="line"></span><br><span class="line">transvar canno --refversion hg19 --refseq -l HGVS_cds --oneline &gt;HGVS_cds.transvar.txt</span><br><span class="line"></span><br><span class="line">head HGVS_cds.transvar.txt</span><br><span class="line"><span class="meta">#</span> input	transcript	gene	strand	coordinates(gDNA/cDNA/protein)	region	info</span><br><span class="line"><span class="meta">#</span> MLH1:c.100G&gt;A	NM_001167618 (protein_coding)	MLH1	+	chr3:g.37059029G&gt;A/c.100G&gt;A/p.A34T	inside_[cds_in_exon_10]	CSQN=Missense;reference_codon=GCC;alternative_codon=ACC;dbxref=GeneID:4292,HGNC:7127,HPRD:00390,MIM:120436;aliases=NP_001161090;source=RefSeq</span><br><span class="line"><span class="meta">#</span> MLH1:c.790+1G&gt;A	NM_001258271 (protein_coding)	MLH1	+	chr3:g.37056036G&gt;A/c.790+1G&gt;A/.	inside_[intron_between_exon_9_and_10]	CSQN=IntronicSNV;dbxref=GeneID:4292,HGNC:7127,HPRD:00390,MIM:120436;aliases=NP_001245200;source=RefSeq</span><br><span class="line"><span class="meta">#</span> VHL:c.1_17del17	NM_198156 (protein_coding)	VHL	+	chr3:g.10183532_10183548del17/c.1_17del17/.	inside_[cds_in_exon_1]	CSQN=CdsStartDeletion;left_align_gDNA=g.10183529_10183545del17;unaligned_gDNA=g.10183532_10183548del17;left_align_cDNA=c.1-3_14del17;unalign_cDNA=c.1_17del17;cds_start_at_chr3:10183532_lost;dbxref=GeneID:7428,HGNC:12687,HPRD:01905,MIM:608537;aliases=NP_937799;source=RefSeq</span><br></pre></td></tr></table></figure>
 <p>类似的也可以从 c.HGVS、g.HGVS 开始获得完整注释</p>
 <h3 id="本地化数据库配置"><a href="#本地化数据库配置" class="headerlink" title="本地化数据库配置"></a>本地化数据库配置</h3><p>软件提供数据库路径为：<a href="http://transvar.info/transvar_user/annotations/" target="_blank" rel="noopener">http://transvar.info/transvar_user/annotations/</a>，本地数据库配置详细如下：</p>
-<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/transvar_config.png" alt=""></p>
-<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/transvar_config2.png" alt=""></p>
+<p><img src="/2018/201807_transvar/./transvar_config.png" alt=""></p>
+<p><img src="/2018/201807_transvar/./transvar_config2.png" alt=""></p>
 
           
         
@@ -2040,7 +2076,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-31 19:30:07" itemprop="dateModified" datetime="2018-07-31T19:30:07+08:00">2018-07-31</time>
+                <time title="Modified: 2019-04-21 14:37:45" itemprop="dateModified" datetime="2019-04-21T14:37:45+08:00">2019-04-21</time>
               
             
           </span>
@@ -2099,23 +2135,23 @@
 <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>ref: <a href="https://www.arraystar.com/reviews/v30-lncrna-classification/" target="_blank" rel="noopener">https://www.arraystar.com/reviews/v30-lncrna-classification/</a></p>
 <ol>
 <li><p>Intergenic LncRNAs</p>
-<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/lnc_intergenic.jpeg" alt=""></p>
+<p><img src="/2018/201807_lnc_classification/./lnc_intergenic.jpeg" alt=""></p>
 <p>Intergenic LncRNAs are long non-coding RNAs which locate between annotated protein-coding genes and are at least 1 kb away from the nearest protein-coding genes. They are named according to their 3-protein-coding genes nearby. Gene expression patterns have implicated these LincRNAs in diverse biological processes, including cell-cycle regulation, immune surveillance and embryonic stem cell pluripotency. LincRNAs collaborate with chromatin modifying protein (PRC2, CoREST and SCMX) to regulate gene expression at specific loci.</p>
 </li>
 <li><p>Bidirectional LncRNAs</p>
-<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/lnc_bidirectional.jpeg" alt=""></p>
+<p><img src="/2018/201807_lnc_classification/./lnc_bidirectional.jpeg" alt=""></p>
 <p>A Bidirectional LncRNA is oriented head to head with a protein-coding gene within 1kb. A Bidirectional LncRNA transcript exhibits a similar expression pattern to its protein-coding counterpart which suggests that they may be subject to share regulatory pressures. However, the discordant expression relationships between bidirectional LncRNAs and protein coding gene pairs have also been found, challenging the assertion that LncRNA transcription occurs solely to “open” chromatin to promote the expression of neighboring coding genes.</p>
 </li>
 <li><p>Intronic LncRNAs</p>
-<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/lnc_intronic.jpeg" alt=""></p>
+<p><img src="/2018/201807_lnc_classification/./lnc_intronic.jpeg" alt=""></p>
 <p>Intronic LncRNAs are RNA molecules that overlap with the intron of annotated coding genes in either sense or antisense orientation. Most of the Intronic LncRNAs have the same tissue expression patterns as the corresponding coding genes, and may stabilize protein-coding transcripts or regulate their alternative splicing.</p>
 </li>
 <li><p>Antisense LncRNAs</p>
-<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/lnc_antisense.jpeg" alt=""></p>
+<p><img src="/2018/201807_lnc_classification/./lnc_antisense.jpeg" alt=""></p>
 <p>Antisense LncRNAs are RNA molecules that are transcribed from the antisense strand and overlap in part with well-defined spliced sense or intronless sense RNAs. Antisense-overlapping LncRNAs have a tendency to undergo fewer splicing events and typically show lower abundance than sense transcripts. The basal expression levels of antisense-overlapping LncRNAs and sense mRNAs in different tissues and cell lines can be either positively or negatively regulated. Antisense-overlapping LncRNAs are frequently functional and use diverse transcriptional and post-transcriptional gene regulatory mechanisms to carry out a wide variety of biological roles.</p>
 </li>
 <li><p>Sense-overlapping LncRNAs</p>
-<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/lnc_sense.jpeg" alt=""></p>
+<p><img src="/2018/201807_lnc_classification/./lnc_sense.jpeg" alt=""></p>
 <p>These LncRNAs can be considered transcript variants of protein-coding mRNAs, as they overlap with a known annotated gene on the same genomic strand. The majority of these LncRNAs lack substantial open reading frames (ORFs) for protein translation, while others contain an open reading frame that shares the same start codon as a protein-coding transcript for that gene, but unlikely encode a protein for several reasons, including non-sense mediated decay (NMD) issues that limits the translation of mRNAs with premature termination stop codons and trigger NMD-mediated destruction of the mRNA, or an upstream alternative open reading frame which inhibits the translation of the predicted ORF.</p>
 </li>
 </ol>

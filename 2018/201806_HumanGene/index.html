@@ -123,13 +123,13 @@
 <meta property="og:site_name" content="ChengCZ&#39;s Notebook">
 <meta property="og:description" content="我们使用 snpEff, annovar 对得到的变异集注释，总会得到多个转录本注释结果，而只需要按照 HGVS 规范报告一个经典转录本(canonical transcripts) 对应注释结果，这时候就需要知道每个基因对应的经典转录本。 一般情况下，我们使用基因对应的最长转录本代表该基因，具体操作上，首先从 HGNC 下载经过确认的基因对应经典转录本信息，其中不确定基因再使用最长转录本代表。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://or5pz0a28.bkt.clouddn.com/images/2018/gff2tab.png">
-<meta property="og:image" content="http://or5pz0a28.bkt.clouddn.com/images/2018/gff_tab.png">
-<meta property="og:updated_time" content="2018-07-31T11:10:22.592Z">
+<meta property="og:image" content="http://chengcz.github.io/2018/201806_HumanGene/gff2tab.png">
+<meta property="og:image" content="http://chengcz.github.io/2018/201806_HumanGene/gff_tab.png">
+<meta property="og:updated_time" content="2019-04-21T06:38:35.088Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="canonical transcripts of Human protein coding gene">
 <meta name="twitter:description" content="我们使用 snpEff, annovar 对得到的变异集注释，总会得到多个转录本注释结果，而只需要按照 HGVS 规范报告一个经典转录本(canonical transcripts) 对应注释结果，这时候就需要知道每个基因对应的经典转录本。 一般情况下，我们使用基因对应的最长转录本代表该基因，具体操作上，首先从 HGNC 下载经过确认的基因对应经典转录本信息，其中不确定基因再使用最长转录本代表。">
-<meta name="twitter:image" content="http://or5pz0a28.bkt.clouddn.com/images/2018/gff2tab.png">
+<meta name="twitter:image" content="http://chengcz.github.io/2018/201806_HumanGene/gff2tab.png">
 
 
 
@@ -419,7 +419,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-31 19:10:22" itemprop="dateModified" datetime="2018-07-31T19:10:22+08:00">2018-07-31</time>
+                <time title="Modified: 2019-04-21 14:38:35" itemprop="dateModified" datetime="2019-04-21T14:38:35+08:00">2019-04-21</time>
               
             
           </span>
@@ -480,9 +480,9 @@
 <li><p>NCBI下载人类基因注释GFF文件</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> wget -c ftp://ftp.ncbi.nlm.nih.gov/refseq/H_sapiens/annotation/GRCh37_latest/refseq_identifiers/GRCh37_latest_genomic.gff.gz</span><br></pre></td></tr></table></figure>
 <p>使用脚本将 gff 转换为表格样式，方便筛选每个基因对应最长转录本，具体操作参考如下，其中 <a href="https://github.com/chengcz/pyGTF" target="_blank" rel="noopener">pyGTF</a> 为用来解析 gff 文件。</p>
-<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/gff2tab.png" alt=""></p>
+<p><img src="/2018/201806_HumanGene/./gff2tab.png" alt=""></p>
 <p>输出文件可以<a href="https://github.com/chengcz/BioResource/tree/master/HumanGene" target="_blank" rel="noopener">下载</a> , 其具体格式为：</p>
-<p><img src="http://or5pz0a28.bkt.clouddn.com/images/2018/gff_tab.png" alt=""></p>
+<p><img src="/2018/201806_HumanGene/./gff_tab.png" alt=""></p>
 <p>表头分别是：gene_id, gene_name, gene_type, transcript_id, transcript_name, transcript_type, transcript_length, chromosome, start, end, strand，根据 gene_name, transcript_name, transcript_length 三列排序，就可以很方便筛选出基因对应最长转录本。</p>
 </li>
 <li><p>脚本整合 HGNC 和 GFF 两部分结果</p>
