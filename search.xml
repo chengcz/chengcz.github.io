@@ -256,17 +256,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[python 参数解析 —— argsparse]]></title>
-    <url>%2F2018%2F201805_argparse%2F</url>
-    <content type="text"><![CDATA[argsparse 解析命令行参数，一些常用参数整理。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455import argparseparser = argparse.ArgumentParser(# prog=__file__, # 设置项目名称，__file__ 与 sys.argv[0] 一致，默认显示为 basename(__file__) usage=''' python %(prog)s [option] ''', # 设置脚本输出默认 USAGE 信息 description=''' some script description ''', # 脚本功能描述等等 formatter_class=argparse.RawTextHelpFormatter, # 以脚本内原始文档格式输出描述等信息 epilog=''' Note and input example, and so on. ''') # 脚本描述以外的其他信息parser.add_argument('-v', '--version', # 添加脚本版本信息参数 action='version', version='%(prog)s 2.0')# 添加一个普通的可选参数parser.add_argument('-e', # 短参数 '--example', # 长参数 dest='example', # 参数对应模块内部，唯一标识符 metavar='', # 设置help信息中参数后字符 action='store', # 参数处理方式 type=str, # 传入参数类型 choices=['a', 'b', 'c'], # 参数选择范围 required=True, # 表示该参数必须被设置 default='a', # 参数缺省时，该参数默认值 nargs='+', # 参数个数，*+？，表示至少一个输入 help='some help infor') # help信息# action属性为store_true, store_false, store_const时，参数不接任何输入信息parser.add_argument('--sum', dest='accumulate', action='store_const', # 该参数被设置时，参数取值成 const 对应值 const=sum, default=max, help='sum the integers (default: find the max)')# 位置参数parser.add_argument('pos', dest='pos_argument', metavar='', nargs='+', # 参数输入文件个数 help='some help infor')# 互斥参数组，组内参数不可同时出现，required=True表示组内必须有参数被设置exclusive = parser.add_mutually_exclusive_group(required=True) exclusive.add_argument('-a', )exclusive.add_argument('-b', )# 设置多个参数为一组，无实际意义，仅在打印help信息时，分组显示group = parser.add_argument_group('argument group info') group.add_argument('-c', )group.add_argument('-d', )# parse.print_help()args = parser.parse_args() # 参数解析，生成可调用对象example = args.example# ...]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>argparse</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[python 执行 linux 命令 —— subprocess]]></title>
     <url>%2F2018%2F201805_subprocess%2F</url>
     <content type="text"><![CDATA[python 脚本内执行 linux 命令有多种方式，os.system(), os.popen()也可以，官方最新推荐方式为subprocess 123456789101112131415161718192021222324import subprocess# 执行cmd并等待运行结束，返回执行状态码subprocess.call('ls', shell=True) # 与 os.system() 功能相似# 执行cmd并等待运行结束，返回执行状态码subprocess.check_call('ls', shell=True) # 与subprocess.call()不同，returncode不为0，触发CalledProcessError异常# 执行cmd并等待运行结束，返回 /dev/stdout 信息subprocess.check_output('ls', shell=True, universal_newlines=True) # 以 string 形式返回 stdout 信息，而不是bytes，与 os.popen() 功能相似# 不等待 cmd 运行结束job = subprocess.Popen('ls -l', # string of cmd shell=True, # 传入参数作为 shell 进行执行 stdout=subprocess.PIPE, # 输出标准输出到subprocess流程 stderr=subprocess.PIPE, # 输出标准错误到subprocess流程 universal_newlines=True) # stdout 返回时，使用 string 代替 bytes 类型pid = job.pid # 获得 cmd 本地执行的 pidjob.wait() # 等待工作结束，默认Popen不等待 cmd 执行完毕即退出stdout, stderr = job.communicate() # 获得 cmd 执行返回标准输出、标准错误# 设置 stdin=subprocess.PIPE 时，可以在communicate(input='...')传入参数job.returncode # 获得 cmd 执行状态码job.kill() # 杀死 cmd 进程 os 模块实现 linux cmd 执行 12345import osos.system('ls -l') # 直接返回 cmd 执行状态码# assert not os.system('ls')os.popen('ls -l') # 以文件句柄的方式返回 cmd 执行的stdout信息]]></content>
@@ -275,6 +264,17 @@
       </categories>
       <tags>
         <tag>suprocess</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[python 参数解析 —— argsparse]]></title>
+    <url>%2F2018%2F201805_argparse%2F</url>
+    <content type="text"><![CDATA[argsparse 解析命令行参数，一些常用参数整理。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455import argparseparser = argparse.ArgumentParser(# prog=__file__, # 设置项目名称，__file__ 与 sys.argv[0] 一致，默认显示为 basename(__file__) usage=''' python %(prog)s [option] ''', # 设置脚本输出默认 USAGE 信息 description=''' some script description ''', # 脚本功能描述等等 formatter_class=argparse.RawTextHelpFormatter, # 以脚本内原始文档格式输出描述等信息 epilog=''' Note and input example, and so on. ''') # 脚本描述以外的其他信息parser.add_argument('-v', '--version', # 添加脚本版本信息参数 action='version', version='%(prog)s 2.0')# 添加一个普通的可选参数parser.add_argument('-e', # 短参数 '--example', # 长参数 dest='example', # 参数对应模块内部，唯一标识符 metavar='', # 设置help信息中参数后字符 action='store', # 参数处理方式 type=str, # 传入参数类型 choices=['a', 'b', 'c'], # 参数选择范围 required=True, # 表示该参数必须被设置 default='a', # 参数缺省时，该参数默认值 nargs='+', # 参数个数，*+？，表示至少一个输入 help='some help infor') # help信息# action属性为store_true, store_false, store_const时，参数不接任何输入信息parser.add_argument('--sum', dest='accumulate', action='store_const', # 该参数被设置时，参数取值成 const 对应值 const=sum, default=max, help='sum the integers (default: find the max)')# 位置参数parser.add_argument('pos', dest='pos_argument', metavar='', nargs='+', # 参数输入文件个数 help='some help infor')# 互斥参数组，组内参数不可同时出现，required=True表示组内必须有参数被设置exclusive = parser.add_mutually_exclusive_group(required=True) exclusive.add_argument('-a', )exclusive.add_argument('-b', )# 设置多个参数为一组，无实际意义，仅在打印help信息时，分组显示group = parser.add_argument_group('argument group info') group.add_argument('-c', )group.add_argument('-d', )# parse.print_help()args = parser.parse_args() # 参数解析，生成可调用对象example = args.example# ...]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>argparse</tag>
       </tags>
   </entry>
   <entry>
