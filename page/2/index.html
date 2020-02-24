@@ -351,7 +351,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201807_lnc_classification/">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/10037.transvar/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ChengCZ">
@@ -370,7 +370,186 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/201807_lnc_classification/" itemprop="url">
+                <a class="post-title-link" href="/2018/10037.transvar/" itemprop="url">
+                  从 p.HGVS 到基因组变异位置
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-19 19:25:21" itemprop="dateCreated datePublished" datetime="2018-07-19T19:25:21+08:00">2018-07-19</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-21 14:35:54" itemprop="dateModified" datetime="2019-04-21T14:35:54+08:00">2019-04-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/bioinfor/" itemprop="url" rel="index"><span itemprop="name">bioinfor</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="transcvar-web-版"><a href="#transcvar-web-版" class="headerlink" title="transcvar web 版"></a>transcvar web 版</h3><p><img src="/2018/10037.transvar/./transvar_web.png" alt=""></p>
+<h3 id="transcvar-本地化"><a href="#transcvar-本地化" class="headerlink" title="transcvar 本地化"></a>transcvar 本地化</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> https://github.com/zwdzwd/transvar</span><br><span class="line">pip search transvar</span><br><span class="line">pip install transvar --user</span><br><span class="line"></span><br><span class="line">transvar config --download_ref --refversion hg19</span><br><span class="line">transvar config --download_anno --refversion hg19</span><br></pre></td></tr></table></figure>
+<p><img src="/2018/10037.transvar/./transvar.png" alt=""></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">head HGVS_cds</span><br><span class="line"><span class="meta">#</span> MLH1:c.100G&gt;A</span><br><span class="line"><span class="meta">#</span> MLH1:c.790+1G&gt;A</span><br><span class="line"><span class="meta">#</span> VHL:c.1_17del17</span><br><span class="line"><span class="meta">#</span> VHL:c.136G&gt;T</span><br><span class="line"></span><br><span class="line">transvar canno --refversion hg19 --refseq -l HGVS_cds --oneline &gt;HGVS_cds.transvar.txt</span><br><span class="line"></span><br><span class="line">head HGVS_cds.transvar.txt</span><br><span class="line"><span class="meta">#</span> input	transcript	gene	strand	coordinates(gDNA/cDNA/protein)	region	info</span><br><span class="line"><span class="meta">#</span> MLH1:c.100G&gt;A	NM_001167618 (protein_coding)	MLH1	+	chr3:g.37059029G&gt;A/c.100G&gt;A/p.A34T	inside_[cds_in_exon_10]	CSQN=Missense;reference_codon=GCC;alternative_codon=ACC;dbxref=GeneID:4292,HGNC:7127,HPRD:00390,MIM:120436;aliases=NP_001161090;source=RefSeq</span><br><span class="line"><span class="meta">#</span> MLH1:c.790+1G&gt;A	NM_001258271 (protein_coding)	MLH1	+	chr3:g.37056036G&gt;A/c.790+1G&gt;A/.	inside_[intron_between_exon_9_and_10]	CSQN=IntronicSNV;dbxref=GeneID:4292,HGNC:7127,HPRD:00390,MIM:120436;aliases=NP_001245200;source=RefSeq</span><br><span class="line"><span class="meta">#</span> VHL:c.1_17del17	NM_198156 (protein_coding)	VHL	+	chr3:g.10183532_10183548del17/c.1_17del17/.	inside_[cds_in_exon_1]	CSQN=CdsStartDeletion;left_align_gDNA=g.10183529_10183545del17;unaligned_gDNA=g.10183532_10183548del17;left_align_cDNA=c.1-3_14del17;unalign_cDNA=c.1_17del17;cds_start_at_chr3:10183532_lost;dbxref=GeneID:7428,HGNC:12687,HPRD:01905,MIM:608537;aliases=NP_937799;source=RefSeq</span><br></pre></td></tr></table></figure>
+<p>类似的也可以从 c.HGVS、g.HGVS 开始获得完整注释</p>
+<h3 id="本地化数据库配置"><a href="#本地化数据库配置" class="headerlink" title="本地化数据库配置"></a>本地化数据库配置</h3><p>软件提供数据库路径为：<a href="http://transvar.info/transvar_user/annotations/" target="_blank" rel="noopener">http://transvar.info/transvar_user/annotations/</a>，本地数据库配置详细如下：</p>
+<p><img src="/2018/10037.transvar/./transvar_config.png" alt=""></p>
+<p><img src="/2018/10037.transvar/./transvar_config2.png" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/10034.lnc_classification/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10034.lnc_classification/" itemprop="url">
                   lncRNA 根据染色体位置进行分类
                 </a>
               
@@ -473,23 +652,23 @@
 <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>ref: <a href="https://www.arraystar.com/reviews/v30-lncrna-classification/" target="_blank" rel="noopener">https://www.arraystar.com/reviews/v30-lncrna-classification/</a></p>
 <ol>
 <li><p>Intergenic LncRNAs</p>
-<p><img src="/2018/201807_lnc_classification/./lnc_intergenic.jpeg" alt=""></p>
+<p><img src="/2018/10034.lnc_classification/./lnc_intergenic.jpeg" alt=""></p>
 <p>Intergenic LncRNAs are long non-coding RNAs which locate between annotated protein-coding genes and are at least 1 kb away from the nearest protein-coding genes. They are named according to their 3-protein-coding genes nearby. Gene expression patterns have implicated these LincRNAs in diverse biological processes, including cell-cycle regulation, immune surveillance and embryonic stem cell pluripotency. LincRNAs collaborate with chromatin modifying protein (PRC2, CoREST and SCMX) to regulate gene expression at specific loci.</p>
 </li>
 <li><p>Bidirectional LncRNAs</p>
-<p><img src="/2018/201807_lnc_classification/./lnc_bidirectional.jpeg" alt=""></p>
+<p><img src="/2018/10034.lnc_classification/./lnc_bidirectional.jpeg" alt=""></p>
 <p>A Bidirectional LncRNA is oriented head to head with a protein-coding gene within 1kb. A Bidirectional LncRNA transcript exhibits a similar expression pattern to its protein-coding counterpart which suggests that they may be subject to share regulatory pressures. However, the discordant expression relationships between bidirectional LncRNAs and protein coding gene pairs have also been found, challenging the assertion that LncRNA transcription occurs solely to “open” chromatin to promote the expression of neighboring coding genes.</p>
 </li>
 <li><p>Intronic LncRNAs</p>
-<p><img src="/2018/201807_lnc_classification/./lnc_intronic.jpeg" alt=""></p>
+<p><img src="/2018/10034.lnc_classification/./lnc_intronic.jpeg" alt=""></p>
 <p>Intronic LncRNAs are RNA molecules that overlap with the intron of annotated coding genes in either sense or antisense orientation. Most of the Intronic LncRNAs have the same tissue expression patterns as the corresponding coding genes, and may stabilize protein-coding transcripts or regulate their alternative splicing.</p>
 </li>
 <li><p>Antisense LncRNAs</p>
-<p><img src="/2018/201807_lnc_classification/./lnc_antisense.jpeg" alt=""></p>
+<p><img src="/2018/10034.lnc_classification/./lnc_antisense.jpeg" alt=""></p>
 <p>Antisense LncRNAs are RNA molecules that are transcribed from the antisense strand and overlap in part with well-defined spliced sense or intronless sense RNAs. Antisense-overlapping LncRNAs have a tendency to undergo fewer splicing events and typically show lower abundance than sense transcripts. The basal expression levels of antisense-overlapping LncRNAs and sense mRNAs in different tissues and cell lines can be either positively or negatively regulated. Antisense-overlapping LncRNAs are frequently functional and use diverse transcriptional and post-transcriptional gene regulatory mechanisms to carry out a wide variety of biological roles.</p>
 </li>
 <li><p>Sense-overlapping LncRNAs</p>
-<p><img src="/2018/201807_lnc_classification/./lnc_sense.jpeg" alt=""></p>
+<p><img src="/2018/10034.lnc_classification/./lnc_sense.jpeg" alt=""></p>
 <p>These LncRNAs can be considered transcript variants of protein-coding mRNAs, as they overlap with a known annotated gene on the same genomic strand. The majority of these LncRNAs lack substantial open reading frames (ORFs) for protein translation, while others contain an open reading frame that shares the same start codon as a protein-coding transcript for that gene, but unlikely encode a protein for several reasons, including non-sense mediated decay (NMD) issues that limits the translation of mRNAs with premature termination stop codons and trigger NMD-mediated destruction of the mRNA, or an upstream alternative open reading frame which inhibits the translation of the predicted ORF.</p>
 </li>
 </ol>
@@ -549,7 +728,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201807_FamilyGene/">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/10032.FamilyGene/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ChengCZ">
@@ -568,7 +747,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/201807_FamilyGene/" itemprop="url">
+                <a class="post-title-link" href="/2018/10032.FamilyGene/" itemprop="url">
                   家族基因分析的一般套路
                 </a>
               
@@ -764,7 +943,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201807_singleTcell_NSCLC/">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/10036.singleTcell_NSCLC/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ChengCZ">
@@ -783,7 +962,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/201807_singleTcell_NSCLC/" itemprop="url">
+                <a class="post-title-link" href="/2018/10036.singleTcell_NSCLC/" itemprop="url">
                   Global characterization of T cells in non-small-cell lung cancer by single-cell sequencing
                 </a>
               
@@ -881,7 +1060,7 @@
         
           
             <p>肺癌T细胞 scRNAseq 分析</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pubmed/29942094" target="_blank" rel="noopener"><img src="/2018/201807_singleTcell_NSCLC/./singleTcell_NSCLC.png" alt=""></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pubmed/29942094" target="_blank" rel="noopener"><img src="/2018/10036.singleTcell_NSCLC/./singleTcell_NSCLC.png" alt=""></a></p>
 <h3 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h3><ol>
 <li><p>we performed deep single-cell RNA sequencing on T cells isolated from <strong>tumor</strong>, <strong>adjacent normal tissues</strong> and <strong>peripheral blood</strong> for 14 treatment-naïve patients, including <strong>11 adenocarcinomas</strong> and <strong>three squamous cell carcinomas</strong>    </p>
 </li>
@@ -971,7 +1150,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201807_RNAedit/">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/10033.RNAedit/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ChengCZ">
@@ -990,7 +1169,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/201807_RNAedit/" itemprop="url">
+                <a class="post-title-link" href="/2018/10033.RNAedit/" itemprop="url">
                   identification of A-to-I RNA Editing
                 </a>
               
@@ -1174,7 +1353,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201807_16S/">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/10031.16S/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ChengCZ">
@@ -1193,7 +1372,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/201807_16S/" itemprop="url">
+                <a class="post-title-link" href="/2018/10031.16S/" itemprop="url">
                   转:16S基本分析点
                 </a>
               
@@ -1462,7 +1641,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201807_matplotlib/">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/10035.matplotlib/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ChengCZ">
@@ -1481,7 +1660,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/201807_matplotlib/" itemprop="url">
+                <a class="post-title-link" href="/2018/10035.matplotlib/" itemprop="url">
                   matplotlib 画图的 Qt 问题
                 </a>
               
@@ -1580,11 +1759,11 @@
           
             <ol>
 <li><p>This application failed to start because it could not find or load the Qt platform plugin “xcb” in “”.</p>
-<p><img src="/2018/201807_matplotlib/./Snipaste_180702_14-11-26.png" alt=""></p>
+<p><img src="/2018/10035.matplotlib/./Snipaste_180702_14-11-26.png" alt=""></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export QT_PLUGIN_PATH="/data/software/anaconda2/plugins/"</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>QXcbConnection: Could not connect to display</p>
-<p><img src="/2018/201807_matplotlib/./Snipaste_180702_14-11-09.png" alt=""></p>
+<p><img src="/2018/10035.matplotlib/./Snipaste_180702_14-11-09.png" alt=""></p>
 <p>方法一：</p>
 <ul>
 <li>设置环境变量</li>
@@ -1652,7 +1831,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201806_HumanGene/">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/10027.HumanGene/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ChengCZ">
@@ -1671,7 +1850,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/201806_HumanGene/" itemprop="url">
+                <a class="post-title-link" href="/2018/10027.HumanGene/" itemprop="url">
                   canonical transcripts of Human protein coding gene
                 </a>
               
@@ -1778,9 +1957,9 @@
 <li><p>NCBI下载人类基因注释GFF文件</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> wget -c ftp://ftp.ncbi.nlm.nih.gov/refseq/H_sapiens/annotation/GRCh37_latest/refseq_identifiers/GRCh37_latest_genomic.gff.gz</span><br></pre></td></tr></table></figure>
 <p>使用脚本将 gff 转换为表格样式，方便筛选每个基因对应最长转录本，具体操作参考如下，其中 <a href="https://github.com/chengcz/pyGTF" target="_blank" rel="noopener">pyGTF</a> 为用来解析 gff 文件。</p>
-<p><img src="/2018/201806_HumanGene/./gff2tab.png" alt=""></p>
+<p><img src="/2018/10027.HumanGene/./gff2tab.png" alt=""></p>
 <p>输出文件可以下载 <strong><a href="./hg37.geneinfo.txt">hg37.geneinfo.txt</a></strong> , 其具体格式为：</p>
-<p><img src="/2018/201806_HumanGene/./gff_tab.png" alt=""></p>
+<p><img src="/2018/10027.HumanGene/./gff_tab.png" alt=""></p>
 <p>表头分别是：gene_id, gene_name, gene_type, transcript_id, transcript_name, transcript_type, transcript_length, chromosome, start, end, strand，根据 gene_name, transcript_name, transcript_length 三列排序，就可以很方便筛选出基因对应最长转录本。</p>
 </li>
 <li><p>脚本整合 HGNC 和 GFF 两部分结果</p>
@@ -1843,7 +2022,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201806_python_decode/">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/10029.python_decode/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ChengCZ">
@@ -1862,7 +2041,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/201806_python_decode/" itemprop="url">
+                <a class="post-title-link" href="/2018/10029.python_decode/" itemprop="url">
                   使用 python 正确读取不同编码方式文本
                 </a>
               
@@ -2017,7 +2196,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201806_compare_vcf/">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/10028.compare_vcf/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ChengCZ">
@@ -2036,7 +2215,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/201806_compare_vcf/" itemprop="url">
+                <a class="post-title-link" href="/2018/10028.compare_vcf/" itemprop="url">
                   NA12878 全外显子数据分析结果比较
                 </a>
               
@@ -2152,209 +2331,12 @@
   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 先看被过滤掉的这部分阴性</span><br><span class="line">cat 0002.vcf | grep -v '^#' | grep -v PASS | awk '&#123;n[$7]+=1&#125;END&#123;for (i in n)&#123;print i,n[i]&#125;&#125;'</span><br><span class="line"><span class="meta">#</span> LowDepth 11</span><br><span class="line"><span class="meta">#</span> StrandBias;snp_Filter 277</span><br><span class="line"><span class="meta">#</span> LowDepth;snp_Filter 2</span><br><span class="line"><span class="meta">#</span> InDels_Filter 265</span><br><span class="line"><span class="meta">#</span> StrandBias 3098</span><br><span class="line"><span class="meta">#</span> LowDepth;StrandBias 2</span><br><span class="line"><span class="meta">#</span> snp_Filter 1148</span><br></pre></td></tr></table></figure>
 <p>过滤掉位点最严重的两项分别是<strong>StrandBias</strong>, <strong>snp_Filter</strong>，对应过滤指标分别为<code>FS &gt; 60.0 || SOR &gt; 3.0</code>, <code>QD &lt; 2.0  || MQ &lt; 40.0 || MQRankSum &lt; -12.5</code>，转换vcf文件到tab格式（脚本：<a href="https://github.com/chengcz/BioResource/tree/master/vcf2tab" target="_blank" rel="noopener">github</a>），对其中一些指标进行分布检查。</p>
 <p>先看 <strong>StrandBias</strong>，对 <code>FS</code>,  <code>SOR</code> 两个参数分析，分布结果如下，可看出被过滤的位点基本上都是由于 <strong>SOR</strong> 参数（作图时FS&gt;60无显示），与 <strong>NA12878</strong> 变异集相比，需调整 <strong>SOR</strong> 临界值到更大水平。</p>
-<p><img src="/2018/201806_compare_vcf/./StrandBias_density.png" alt=""></p>
+<p><img src="/2018/10028.compare_vcf/./StrandBias_density.png" alt=""></p>
 <p>再看 <strong>snp_Filter</strong> 对应的<code>QD &lt; 2.0  || MQ &lt; 40.0 || MQRankSum &lt; -12.5</code>，其中 MQRankSum 对应67个位点，QD 对应557个位点，MQ 对应 1168 个位点，看出 <strong>MQ</strong>, <strong>QD</strong> 标准需要进行调整。</p>
 <p>以现在质控指标对文件<code>0001.vcf</code> <strong>2131</strong> 变异质控，<strong>QD</strong> 过滤掉949，<strong>MQRankSum</strong> 过滤掉14，<strong>MQ</strong> 过滤掉195，<strong>FS</strong> 过滤掉135，根据这部分参考变异集质量指标，同样 <strong>QD</strong>, <strong>MQ</strong>, <strong>FS</strong> 参数需要进行调整。</p>
 <p>另，vcftools 也可以很方便进行两个 vcf 文件的比较，还没 bcftools 对 vcf 文件必须排序、index的要求，输出结果也相应不同，因为我需要看阳性、阴性位点是否被过滤以及过滤情况，就不再用 vcftools 整理了，具体命令可参考如下：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> http://vcftools.github.io/</span><br><span class="line">vcftools --vcf ref.vcf --diff alt.vcf --out prefix</span><br><span class="line"><span class="meta">#</span> ref.vcf.gz    # 则需要使用--gzvcf</span><br><span class="line"><span class="meta">#</span> alt.vcf.gz    # 则需要使用--gzdiff</span><br></pre></td></tr></table></figure>
 <h3 id="质控参数调整思路"><a href="#质控参数调整思路" class="headerlink" title="质控参数调整思路"></a>质控参数调整思路</h3><p>根据质控结果比较来看，参控参数都还需要进行再调整，一个初步的参数调整思路是，对高质量变异集各项质控指标分布进行统计，然后进行阈值选择；或者对 <strong>NA12878</strong> 全基因组水平的变异进行 <strong><a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=2805" target="_blank" rel="noopener">VQSR</a></strong> 分析，统计高质量变异位点质控指标分布</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2018/201806_ANNOVAR/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ChengCZ">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChengCZ's Notebook">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/201806_ANNOVAR/" itemprop="url">
-                  vcf 注释 —— ANNOVAR
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-06-16 23:40:21" itemprop="dateCreated datePublished" datetime="2018-06-16T23:40:21+08:00">2018-06-16</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-07-31 19:09:55" itemprop="dateModified" datetime="2018-07-31T19:09:55+08:00">2018-07-31</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/bioinfor/" itemprop="url" rel="index"><span itemprop="name">bioinfor</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最先知道的 VCF 注释软件，但是呢没有搞定构建研究物种的注释数据库，于是转向snpEff，工作转向临床分析时候，发现 ANNOVAR 在人类数据注释多种第三方数据库支持，变异频率、HGVS、ACMG致病性、dbSNP、Cosmic支持等等</p>
-<p>软件文档镇楼: <a href="http://annovar.openbioinformatics.org/en/latest/" target="_blank" rel="noopener">http://annovar.openbioinformatics.org/en/latest/</a></p>
-<h3 id="软件下载"><a href="#软件下载" class="headerlink" title="软件下载"></a>软件下载</h3><p>ANNOVAR 由 perl 实现，下载即用，软件下载地址为：<a href="http://www.openbioinformatics.org/annovar/annovar_download_form.php" target="_blank" rel="noopener">http://www.openbioinformatics.org/annovar/annovar_download_form.php</a> ，软件包包括下面几个功能脚本：</p>
-<ul>
-<li><em>annotate_variation.pl</em>, 主程序，数据库下载，变异注释等等</li>
-<li><em>coding_change.pl</em>, 推断蛋白序列的变化</li>
-<li><em>convert2annovar.pl</em>, </li>
-<li><em>retrieve_seq_from_fasta.pl</em>, </li>
-<li><em>table_annovar.pl</em>, 注释程序，根据数据库选择完成不同类型变异注释</li>
-<li><em>variants_reduction.pl</em>, </li>
-</ul>
-<h3 id="数据库下载、整理"><a href="#数据库下载、整理" class="headerlink" title="数据库下载、整理"></a>数据库下载、整理</h3><p>ANNOVAR 注释变异可以分成有基于基因、基于染色体区间和变异数据等三种类型</p>
-<ol>
-<li><p>基于gene的注释</p>
-<p>注释结果为突变位点位于基因的相对位置，是否改变氨基酸编码，获得变异位点的HGVS命名方式</p>
-</li>
-<li><p>基于染色体区间的注释</p>
-<p>获取变异位点是否存在于某些特定的区间内，Identify cytogenetic band, 转录因子结合区等等</p>
-</li>
-<li><p>变异数据库的注释</p>
-<p>包括Clinvar, dbSNP, Cosmic, ExAC, gnomAD等等，突变数据库整理可参考<a href="https://chengcz.github.io/2018/201806_vcf2tab/index.html"><strong><em>从 vcf 文件准备 ANNOVAR 数据库</em></strong></a></p>
-</li>
-</ol>
-<p>ANNOVAR 数据库文件实际上为特定格式的文本文件，其数据库文件命名规则为:  <strong>\${path_database}/\${buildver}_\${database_name}.txt</strong></p>
-<h3 id="软件运行"><a href="#软件运行" class="headerlink" title="软件运行"></a>软件运行</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> input file format: vcf</span><br><span class="line">table_annovar.pl example/ex2.vcf humandb/ -buildver hg19 -out myanno -remove -protocol refGene,cytoBand,esp6500siv2_all,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_eas,1000g2015aug_eur,snp138,dbnsfp30a -operation g,r,f,f,f,f,f,f,f -nastring . -vcfinput</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 不同于snpEff，ANNOVAR 所有注释结果都在 vcf 文件 INFO 列添加key-value</span><br></pre></td></tr></table></figure>
-<h3 id="非人物种数据库整理"><a href="#非人物种数据库整理" class="headerlink" title="非人物种数据库整理"></a>非人物种数据库整理</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 下载物种基因序列、注释文件</span><br><span class="line">wget -c ftp://ftp.ensemblgenomes.org/pub/release-27/plants/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.27.dna.genome.fa.gz</span><br><span class="line">wget -c ftp://ftp.ensemblgenomes.org/pub/release-27/plants/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.27.gtf.gz</span><br><span class="line">gzip -d Arabidopsis_thaliana.TAIR10.27.dna.genome.fa.gz</span><br><span class="line">gzip -d Arabidopsis_thaliana.TAIR10.27.gtf.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> gtf文件格式转换</span><br><span class="line">gtfToGenePred -genePredExt Arabidopsis_thaliana.TAIR10.27.gtf AT_refGene.txt</span><br><span class="line"><span class="meta">#</span> wget -c http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/gtfToGenePred</span><br><span class="line"><span class="meta">#</span> 另一种格式转换方法，https://github.com/chengcz/pyGTF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 使用软件包提供脚本build物种数据库，数据库buildver为AT，名称为refGene</span><br><span class="line">perl retrieve_seq_from_fasta.pl --format refGene --seqfile Arabidopsis_thaliana.TAIR10.27.dna.genome.fa AT_refGene.txt --out AT_refGeneMrna.fa</span><br></pre></td></tr></table></figure>
 
           
         

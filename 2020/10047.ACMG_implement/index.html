@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"remove","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="公开的 ACMG-AMP 实现证据判断整理   支持数据公开可用 基因组注释  refseq, ensembl, genomic repeat region, repeat masker track from UCSC Protein domain from uniprot 转录因子结合区域   人群基因型频率数据  gnomAD ESP6500 1000 Genomes Project ExAC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ChengCZ&#39;s Notebook">
+<meta property="og:url" content="http://chengcz.github.io/2020/10047.ACMG_implement/index.html">
+<meta property="og:site_name" content="ChengCZ&#39;s Notebook">
+<meta property="og:description" content="公开的 ACMG-AMP 实现证据判断整理   支持数据公开可用 基因组注释  refseq, ensembl, genomic repeat region, repeat masker track from UCSC Protein domain from uniprot 转录因子结合区域   人群基因型频率数据  gnomAD ESP6500 1000 Genomes Project ExAC">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-02-24T08:18:29.229Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ChengCZ&#39;s Notebook">
+<meta name="twitter:description" content="公开的 ACMG-AMP 实现证据判断整理   支持数据公开可用 基因组注释  refseq, ensembl, genomic repeat region, repeat masker track from UCSC Protein domain from uniprot 转录因子结合区域   人群基因型频率数据  gnomAD ESP6500 1000 Genomes Project ExAC">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ChengCZ's Notebook" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://chengcz.github.io/2020/10047.ACMG_implement/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | ChengCZ's Notebook</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a79f8c7f932a2d3ed822562170533a8d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/chengcz/" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style></a>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ChengCZ's Notebook</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chengcz.github.io/2020/10047.ACMG_implement/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChengCZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChengCZ's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-02-24 16:13:30 / Modified: 16:18:29" itemprop="dateCreated datePublished" datetime="2020-02-24T16:13:30+08:00">2020-02-24</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <center><strong>公开的 ACMG-AMP 实现证据判断整理</strong></center>
+
+<hr>
+<h2 id="支持数据"><a href="#支持数据" class="headerlink" title="支持数据"></a>支持数据</h2><h3 id="公开可用"><a href="#公开可用" class="headerlink" title="公开可用"></a>公开可用</h3><ul>
+<li><p>基因组注释</p>
+<ul>
+<li>refseq, ensembl,</li>
+<li>genomic repeat region, repeat masker track from <a href="http://genome.ucsc.edu/cgi-bin/hgTables?hgsid=791859517_g3Q1pxDLIEmxt4q0ujkwlUJj2G1l&amp;clade=mammal&amp;org=Human&amp;db=hg19&amp;hgta_group=rep&amp;hgta_track=knownGene&amp;hgta_table=0&amp;hgta_regionType=genome&amp;position=chr21%3A33%2C031%2C597-33%2C041%2C570&amp;hgta_outputType=primaryTable&amp;hgta_outFileName=" target="_blank" rel="noopener">UCSC</a></li>
+<li>Protein domain from <a href="https://www.uniprot.org/" target="_blank" rel="noopener">uniprot</a></li>
+<li>转录因子结合区域</li>
+</ul>
+</li>
+<li><p>人群基因型频率数据</p>
+<ul>
+<li><a href="https://gnomad.broadinstitute.org/" target="_blank" rel="noopener">gnomAD</a></li>
+<li><a href="http://evs.gs.washington.edu/EVS/" target="_blank" rel="noopener">ESP6500</a></li>
+<li><a href="https://www.internationalgenome.org/" target="_blank" rel="noopener">1000 Genomes Project</a></li>
+<li><del><a href="http://exac.broadinstitute.org/" target="_blank" rel="noopener">ExAC</a></del>, The ExAC browser is no longer available</li>
+</ul>
+</li>
+<li><p>变异数据</p>
+<ul>
+<li>Clinvar</li>
+<li><a href="">Human Gene Mutation Database</a></li>
+<li><a href="https://www.ebi.ac.uk/gwas/" target="_blank" rel="noopener">GWAS Catelog</a></li>
+<li>reported variants from public databases like IARC, TP53 database</li>
+</ul>
+</li>
+<li><p>致病性预测，一般使用源于 <a href="https://sites.google.com/site/jpopgen/dbNSFP" target="_blank" rel="noopener">dbNSFP</a> 数据</p>
+<ul>
+<li>exon-intron 剪接点影响预测数据来源于 <a href="http://www.liulab.science/dbscsnv.html" target="_blank" rel="noopener">dbscSNV</a></li>
+<li>蛋白功能致病性</li>
+<li>蛋白序列保守性, GERP++</li>
+</ul>
+</li>
+</ul>
+<h3 id="支持数据整理"><a href="#支持数据整理" class="headerlink" title="支持数据整理"></a>支持数据整理</h3><ul>
+<li><p>PS1, PM5: 已知致病的 variant list，综合多来源数据</p>
+</li>
+<li><p>PP2: 基因错义突变为主要致病机制基因（定义）</p>
+</li>
+<li><p>BP1: 基因截短变异为致病机制定义</p>
+</li>
+</ul>
+<hr>
+<h2 id="Public-implement"><a href="#Public-implement" class="headerlink" title="Public implement"></a>Public implement</h2><h3 id="intervar-18-28-implement"><a href="#intervar-18-28-implement" class="headerlink" title="intervar, 18 / 28 implement"></a><a href="./InterVar.pdf">intervar</a>, 18 / 28 implement</h3><ul>
+<li><a href="http://wintervar.wglab.org/" target="_blank" rel="noopener">http://wintervar.wglab.org/</a></li>
+<li>Use ANNOVAR for genomic annotation</li>
+<li>多个自整理数据输入，支持证据判断</li>
+</ul>
+<h3 id="varsome-19-28-implement"><a href="#varsome-19-28-implement" class="headerlink" title="varsome, 19 / 28 implement"></a><a href="./VarSome.pdf">varsome</a>, 19 / 28 implement</h3><ul>
+<li><a href="https://varsome.com/about/acmg-implementation/" target="_blank" rel="noopener">https://varsome.com/about/acmg-implementation/</a></li>
+<li>We use both the ‘ADA Boost Splicing’ threshold (<strong>0.708</strong>) and ‘Random Forest Splicing’ threshold (<strong>0.515</strong>) to identify potentially splicing variants</li>
+<li><p>A position will be considered highly conserved for rules BP7 and BP4 if GERP Rejected Subsitutions (GERP_RS) is greater than <strong>6.8</strong></p>
+</li>
+<li><p>Transcript Selection</p>
+<ul>
+<li>Mostseverecodingimpact,orwithin+/-2basesofthesplicingsite</li>
+<li>Canonical</li>
+<li>Longest transcript</li>
+</ul>
+</li>
+<li>Allele Frequency, Frequencies will not be considered valid if:<ul>
+<li>Coverage is less than <strong>20</strong>,</li>
+<li>the Allele Number is less than <strong>1000</strong>,</li>
+<li>the GnomAD quality filter is suspect (ie: not PASS).</li>
+</ul>
+</li>
+</ul>
+<h3 id="PathoMAN"><a href="#PathoMAN" class="headerlink" title="PathoMAN"></a><a href="./PathoMAN.pdf">PathoMAN</a></h3><ul>
+<li><a href="https://pathoman.mskcc.org/" target="_blank" rel="noopener">https://pathoman.mskcc.org/</a></li>
+<li>仅分析 76 个已知或推定的肿瘤风险基因</li>
+<li>we also assessed the frequency of clinically actionable variants present in general population using ExAC (noTCGA) data in cancer susceptibility and predisposition genes.</li>
+<li>PathoMAN uses CAVA for genomic annotation, dbNSfP using Annovar for <em>in silico</em> predictions, ExAC-noTCGA and gnomAD for public control frequencies, ClinVar for public evidences, and curated list of variants from the literature for functional evidences</li>
+<li>test date set<ul>
+<li>Ambry, Invitae and GeneDx (3513 variants in 27 genes)</li>
+<li>300 P/LP variants in 55 genes from four published reports on multiple cancers</li>
+</ul>
+</li>
+</ul>
+<h3 id="CardioClassifier"><a href="#CardioClassifier" class="headerlink" title="CardioClassifier"></a><a href="./CardioClassifier.docx">CardioClassifier</a></h3><ul>
+<li><a href="https://www.cardioclassifier.org/" target="_blank" rel="noopener">https://www.cardioclassifier.org/</a></li>
+<li>we refined 14 computational ACMG criteria and created three ICC-specific rules.<ul>
+<li>modified PVS1 for the titin (TTN) gene</li>
+<li>extended PS1 and PM5 to utilize known disease- causing variants in related genes/proteins (paralogues) to identify residues intolerant to variation</li>
+</ul>
+</li>
+<li>Use VEP for genomic annotation</li>
+<li>Inherited cardiac conditions (ICCs) represent a major health burden with a combined prevalence of ~1%.</li>
+<li>Protein-altering and splice-site variants (coding ±8 bps) are analyzed for a set of 40 genes associated with inherited cardiac conditions</li>
+<li>Test data set<ul>
+<li>ClinVar—all variants identified as pathogenic or likely pathogenic by multiple submitters with no conflicting data (i.e., no reports of benign, likely benign, or uncertain significance) for hypertrophic cardiomyopathy (HCM; n = 158), dilated cardiomyopathy (DCM; n = 16), long QT syndrome (n = 18), catecholaminer- gic polymorphic ventricular tachycardia (n = 1), Bru- gada syndrome (n = 4), or arrhythmogenic right ventricular cardiomyopathy (n = 22) were extracted from the 20161201 release of ClinVar</li>
+<li>Fifty-seven protein-altering variants in MYH7</li>
+</ul>
+</li>
+</ul>
+<h3 id="CardioVAI"><a href="#CardioVAI" class="headerlink" title="CardioVAI"></a><a href="./CardioVAI.pdf">CardioVAI</a></h3><ul>
+<li><p><a href="http://cardiovai.engenome.com/" target="_blank" rel="noopener">http://cardiovai.engenome.com/</a></p>
+</li>
+<li><p>仅分析 72 个心血管疾病相关基因，<a href="./clingen_cmp_acmg_specifications_v1-1.pdf">MYH7 证据判断使用 ClinGen Expert Panel 指南</a></p>
+</li>
+<li><p>we defined and added a new supporting benign criterion BP8, The same amino change has been previously reported in ClinVar as benign</p>
+</li>
+</ul>
+<hr>
+<h2 id="Evidences-implement-20-28"><a href="#Evidences-implement-20-28" class="headerlink" title="Evidences, implement 20/28"></a>Evidences, implement 20/28</h2><h3 id="PVS-implement-1-1"><a href="#PVS-implement-1-1" class="headerlink" title="PVS, implement 1/1"></a>PVS, implement 1/1</h3><h4 id="PVS1"><a href="#PVS1" class="headerlink" title="PVS1"></a>PVS1</h4><p>基因发生 Loss-of-function，功能完全缺失</p>
+<ul>
+<li><p>[x] InterVar</p>
+<ol>
+<li>we identified 1,988 genes harboring at least one LOF variant that is ‘‘pathogenic’’ in ClinVar.</li>
+<li>the ExAC analyzed high-quality exome (protein-coding region) DNA sequence data for 60,706 in-dividuals and identified 3,230 genes as LOF intolerant.</li>
+<li>Gene 在上述方法预定义的 4,807 个 genes 中</li>
+<li>variant type: “nonsense”,”frameshift”,”splic”,”stopgain”</li>
+<li>splicing variant dbscSNV 预测结果改变剪接</li>
+<li>we did not consider nonsense variants that are downstream of or within 50 nucleotides of the final exon-junction complex</li>
+<li>第一个和最后一个 exon 上的 variant 将不考虑评定 PVS 证据</li>
+</ol>
+</li>
+<li><p>[x] varsome</p>
+<ol>
+<li>Variant type: nonsense variant, frameshift variant, exon deletion variant, within ±2 bases of transcript splice site, start loss variant</li>
+<li>ExAC probability of loss-of-function tolerance is greater than 0.7,  or The gene statistics: if at least <strong>5</strong> variants in this gene are known to be pathogenic.</li>
+</ol>
+</li>
+<li><p>[x] PathoMAN</p>
+<ol>
+<li>Curated lists of cancer-causing genes from the literature, various genetic testing panels, and OMIM genes that cause autosomal dominant disease were aggregated</li>
+<li><strong>Tier 1 variants (frameshift, truncating, essential splice, and initiation codon)</strong> in curated list of tumor suppressor genes and cancer predisposition genes and not in their last exon</li>
+<li>A gene with a functional domain encoded by the last exon, such as ATM, was an exception to the last exon criteria</li>
+<li>PVS1 was not coded for BRCA2 mutations observed after the polymorphic stop rs11571833</li>
+</ol>
+</li>
+<li><p>[x] CardioClassifier:  <strong><em>Disease/gene specific rules</em></strong></p>
+<ol>
+<li>Genes with a significant burden of truncating variants in cases against controls from analysis of 7,855 cardiomyopathy cases and 60,706 controls</li>
+<li>Genes with an excess of truncating variants in HGMD over ExAC</li>
+<li>Phenocopy genes where 2. is true</li>
+</ol>
+<blockquote>
+<p>For this rule, truncating variants were taken as a proxy for variants that cause LoF</p>
+</blockquote>
+<ol start="4">
+<li><strong>PVS1_strong</strong> - TTN truncating variant in a constitutively expressed exon</li>
+</ol>
+<blockquote>
+<p>This rule was created specifically for analysing variants in the TTN gene where truncating variants are only known to cause disease if located in exons that are constitutively expressed in the heart (i.e. PVS1 doesn’t always apply). It is activated within a DCM test for nonsense, frameshift and essential splice site variants in TTN within exons with proportion spliced in (PSI) &gt;0.9.</p>
+</blockquote>
+</li>
+<li><p>[x] CardioVAI</p>
+<ol>
+<li>Variant is stop gained/frameshift/canonical splicing site.</li>
+<li>ExAC probabilities of being intolerant to LOF mutations in heterozygous (pLI) or in homozygous (pRec). Phenotype is a known LOF for a certain phenotype or ExAC Prec &gt;= 0.9, ExAC Pli &gt;= 0.9 in case of recessive and dominant phenotype respectively.</li>
+<li>Another pathogenic null variant in the same exon has been reported.</li>
+<li>MYH7 variants, this criterion level of evidence has been downgraded to a moderate level of evidence</li>
+</ol>
+</li>
+</ul>
+<h3 id="PS-implement-3-4"><a href="#PS-implement-3-4" class="headerlink" title="PS, implement 3/4"></a>PS, implement 3/4</h3><h4 id="PS1"><a href="#PS1" class="headerlink" title="PS1"></a>PS1</h4><p>和已知致病突变产生一模一样的氨基酸变化</p>
+<ul>
+<li><p>[x] InterVar</p>
+<ol>
+<li>first filtered ClinVar, picked out all missense variants annotated as pathogenic, and stored the amino acid changes in an InterVar-specific database</li>
+<li>variant type: “missense”,”nonsynony”</li>
+<li>Pathogenic missense variant 支持数据库中发现，剪接改变时不给予 PS1 证据</li>
+</ol>
+</li>
+<li><p>[x] varsome</p>
+<ol>
+<li>The strengths of rules such as PS1 will be downgraded if a variant has been reported pathogenic but that it is not confirmed through the independent ACMG re-annotation</li>
+<li>only applies to missense variants</li>
+<li>any clinically reported pathogenic variants are identified in the known pathogenic database</li>
+</ol>
+</li>
+<li><p>[x] PathoMAN</p>
+<ol>
+<li>missense variant was reported as pathogenic by multiple submitters with no conflicts and had a review status of 2 or more in ClinVar</li>
+</ol>
+</li>
+<li><p>[x] CardioClassifier</p>
+<ol>
+<li>same amino acid change is categorised as ‘Pathogenic’ for the phenotype of interest in ClinVar by multiple submitters with no conflicting evidence. only a single submitter, it is displayed on the report but is not used to activate PS1</li>
+<li><strong>PS1_moderate</strong> - Equivalent amino acid change as an established pathogenic variant in a paralogous gene</li>
+</ol>
+</li>
+<li><p>[x] CardioVAI</p>
+<ol>
+<li>The same amino change has been reported as pathogenic without conflicts for the same phenotype in ClinVar</li>
+</ol>
+</li>
+</ul>
+<h4 id="PS2-User-Input"><a href="#PS2-User-Input" class="headerlink" title="PS2, User Input"></a>PS2, User Input</h4><p>经过生物学父母验证的 <em>denovo</em> mutation</p>
+<h4 id="PS3"><a href="#PS3" class="headerlink" title="PS3"></a>PS3</h4><p>体内、体外功能实验证明有害</p>
+<ul>
+<li><p>[ ] InterVar: Not Implemented</p>
+</li>
+<li><p>[x] varsome</p>
+<ol>
+<li>looking for papers that refer to in-vitro or functional studies</li>
+</ol>
+</li>
+<li><p>[x] PathoMAN</p>
+<ol>
+<li>Variant in list of pathogenic variants knowledgebase aggregated from literature with functional evidence, public database with loss of function reports</li>
+<li>it was a truncating(<em>frameshift, truncating, essential splice, and initiation codon</em>) variant and ClinVar had reported it as pathogenic or benign with a review status 2 or more</li>
+<li>missense variants reported by ENIGMA</li>
+</ol>
+</li>
+<li><p>[ ] CardioClassifier: User only rules</p>
+</li>
+<li><p>[x] CardioVAI</p>
+<ol>
+<li>Variant has been reported as pathogenic for the same phenotype in ClinVar and the submission methods report the presence of functional studies(review star &gt;= 3).</li>
+<li>For MYH7 variants, only mammalian knock-in models are considered.</li>
+</ol>
+</li>
+</ul>
+<h4 id="PS4"><a href="#PS4" class="headerlink" title="PS4"></a>PS4</h4><p>患病群体基因频率明显高于对照群体</p>
+<ul>
+<li><p>[x] InterVar</p>
+<ol>
+<li>variant with an odds ratio (OR) &gt; 5.0 from GWASdb, 数据来源于已整理结果</li>
+</ol>
+</li>
+<li><p>[ ] varsome: Not Implemented</p>
+</li>
+<li><p>[x] PathoMAN</p>
+<ol>
+<li>For variants, not coded as BA1, BS1, BS2 or PM2, Fisher’s case–control test odds ratio &gt;3 and Pval &lt;0.05 against ExAC noTCGA and gnomAD population of interest</li>
+</ol>
+</li>
+<li><p>[x] CardioClassifier:  <strong><em>Disease/gene specific rules</em></strong></p>
+<ol>
+<li>A Fisher’s exact test was used to test for association against the ExAC dataset. If a variant does not exist in ExAC, the total count of individuals is taken as the proportion covered at &gt;=15x at the variant position.</li>
+<li>A Bonferroni correction based on the number of rare variants (freq &lt;0.0001) across all tested genes in either ExAC or the case cohort, was used to assess statistical significance.</li>
+<li>This rule is activated if the count in the cases was &gt;2 and the Fisher’s P&lt;1.79x10-6.</li>
+</ol>
+</li>
+<li><p>[ ] CardioVAI: Not Implemented</p>
+</li>
+</ul>
+<h3 id="PM-implement-4-6"><a href="#PM-implement-4-6" class="headerlink" title="PM, implement 4/6"></a>PM, implement 4/6</h3><h4 id="PM1"><a href="#PM1" class="headerlink" title="PM1"></a>PM1</h4><p>突变热点区域、或者无良性突变的关键domain</p>
+<ul>
+<li><p>[x] InterVar</p>
+<ol>
+<li>Variant type: “missense”,”nonsynony”</li>
+<li>变异位于 Interpro domain 区域，同时不在已整理良性区域内</li>
+</ol>
+</li>
+<li><p>[x] varsome</p>
+<ol>
+<li>Hot-Spot: using a region of <strong>30</strong> base-pairs either side of the variant, we check that there are at least <strong>5</strong> pathogenic variants, then weights them by distance to compute a “proximity score”. The rule triggers if the this score is greater than <strong>2.472</strong></li>
+<li>Protein Domains: for each UniProt functional domain, the rule will trigger if at least <strong>5</strong> pathogenic variants are found within the domain, and the ratio of pathogenic to non-VUS variants is greater than <strong>0.172</strong>.</li>
+</ol>
+</li>
+<li><p>[x] PathoMAN</p>
+<ol>
+<li>the amino acid that was being altered by the mutation was present in a protein domain, or a residue involved in signaling, binding with other proteins, or in an active site</li>
+</ol>
+</li>
+<li><p>[x] CardioClassifier:  <strong><em>Disease/gene specific rules</em></strong></p>
+<ol>
+<li>located in a mutational hot-spot and/or critical and well-established functional domain</li>
+</ol>
+</li>
+<li><p>[x] CardioVAI</p>
+<ol>
+<li>Variant overlaps a known hotspot domain</li>
+</ol>
+</li>
+</ul>
+<h4 id="PM2"><a href="#PM2" class="headerlink" title="PM2"></a>PM2</h4><p>人群数据库未发现，或者隐性遗传病中超低频位点</p>
+<ul>
+<li><p>[x] InterVar</p>
+<ol>
+<li>variant that is responsible for dominant diseases is absent in all control subjects from ESP6500, 1000 Genomes Project, and the ExAC Browser</li>
+<li>the variant causes recessive diseases and has a very low frequency with AF &lt; 0.5%</li>
+</ol>
+</li>
+<li><p>[x] varsome</p>
+<ol>
+<li>Not found in GnomAD, with valid GnomAD coverage</li>
+<li>Less than <strong>0.0001</strong> (see ACMG Guidelines) for recessive genes,</li>
+<li>The allele count less than <strong>5</strong> for dominante genes</li>
+</ol>
+</li>
+<li><p>[x] PathoMAN</p>
+<ol>
+<li>the variant was absent from ExAC-noTCGA data or gnomAD general population data</li>
+</ol>
+</li>
+<li><p>[x] CardioClassifier:  <strong><em>Disease/gene specific rules</em></strong></p>
+<ol>
+<li>PM2 is activated according to the lowest of the calculated maximum tolerated allele frequencies for diseases that are linked to the gene being assessed</li>
+</ol>
+</li>
+<li><p>[x] CardioVAI</p>
+<ol>
+<li>Variant is absent from ExAC and 1KGP and ESP frequency &lt;= 1% in case of dominant phenotype.</li>
+<li>Variant has frequency &lt;= 0.01% in ExAC and 1KGP and ESP frequency &lt;= 1% in case of recessive phenotype.</li>
+<li>For MYH7 variants, the above frequency thresholds are set to 0.004%.</li>
+</ol>
+</li>
+</ul>
+<h4 id="PM3-User-Input"><a href="#PM3-User-Input" class="headerlink" title="PM3, User Input"></a>PM3, User Input</h4><p>隐性遗传病中，已知致病变异 trans 位置上发现的 vairant</p>
+<blockquote>
+<p>二代测序数据，分析 variant cis / trans 技术上达不到</p>
+</blockquote>
+<h4 id="PM4"><a href="#PM4" class="headerlink" title="PM4"></a>PM4</h4><p>非重复区内，引起蛋白长度变化的 InDel</p>
+<ul>
+<li><p>[x] InterVar</p>
+<ol>
+<li>variants are ‘‘non-frameshift insertion,’’ ‘‘non-frameshift deletion’’ in the non-repeat region, or stop-loss variants</li>
+</ol>
+</li>
+<li><p>[x] varsome</p>
+<ol>
+<li>variants are ‘‘non-frameshift insertion,’’ ‘‘non-frameshift deletion’’ in the non-repeat region, or stop-loss variants</li>
+<li>In order to avoid double-counting the same evidence, rule PM4 will not be applied if rule PVS1 was triggered.</li>
+</ol>
+</li>
+<li><p>[x] PathoMAN</p>
+<ol>
+<li>the mutation was an in-frame insertion/deletion or a stop loss in a non-repetitive region, repeat masker track</li>
+</ol>
+</li>
+<li><p>[x] CardioClassifier</p>
+<ol>
+<li>protein length changes as a result of <strong>in-frame deletions/insertions</strong> in a <strong>non-repeat region</strong> or <strong>stop-lost variants</strong></li>
+</ol>
+</li>
+<li><p>[x] CardioVAI</p>
+<ol>
+<li>Variant is an in-frame deletion/insertion and does not overlap a repetitive region according to Repeat Masker (UCSC)</li>
+</ol>
+</li>
+</ul>
+<h4 id="PM5"><a href="#PM5" class="headerlink" title="PM5"></a>PM5</h4><p>错义突变产生和已知致病突变不一致的 vairant</p>
+<ul>
+<li><p>[x] InterVar</p>
+<ol>
+<li>Variant type: “missense”,”nonsynony”</li>
+<li>variant supplied by the user results in a different amino acid change</li>
+</ol>
+</li>
+<li><p>[x] varsome</p>
+<ol>
+<li>The strengths of rules such as PM5 will be downgraded if a variant has been reported pathogenic but that it is not confirmed through the independent ACMG re-annotation</li>
+<li>only applies to missense variants</li>
+<li>any clinically reported pathogenic variants are identified in the known pathogenic database</li>
+</ol>
+</li>
+<li><p>[x] PathoMAN</p>
+<ol>
+<li>Missense variant in ClinVar with review status ≥2 irrespective of the alternative amino acid change at the same position as that of the reported pathogenic variant in ClinVar</li>
+</ol>
+</li>
+<li><p>[x] CardioClassifier</p>
+<ol>
+<li>Activated when a different missense variant at the same residue is categorised as ‘Pathogenic’ for the phenotype of interest in ClinVar by multiple submitters with no conflicting evidence. If data is from only a single submitter, it is displayed on the report but is not used to activate PM5</li>
+<li><strong>PM5_supporting</strong> - Missense change at an amino acid residue where a pathogenic missense change has been seen in the equivalent residue of a paralogous gene</li>
+</ol>
+</li>
+<li><p>[x] CardioVAI</p>
+<ol>
+<li>A different amino-acid change at the same residue position has been reported in ClinVar as pathogenic without conflicts</li>
+</ol>
+</li>
+</ul>
+<h4 id="PM6-User-Input"><a href="#PM6-User-Input" class="headerlink" title="PM6, User Input"></a>PM6, User Input</h4><p>未经过父母验证的 <em>denovo</em> mutation</p>
+<blockquote>
+<p>家系样品可实现该证据</p>
+</blockquote>
+<h3 id="PP-implement-3-5"><a href="#PP-implement-3-5" class="headerlink" title="PP, implement 3/5"></a>PP, implement 3/5</h3><h4 id="PP1-User-Input"><a href="#PP1-User-Input" class="headerlink" title="PP1, User Input"></a>PP1, User Input</h4><p>家系样品中基因型和表型共分离</p>
+<blockquote>
+<p>多样品家系样品可实现该证据，参考耳聋 ACMG 分级文章，计算共分离指数，当前代码未实现</p>
+</blockquote>
+<h4 id="PP2"><a href="#PP2" class="headerlink" title="PP2"></a>PP2</h4><p>基因错义突变致病，同时良性突变比例极低，发现新的错义突变</p>
+<ul>
+<li><p>[x] InterVar</p>
+<ol>
+<li>variant type: “missense”,”nonsynony”</li>
+<li>the missense variants are common causes of the disorder and the gene also has very few benign variants, then a missense variant in this gene can be supporting evidence for pathogenicity, gene list 已整理</li>
+</ol>
+</li>
+<li><p>[x] varsome</p>
+<ol>
+<li>how many variants are benign/pathogenic for each gene, along with their coding impacts</li>
+<li>the ratio of pathogenic missense variants over all non-VUS missense variants is greater than <strong>0.51</strong>,</li>
+<li>the ratio of pathogenic variants over all clinically reported variants is greater than <strong>0.12</strong></li>
+</ol>
+</li>
+<li><p>[x] PathoMAN</p>
+<ol>
+<li>missense variant in the missense-driven pathogenic gene list<blockquote>
+<ul>
+<li>We used ClinVar to collect all tier1(<em>frameshift, truncating, essential splice, and initiation codon</em>) and missense variants with review status two or more, per gene.</li>
+<li>The list of genes with overall ratio of tier1(<em>frameshift, truncating, essential splice, and initiation codon</em>) to missense variants more than 1 and a ratio of pathogenic missense to benign missense variants over 1 were called missense-driven pathogenic genes</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><p>[x] CardioClassifier:  <strong><em>Disease/gene specific rules</em></strong></p>
+<ol>
+<li>PP2 to activate both gene regions with lower confidence than PM1 (i.e. EF ≥0.75) or genes that are both constrained and where missense variants are commonly disease causing.</li>
+<li>For the LQTS, Brugada syndrome and HCM genes in PM1, PP2 is activated where EF ≥0.75 and Fisher’s exact P&lt;0.05.</li>
+<li>For all other genes involved in DCM, HCM and ARVD/C, PP2 activation is based on data from <a href="http://www.nature.com/gim/journal/vaop/ncurrent/full/gim201690a.html" target="_blank" rel="noopener">http://www.nature.com/gim/journal/vaop/ncurrent/full/gim201690a.html</a> and the ExAC database for genes with missense etiological fraction (i.e. the estimated proportion of cases with a variant where the variant is causative, essentially equivalent to a prior probability of pathogenicity) ≥0.75 with Fisher’s exact P&lt;0.05.</li>
+<li>we activate PP2 for two additional genes that are constrained in ExAC (missense Z score &gt; 3.09) and where missense mutations are a common disease mechanism. These are FBN1 in Marfan syndrome and PTPN11 for Noonan syndrome.</li>
+<li>this rule is never activated if PM1 is already used</li>
+</ol>
+</li>
+<li><p>[x] CardioVAI</p>
+<ol>
+<li>ExAC missense zscore &gt; 1.96 and more than 5 missense pathogenic variants have been reported in the same gene for the same phenotype.</li>
+<li>Not considered for MYH7 variants.</li>
+</ol>
+</li>
+</ul>
+<h4 id="PP3"><a href="#PP3" class="headerlink" title="PP3"></a>PP3</h4><p>多种预测工具认为突变有害</p>
+<ul>
+<li><p>[x] InterVar</p>
+<ol>
+<li>MetaSVM_score 预测得分大于 0</li>
+<li>GERP++_RS 大于 2</li>
+<li>dbscSNV_RF_SCORE 和 dbscSNV_ADA_SCORE 都大于 0.6</li>
+<li>上述三种预测结果其中两种认为有害</li>
+</ol>
+</li>
+<li><p>[x] varsome</p>
+<ol>
+<li>Tools: “DANN”, “DEOGEN2”, “FATHMM-MKL”, “M-CAP”, “Mutation Assessor”, “Mutation Taster”, “Primate AI”, “Polyphen 2” (only for users of VarSome Clinical), “MVP”, “EIGEN”, “REVEL”, “SIFT”, “GERP”</li>
+<li>the ratio of pathogenic classifications to total classifications (respectively benign) exceeds the <strong>0.53</strong></li>
+<li>variant is not found in any static in-silico database, pathogenic prediction if GERP_RS is greater than <strong>3.597</strong></li>
+</ol>
+</li>
+<li><p>[x] PathoMAN</p>
+<ol>
+<li>In silico predictors agree on pathogenicity or deleteriousness of the variant, 12 <em>in silico</em> algorithms(7, >50%) – CADD, FATHMM, LRT, MutationAssessor, MutationTaster, PROVEAN, Polyphen2-HDIV, Polyphen2- HVAR, RadialSVM, SIFT, VEST3 and M-CAP</li>
+</ol>
+</li>
+<li><p>[x] CardioClassifier</p>
+<ol>
+<li>eight prediction algorithms are used: SIFT, PolyPhen2 var, LRT, Mutation Taster, Mutation Assessor, FATHMM, CADD and Grantham scores.</li>
+<li>At least five tools predict deleterious, with at most 1 tool predicting benign, and &lt;3 with “unknown” classifications</li>
+<li>If &gt;=3 tools have unknown outcomes, all other tools predict damaging</li>
+</ol>
+</li>
+<li><p>[x] CardioVAI</p>
+<ol>
+<li>Prediction is “DAMAGING” for PaPI, DANN or dbscSNV</li>
+</ol>
+</li>
+</ul>
+<h4 id="PP4-User-Input"><a href="#PP4-User-Input" class="headerlink" title="PP4, User Input"></a>PP4, User Input</h4><p>变异携带者表型或者家族史符合单基因遗传病</p>
+<h4 id="PP5"><a href="#PP5" class="headerlink" title="PP5"></a>PP5</h4><p>可靠来源报告为致病突变</p>
+<ul>
+<li><p>[x] InterVar</p>
+<ol>
+<li>the variant was pathogenic/likely pathogenic without conflicts in ClinVar</li>
+</ol>
+</li>
+<li><p>[x] Varsome: we disable the clinical evidence rules</p>
+<ol>
+<li><strong>Very Strong</strong> if ‘practice guideline’ = 4 stars, or ‘reviewed by expert panel’ = 3 stars, [clinvar]</li>
+<li><strong>Moderate</strong> if consistent submissions from multiple sources = 2 stars, [clinvar]</li>
+<li><strong>Very Strong</strong> if more than 3 VarSome users have linked publications and classified the variant,</li>
+<li><strong>Strong</strong> if only 2 publications linked by users,</li>
+<li><strong>Moderate</strong> if only 1 publication linked by users</li>
+<li>In order to avoid double-counting, these rules will not be evaluated if rules PP3 or BS3 have triggered</li>
+</ol>
+</li>
+<li><p>[x] PathoMAN</p>
+<ol>
+<li>the variant was seen in ClinVar with review status less than 2 and was pathogenic without conflicts</li>
+</ol>
+</li>
+<li><p>[ ] CardioClassifier: User only rules</p>
+</li>
+<li><p>[x] CardioVAI</p>
+<ol>
+<li>Variant has been previously reported as pathogenic in ClinVar for the same phenotype.</li>
+<li>Not considered for MYH7 variants.</li>
+</ol>
+</li>
+</ul>
+<h3 id="BA-implement-1-1"><a href="#BA-implement-1-1" class="headerlink" title="BA, implement 1/1"></a>BA, implement 1/1</h3><h4 id="BA1"><a href="#BA1" class="headerlink" title="BA1"></a>BA1</h4><p>人群频率大于 5%</p>
+<ul>
+<li><p>[x] InterVar</p>
+<ol>
+<li>the AFs in any database is &gt;5%</li>
+</ol>
+</li>
+<li><p>[x] varsome</p>
+<ol>
+<li>the allele frequency is greater than the threshold <strong>0.05</strong></li>
+</ol>
+</li>
+<li><p>[x] PathoMAN</p>
+<ol>
+<li>Variant seen in ExAC noTCGA or gnomAD with AF > 5%</li>
+</ol>
+</li>
+<li><p>[x] CardioClassifier</p>
+<ol>
+<li>This rule is activated for all variants with a filtering allele frequency &gt;0.1% for heterozygotes or &gt;3.16% (sqrt(0.001)) for homozygotes in the exome aggregation consortium (ExAC) database.</li>
+<li>As this is a small dataset we use a threshold of 5% and activate BA1 if a variant is rare/absent from ExAC but present in &gt;5% of healthy volunteers.</li>
+</ol>
+</li>
+<li><p>[x] CardioVAI</p>
+<ol>
+<li>variant allele frequency is higher than a threshold(5%) in at least a database.</li>
+<li>MYH7 variants, the allele frequency in ExAC, 1KGP or ESP must be &gt;=0.1%</li>
+</ol>
+</li>
+</ul>
+<h3 id="BS-implement-3-4"><a href="#BS-implement-3-4" class="headerlink" title="BS, implement 3/4"></a>BS, implement 3/4</h3><h4 id="BS1"><a href="#BS1" class="headerlink" title="BS1"></a>BS1</h4><p>等位基因频率大于疾病发病率</p>
+<ul>
+<li><p>[x] InterVar</p>
+<ol>
+<li>We retrieved infor- mation on disease prevalence from OrphaNet and translated OrphaNet identifiers into OMIM identifier</li>
+<li>AF in the ExAC Browser is great than expected for the disorder caused by mutations in the corresponding gene(default cutoff as 1% for rare disease)</li>
+</ol>
+</li>
+<li><p>[x] varsome</p>
+<ol>
+<li>we find the highest GnomAD allele frequency for the variant across the main population ethnicities and compare this to the benign cut-off frequency derived from the gene statistics</li>
+<li>if there are too few known variants (fewer than <strong>5</strong>), we use a much higher default threshold, <strong>0.015</strong>, for rare diseases.</li>
+<li>In order to avoid double-counting, rule BS1 is not evaluated if either rules BA1 or PM2 were triggered first.</li>
+</ol>
+</li>
+<li><p>[x] PathoMAN</p>
+<ol>
+<li>the variant had an allele frequency in public controls between 1% and 5%</li>
+</ol>
+</li>
+<li><p>[x] CardioClassifier:  <strong><em>Disease/gene specific rules</em></strong></p>
+<ol>
+<li>the ExAC filtering allele frequency is greater the calculated maximum tolerated allele frequency for the disease</li>
+</ol>
+</li>
+<li><p>[x] CardioVAI</p>
+<ol>
+<li>BS1 allele frequency threshold varies according to Orphanet database</li>
+<li>In case of recessive disorder, the carrier frequency is estimated by Hardy-Weinerg equilibrium.</li>
+<li>In case of dominant disorder, incidence is greater than 0.001% and incidence is greater than ExAC or 1KGP frequency.</li>
+<li>For MYH7 variants, the allele frequency in ExAC, 1KGP or ESP must be &gt;= 0.02%</li>
+</ol>
+</li>
+</ul>
+<h4 id="BS2"><a href="#BS2" class="headerlink" title="BS2"></a>BS2</h4><p>早期完全外显疾病，在健康人中发现相同变异</p>
+<ul>
+<li><p>[x] InterVar</p>
+<ol>
+<li>variant is observed in a healthy adult in the 1000 Genomes Project as a homozygote (for diseases defined as recessive in OMIM) or as a heterozygote otherwise</li>
+</ol>
+</li>
+<li><p>[x] varsome</p>
+<ol>
+<li>missing</li>
+</ol>
+</li>
+<li><p>[x] PathoMAN</p>
+<ol>
+<li>The variant was also present in a homozygous form in the public controls</li>
+</ol>
+</li>
+<li><p>[ ] CardioClassifier</p>
+</li>
+<li><p>[ ] CardioVAI</p>
+</li>
+</ul>
+<h4 id="BS3"><a href="#BS3" class="headerlink" title="BS3"></a>BS3</h4><p>体内、体外实验证明无害</p>
+<blockquote>
+<p>有文献报告，使用 clinvar 数据库中 star &gt;=3 的 benign 突变作为该证据评级支持数据</p>
+</blockquote>
+<ul>
+<li><p>[ ] InterVar: Not implemented</p>
+</li>
+<li><p>[x] varsome</p>
+<ol>
+<li>looking for papers that refer to in-vitro or functional studies</li>
+</ol>
+</li>
+<li><p>[x] PathoMAN</p>
+<ol>
+<li>Variant in list of benign variants knowledgebase aggregated from literature with functional evidence, public database with loss of function reports</li>
+<li>it was a truncating(<em>frameshift, truncating, essential splice, and initiation codon</em>) variant and ClinVar had reported it as benign with a review status 2 or more</li>
+</ol>
+</li>
+<li><p>[ ] CardioClassifier: User only rules</p>
+</li>
+<li><p>[x] CardioVAI</p>
+<ol>
+<li>Variant has been reported as benign without conflicting interpretation in ClinVar for the same phenotype and submission method report the presence of functional studies(review star &gt;=3)</li>
+</ol>
+</li>
+</ul>
+<h4 id="BS4-User-Input"><a href="#BS4-User-Input" class="headerlink" title="BS4, User Input"></a>BS4, User Input</h4><p>家系成员间缺乏共分离</p>
+<blockquote>
+<p>多样品家系样品可实现该证据，参考耳聋 ACMG 分级文章，计算共分离指数，当前代码未实现</p>
+</blockquote>
+<h3 id="BP-implement-5-7"><a href="#BP-implement-5-7" class="headerlink" title="BP, implement 5/7"></a>BP, implement 5/7</h3><h4 id="BP1"><a href="#BP1" class="headerlink" title="BP1"></a>BP1</h4><p>基因截短致病的基因上发生的错义突变</p>
+<ul>
+<li><p>[x] InterVar</p>
+<ol>
+<li>variant type：”missense”,”nonsynony”</li>
+<li>同时突变基因属于已整理预定义的基因截短为主要致病机制的gene</li>
+</ol>
+</li>
+<li><p>[x] varsome</p>
+<ol>
+<li>how many variants are benign/pathogenic for each gene, along with their coding impacts</li>
+<li>the ratio of benign missense variants over all non-VUS missense variants is greater than <strong>0.51</strong></li>
+<li>the ratio of benign variants over all clinically reported variants is greater than <strong>0.24</strong></li>
+</ol>
+</li>
+<li><p>[ ] PathoMAN: We do not have enough evidence to nominate genes as missense driven benign genes. So BP1 will remain unutilized</p>
+</li>
+<li><p>[ ] CardioClassifier: User only rules</p>
+</li>
+<li><p>[x] CardioVAI</p>
+<ol>
+<li>Variant is coding and missense and at least 5 null variants in the gene have been reported as pathogenic for the same phenotype in ClinVar.</li>
+<li>Not considered for MYH7 variants.</li>
+</ol>
+</li>
+</ul>
+<h4 id="BP2-User-Input"><a href="#BP2-User-Input" class="headerlink" title="BP2, User Input"></a>BP2, User Input</h4><p>显性遗传病中，另一染色体上相同基因发现了已知致病突变；或者任一遗传模式，同染色体同基因发现了已知致病突变</p>
+<h4 id="BP3"><a href="#BP3" class="headerlink" title="BP3"></a>BP3</h4><p>重复区内发生的未引起蛋白长度变化的 InDel</p>
+<ul>
+<li><p>[x] InterVar</p>
+<ol>
+<li>variant type: “nonframeshift insertion”,”nonframeshift deletion”,”nonframeshift substitution”</li>
+<li>同时位于重复区域，但是不位于已知的蛋白 domain</li>
+</ol>
+</li>
+<li><p>[x] varsome</p>
+<ol>
+<li>the variant isn’t in a domain with a known function</li>
+<li>the variant is indeed in a repeat region, and verifies that there are no known clinically reported pathogenic variants within <strong>3</strong> base-pairs of the repeat region under consideration</li>
+</ol>
+</li>
+<li><p>[x] PathoMAN</p>
+<ol>
+<li>it was an in-frame insertion/deletion in a repetitive region, repeat masker track</li>
+</ol>
+</li>
+<li><p>[x] CardioClassifier</p>
+<ol>
+<li>Activated for any in-frame insertion or deletion that falls within a region annotated by repeat masker.</li>
+</ol>
+</li>
+<li><p>[x] CardioVAI</p>
+<ol>
+<li>Variant is in-frame deletion/insertion , but overlaps a repetitive region (UCSC</li>
+</ol>
+</li>
+</ul>
+<h4 id="BP4"><a href="#BP4" class="headerlink" title="BP4"></a>BP4</h4><p>多种预测工具认为突变无害</p>
+<ul>
+<li><p>[x] InterVar</p>
+<ol>
+<li>MetaSVM_score 预测得分小于 0</li>
+<li>GERP++_RS 小于等于 2</li>
+<li>dbscSNV_RF_SCORE 和 dbscSNV_ADA_SCORE 都小于等于 0.6</li>
+<li>以上三种预测指标同时满足条件</li>
+</ol>
+</li>
+<li><p>[x] varsome</p>
+<ol>
+<li>Tools: “DANN”, “DEOGEN2”, “FATHMM-MKL”, “M-CAP”, “Mutation Assessor”, “Mutation Taster”, “Primate AI”, “Polyphen 2” (only for users of VarSome Clinical), “MVP”, “EIGEN”, “REVEL”, “SIFT”, “GERP”</li>
+<li>the ratio of benign classifications to total classifications (respectively benign) exceeds the <strong>0.53</strong></li>
+<li>In order to avoid double-counting, rule BP4 will not be evaluated if rule BP7 was triggered</li>
+<li>variant is not found in any static in-silico database, benign if the variant is non-truncating and GERP_RS is less than <strong>3.561</strong></li>
+</ol>
+</li>
+<li><p>[x] PathoMAN</p>
+<ol>
+<li>In silico predictors agree on benignity or tolerance of the variant, 12 <em>in silico</em> algorithms(7, >50%) – CADD, FATHMM, LRT, MutationAssessor, MutationTaster, PROVEAN, Polyphen2-HDIV, Polyphen2- HVAR, RadialSVM, SIFT, VEST3 and M-CAP</li>
+</ol>
+</li>
+<li><p>[x] CardioClassifier</p>
+<ol>
+<li>eight prediction algorithms are used: SIFT, PolyPhen2 var, LRT, Mutation Taster, Mutation Assessor, FATHMM, CADD and Grantham scores.</li>
+<li>At least five tools predict benign, with at most 1 tool predicting deleterious, and &lt;3 with “unknown” classifications</li>
+<li>If &gt;=3 tools have unknown outcomes, all other tools predict benign</li>
+</ol>
+</li>
+<li><p>[x] CardioVAI</p>
+<ol>
+<li>Prediction is “BENIGN” for PaPI, DANN or dbscSNV</li>
+</ol>
+</li>
+</ul>
+<h4 id="BP5-User-Input"><a href="#BP5-User-Input" class="headerlink" title="BP5, User Input"></a>BP5, User Input</h4><p>明确致病原因的病例中同时发现的其他非致病变异</p>
+<h4 id="BP6"><a href="#BP6" class="headerlink" title="BP6"></a>BP6</h4><p>可靠来源报告为良性突变</p>
+<ul>
+<li><p>[x] InterVar</p>
+<ol>
+<li>the variant was benign/likely benign without conflicts in ClinVar, review star is not considered</li>
+</ol>
+</li>
+<li><p>[x] varsome: we disable the clinical evidence rules</p>
+<ol>
+<li><strong>Very Strong</strong> if ‘practice guideline’ = 4 stars, or ‘reviewed by expert panel’ = 3 stars, [clinvar]</li>
+<li><strong>Moderate</strong> if consistent submissions from multiple sources = 2 stars, [clinvar]</li>
+<li><strong>Very Strong</strong> if more than 3 VarSome users have linked publications and classified the variant,</li>
+<li><strong>Strong</strong> if only 2 publications linked by users,</li>
+<li><strong>Moderate</strong> if only 1 publication linked by users</li>
+<li>In order to avoid double-counting, these rules will not be evaluated if rules PP3 or BS3 have triggered</li>
+</ol>
+</li>
+<li><p>[x] PathoMAN</p>
+<ol>
+<li>Variant in ClinVar with review status &lt;2 and benign without conflicts</li>
+</ol>
+</li>
+<li><p>[ ] CardioClassifier: User only rules</p>
+</li>
+<li><p>[x] CardioVAI</p>
+<ol>
+<li>Variant has been previously reported in ClinVar as benign</li>
+<li>Not considered for MYH7 variants.</li>
+</ol>
+</li>
+</ul>
+<h4 id="BP7"><a href="#BP7" class="headerlink" title="BP7"></a>BP7</h4><p>不影响剪接的同义突变</p>
+<ul>
+<li><p>[x] InterVar</p>
+<ol>
+<li>不影响简介点形成(dbscSNV_RF_SCORE 和 dbscSNV_ADA_SCORE 小于 0.6)的同义突变，同时序列保守性低(GERP++_RS &lt;= 2)</li>
+</ol>
+</li>
+<li><p>[x] varsome</p>
+<ol>
+<li>synonymous variants</li>
+<li>the variant is found further than <strong>3</strong> bases from a splice site, and there is no scSNV splice-site prediction</li>
+<li>not predicted splicing using scSNV</li>
+</ol>
+</li>
+<li><p>[x] PathoMAN</p>
+<ol>
+<li>Synonymous variant with dbscSNV adaptive boosting and random forest score &lt;0.6</li>
+</ol>
+</li>
+<li><p>[ ] CardioClassifier: the tool does not currently annotate synonymous variants so rule BP7 is not utilised.</p>
+</li>
+<li><p>[x] CardioVAI</p>
+<ol>
+<li>Variant is synonymous and “BENIGN” for dbscSNV AB and DANN</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2 id="ACMG-AMP-classifier"><a href="#ACMG-AMP-classifier" class="headerlink" title="ACMG-AMP classifier"></a>ACMG-AMP classifier</h2><h3 id="CardioVAI-1"><a href="#CardioVAI-1" class="headerlink" title="CardioVAI"></a>CardioVAI</h3><ul>
+<li>新增 BP8 证据，The same amino change has been previously reported in ClinVar as benign</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>pathogenic</th>
+<th></th>
+<th></th>
+<th></th>
+<th>benign</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Evidences</td>
+<td>PVS</td>
+<td>PS</td>
+<td>PM</td>
+<td>PP</td>
+<td>BA</td>
+<td>BS</td>
+<td>BP</td>
+</tr>
+<tr>
+<td>score</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>-1.5</td>
+<td>-1</td>
+<td>-0.5</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>$$ Score_{pathogenicity}= \sum(Score_{evidence}) $$</p>
+</li>
+<li><p>pathogenicity score can be used to provide a rank of variant-phenotypes,</p>
+</li>
+</ul>
+<hr>
+<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><ol>
+<li>Li, Q., &amp; Wang, K. (2017). InterVar: Clinical Interpretation of Genetic Variants by the 2015 ACMG-AMP Guidelines. <em>American Journal of Human Genetics</em>, <em>100</em>(2), 267–280. <a href="https://doi.org/10.1016/j.ajhg.2017.01.004" target="_blank" rel="noopener">https://doi.org/10.1016/j.ajhg.2017.01.004</a></li>
+<li>Nicora, G., Limongelli, I., Gambelli, P., Memmi, M., Malovini, A., Mazzanti, A., … Bellazzi, R. (2018). CardioVAI: An automatic implementation of ACMG-AMP variant interpretation guidelines in the diagnosis of cardiovascular diseases. <em>Human Mutation</em>, <em>39</em>(12), 1835–1846. <a href="https://doi.org/10.1002/humu.23665" target="_blank" rel="noopener">https://doi.org/10.1002/humu.23665</a></li>
+<li>Whiffin, N., Walsh, R., Govind, R., Edwards, M., Ahmad, M., Zhang, X., … Cook, S. A. (2018). CardioClassifier: disease- and gene-specific computational decision support for clinical genome interpretation. <em>Genetics in Medicine</em>, <em>20</em>(10), 1246–1254. <a href="https://doi.org/10.1038/gim.2017.258" target="_blank" rel="noopener">https://doi.org/10.1038/gim.2017.258</a></li>
+<li>Ravichandran, V., Shameer, Z., Kemel, Y., Walsh, M., Cadoo, K., Lipkin, S., … Vijai, J. (2019). Toward automation of germline variant curation in clinical cancer genetics. <em>Genetics in Medicine</em>. <a href="https://doi.org/10.1038/s41436-019-0463-8" target="_blank" rel="noopener">https://doi.org/10.1038/s41436-019-0463-8</a></li>
+<li>Kelly, M. A., Caleshu, C., Morales, A., Buchan, J., Wolf, Z., Harrison, S. M., … Wilde, A. (2018). Adaptation and validation of the ACMG/AMP variant classification framework for MYH7-associated inherited cardiomyopathies: Recommendations by ClinGen’s Inherited Cardiomyopathy Expert Panel. <em>Genetics in Medicine</em>, <em>20</em>(3), 351–359. <a href="https://doi.org/10.1038/gim.2017.218" target="_blank" rel="noopener">https://doi.org/10.1038/gim.2017.218</a></li>
+<li>Nykamp, K., Anderson, M., Powers, M., Garcia, J., Herrera, B., Ho, Y. Y., … Topper, S. (2017). Sherloc: A comprehensive refinement of the ACMG-AMP variant classification criteria. <em>Genetics in Medicine</em>, <em>19</em>(10), 1105–1117. <a href="https://doi.org/10.1038/gim.2017.37" target="_blank" rel="noopener">https://doi.org/10.1038/gim.2017.37</a></li>
+<li>Lek, M., Karczewski, K. J., Minikel, E. V., Samocha, K. E., Banks, E., Fennell, T., … MacArthur, D. G. (2016). Analysis of protein-coding genetic variation in 60,706 humans. Nature, 536(7616), 285–291. <a href="https://doi.org/10.1038/nature19057" target="_blank" rel="noopener">https://doi.org/10.1038/nature19057</a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+      <div>
+        <div>
+  
+    <div style="text-align:center;color: #ccc;font-size:14px;">---------本文结束，感谢您的阅读---------</div>
+  
+</div>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/10046.KNN/" rel="next" title="KNN (k-nearest neighbor) 算法学习">
+                <i class="fa fa-chevron-left"></i> KNN (k-nearest neighbor) 算法学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!---<div class="powered-by">
+  <i class="fa fa-user-md"></i>
+  <span id="busuanzi_container_site_uv">
+    本站访客数:<span id="busuanzi_value_site_uv"></span>
+  </span>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量:<span id="busuanzi_value_site_pv"></span>
+  </span>
+</div>--->
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChengCZ</span>
+
+  
+
+  
+</div>
+
+
+
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.3.0</div>
+
+
+-->
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
